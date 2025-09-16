@@ -170,7 +170,12 @@ function explainAccEq(){
 
 /* ---------------------------
    2) Sources & Cost of Capital (Dividend Growth, CAPM, WACC)
-   --------------------------- */
+   /* ---------------------------
+   Sources of Finance & Cost of Capital
+   Upgraded: 
+   - Added direct P0 input option for Gordon Growth
+   - Expanded WACC explanation: kd step, weighted components, step-by-step
+---------------------------- */
 function sourcesCostHTML(){
   return `
     <div>
@@ -178,11 +183,13 @@ function sourcesCostHTML(){
       <p class="mt-2 text-sm opacity-90">Calculate price using Gordon Growth (Dividend Discount Model), CAPM expected return, and WACC.</p>
 
       <div class="mt-4 grid gap-3 md:grid-cols-2">
+        <!-- Dividend Growth Model -->
         <div class="glass p-3 rounded-md">
           <h3 class="font-semibold">Dividend Growth Model (Gordon)</h3>
           <div class="mt-2 grid gap-2">
-            <label class="label">Dividend just paid D0 <input id="dgm-d0" class="input" placeholder="e.g. 2.50" /></label>
-            <label class="label">Dividend next year D1 (optional) <input id="dgm-d1" class="input" placeholder="or leave blank to compute from D0 and g" /></label>
+            <label class="label">Price today P₀ (optional) <input id="dgm-p0" class="input" placeholder="e.g. 50" /></label>
+            <label class="label">Dividend just paid D₀ <input id="dgm-d0" class="input" placeholder="e.g. 2.50" /></label>
+            <label class="label">Dividend next year D₁ (optional) <input id="dgm-d1" class="input" placeholder="or leave blank to compute from D₀ and g" /></label>
             <label class="label">Growth rate g (decimal) <input id="dgm-g" class="input" placeholder="e.g. 0.04" /></label>
             <label class="label">Required return r (decimal) <input id="dgm-r" class="input" placeholder="e.g. 0.09" /></label>
             <div class="flex gap-2 mt-2"><button id="dgm-explain" class="btn btn-primary">Explain</button><button id="dgm-example" class="btn btn-ghost">Example</button></div>
@@ -190,6 +197,7 @@ function sourcesCostHTML(){
           </div>
         </div>
 
+        <!-- CAPM -->
         <div class="glass p-3 rounded-md">
           <h3 class="font-semibold">CAPM — Expected return</h3>
           <div class="mt-2 grid gap-2">
@@ -201,15 +209,18 @@ function sourcesCostHTML(){
           </div>
         </div>
 
+        <!-- WACC -->
         <div class="glass p-3 rounded-md md:col-span-2">
           <h3 class="font-semibold">WACC — Weighted Average Cost of Capital</h3>
-          <p class="muted">Enter market values (Equity and Debt), costs and corporate tax rate.</p>
+          <p class="muted">Enter market values (Equity, Preference shares, and Debt), costs and corporate tax rate.</p>
           <div class="mt-2 grid gap-2 md:grid-cols-3">
-            <label class="label">Market value of Equity (E) <input id="wacc-e" class="input" placeholder="e.g. 500000" /></label>
-            <label class="label">Market value of Debt (D) <input id="wacc-d" class="input" placeholder="e.g. 200000" /></label>
-            <label class="label">Cost of equity Re (decimal) <input id="wacc-re" class="input" placeholder="e.g. 0.12" /></label>
-            <label class="label">Cost of debt Rd (decimal) <input id="wacc-rd" class="input" placeholder="e.g. 0.07" /></label>
-            <label class="label">Corporate tax rate Tc (decimal) <input id="wacc-tc" class="input" placeholder="e.g. 0.28" /></label>
+            <label class="label">Equity (E) <input id="wacc-e" class="input" placeholder="e.g. 2000000" /></label>
+            <label class="label">Preference shares (P) <input id="wacc-p" class="input" placeholder="e.g. 500000" /></label>
+            <label class="label">Debt (D) <input id="wacc-d" class="input" placeholder="e.g. 300000" /></label>
+            <label class="label">Cost of equity Re <input id="wacc-re" class="input" placeholder="e.g. 0.20" /></label>
+            <label class="label">Cost of preference shares Rp <input id="wacc-rp" class="input" placeholder="e.g. 0.14" /></label>
+            <label class="label">Cost of debt Rd (before tax) <input id="wacc-rd" class="input" placeholder="e.g. 0.15" /></label>
+            <label class="label">Corporate tax rate Tc <input id="wacc-tc" class="input" placeholder="e.g. 0.30" /></label>
           </div>
           <div class="mt-2 flex gap-2"><button id="wacc-explain" class="btn btn-primary">Explain</button><button id="wacc-example" class="btn btn-ghost">Example</button></div>
           <div id="wacc-output" class="mt-2 steps"></div>
@@ -218,26 +229,47 @@ function sourcesCostHTML(){
     </div>
   `;
 }
+
 function explainDGM(){
+  const p0val = document.getElementById('dgm-p0').value.trim();
   const d0 = parseFloat(document.getElementById('dgm-d0').value || NaN);
   const d1val = document.getElementById('dgm-d1').value.trim();
   const g = parseFloat(document.getElementById('dgm-g').value || NaN);
   const r = parseFloat(document.getElementById('dgm-r').value || NaN);
   const out = document.getElementById('dgm-output');
+
+  // Case 1: P0 given, find implied return
+  if(p0val !== ''){
+    const P0 = parseFloat(p0val);
+    if(isNaN(P0) || isNaN(d0) || isNaN(g)){ out.innerHTML = '<p>Enter P0, D0, and g.</p>'; return; }
+    const D1 = d0 * (1 + g);
+    const impliedR = (D1 / P0) + g;
+    out.innerHTML = `
+      <p><strong>Given</strong>: P₀ = ${fmt(P0)}, D₀ = ${fmt(d0)}, g = ${fmt(g)}</p>
+      <p>First compute D₁ = D₀(1+g) = ${fmt(D1)}</p>
+      <p>Required return r = (D₁/P₀) + g = (${fmt(D1)}/${fmt(P0)}) + ${fmt(g)} = ${fmt(impliedR)}</p>
+      <p><em>Interpretation:</em> If the share price is P₀, the implied required return is ${fmt(impliedR)}.</p>
+    `;
+    if(window.MathJax) MathJax.typesetPromise();
+    return;
+  }
+
+  // Case 2: Price from D1, r, g
   if(isNaN(g) || isNaN(r) || (isNaN(d0) && d1val=='')){ out.innerHTML='<p>Enter growth rate g, required return r, and either D0 or D1.</p>'; return; }
   let d1;
   if(d1val !== '') d1 = parseFloat(d1val);
   else d1 = d0 * (1 + g);
-  if(r <= g){ out.innerHTML = `<p>Warning: required return r must be > growth rate g for the Gordon model to give a finite price. r=${r}, g=${g}</p>`; return; }
+  if(r <= g){ out.innerHTML = `<p>Warning: required return r must be > growth rate g. r=${r}, g=${g}</p>`; return; }
   const P0 = d1 / (r - g);
   out.innerHTML = `
-    <p><strong>Given</strong>: D<sub>1</sub> = R${fmt(d1)}, r = ${fmt(r)}, g = ${fmt(g)}</p>
-    <p>Gordon Growth Model (constant growth): $P_0 = \\dfrac{D_1}{r-g}$</p>
-    <p class="block">$P_0 = \\dfrac{${fmt(d1)}}{${fmt(r)} - ${fmt(g)}} = R${fmt(P0)}</p>
-    <p><em>Interpretation:</em> Price today equals next year's dividend discounted by the excess of return over growth.</p>
+    <p><strong>Given</strong>: D₁ = ${fmt(d1)}, r = ${fmt(r)}, g = ${fmt(g)}</p>
+    <p>Gordon Growth Model: $P_0 = \\dfrac{D_1}{r-g}$</p>
+    <p>$P_0 = \\dfrac{${fmt(d1)}}{${fmt(r)} - ${fmt(g)}} = ${fmt(P0)}$</p>
+    <p><em>Interpretation:</em> Current share price equals the next dividend discounted by the difference between required return and growth.</p>
   `;
   if(window.MathJax) MathJax.typesetPromise();
 }
+
 function explainCAPM(){
   const rf = parseFloat(document.getElementById('capm-rf').value || NaN);
   const beta = parseFloat(document.getElementById('capm-beta').value || NaN);
@@ -246,38 +278,55 @@ function explainCAPM(){
   if(isNaN(rf) || isNaN(beta) || isNaN(rm)){ out.innerHTML='<p>Enter Rf, β and Rm.</p>'; return; }
   const exp = rf + beta * (rm - rf);
   out.innerHTML = `
-    <p><strong>Given</strong>: Risk-free rate $R_f = ${fmt(rf)}$, $\\beta = ${fmt(beta)}$, Market return $R_m = ${fmt(rm)}</p>
-    <p>CAPM: $E[R_i] = R_f + \\beta (R_m - R_f)$</p>
-    <p class="block">$E[R_i] = ${fmt(rf)} + ${fmt(beta)} \\times (${fmt(rm)} - ${fmt(rf)}) = ${fmt(exp)}</p>
-    <p><em>Interpretation:</em> Expected return compensates for time value (Rf) plus risk premium (β times market premium).</p>
-  `;
-  if(window.MathJax) MathJax.typesetPromise();
-}
-function explainWACC(){
-  const E = parseFloat(document.getElementById('wacc-e').value || 0);
-  const D = parseFloat(document.getElementById('wacc-d').value || 0);
-  const Re = parseFloat(document.getElementById('wacc-re').value || NaN);
-  const Rd = parseFloat(document.getElementById('wacc-rd').value || NaN);
-  const Tc = parseFloat(document.getElementById('wacc-tc').value || 0);
-  const out = document.getElementById('wacc-output');
-  if(isNaN(Re) || isNaN(Rd)){ out.innerHTML = '<p>Enter costs of equity (Re) and debt (Rd).</p>'; return; }
-  const V = E + D;
-  if(V === 0){ out.innerHTML = '<p>Please provide non-zero capital values for E or D.</p>'; return; }
-  const wE = E / V, wD = D / V;
-  const afterTaxRd = Rd * (1 - Tc);
-  const wacc = wE * Re + wD * afterTaxRd;
-  out.innerHTML = `
-    <p><strong>Inputs</strong>: E=${fmt(E)}, D=${fmt(D)}, Re=${fmt(Re)}, Rd=${fmt(Rd)}, Tax rate Tc=${fmt(Tc)}</p>
-    <p>Weights: $w_E = \\dfrac{E}{E+D} = ${fmt(wE)}$, $w_D = \\dfrac{D}{E+D} = ${fmt(wD)}$</p>
-    <p>After-tax cost of debt: $R_d(1-T_c) = ${fmt(Rd)}\\times(1-${fmt(Tc)}) = ${fmt(afterTaxRd)}</p>
-    <p class="block">WACC $= w_E R_e + w_D R_d (1-T_c) = ${fmt(wacc)}</p>
-    <p><em>Interpretation:</em> Weighted average cost of capital is the average return required by providers of capital, weighted by market values.</p>
+    <p><strong>Given</strong>: Rf = ${fmt(rf)}, β = ${fmt(beta)}, Rm = ${fmt(rm)}</p>
+    <p>Formula: $E[R_i] = R_f + \\beta (R_m - R_f)$</p>
+    <p>$E[R_i] = ${fmt(rf)} + ${fmt(beta)} \\times (${fmt(rm)} - ${fmt(rf)}) = ${fmt(exp)}$</p>
+    <p><em>Interpretation:</em> CAPM expected return is the risk-free return plus a risk premium proportional to β.</p>
   `;
   if(window.MathJax) MathJax.typesetPromise();
 }
 
+function explainWACC(){
+  const E = parseFloat(document.getElementById('wacc-e').value || 0);
+  const P = parseFloat(document.getElementById('wacc-p').value || 0);
+  const D = parseFloat(document.getElementById('wacc-d').value || 0);
+  const Re = parseFloat(document.getElementById('wacc-re').value || NaN);
+  const Rp = parseFloat(document.getElementById('wacc-rp').value || NaN);
+  const Rd = parseFloat(document.getElementById('wacc-rd').value || NaN);
+  const Tc = parseFloat(document.getElementById('wacc-tc').value || 0);
+  const out = document.getElementById('wacc-output');
+
+  if(isNaN(Re) || isNaN(Rp) || isNaN(Rd)){ out.innerHTML='<p>Enter Re, Rp and Rd.</p>'; return; }
+
+  const V = E + P + D;
+  if(V === 0){ out.innerHTML='<p>Provide non-zero values for E, P, or D.</p>'; return; }
+
+  const wE = E / V, wP = P / V, wD = D / V;
+  const afterTaxRd = Rd * (1 - Tc);
+  const wacc = wE*Re + wP*Rp + wD*afterTaxRd;
+
+  out.innerHTML = `
+    <p><strong>Step 1</strong>: After-tax cost of debt: $k_d = R_d(1-T_c) = ${fmt(Rd)}(1-${fmt(Tc)}) = ${fmt(afterTaxRd)}$</p>
+    <p><strong>Step 2</strong>: Weights (based on market values):</p>
+    <ul>
+      <li>$w_E = E/V = ${fmt(E)}/${fmt(V)} = ${fmt(wE)}$</li>
+      <li>$w_P = P/V = ${fmt(P)}/${fmt(V)} = ${fmt(wP)}$</li>
+      <li>$w_D = D/V = ${fmt(D)}/${fmt(V)} = ${fmt(wD)}$</li>
+    </ul>
+    <p><strong>Step 3</strong>: WACC = $w_E R_e + w_P R_p + w_D k_d$</p>
+    <p>$= (${fmt(wE)})( ${fmt(Re)}) + (${fmt(wP)})( ${fmt(Rp)}) + (${fmt(wD)})( ${fmt(afterTaxRd)})$</p>
+    <p>= ${fmt(wacc)}</p>
+    <p><em>Interpretation:</em> The firm’s average cost of capital is ${fmt(wacc)}, weighted by each capital source.</p>
+  `;
+  if(window.MathJax) MathJax.typesetPromise();
+}
+
+
 /* ---------------------------
    3) Recording transactions — simple journal -> ledger -> trial balance
+   Add a clear button or redo button
+   Try to make it so that it splits SOFP and Income Statement
+   Allow user to choose from dropbox if other then type it out
    --------------------------- */
 function recordTxnHTML(){
   return `
@@ -354,6 +403,32 @@ function showTrialBalance(){
 
 /* ---------------------------
    4) Adjustments & FS — short explanation (because adjustments vary)
+   Accruals and Prepayments - you cna do more explanation of what they are as there no calculations involve
+   Statement of Financial Position (Balance sheet)
+   - Statement of Comprehensive Income (Income statement)
+   AAFS Page 4 of 4
+Notes to the Statement of Financial Position (Balance Sheet)
+Property, plant and equipment (PPE)
+Cost Less Acc dep = Carrying value
+R R R
+Land and buildings 200 000 (½) 200 000
+Vehicles 120 000 (½) 55 000
+(R45 000 +10
+000)(1)
+65 000
+Furniture and equipment 90 000 (½) 31 600
+(R17 000 + 14 600)
+(1)
+58 400
+R410 000 R86 600 R323 400
+Alternative SOFP presentation for Inventories and Trade and other receivables
+Inventories R Trade and other receivables R
+Inventory 40 000 Accounts receivable (R30 000 – 400) 29 600
+Stationery on hand 2 000 Accrued income 2 000
+Prepaid expenses 1 000
+R42 000 R32 600
+Bonus question solution
+1. (Gross profit / Sales) x 100 = (R100 000 / 200 000) x 100 = 50 % (1)
    --------------------------- */
 function adjustmentsHTML(){
   return `
@@ -412,6 +487,80 @@ function explainDepreciation(){
 
 /* ---------------------------
    5) Financial Ratios
+   These would come from a Statement of Comprehendsion
+   1.1 Calculate the gross margin, operating margin and profit margin for 2023 and 2022.
+1.2 Comment on your answers calculated in question 1.1.
+1.3 Calculate the current ratio and acid test ratio at the end of each year. How has the
+enterprise’s liquidity changed over this period?
+1.4 Compute the following for 2023 ratios ( 2022 are given in brackets):
+■ Inventory turnover ( 9.04 times)
+■ Debtors collection period ( 29.24 days)
+■ Creditors payment period ( 42.40 days)
+■ Turnover to net assets ( 2.13)
+1.5 What is your interpretation of the enterprise’s performance with respect to your answers
+in question 1.4?
+192 040
+396 270
+190 660
+898 200
+2 038 860
+155 200
+2 306 440
+
+Different question
+
+Answer the questions below based on the following information. Income tax is
+calculated at 35% of profit.
+Vuyo Traders Sipho Stores
+2023 (R) 2022 (R) 2023 (R) 2022 (R)
+Operating profit 400 000 320 000 420 000 380 000
+Profit after tax 120 000 100 000 140 000 80 000
+Non-current debt (10% p.a.) 200 000 80 000 1 200 000 1 000 000
+Equity 800 000 720 000 300 000 280 000
+Note: The enterprise has no current liabilities.
+Required
+2.1 Calculate the return on assets for both enterprises for 2023.
+2.2 Calculate the return on equity for both enterprises for 2023.
+2.3 Which enterprise is more profitable? Explain.
+2.4 Should Vuyo Traders be satisfied with its return on assets? Explain.
+
+Ensure that there every type ratio
+1. Solvency and Net asset value
+1.1Solvency (Total Assets (Fairly valued) > Total liabilities) 
+1.2 Net Asset Value (NAV)
+2. Liquidity ratios
+2.1 Current ratio
+2.2 Acid test ratio (Quick ratio)
+3. Asset Management 
+3.1 Days inventory on hand
+3.2 Inventory Turnover Ratio
+3.3  Account Receivables Days (Collection period)
+3.4  Accounts Payables Days (Creditors payment period)
+4. Asset Turnover Ratios (Management) 
+4.1  Total Asset Turnover
+4.2  Fixed Asset (Non Current) Turnover 
+5. Financial Leverage Ratios
+5.1  Debt ratio
+5.2(a)  Debt to Equity Ratio 
+5.2(b)  Debt to Equity Ratio
+5.3  Times Interest Earned Ratio
+5.4  Cash Coverage Ratio
+6. Profitability
+6.1 Gross Margin on Sales
+6.2 Net Operating Profit Margin
+6.3 Net Profit on Sales after Tax
+6.4(a)  Return on Total Assets (ROA) 
+6.4(b)  Return on Total Assets (ROA) 
+6.5 Return on Equity (ROE)
+7. Investment Performance Ratios
+7.1  Dividend Yield (DY) (Income yield)
+7.2 Return to Shareholder (Holding Period Return (HPR) 
+7.3  Headline Earnings Per Share (EPS)
+7.4 Dividend Cover
+7.5 Pay-out ratio
+7.6 Retention ratio (Ploughback/plowback ratio)
+7.7(a) Price Earnings Ratio (P/E) 
+7.7(b) Earnings Yield (EY) (Inverse of PE) 
    --------------------------- */
 function ratiosHTML(){
   return `
@@ -465,6 +614,68 @@ function explainRatios(){
 
 /* ---------------------------
    6) Investments, Risk & Return (expected return & variance)
+   Years Share A Average Return Dev Deviations squared
+R R R−R ( R−R )2
+2020 0.25 0.22 0.03 0.0009
+2021 0.23 0.22 0.01 0.0001
+2022 0.18 0.22 -0.04 0.0016
+0.66 0.0026
+Mean = 066/3 = 0.22
+Variance = 0.0026 / (3-1) = 0.0013
+Standard Deviation = √0.0013 = 0.0361
+Years Share A Average Return Dev Deviations squared
+R R R−R ( R−R )2
+2020 0.14 0.2 -0.06 0.0036
+2021 0.16 0.2 -0.04 0.0016
+2022 0.30 0.2 0.1 0.01
+0.60 0.0152
+Mean = 0.60/3 = 0.2
+Variance = 0.0152/(3-1) = 0.0076
+Standard Deviation= √0.0076 = 0.0872
+QUESTION 2
+Economic
+State
+Probabilit
+y
+P
+Projected
+returns
+R
+E(R)
+P x R
+Deviation
+s
+R- E(R)
+Dev Sqd
+(DEV2)
+(R-ER)2 P x DEV2
+Boom 0.35 0.22 0.077 0.088 0.0077 0.0027
+Normal 0.45 0.10 0.045 -0.032 0.0010 0.0005
+Recession 0.20 0.05 0.01 -0.082 0.0067 0.0013
+0.132 0.0045
+Expected return = 0.132
+Variance = 0.0045
+Standard deviation = √0 , 0 045=0.0671
+OR
+Mean = (0.35 x 0.22) + (0.45 x 0.10) + (0.20 x 0.05)
+= 0.077+ 0.045 +0.01
+= 0.132
+Variance = ((0.22 – 0.132) 2 x 0.35) + ((0.10 – 0.132) 2 x 0.45) + ((0.05 – 0.132) 2 x 0.20)
+= 0.0027 + 0.0005 + 0.0013
+= 0.0045
+Standard deviation = √0,0045 = 0.0671
+QUESTION 3
+At a 90% confidence level, we expect the return to be within 1.645 standard deviations from
+the mean
+(RA) +/- (A x 1.000)
+= 8 +- / (20 x 1.645)
+= 8 - 32.9 = -24.9 and 8 + 32.9 = 40.9
+There is a 90% chance that the actual return will be between -24.9% and 40.9%
+QUESTION 4
+E(Ri) = Rrf + βi(E(Rm) – Rrf)
+= 8 + (1.3 x (15- 8))
+= 8 + 9.1
+= 17.1%
    --------------------------- */
 function investRiskHTML(){
   return `
@@ -512,6 +723,37 @@ function explainInvest(){
 
 /* ---------------------------
    7) Working Capital Management (NWC & Cash Conversion Cycle)
+   1. Working Capital Cycle 2017
+Days inventory on hand Inventory x 365 R3 816.4 x 365 (1)
+Cost of sales expense 85 830.2 (1)
+= 16.2299 days (½m)
+Debtors collection period Debtors x 365 R10 814.3 x 365 (1)
+Credit sales 57 277 (95 461.1 x 0.60) (1)
+= 68.91 days (½m)
+Creditors payment period Creditors x 365 R13 452.7 x 365 (1)
+Cost of sales expense 85 830.2 (1)
+= 57.21 days (½m)
+Days inventory on
+hand
++ Debtors collection
+period
+- Creditors payment
+period
+= Working Capital Cycle
+16.2299 (½m) days + 68.91 (½m) days - 57.21 (½m) days = 27.9299 (½m) days
+▪ Spar collected cash from debtors 27.9299 days after they paid their creditors
+or
+▪ Spar paid their creditors 27.9299 days before they received the cash from Debtors
+(½)
+▪ A shorter Working Capital Cycle (½) so that they receive the cash from the credit customers
+(debtors) before they pay their creditors (½)
+(11 marks)
+2.
+3 X 365 =
+100 – 3 45 – 12
+(1 or ½m) (1 or ½m)
+0.030927835 x 11.06060606 34.2080 %
+Calculation of discount 180 / 6000 x 100 = 3 % (1)
    --------------------------- */
 function workingCapHTML(){
   return `
@@ -555,6 +797,119 @@ function explainWorkingCap(){
 
 /* ---------------------------
    8) Cost-Volume-Profit (break-even)
+   QUESTION ONE
+Purple Ltd produces special candles in glasses containers for restaurants and packs them in
+red boxes that sells for R200 each. The total and per unit budgeted costs to manufacture and
+sell 20 000 candles for 2021 are as follows:
+Total Per unit
+R R
+Variable Manufacturing costs
+Direct materials 800 000 40
+Direct labour 700 000 35
+Variable manufacturing overheads 100 000 5
+Selling commission (10 % of the selling price) ? ?
+Fixed costs
+Fixed manufacturing overheads 340 000
+Salaries and other operating fixed costs 600 000
+Zandisile, the accountant, has omitted the depreciation of R60 000 for the production
+equipment.
+YOU ARE REQUIRED TO:
+1. Prepare Purple Ltd’s Contribution Margin Income Statement for the year ended 31
+December 2021.
+(6 marks)
+2. Calculate the number of glass candles that Purple Ltd must sell to Breakeven in 2021.
+(5 marks)
+3. Calculate the Margin of Safety (in glasses).
+(1 mark)
+4. Assume that the Prime costs increases by 10 % calculate the number of glass candles
+that Purple Ltd must sell in 2021 to make a Profit of R119 250.
+(3 marks)
+(SOLUTION)
+1. Contribution margin Income Statement for the year ended 31 December 2021
+Sales (20 000 x R200) R4 000 000
+Less: Variable costs -2 000 000
+Direct material (Ingredients) (20 000 x R40) 800 000
+Direct labour (20 000 x R35) 700 000
+Variable manufacturing overheads (20 000 x R5) 100 000
+Selling commission (20 000 x R20) 400 000
+Contribution margin 2 000 000
+Less: Fixed costs -1 000 000
+Fixed manufacturing overheads 340 000
+Salaries and other operating fixed costs 600 000
+Depreciation 60 000
+Net profit R1 000 000
+2. Break-even quantity
+ALL Fixed costs (R340 000 + 600 000 + 60 000)
+Contribution margin per unit
+= R1 000 000
+100
+= 10 000 candles
+Contribution margin per unit
+Selling price per unit 200
+Variable Manufacturing costs: -100
+Direct material (Ingredients) 40
+Direct labour 35
+Variable manufacturing overheads 5
+Selling commission (10 % of the selling price) 20
+100
+3. Margin of safety
+Budgeted sales - Breakeven quantity
+20 000 – 10 000 = 10 000
+4. New breakeven quantity with Target profit
+ALL Fixed costs + Target net profit
+Contribution margin per unit
+= R340 000 + 600 000 + 60 000 + 119 250
+100 – 7.5
+= 12 100 candles
+QUESTION 2
+DuraBricks Ltd provided the folllowing information relating to the manufacturer of
+bricks.
+R R R
+Sales (40 000 units at R10) 400 000
+Less: Cost of sales Fixed Variable 280 000
+Cost of direct materials 60 000
+Cost of direct labour 80 000
+Manufacturing overheads 100 000 40 000
+Gross profit 120 000
+Less: Selling and admin costs 30 000 20 000 50 000
+Net Profit 70 000
+Determine the following:
+a. The breakeven point (in units and value)
+b. The effect on the breakeven units if there is an
+i. Increase of 10 % in the selling price per unit
+ii. Increase of 10% in the sales volume
+iii. Increase of 10% in the variable costs per unit
+iv. Increase of 10% in fixed costs.
+Consider each scenario independently
+a. The breakeven point (in units and value)
+TOTAL PER
+UNIT
+R R
+Sales (40 000 units X 10) 400 000 10
+Less: Variable costs (60 000 + 80 000 + 40 000+ 20 000) 200 000 5
+Contribution 200 000 5
+Breakeven units = total fixed costs / contribution per unit
+= 130 000 / 5
+= 26 000 units
+Breakeven value = 26 000 X R10
+= R 260 000
+b. i. Increase in selling price unit = R1 + previous contribution per unit R5
+= R6 per unit
+Breakeven units = 130 000 / 6
+= 21 667 units
+There is a decrease from 26 000 to 21 667 in the breakeven units
+ii . Fixed costs remain unchanged
+Contribution per unit remains
+unchanged
+Therefore: Breakeven units remain unchanged.
+iii. Previous contribution per unit
+cost per unit of
+Breakeven units = R130 000 / R4.50
+= 28 889 units
+iv. Fixed costs increase by 10 % (R130 000 X 1.1) =
+R 143 000 Breakeven units = R 143 000 / R5
+= 28 600
+There is an increase from 26 000 to 28 600 in the breakeven units.
    --------------------------- */
 function cvpHTML(){
   return `
@@ -587,6 +942,37 @@ function explainCVP(){
 
 /* ---------------------------
    9) Budgeting (variance analysis)
+   Allow creation pf Cash Budget
+   FurnitureWorld Ltd is a relatively new company that retails both office and household furniture for the
+domestic market. The chief executive director (CEO) is concern about the company’s ability to meet its
+cash obligations in the coming months. In order to facilitate the preparation of the Cash Budget for the
+company, the following estimates are provided to you for the three months ending 30 September 2024:
+1. Sales and purchases
+July August September
+R R R
+Total sales 300 000 400 000 500 000
+Total purchases (inventory) 120 000 140 000 160 000
+2. Of the total sales, 20% are for cash, while 80% are on credit. The company expects to collect cash
+from its credit customers (debtors) as follows:
+• 60% in the first month after the month of sale.
+• 35% in the second month after the month of sale.
+• 5% is considered as bad debts (that is, irrecoverable).
+3. 40% of the total purchases (of inventory) is on a cash basis, while 60% is on credit. Creditors are paid
+in the month following the month of purchase.
+4. FurnitureWorld is leasing part of its warehouse to another company and is charging rent of R40 000
+per month. The lease runs for one year from 1 April 2024.
+5. Salaries and wages are R60 000 per month for July and August 2024 and are expected to increase by
+10% from September 2024 going forward. Salaries and wages are payable in the month in which they
+are incurred.
+6. Operating expenses are R100 000 per month, payable in the month in which they are incurred. The
+amount (R100 000) includes depreciation of R20 000 for delivery vehicles.
+7. A new delivery van is expected to be purchased on 1 September 2024 for R200 000. A deposit of 25%
+is paid on the date of purchase (1 September 2024). The balance (together with interest) is paid in 10
+equal instalments of R17 000 each beginning end of September 2024.
+8. On 1 September 2024, the company expects to have a bank overdraft of R20 000.
+REQUIRED:
+1. Prepare a Cash Budget for FurnitureWorld Ltd (Only) for the month of September 2024 using the
+available information, and indicate the cash balance at the end of September 2024
    --------------------------- */
 function budgetingHTML(){
   return `
@@ -619,6 +1005,7 @@ function explainBudgeting(){
 
 /* ---------------------------
    10) Time Value of Money (PV, FV, annuities)
+   Solve these
    --------------------------- */
 function tvmHTML(){
   return `
@@ -673,6 +1060,165 @@ function explainTVMFV(){
 
 /* ---------------------------
    11) Valuation (Perpetuity & Growing perpetuity)
+   Question 1.
+Green Ltd paid R13 dividend this year. The firm expects the dividend to grow at a constant
+rate of 4% each year forever. Investors require an 8% return on this stock.
+Required: How much is the intrinsic price of this share?
+Question 2
+The company paid a dividend of R4.50 in the last period; however, the company’s dividends
+have been reduced each year by 6%. This trend is expected to continue in the future.
+Required: As an investor, what is the most price you are willing to pay for this stock if your
+required rate of return is 12%?
+Question 3
+Sindy Ltd just paid a dividend of R2.15 last year. The company is expected to grow at a
+steady rate of 5 percent for the next several years.
+Required: If shares such as these require a rate of return of 15 percent, what should be the
+market value of the shares?
+Question 4
+A non –redeemable bond that has a face value of R300 and pays a coupon rate of 7%. The
+current yield to maturity for similar bonds is 4%.
+Required: Calculate the price you will pay for this bond
+Question 5
+Purple Ltd issued a bond with a face value of R100 and pays an annual coupon of 15%, and it
+is redeemable in 5 years’ time. Similar bonds have a market yield of 10%.
+Required: How much will you be willing to pay for this bond?
+Question 6
+White Ltd has issued a bond with a face value of R1000. This is a three-year bond that pays a
+coupon of 6.10%. Coupon payments are made semi-annually.
+Required: Given the market rate of interest of 5.8%, what is the market value of the bond?
+How much will you be willing to pay for this bond?
+Question 7
+Brown Ltd issued bond-paying coupons annually. The bond has a par value of R800 and is
+now left with 12 years to maturity, and a coupon rate is R8%.
+Required: Calculate the prices of the bond today, assuming bonds are trading at a yield of
+8%, 6%, and 10%. Interpret your calculation by stating whether each bond is selling at a
+premium or at a discount or at pa
+   Question 1.
+𝐷0 = 13, R = 8%, G= 4%
+𝑃0 = 𝐷1
+𝑅 − 𝑔
+𝐶𝑎𝑙𝑐𝑢𝑙𝑎𝑡𝑒 𝐷1 = 𝐷0 𝑋 (1 + 𝑔)
+𝐷1 = 13 (1 + 0.04) = R13.52
+= 13.52
+0.08 − 0.04
+= 13.52
+0.04
+= R338
+Question 2.
+𝑃0 = 𝐷1
+𝑅 − 𝑔
+𝐶𝑎𝑙𝑐𝑢𝑙𝑎𝑡𝑒 𝐷1 = 𝐷0 𝑋 (1 + 𝑔)
+𝐷1 =4.50 (1 − 0.06)
+= 4.23
+0.12 − (−0.06)
+= 4.23
+0.18
+= R23.50
+Question 3.
+D0 = R2.15; g = 5%; R = 15%
+𝑃0 = 𝐷1
+𝑅−𝑔 = 𝐷0 (1+𝑔)
+𝑅−𝑔
+𝑅2.15 (1.05)
+0.15−0.05
+= R22.58
+Question 4
+𝑃𝐵 = 𝐶
+𝑖 ; C = coupon payment = R300 x 7% = R21; I = 4%
+𝑃𝐵 = 𝑅21
+0.04
+= R525.
+Question 5
+𝑃𝐵 = 𝐶 [
+1 − 1
+(1 + 𝑖)𝑛𝑚
+𝑖 ] + 𝐹 [ 1
+(1 + 𝑖)𝑛]
+C = R100 x 15% =R15; I= 0.10; F =100; N = 5
+𝑃𝐵 = 𝑅15𝑥(1− 1
+(1+0.10)5
+0.10 ) +100𝑥( 1
+(1+0.10)5)
+= 𝑅15𝑥(1− 1
+(1,61051
+0.10 )+100𝑥( 1
+(1,61051))
+= 𝑅15𝑥(1−0.620921323
+0.10 )+100𝑥(0.620921323)
+= 15 (3.79078677) + 100 (0.620921323)
+= 56.86180155 + 62.0921323
+= R118.95
+OR
+PB= R15 x PVIFA5; 10% + R100 x PVIF5; 10%
+= 15 x 3.791 + 100 x 0.621
+= 56.865 + 62.10
+= R118.97
+Question 6
+N = 3
+C = R1000 (6.1%/2) = R30.50
+M = 2
+Semi-annual coupon = R 1 000 x (0.061/2) = R30.50
+I = 5.8%/2 = 0.029
+𝑃𝐵 = 𝐶/𝑚 [
+1 − 1
+(1 + 𝑖/𝑚)𝑛𝑚
+𝑖/𝑚 ] + 𝐹 [ 1
+(1 + 𝑖/𝑚)𝑛𝑚]
+𝑃𝐵 = 30.50 [ 1− 1
+(1.029)6
+0.029 ] +1000𝑥 ( 1
+(1.029 ) 6 )
+= R165.77 + R842.38
+= R1008.15
+Question 7
+N = 12
+C = 800 x 8% = R64
+I= 8%, 6%, 10
+FV = R800
+Bond price assuming a yield of 8%
+𝑃𝐵 = 𝐶 [
+1 − 1
+(1 + 𝑖)𝑛
+𝑖 ] + 𝐹 [ 1
+(1 + 𝑖)𝑛]
+𝑃𝐵 = 64 [
+1 − 1
+(1 + 0.08)12
+0.08 ] + 800 [ 1
+(1 + 0.08)12]
+= 64 [1− 1
+2.5182
+0.08 ] + 800 𝑥 [ 1
+2.5182]
+= 64 (1-0.3971/0.08) + 800 x (0.3971)
+= 482.32 + 317.68
+= R800
+Bond price assuming a yield of 6%
+𝑃𝐵 = 64 [
+1 − 1
+(1 + 0.06)12
+0.06 ] + 800 [ 1
+(1 + 0.06)12]
+= 64 [1− 1
+2.0121
+0.06 ] + 800 [ 1
+2.0121 ]
+= 64 (1- 0.4970/0.06) + 800 x (0.4970)
+= 536.5406 + 397.6
+= R934.14
+Bond price assuming a yield of 10%
+𝑃𝐵 = 64 [
+1 − 1
+(1 + 0.10)12
+0.10 ] + 800 𝑥 [ 1
+(1 + 0.10)12]
+= 64 [1− 1
+3.1384
+0.10 ] + 800 𝑥 [ 1
+3.1384 ]
+= 64 x (1- 0.3186 /0.10) + 800x (0.3186)
+= 436.0744 + 254.9070
+= R690.98
    --------------------------- */
 function valuationHTML(){
   return `
@@ -713,6 +1259,131 @@ function explainValuation(){
 
 /* ---------------------------
    12) Capital Budgeting — NPV & IRR
+   A) AR – THE AVERAGE RETURN
+PROJECT A PROJECT B
+𝐶𝐶0 = R500 000 (Investment)
+𝐶𝐶𝑡𝑡 = 100 000 , 150 000, 250 000, 400 000
+N = 4 years
+𝐶𝐶0 = R500 000 (Investment)
+𝐶𝐶𝑡𝑡 = 250 000, 200 000, 150 000, 100 000
+N = 4 years
+𝐴𝐴𝐴𝐴𝑝𝑝𝑝𝑝𝑝𝑝𝑝𝑝𝑝𝑝𝑝𝑝𝑡𝑡𝑝𝑝
+= ( 100 000 + 150 000 + 250 000 + 400 000) /4 x 100
+500 000 1
+𝐴𝐴𝐴𝐴𝑝𝑝𝑝𝑝𝑝𝑝𝑝𝑝𝑝𝑝𝑝𝑝𝑡𝑡𝑝𝑝
+= (250 000 + 200 000 + 150 000 + 100 000) /4 x 100
+500 000 1
+= 225 000 x 100
+500 000
+= 175 000 x 100
+500 000
+= 0.45 or 45% = 0.35 or 35%
+Interpretation
+ Both projects would be acceptable since both ARs exceed the cost of capital of 10%
+ Project A offers a higher return than Project B, so choose Project A
+ Both projects require the same capital
+ Project A cash flows are lower at the beginning of the project
+ Project B requires cash flows are larger at the beginning of the investment
+ The sooner the cash flows are received, the greater the return on the investment
+B) PBP - PAYBACK PERIOD
+Year Nature of cash
+flow
+PROJECT A
+cash flows
+Cumulative cash flows
+0 Outflow -R500 000 -R500 000
+1 Inflow R100 000 -R400 000 (-500 000 + 100 000)
+2 Inflow R150 000, -R250 000 (-400 000 + 150 000)
+3 Inflow R250 000, 0 (- 250 000 + 250 000)
+= 3 years
+4 Inflow R400 000
+Page 2 of 4
+Year Nature of cash
+flow
+PROJECT B
+cash flows
+Cumulative cash flows
+0 Outflow -R500 000 -R500 000
+1 Inflow 250 000, -R250 000 (-500 000 + 250 000)
+2 Inflow 200 000 -R50 000 (-250 000 + 200 000)
+3 Inflow 150 000 In the 3 rd year, we need R50 000 only,
+not R150 000 to recover the
+investment capital of R500 000
+= 2 years + 50 000
+150 000
+= 2.33 years
+4 Inflow 100 000
+Interpretation
+ Project B is preferred because it has a shorter recovery period than Project A.
+ The investor would recover the invested capital more quickly by investing in Project
+B.
+C) DPB - DISCOUNTED PAYBACK PERIOD
+Year Nature of
+cash flow
+PROJECT A
+cash flows
+Present value of cash flow
+Cash flow discounted at i =
+20%
+Cumulative cash flows
+0 Outflow -R500 000 -R500 000
+1 Inflow R100 000 𝐶𝐶t
+(1+𝑖𝑖)𝑡𝑡 = 100 000
+(1+0,20)1 = 100 000
+1,2 =
+83 333
+-R416 667 ( -500 000 + 83 333)
+2 Inflow R150 000, 150 000
+(1+0,20)2 = 150 000
+1,44 = 104 167 -R312 500 (- 416 667 + 104 167)
+3 Inflow R250 000, 250 000
+(1+0,20)3 = 250 000
+1,728 = 144 676 -R167 824 (-312 500 + 144 676)
+4 Inflow R400 000 400 000
+(1+0,20)4 = 400 000
+2,0736 = 192 901 In the 4th year, the investor needs
+R167 824 only, not R192 901 to
+recover the investment capital of
+R500 000
+= 3 years + 167 824
+192 901
+= 3.87 years
+DCF = 𝐶𝐶t
+(1+𝑖𝑖)𝑡𝑡
+Page 3 of 4
+Year Nature of
+cash flow
+PROJECT B
+cash flows
+Present value of cash flow
+Cash flow discounted at i =
+20%
+Cumulative cash flows
+0 Outflow -R500 000 -R500 000
+1 Inflow 250 000, 𝐶𝐶t
+(1+𝑖𝑖)𝑡𝑡 = 250 000
+(1+0,20)1 = 250 000
+1,2
+= 208 333
+-R291 667 (-500 000 + 208 333)
+2 Inflow 200 000 200 000
+(1+0,20)2 = 200 000
+1,44 = 138 889 -152 778 (-291 667 + 138 889)
+3 Inflow 150 000 150 000
+(1+0,20)3 = 150 000
+1,728 = 86 806 -65 972 (-152 778 + 86 806)
+4 Inflow 100 000 100 000
+(1+0,20)4 = 100 000
+2,0736 = 48 225 -17 757 (-65 872 + 48225)
+Capital is NOT recovered at the
+end of the project
+= +4years
+Interpretation
+ DPB method yields larger values, This is because the discounted cash flows are lower
+than the cash flows, therefore it will take longer to recover the capital compared to
+PBP
+ Project A is preferred because it has a shorter recovery period than Project B.
+ The investor will not recover the capital if project B is chos
    --------------------------- */
 function capBudHTML(){
   return `
