@@ -2,51 +2,106 @@
   {
     "ID": "Q1",
     "module": "Time Value of Money (TVM)",
-    "topic": "TVM",
+    "topic": "Present Value",
     "type": "numeric",
     "question": "Calculate the present value of R1000 to be received in 5 years at 5% per annum.",
     "options": [],
-    "answer": "PV(0.05,5,0,1000,0)",
-    "explain": "To calculate PV, we discount the future value (R1000) using the formula PV = FV / (1+r)^n. Here, r = 5% = 0.05, n = 5, FV = 1000. PV = 1000 / (1.05)^5 = 783.526166... (≈ R783.53)."
+    "answer": "1000 / (1 + 0.05) ^ 5",
+    "explain": "PV = FV / (1 + r)^n. Here FV = 1000, r = 0.05, n = 5. PV ≈ 783.53."
   },
   {
     "ID": "Q2",
-    "module": "Objective of Accounting (A = E + L)",
-    "topic": "Balance sheet basics",
+    "module": "Valuation",
+    "topic": "Gordon Growth",
     "type": "numeric",
-    "question": "If Assets = R15000 and Liabilities = R6200, calculate Equity.",
+    "question": "A company will pay a dividend of R2.00 next year. If required return is 9% and growth is 4%, what is the value of the share using Gordon Growth model?",
     "options": [],
-    "answer": "15000-6200",
-    "explain": "Equity = Assets − Liabilities = 15000 − 6200 = R8800."
+    "answer": "2.00 / (0.09 - 0.04)",
+    "explain": "Using P0 = D1 / (r - g). D1=2.00, r=0.09, g=0.04 → P0 = 2 / 0.05 = R40."
   },
   {
     "ID": "Q3",
-    "module": "Financial Ratio Analysis (FRA)",
-    "topic": "Current Ratio",
+    "module": "Sources of Finance & Cost of Capital",
+    "topic": "CAPM",
     "type": "numeric",
-    "question": "Compute the current ratio where current assets = R120000 and current liabilities = R60000.",
+    "question": "Using CAPM, compute expected return for beta = 1.2, risk-free rate 6% and market return 12%.",
     "options": [],
-    "answer": "120000/60000",
-    "explain": "Current ratio = Current assets / Current liabilities = 120000 / 60000 = 2.00 (two times)."
+    "answer": "0.06 + 1.2 * (0.12 - 0.06)",
+    "explain": "CAPM: E[R] = Rf + β (Rm - Rf) = 0.06 + 1.2*(0.06) = 0.132 (13.2%)."
   },
   {
     "ID": "Q4",
-    "module": "Costs & CVP",
-    "topic": "Break-even point",
+    "module": "Capital Budgeting",
+    "topic": "NPV",
     "type": "numeric",
-    "question": "Price per unit = R50, variable cost per unit = R30, fixed costs = R20000. Calculate break-even units.",
+    "question": "Project with cash flows: t0 = -100000, t1 = 30000, t2 = 40000, t3 = 50000. Compute NPV at 12%.",
     "options": [],
-    "answer": "20000/(50-30)",
-    "explain": "Contribution per unit = 50 − 30 = R20. Break-even units = Fixed costs / Contribution per unit = 20000 / 20 = 1000 units."
+    "answer": "(-100000) + 30000 / (1 + 0.12) + 40000 / (1 + 0.12)^2 + 50000 / (1 + 0.12)^3",
+    "explain": "Discount each cash flow to present. NPV > 0 indicates project adds value."
   },
   {
     "ID": "Q5",
-    "module": "Capital Budgeting (CB)",
-    "topic": "NPV",
+    "module": "Financial Ratio Analysis",
+    "topic": "Current Ratio",
     "type": "numeric",
-    "question": "Project cashflows: initial −R120000, year1 R40000, year2 R50000, year3 R60000. Discount rate 10%. Calculate NPV.",
+    "question": "Calculate the current ratio if current assets are R150,000 and current liabilities are R60,000.",
     "options": [],
-    "answer": "(-120000) + 40000/(1+0.10) + 50000/(1+0.10)^2 + 60000/(1+0.10)^3",
-    "explain": "Calculate present values of each future cashflow and add the initial investment. Compute each discounted term and sum. If NPV>0 project acceptable."
+    "answer": "150000 / 60000",
+    "explain": "Current ratio = Current Assets / Current Liabilities = 150000/60000 = 2.5."
+  },
+  {
+    "ID": "Q6",
+    "module": "Cost-Volume-Profit",
+    "topic": "Break-even",
+    "type": "numeric",
+    "question": "Fixed costs R50,000, price per unit R50, variable cost per unit R30. Compute break-even in units.",
+    "options": [],
+    "answer": "50000 / (50 - 30)",
+    "explain": "Break-even units = FC / (P - VC) = 50000 / 20 = 2500 units."
+  },
+  {
+    "ID": "Q7",
+    "module": "Working Capital",
+    "topic": "Net Working Capital",
+    "type": "numeric",
+    "question": "Compute Net Working Capital if current assets are R120,000 and current liabilities R80,000.",
+    "options": [],
+    "answer": "120000 - 80000",
+    "explain": "NWC = Current assets - Current liabilities = 40000."
+  },
+  {
+    "ID": "Q8",
+    "module": "Recording Transactions",
+    "topic": "Journal Entry",
+    "type": "mcq",
+    "question": "A firm receives cash of R10,000 from a customer for services rendered. What is the correct journal entry?",
+    "options": [
+      "Debit Cash R10,000; Credit Service Revenue R10,000",
+      "Debit Service Revenue R10,000; Credit Cash R10,000",
+      "Debit Cash R10,000; Credit Accounts Receivable R10,000",
+      "Debit Accounts Receivable R10,000; Credit Service Revenue R10,000"
+    ],
+    "answerIndex": 0,
+    "explain": "Cash received increases the Cash account (debit) and recognizes revenue (credit)."
+  },
+  {
+    "ID": "Q9",
+    "module": "Valuation",
+    "topic": "Perpetuity",
+    "type": "numeric",
+    "question": "A perpetuity pays R500 per year forever. If discount rate is 5%, what is the present value?",
+    "options": [],
+    "answer": "500 / 0.05",
+    "explain": "PV = C / r = 500 / 0.05 = R10,000."
+  },
+  {
+    "ID": "Q10",
+    "module": "Investments",
+    "topic": "Expected Return",
+    "type": "numeric",
+    "question": "An asset has two states: 0.6 probability of 8% return and 0.4 probability of -2% return. Compute expected return.",
+    "options": [],
+    "answer": "0.6 * 0.08 + 0.4 * (-0.02)",
+    "explain": "E[R] = Σ p_i r_i = 0.6*0.08 + 0.4*(-0.02) = 0.032 = 3.2%."
   }
 ]
