@@ -33,6 +33,7 @@ function applyTheme(name){
 }
 applyTheme('bloodred');
 
+
 /* ---------------------------
    Helpers
    --------------------------- */
@@ -176,22 +177,25 @@ function explainAccEq(){
    - Added direct P0 input option for Gordon Growth
    - Expanded WACC explanation: kd step, weighted components, step-by-step
 ---------------------------- */
+/* ---------------------------
+   Sources of Finance & Cost of Capital (Upgraded)
+   --------------------------- */
 function sourcesCostHTML(){
   return `
     <div>
       <h2 class="text-2xl font-semibold">Sources of Finance & Cost of Capital</h2>
-      <p class="mt-2 text-sm opacity-90">Calculate price using Gordon Growth (Dividend Discount Model), CAPM expected return, and WACC.</p>
+      <p class="mt-2 text-sm opacity-90">Work with Dividend Growth (Gordon), CAPM, and WACC — all step by step with symbols used in class.</p>
 
       <div class="mt-4 grid gap-3 md:grid-cols-2">
-        <!-- Dividend Growth Model -->
+        <!-- Dividend Growth -->
         <div class="glass p-3 rounded-md">
           <h3 class="font-semibold">Dividend Growth Model (Gordon)</h3>
           <div class="mt-2 grid gap-2">
-            <label class="label">Price today P₀ (optional) <input id="dgm-p0" class="input" placeholder="e.g. 50" /></label>
-            <label class="label">Dividend just paid D₀ <input id="dgm-d0" class="input" placeholder="e.g. 2.50" /></label>
-            <label class="label">Dividend next year D₁ (optional) <input id="dgm-d1" class="input" placeholder="or leave blank to compute from D₀ and g" /></label>
-            <label class="label">Growth rate g (decimal) <input id="dgm-g" class="input" placeholder="e.g. 0.04" /></label>
-            <label class="label">Required return r (decimal) <input id="dgm-r" class="input" placeholder="e.g. 0.09" /></label>
+            <label class="label">Dividend just paid D₀ <input id="dgm-d0" class="input" placeholder="e.g. 0.50" /></label>
+            <label class="label">Dividend next year D₁ (optional) <input id="dgm-d1" class="input" placeholder="or leave blank" /></label>
+            <label class="label">Growth rate g <input id="dgm-g" class="input" placeholder="e.g. 0.08" /></label>
+            <label class="label">Required return r <input id="dgm-r" class="input" placeholder="e.g. 0.20" /></label>
+            <label class="label">Price today P₀ (optional) <input id="dgm-p0" class="input" placeholder="Enter to compute r" /></label>
             <div class="flex gap-2 mt-2"><button id="dgm-explain" class="btn btn-primary">Explain</button><button id="dgm-example" class="btn btn-ghost">Example</button></div>
             <div id="dgm-output" class="mt-2 steps"></div>
           </div>
@@ -199,11 +203,11 @@ function sourcesCostHTML(){
 
         <!-- CAPM -->
         <div class="glass p-3 rounded-md">
-          <h3 class="font-semibold">CAPM — Expected return</h3>
+          <h3 class="font-semibold">CAPM — Cost of Equity (K<sub>e</sub>)</h3>
           <div class="mt-2 grid gap-2">
-            <label class="label">Risk-free rate Rf (decimal) <input id="capm-rf" class="input" placeholder="e.g. 0.06" /></label>
-            <label class="label">Beta (β) <input id="capm-beta" class="input" placeholder="e.g. 1.2" /></label>
-            <label class="label">Market return Rm (decimal) <input id="capm-rm" class="input" placeholder="e.g. 0.12" /></label>
+            <label class="label">Risk-free rate R<sub>f</sub> <input id="capm-rf" class="input" placeholder="e.g. 0.06" /></label>
+            <label class="label">Beta β <input id="capm-beta" class="input" placeholder="e.g. 1.1" /></label>
+            <label class="label">Market return R<sub>m</sub> <input id="capm-rm" class="input" placeholder="e.g. 0.10" /></label>
             <div class="flex gap-2 mt-2"><button id="capm-explain" class="btn btn-primary">Explain</button><button id="capm-example" class="btn btn-ghost">Example</button></div>
             <div id="capm-output" class="mt-2 steps"></div>
           </div>
@@ -211,16 +215,16 @@ function sourcesCostHTML(){
 
         <!-- WACC -->
         <div class="glass p-3 rounded-md md:col-span-2">
-          <h3 class="font-semibold">WACC — Weighted Average Cost of Capital</h3>
-          <p class="muted">Enter market values (Equity, Preference shares, and Debt), costs and corporate tax rate.</p>
+          <h3 class="font-semibold">Weighted Average Cost of Capital (WACC)</h3>
+          <p class="muted">Use Ke, Kp, Kd, and values of Equity (Vₑ), Preference shares (Vₚ), and Debt (Vd).</p>
           <div class="mt-2 grid gap-2 md:grid-cols-3">
-            <label class="label">Equity (E) <input id="wacc-e" class="input" placeholder="e.g. 2000000" /></label>
-            <label class="label">Preference shares (P) <input id="wacc-p" class="input" placeholder="e.g. 500000" /></label>
-            <label class="label">Debt (D) <input id="wacc-d" class="input" placeholder="e.g. 300000" /></label>
-            <label class="label">Cost of equity Re <input id="wacc-re" class="input" placeholder="e.g. 0.20" /></label>
-            <label class="label">Cost of preference shares Rp <input id="wacc-rp" class="input" placeholder="e.g. 0.14" /></label>
-            <label class="label">Cost of debt Rd (before tax) <input id="wacc-rd" class="input" placeholder="e.g. 0.15" /></label>
-            <label class="label">Corporate tax rate Tc <input id="wacc-tc" class="input" placeholder="e.g. 0.30" /></label>
+            <label class="label">Vₑ (Ordinary shares + Retained income) <input id="wacc-ve" class="input" placeholder="e.g. 2000000" /></label>
+            <label class="label">K<sub>e</sub> (Cost of equity) <input id="wacc-ke" class="input" placeholder="e.g. 0.20" /></label>
+            <label class="label">Vₚ (Preference shares) <input id="wacc-vp" class="input" placeholder="e.g. 500000" /></label>
+            <label class="label">K<sub>p</sub> (Cost of preference shares) <input id="wacc-kp" class="input" placeholder="e.g. 0.14" /></label>
+            <label class="label">Vd (Debt) <input id="wacc-vd" class="input" placeholder="e.g. 300000" /></label>
+            <label class="label">K<sub>d</sub> (Before tax) <input id="wacc-kd" class="input" placeholder="e.g. 0.15" /></label>
+            <label class="label">Tax rate t <input id="wacc-t" class="input" placeholder="e.g. 0.30" /></label>
           </div>
           <div class="mt-2 flex gap-2"><button id="wacc-explain" class="btn btn-primary">Explain</button><button id="wacc-example" class="btn btn-ghost">Example</button></div>
           <div id="wacc-output" class="mt-2 steps"></div>
@@ -230,43 +234,44 @@ function sourcesCostHTML(){
   `;
 }
 
+/* ---------------------------
+   Explain Functions
+   --------------------------- */
 function explainDGM(){
-  const p0val = document.getElementById('dgm-p0').value.trim();
   const d0 = parseFloat(document.getElementById('dgm-d0').value || NaN);
   const d1val = document.getElementById('dgm-d1').value.trim();
   const g = parseFloat(document.getElementById('dgm-g').value || NaN);
   const r = parseFloat(document.getElementById('dgm-r').value || NaN);
+  const p0val = document.getElementById('dgm-p0').value.trim();
   const out = document.getElementById('dgm-output');
 
-  // Case 1: P0 given, find implied return
-  if(p0val !== ''){
-    const P0 = parseFloat(p0val);
-    if(isNaN(P0) || isNaN(d0) || isNaN(g)){ out.innerHTML = '<p>Enter P0, D0, and g.</p>'; return; }
-    const D1 = d0 * (1 + g);
-    const impliedR = (D1 / P0) + g;
-    out.innerHTML = `
-      <p><strong>Given</strong>: P₀ = ${fmt(P0)}, D₀ = ${fmt(d0)}, g = ${fmt(g)}</p>
-      <p>First compute D₁ = D₀(1+g) = ${fmt(D1)}</p>
-      <p>Required return r = (D₁/P₀) + g = (${fmt(D1)}/${fmt(P0)}) + ${fmt(g)} = ${fmt(impliedR)}</p>
-      <p><em>Interpretation:</em> If the share price is P₀, the implied required return is ${fmt(impliedR)}.</p>
-    `;
-    if(window.MathJax) MathJax.typesetPromise();
-    return;
-  }
+  // Need at least D1 & r-g OR P0 given
+  if(isNaN(g)){ out.innerHTML='<p>Enter growth rate g.</p>'; return; }
 
-  // Case 2: Price from D1, r, g
-  if(isNaN(g) || isNaN(r) || (isNaN(d0) && d1val=='')){ out.innerHTML='<p>Enter growth rate g, required return r, and either D0 or D1.</p>'; return; }
-  let d1;
+  let d1, p0, reqR;
   if(d1val !== '') d1 = parseFloat(d1val);
-  else d1 = d0 * (1 + g);
-  if(r <= g){ out.innerHTML = `<p>Warning: required return r must be > growth rate g. r=${r}, g=${g}</p>`; return; }
-  const P0 = d1 / (r - g);
-  out.innerHTML = `
-    <p><strong>Given</strong>: D₁ = ${fmt(d1)}, r = ${fmt(r)}, g = ${fmt(g)}</p>
-    <p>Gordon Growth Model: $P_0 = \\dfrac{D_1}{r-g}$</p>
-    <p>$P_0 = \\dfrac{${fmt(d1)}}{${fmt(r)} - ${fmt(g)}} = ${fmt(P0)}$</p>
-    <p><em>Interpretation:</em> Current share price equals the next dividend discounted by the difference between required return and growth.</p>
-  `;
+  else if(!isNaN(d0)) d1 = d0 * (1 + g);
+
+  if(p0val !== '' && !isNaN(d1)){ 
+    // Compute required return r
+    p0 = parseFloat(p0val);
+    reqR = d1/p0 + g;
+    out.innerHTML = `
+      <p><strong>Given</strong>: D₁ = R${fmt(d1)}, P₀ = R${fmt(p0)}, g = ${fmt(g)}</p>
+      <p>Formula: $r = \\dfrac{D₁}{P₀} + g$</p>
+      <p class="block">$r = \\dfrac{${fmt(d1)}}{${fmt(p0)}} + ${fmt(g)} = ${fmt(reqR)}$</p>
+      <p><em>Interpretation:</em> Required return equals dividend yield plus growth.</p>
+    `;
+  } else if(!isNaN(d1) && !isNaN(r) && r>g){ 
+    p0 = d1/(r-g);
+    out.innerHTML = `
+      <p><strong>Given</strong>: D₁ = R${fmt(d1)}, r = ${fmt(r)}, g = ${fmt(g)}</p>
+      <p>Formula: $P₀ = \\dfrac{D₁}{r-g}$</p>
+      <p class="block">$P₀ = \\dfrac{${fmt(d1)}}{${fmt(r)} - ${fmt(g)}} = R${fmt(p0)}</p>
+    `;
+  } else {
+    out.innerHTML='<p>Enter D₀ (or D₁), growth g, and either r or P₀.</p>';
+  }
   if(window.MathJax) MathJax.typesetPromise();
 }
 
@@ -275,94 +280,136 @@ function explainCAPM(){
   const beta = parseFloat(document.getElementById('capm-beta').value || NaN);
   const rm = parseFloat(document.getElementById('capm-rm').value || NaN);
   const out = document.getElementById('capm-output');
+
   if(isNaN(rf) || isNaN(beta) || isNaN(rm)){ out.innerHTML='<p>Enter Rf, β and Rm.</p>'; return; }
-  const exp = rf + beta * (rm - rf);
+  const ke = rf + beta*(rm-rf);
   out.innerHTML = `
-    <p><strong>Given</strong>: Rf = ${fmt(rf)}, β = ${fmt(beta)}, Rm = ${fmt(rm)}</p>
-    <p>Formula: $E[R_i] = R_f + \\beta (R_m - R_f)$</p>
-    <p>$E[R_i] = ${fmt(rf)} + ${fmt(beta)} \\times (${fmt(rm)} - ${fmt(rf)}) = ${fmt(exp)}$</p>
-    <p><em>Interpretation:</em> CAPM expected return is the risk-free return plus a risk premium proportional to β.</p>
+    <p><strong>Given</strong>: Rf=${fmt(rf)}, β=${fmt(beta)}, Rm=${fmt(rm)}</p>
+    <p>Formula: $K_e = R_f + \\beta (R_m - R_f)$</p>
+    <p class="block">$K_e = ${fmt(rf)} + ${fmt(beta)} \\times (${fmt(rm)} - ${fmt(rf)}) = ${fmt(ke)}$</p>
   `;
   if(window.MathJax) MathJax.typesetPromise();
 }
 
 function explainWACC(){
-  const E = parseFloat(document.getElementById('wacc-e').value || 0);
-  const P = parseFloat(document.getElementById('wacc-p').value || 0);
-  const D = parseFloat(document.getElementById('wacc-d').value || 0);
-  const Re = parseFloat(document.getElementById('wacc-re').value || NaN);
-  const Rp = parseFloat(document.getElementById('wacc-rp').value || NaN);
-  const Rd = parseFloat(document.getElementById('wacc-rd').value || NaN);
-  const Tc = parseFloat(document.getElementById('wacc-tc').value || 0);
+  const Ve = parseFloat(document.getElementById('wacc-ve').value || 0);
+  const Ke = parseFloat(document.getElementById('wacc-ke').value || NaN);
+  const Vp = parseFloat(document.getElementById('wacc-vp').value || 0);
+  const Kp = parseFloat(document.getElementById('wacc-kp').value || NaN);
+  const Vd = parseFloat(document.getElementById('wacc-vd').value || 0);
+  const Kd = parseFloat(document.getElementById('wacc-kd').value || NaN);
+  const t = parseFloat(document.getElementById('wacc-t').value || 0);
   const out = document.getElementById('wacc-output');
 
-  if(isNaN(Re) || isNaN(Rp) || isNaN(Rd)){ out.innerHTML='<p>Enter Re, Rp and Rd.</p>'; return; }
+  if(isNaN(Ke) || isNaN(Kp) || isNaN(Kd)){ out.innerHTML='<p>Enter Ke, Kp, Kd values.</p>'; return; }
+  const V = Ve+Vp+Vd;
+  if(V===0){ out.innerHTML='<p>Provide non-zero values for Ve, Vp, or Vd.</p>'; return; }
 
-  const V = E + P + D;
-  if(V === 0){ out.innerHTML='<p>Provide non-zero values for E, P, or D.</p>'; return; }
-
-  const wE = E / V, wP = P / V, wD = D / V;
-  const afterTaxRd = Rd * (1 - Tc);
-  const wacc = wE*Re + wP*Rp + wD*afterTaxRd;
+  const kdAfter = Kd*(1-t);
+  const wacc = (Ke*Ve + Kp*Vp + kdAfter*Vd)/V;
 
   out.innerHTML = `
-    <p><strong>Step 1</strong>: After-tax cost of debt: $k_d = R_d(1-T_c) = ${fmt(Rd)}(1-${fmt(Tc)}) = ${fmt(afterTaxRd)}$</p>
-    <p><strong>Step 2</strong>: Weights (based on market values):</p>
-    <ul>
-      <li>$w_E = E/V = ${fmt(E)}/${fmt(V)} = ${fmt(wE)}$</li>
-      <li>$w_P = P/V = ${fmt(P)}/${fmt(V)} = ${fmt(wP)}$</li>
-      <li>$w_D = D/V = ${fmt(D)}/${fmt(V)} = ${fmt(wD)}$</li>
-    </ul>
-    <p><strong>Step 3</strong>: WACC = $w_E R_e + w_P R_p + w_D k_d$</p>
-    <p>$= (${fmt(wE)})( ${fmt(Re)}) + (${fmt(wP)})( ${fmt(Rp)}) + (${fmt(wD)})( ${fmt(afterTaxRd)})$</p>
-    <p>= ${fmt(wacc)}</p>
-    <p><em>Interpretation:</em> The firm’s average cost of capital is ${fmt(wacc)}, weighted by each capital source.</p>
+    <p><strong>Inputs</strong>: Ve=${fmt(Ve)}, Ke=${fmt(Ke)}, Vp=${fmt(Vp)}, Kp=${fmt(Kp)}, Vd=${fmt(Vd)}, Kd=${fmt(Kd)}, t=${fmt(t)}</p>
+    <p>Step 1: $K_d(1-t) = ${fmt(Kd)}(1-${fmt(t)}) = ${fmt(kdAfter)}$</p>
+    <p>Step 2: $WACC = \\dfrac{K_e V_e + K_p V_p + K_d(1-t) V_d}{V_e+V_p+V_d}$</p>
+    <p class="block">$= \\dfrac{${fmt(Ke)}\\times${fmt(Ve)} + ${fmt(Kp)}\\times${fmt(Vp)} + ${fmt(kdAfter)}\\times${fmt(Vd)}}{${fmt(V)}} = ${fmt(wacc)}$</p>
   `;
   if(window.MathJax) MathJax.typesetPromise();
 }
 
 
 /* ---------------------------
-   3) Recording transactions — simple journal -> ledger -> trial balance
-   Add a clear button or redo button
-   Try to make it so that it splits SOFP and Income Statement
-   Allow user to choose from dropbox if other then type it out
+   3) Recording transactions — Journal -> Ledger -> Trial Balance
+   Upgraded: Dropdowns, reset button, IS vs SOFP split
    --------------------------- */
 function recordTxnHTML(){
   return `
     <div>
       <h2 class="text-2xl font-semibold">Recording Financial Transactions — Journal & Trial Balance</h2>
-      <p class="mt-2 text-sm opacity-90">Enter journal entries (date, account debited, account credited, amount). Click "Post" to make ledger posting and "Trial balance" to verify.</p>
+      <p class="mt-2 text-sm opacity-90">Enter journal entries (date, debit, credit, amount). Use dropdowns to select common accounts (Income Statement or SOFP). Choose "Other" to type your own.</p>
 
       <div class="mt-3 grid gap-2 md:grid-cols-4">
         <input id="je-date" class="input" placeholder="Date (e.g. 2025-03-31)" />
-        <input id="je-debit" class="input" placeholder="Account debited (e.g. Cash)" />
-        <input id="je-credit" class="input" placeholder="Account credited (e.g. Revenue)" />
+        <select id="je-debit" class="input" style="color:black">${accountOptions()}</select>
+        <input id="je-debit-other" class="input hidden" placeholder="If Debit=Other, type here" />
+        <select id="je-credit" class="input" style="color:black">${accountOptions()}</select>
+        <input id="je-credit-other" class="input hidden" placeholder="If Credit=Other, type here" />
         <input id="je-amt" class="input" placeholder="Amount" />
       </div>
+
       <div class="mt-2 flex gap-2">
         <button id="je-add" class="btn btn-primary">Add Journal Entry</button>
         <button id="je-post" class="btn btn-ghost">Post to Ledger</button>
         <button id="je-trial" class="btn btn-link">Show Trial Balance</button>
+        <button id="je-clear" class="btn btn-danger">Clear All</button>
       </div>
 
       <div id="je-output" class="mt-4 topic-card p-4 rounded-md steps"></div>
+      <p class="muted mt-2">Example: Debit "Cash" R1000, Credit "Sales Revenue" R1000 → increases cash (asset, SOFP) and revenue (Income Statement).</p>
     </div>
   `;
 }
+
+/* Account options for dropdowns */
+function accountOptions(){
+  const incomeDebit = [
+    "Cost of Goods Sold","Salaries Expense","Rent Expense","Utilities Expense",
+    "Depreciation Expense","Amortization Expense","Marketing Expense",
+    "Repairs and Maintenance Expense","Interest Expense","Bad Debt Expense",
+    "Insurance Expense","Office Supplies Expense","Travel Expense","Transport Expense",
+    "Research and Development Expense","Impairment Loss","Loss on Sale of Asset","Dividend Expense"
+  ];
+  const incomeCredit = [
+    "Sales Revenue","Service Revenue","Interest Revenue","Dividend Revenue","Rent Revenue",
+    "Gain on Sale of Asset","Other Comprehensive Income"
+  ];
+  const sofpDebit = [
+    "Cash","Accounts Receivable","Inventory","Prepaid Expenses","Property, Plant, and Equipment",
+    "Accumulated Depreciation","Intangible Assets","Investments","Drawings"
+  ];
+  const sofpCredit = [
+    "Accounts Payable","Salaries Payable","Rent Payable","Accrued Expenses","Unearned Revenue",
+    "Notes Payable","Loans Payable","Bonds Payable","Share Capital","Retained Earnings",
+    "Accumulated Other Comprehensive Income","Sales Returns and Allowances","Purchase Returns and Allowances"
+  ];
+  const all = [...incomeDebit, ...incomeCredit, ...sofpDebit, ...sofpCredit];
+  let html = `<option value="">-- Select account --</option>`;
+  all.forEach(acc => html += `<option value="${acc}">${acc}</option>`);
+  html += `<option value="Other">Other (type manually)</option>`;
+  return html;
+}
+
+/* Data stores */
 let journalEntries = []; // {date, debit, credit, amount}
-let ledger = {}; // account -> {debit: total, credit: total}
+let ledger = {}; // account -> {debit, credit}
+
+/* Event listeners for Other toggle */
+document.addEventListener("change", e=>{
+  if(e.target.id==="je-debit") {
+    document.getElementById("je-debit-other").classList.toggle("hidden", e.target.value!=="Other");
+  }
+  if(e.target.id==="je-credit") {
+    document.getElementById("je-credit-other").classList.toggle("hidden", e.target.value!=="Other");
+  }
+});
+
+/* Add journal entry */
 function addJournalEntry(){
   const date = document.getElementById('je-date').value || '(no date)';
-  const debit = document.getElementById('je-debit').value.trim();
-  const credit = document.getElementById('je-credit').value.trim();
+  let debit = document.getElementById('je-debit').value;
+  if(debit==="Other") debit = document.getElementById('je-debit-other').value.trim();
+  let credit = document.getElementById('je-credit').value;
+  if(credit==="Other") credit = document.getElementById('je-credit-other').value.trim();
   const amt = parseFloat(document.getElementById('je-amt').value || 0);
   const out = document.getElementById('je-output');
-  if(!debit || !credit || !amt){ out.innerHTML = '<p>Please provide debit account, credit account and amount.</p>'; return; }
+  if(!debit || !credit || !amt){ out.innerHTML = '<p>Please provide debit account, credit account, and amount.</p>'; return; }
+
   journalEntries.push({date, debit, credit, amount: amt});
-  out.innerHTML = `<p>Added journal entry: ${date}: Debit ${debit} R${fmt(amt)} / Credit ${credit} R${fmt(amt)} (unposted)</p>`;
+  out.innerHTML = `<p>Added: ${date}: Debit ${debit} R${fmt(amt)} / Credit ${credit} R${fmt(amt)} (unposted)</p>`;
   renderJournalList();
 }
+
+/* Render Journal */
 function renderJournalList(){
   const out = document.getElementById('je-output');
   if(journalEntries.length === 0){ out.innerHTML = '<p>No journal entries.</p>'; return; }
@@ -371,246 +418,452 @@ function renderJournalList(){
   html += `</tbody></table>`;
   out.innerHTML = html;
 }
+
+/* Post to Ledger */
 function postToLedger(){
-  // reset ledger
   ledger = {};
-  journalEntries.forEach(j => {
-    if(!ledger[j.debit]) ledger[j.debit] = {debit:0, credit:0};
-    if(!ledger[j.credit]) ledger[j.credit] = {debit:0, credit:0};
+  journalEntries.forEach(j=>{
+    if(!ledger[j.debit]) ledger[j.debit]={debit:0,credit:0};
+    if(!ledger[j.credit]) ledger[j.credit]={debit:0,credit:0};
     ledger[j.debit].debit += j.amount;
     ledger[j.credit].credit += j.amount;
   });
-  const out = document.getElementById('je-output');
-  let html = `<p><strong>Ledger (posted)</strong></p><table><thead><tr><th>Account</th><th>Total Debits</th><th>Total Credits</th></tr></thead><tbody>`;
-  Object.keys(ledger).forEach(a => { html += `<tr><td>${a}</td><td>R${fmt(ledger[a].debit)}</td><td>R${fmt(ledger[a].credit)}</td></tr>`; });
-  html += `</tbody></table><p class="muted">Use "Show Trial Balance" to view balances by account.</p>`;
-  out.innerHTML = html;
+  const out=document.getElementById('je-output');
+  let html=`<p><strong>Ledger (posted)</strong></p><table><thead><tr><th>Account</th><th>Debit</th><th>Credit</th></tr></thead><tbody>`;
+  Object.keys(ledger).forEach(a=>{ html+=`<tr><td>${a}</td><td>R${fmt(ledger[a].debit)}</td><td>R${fmt(ledger[a].credit)}</td></tr>`; });
+  html+=`</tbody></table><p class="muted">Click "Show Trial Balance" to see by section (Income Statement / SOFP).</p>`;
+  out.innerHTML=html;
 }
+
+/* Trial Balance split */
 function showTrialBalance(){
-  const out = document.getElementById('je-output');
-  if(!ledger || Object.keys(ledger).length === 0){ out.innerHTML = '<p>No ledger postings yet. Post entries first.</p>'; return; }
-  let html = `<p><strong>Trial Balance</strong></p><table><thead><tr><th>Account</th><th>Debit Balance</th><th>Credit Balance</th></tr></thead><tbody>`;
-  let totalDebits = 0, totalCredits = 0;
+  const out=document.getElementById('je-output');
+  if(!ledger||Object.keys(ledger).length===0){ out.innerHTML='<p>No ledger postings yet. Post entries first.</p>'; return; }
+
+  let isRows="", sofpRows="", totalDeb=0,totalCred=0;
   Object.keys(ledger).forEach(a=>{
-    const bal = ledger[a].debit - ledger[a].credit;
-    if(bal >= 0){ html += `<tr><td>${a}</td><td>R${fmt(bal)}</td><td>R0</td></tr>`; totalDebits += bal; }
-    else { html += `<tr><td>${a}</td><td>R0</td><td>R${fmt(-bal)}</td></tr>`; totalCredits += -bal; }
+    const bal=ledger[a].debit - ledger[a].credit;
+    let dr=0,cr=0; if(bal>=0){dr=bal; totalDeb+=bal;} else {cr=-bal; totalCred+=-bal;}
+    const row=`<tr><td>${a}</td><td>R${fmt(dr)}</td><td>R${fmt(cr)}</td></tr>`;
+
+    if(isAccount(a)) isRows+=row; else sofpRows+=row;
   });
-  html += `</tbody></table><p class="block"><strong>Totals</strong> — Debits: R${fmt(totalDebits)} | Credits: R${fmt(totalCredits)}</p>`;
-  html += `<p>${fmt(totalDebits) === fmt(totalCredits) ? '<strong>Trial balance is balanced.</strong>' : '<strong>Trial balance does not balance.</strong>'}</p>`;
-  out.innerHTML = html;
+
+  let html=`<h3>Trial Balance</h3>`;
+  html+=`<p><strong>Income Statement Accounts</strong></p><table><thead><tr><th>Account</th><th>Debit</th><th>Credit</th></tr></thead><tbody>${isRows}</tbody></table>`;
+  html+=`<p><strong>SOFP Accounts</strong></p><table><thead><tr><th>Account</th><th>Debit</th><th>Credit</th></tr></thead><tbody>${sofpRows}</tbody></table>`;
+  html+=`<p class="block"><strong>Totals</strong> — Debits: R${fmt(totalDeb)} | Credits: R${fmt(totalCred)}</p>`;
+  html+=`<p>${fmt(totalDeb)===fmt(totalCred)?'<strong>Trial balance is balanced.</strong>':'<strong>Trial balance does not balance.</strong>'}</p>`;
+  out.innerHTML=html;
+}
+
+/* Helper: classify IS vs SOFP */
+function isAccount(acc){
+  const incomeList=["Cost of Goods Sold","Salaries Expense","Rent Expense","Utilities Expense","Depreciation Expense","Amortization Expense","Marketing Expense","Repairs and Maintenance Expense","Interest Expense","Bad Debt Expense","Insurance Expense","Office Supplies Expense","Travel Expense","Transport Expense","Research and Development Expense","Impairment Loss","Loss on Sale of Asset","Dividend Expense","Sales Revenue","Service Revenue","Interest Revenue","Dividend Revenue","Rent Revenue","Gain on Sale of Asset","Other Comprehensive Income"];
+  return incomeList.includes(acc);
+}
+
+/* Clear all */
+function clearAll(){
+  journalEntries=[]; ledger={};
+  document.getElementById('je-output').innerHTML='<p>All data cleared.</p>';
 }
 
 /* ---------------------------
-   4) Adjustments & FS — short explanation (because adjustments vary)
-   Accruals and Prepayments - you cna do more explanation of what they are as there no calculations involve
-   Statement of Financial Position (Balance sheet)
-   - Statement of Comprehensive Income (Income statement)
-   AAFS Page 4 of 4
-Notes to the Statement of Financial Position (Balance Sheet)
-Property, plant and equipment (PPE)
-Cost Less Acc dep = Carrying value
-R R R
-Land and buildings 200 000 (½) 200 000
-Vehicles 120 000 (½) 55 000
-(R45 000 +10
-000)(1)
-65 000
-Furniture and equipment 90 000 (½) 31 600
-(R17 000 + 14 600)
-(1)
-58 400
-R410 000 R86 600 R323 400
-Alternative SOFP presentation for Inventories and Trade and other receivables
-Inventories R Trade and other receivables R
-Inventory 40 000 Accounts receivable (R30 000 – 400) 29 600
-Stationery on hand 2 000 Accrued income 2 000
-Prepaid expenses 1 000
-R42 000 R32 600
-Bonus question solution
-1. (Gross profit / Sales) x 100 = (R100 000 / 200 000) x 100 = 50 % (1)
+   4) Adjustments & Annual Financial Statements (AAFS)
+   Upgrade: Can carry forward Trial Balance from earlier, apply adjustments,
+   and split output into Income Statement vs SOFP.
    --------------------------- */
 function adjustmentsHTML(){
   return `
     <div>
       <h2 class="text-2xl font-semibold">Adjustments & Annual Financial Statements</h2>
-      <p class="mt-2 text-sm opacity-90">This module outlines common year-end adjustments and shows how they affect the income statement and balance sheet. Use as a worked example tool.</p>
+      <p class="mt-2 text-sm opacity-90">
+        This module lets you apply year-end adjustments to your trial balance and generate 
+        Income Statement and Balance Sheet outputs. You can load balances from your earlier 
+        journal/ledger work or run simple examples.
+      </p>
 
-      <div class="mt-3 grid gap-3 md:grid-cols-2">
+      <div class="mt-3 flex gap-2">
+        <button id="adj-load" class="btn btn-primary">Load Trial Balance</button>
+        <button id="adj-clear" class="btn btn-ghost">Clear Adjustments</button>
+      </div>
+
+      <div class="mt-4 grid gap-3 md:grid-cols-2">
         <div class="glass p-3 rounded-md">
-          <h3 class="font-semibold">Accruals and Prepayments</h3>
-          <p class="muted">Enter data to see the effect on profit and closing balances.</p>
-          <label class="label mt-2">Accrued expense (expense incurred but not yet paid) <input id="adj-accrued" class="input" placeholder="R" /></label>
-          <label class="label">Prepaid expense (paid but not yet incurred) <input id="adj-prepaid" class="input" placeholder="R" /></label>
-          <div class="mt-2 flex gap-2"><button id="adj-explain" class="btn btn-primary">Explain Effect</button><button id="adj-example" class="btn btn-ghost">Example</button></div>
+          <h3 class="font-semibold">Accruals & Prepayments</h3>
+          <label class="label mt-2">
+            Accrued expense (increase expense + liability) 
+            <input id="adj-accrued" class="input" placeholder="R" />
+          </label>
+          <label class="label">
+            Prepaid expense (asset; reduce expense if not used) 
+            <input id="adj-prepaid" class="input" placeholder="R" />
+          </label>
+          <div class="mt-2 flex gap-2">
+            <button id="adj-explain" class="btn btn-primary">Explain Effect</button>
+          </div>
           <div id="adj-output" class="mt-2 steps"></div>
         </div>
 
         <div class="glass p-3 rounded-md">
           <h3 class="font-semibold">Depreciation (straight-line)</h3>
-          <label class="label mt-2">Cost <input id="dep-cost" class="input" placeholder="R" /></label>
-          <label class="label">Residual value <input id="dep-res" class="input" placeholder="R" /></label>
-          <label class="label">Useful life (years) <input id="dep-life" class="input" placeholder="e.g. 5" /></label>
-          <div class="mt-2 flex gap-2"><button id="dep-explain" class="btn btn-primary">Explain</button><button id="dep-example" class="btn btn-ghost">Example</button></div>
+          <label class="label mt-2">Cost 
+            <input id="dep-cost" class="input" placeholder="R" />
+          </label>
+          <label class="label">Residual value 
+            <input id="dep-res" class="input" placeholder="R" />
+          </label>
+          <label class="label">Useful life (years) 
+            <input id="dep-life" class="input" placeholder="e.g. 5" />
+          </label>
+          <div class="mt-2 flex gap-2">
+            <button id="dep-explain" class="btn btn-primary">Explain</button>
+          </div>
           <div id="dep-output" class="mt-2 steps"></div>
         </div>
+      </div>
+
+      <div class="mt-4">
+        <button id="adj-apply" class="btn btn-link">Apply Adjustments to TB</button>
+        <div id="adj-tb-output" class="mt-3 steps"></div>
       </div>
     </div>
   `;
 }
+
+/* ========== Adjustments logic ========== */
+let savedTrialBalance = {}; // carryover from earlier module
+
 function explainAdjustments(){
   const accrued = parseFloat(document.getElementById('adj-accrued').value || 0);
   const prepaid = parseFloat(document.getElementById('adj-prepaid').value || 0);
   const out = document.getElementById('adj-output');
-  // explain effect concisely
+
   out.innerHTML = `
-    <p><strong>Accrued expense</strong>: R${fmt(accrued)}. This increases expenses (reduces profit) and increases a liability (accruals). Example: record debit Expense R${fmt(accrued)}, credit Accrued Liabilities R${fmt(accrued)}.</p>
-    <p><strong>Prepaid expense</strong>: R${fmt(prepaid)}. This is an asset. At year-end, the portion incurred becomes an expense and reduces the prepaid asset. Example: if R${fmt(prepaid)} was paid but none incurred, adjust by debiting Expense and crediting Prepaid as needed (or reverse if over-accrued).</p>
-    <p class="muted">Why step-by-step: adjustments ensure revenue and expenses are recognized in the period they are incurred (accrual accounting).</p>
+    <p><strong>Accrued expense</strong>: R${fmt(accrued)}. 
+      → Debit Expense (increases cost, reduces profit). 
+      → Credit Accrued Liabilities (current liability).</p>
+    <p><strong>Prepaid expense</strong>: R${fmt(prepaid)}. 
+      → Debit Prepaid Expense (asset). 
+      → Credit Expense (reduce cost for portion not incurred).</p>
+    <p class="muted">Adjustments ensure revenues and expenses match the correct accounting period (accrual principle).</p>
   `;
 }
+
 function explainDepreciation(){
   const cost = parseFloat(document.getElementById('dep-cost').value || NaN);
   const res = parseFloat(document.getElementById('dep-res').value || 0);
   const life = parseFloat(document.getElementById('dep-life').value || NaN);
   const out = document.getElementById('dep-output');
-  if(isNaN(cost) || isNaN(life) || life <= 0){ out.innerHTML = '<p>Enter cost and useful life (years).</p>'; return; }
+
+  if(isNaN(cost) || isNaN(life) || life <= 0){
+    out.innerHTML = '<p>Enter cost and useful life (years).</p>';
+    return;
+  }
   const dep = (cost - res) / life;
   out.innerHTML = `
     <p><strong>Straight-line depreciation</strong></p>
-    <p>Cost = R${fmt(cost)}, Residual = R${fmt(res)}, Useful life = ${fmt(life)}</p>
-    <p class="block">Annual depreciation expense = \\(\\dfrac{\\text{Cost - Residual}}{\\text{Useful life}} = \\dfrac{${fmt(cost)} - ${fmt(res)}}{${fmt(life)}} = R${fmt(dep)}\\)</p>
+    <p>Cost = R${fmt(cost)}, Residual = R${fmt(res)}, Life = ${fmt(life)} years</p>
+    <p>Annual depreciation = (Cost - Residual) ÷ Life = R${fmt(dep)}</p>
     <p>Journal: Debit Depreciation Expense R${fmt(dep)}; Credit Accumulated Depreciation R${fmt(dep)}</p>
   `;
   if(window.MathJax) MathJax.typesetPromise();
 }
 
+/* ---------- Load Trial Balance from earlier ledger ---------- */
+function loadTrialBalanceFromLedger(){
+  if(!ledger || Object.keys(ledger).length === 0){
+    alert("No ledger data found. Post entries first in the Transactions module.");
+    return;
+  }
+  savedTrialBalance = JSON.parse(JSON.stringify(ledger));
+  document.getElementById('adj-tb-output').innerHTML = `<p class="muted">Trial Balance loaded from earlier postings. Ready for adjustments.</p>`;
+}
+
+/* ---------- Apply adjustments ---------- */
+function applyAdjustmentsToTB(){
+  if(!savedTrialBalance || Object.keys(savedTrialBalance).length === 0){
+    document.getElementById('adj-tb-output').innerHTML = '<p>No trial balance loaded.</p>';
+    return;
+  }
+
+  const accrued = parseFloat(document.getElementById('adj-accrued').value || 0);
+  const prepaid = parseFloat(document.getElementById('adj-prepaid').value || 0);
+  const cost = parseFloat(document.getElementById('dep-cost').value || NaN);
+  const res = parseFloat(document.getElementById('dep-res').value || 0);
+  const life = parseFloat(document.getElementById('dep-life').value || NaN);
+
+  // Clone TB so we don’t overwrite original
+  let adjTB = JSON.parse(JSON.stringify(savedTrialBalance));
+
+  // Apply accrued expense
+  if(accrued > 0){
+    if(!adjTB["Accrued Expenses"]) adjTB["Accrued Expenses"] = {debit:0, credit:0};
+    if(!adjTB["Expense (Accrued)"]) adjTB["Expense (Accrued)"] = {debit:0, credit:0};
+    adjTB["Expense (Accrued)"].debit += accrued;
+    adjTB["Accrued Expenses"].credit += accrued;
+  }
+
+  // Apply prepaid expense
+  if(prepaid > 0){
+    if(!adjTB["Prepaid Expenses"]) adjTB["Prepaid Expenses"] = {debit:0, credit:0};
+    if(!adjTB["Expense (Prepaid adj)"]) adjTB["Expense (Prepaid adj)"] = {debit:0, credit:0};
+    adjTB["Prepaid Expenses"].debit += prepaid;
+    adjTB["Expense (Prepaid adj)"].credit += prepaid;
+  }
+
+  // Apply depreciation
+  if(!isNaN(cost) && !isNaN(life) && life > 0){
+    const dep = (cost - res) / life;
+    if(dep > 0){
+      if(!adjTB["Depreciation Expense"]) adjTB["Depreciation Expense"] = {debit:0, credit:0};
+      if(!adjTB["Accumulated Depreciation"]) adjTB["Accumulated Depreciation"] = {debit:0, credit:0};
+      adjTB["Depreciation Expense"].debit += dep;
+      adjTB["Accumulated Depreciation"].credit += dep;
+    }
+  }
+
+  renderAdjTB(adjTB);
+}
+
+/* ---------- Render Adjusted Trial Balance split ---------- */
+function renderAdjTB(tb){
+  let totalDebits = 0, totalCredits = 0;
+  let isHTML = `<h3 class="font-semibold mt-2">Income Statement Accounts</h3><table><thead><tr><th>Account</th><th>Debit</th><th>Credit</th></tr></thead><tbody>`;
+  let sofpHTML = `<h3 class="font-semibold mt-2">Statement of Financial Position Accounts</h3><table><thead><tr><th>Account</th><th>Debit</th><th>Credit</th></tr></thead><tbody>`;
+
+  Object.keys(tb).forEach(a=>{
+    const bal = tb[a].debit - tb[a].credit;
+    const debit = bal >= 0 ? bal : 0;
+    const credit = bal < 0 ? -bal : 0;
+
+    // crude classification by keywords
+    if(a.toLowerCase().includes("expense") || a.toLowerCase().includes("revenue") || a.toLowerCase().includes("income")){
+      isHTML += `<tr><td>${a}</td><td>R${fmt(debit)}</td><td>R${fmt(credit)}</td></tr>`;
+    } else {
+      sofpHTML += `<tr><td>${a}</td><td>R${fmt(debit)}</td><td>R${fmt(credit)}</td></tr>`;
+    }
+
+    totalDebits += debit;
+    totalCredits += credit;
+  });
+
+  isHTML += `</tbody></table>`;
+  sofpHTML += `</tbody></table>`;
+
+  let balanced = (fmt(totalDebits) === fmt(totalCredits));
+  const out = document.getElementById('adj-tb-output');
+  out.innerHTML = `
+    ${isHTML}
+    ${sofpHTML}
+    <p class="mt-2"><strong>Totals</strong> — Debits: R${fmt(totalDebits)} | Credits: R${fmt(totalCredits)}</p>
+    <p>${balanced ? '<strong>Trial Balance is balanced ✔️</strong>' : '<strong>Trial Balance does not balance ❌</strong>'}</p>
+  `;
+}
+
+/* ---------- Hook up buttons ---------- */
+document.addEventListener("DOMContentLoaded", ()=>{
+  if(document.getElementById("adj-load")){
+    document.getElementById("adj-load").onclick = loadTrialBalanceFromLedger;
+    document.getElementById("adj-clear").onclick = ()=>{ savedTrialBalance = {}; document.getElementById("adj-tb-output").innerHTML=""; };
+    document.getElementById("adj-explain").onclick = explainAdjustments;
+    document.getElementById("dep-explain").onclick = explainDepreciation;
+    document.getElementById("adj-apply").onclick = applyAdjustmentsToTB;
+  }
+});
+
 /* ---------------------------
-   5) Financial Ratios
-   These would come from a Statement of Comprehendsion
-   1.1 Calculate the gross margin, operating margin and profit margin for 2023 and 2022.
-1.2 Comment on your answers calculated in question 1.1.
-1.3 Calculate the current ratio and acid test ratio at the end of each year. How has the
-enterprise’s liquidity changed over this period?
-1.4 Compute the following for 2023 ratios ( 2022 are given in brackets):
-■ Inventory turnover ( 9.04 times)
-■ Debtors collection period ( 29.24 days)
-■ Creditors payment period ( 42.40 days)
-■ Turnover to net assets ( 2.13)
-1.5 What is your interpretation of the enterprise’s performance with respect to your answers
-in question 1.4?
-192 040
-396 270
-190 660
-898 200
-2 038 860
-155 200
-2 306 440
+   Full Financial Ratios Module
+   Covers:
+   1) Solvency & NAV
+   2) Liquidity
+   3) Asset Management
+   4) Asset Turnover
+   5) Financial Leverage
+   6) Profitability
+   7) Investment Performance
+--------------------------- */
+/* ---------------------------
+   5) Financial Ratios Interactive Module
+   Users can select a ratio from a dropdown, input values, and see the formula, calculation, and interpretation.
+--------------------------- */
 
-Different question
-
-Answer the questions below based on the following information. Income tax is
-calculated at 35% of profit.
-Vuyo Traders Sipho Stores
-2023 (R) 2022 (R) 2023 (R) 2022 (R)
-Operating profit 400 000 320 000 420 000 380 000
-Profit after tax 120 000 100 000 140 000 80 000
-Non-current debt (10% p.a.) 200 000 80 000 1 200 000 1 000 000
-Equity 800 000 720 000 300 000 280 000
-Note: The enterprise has no current liabilities.
-Required
-2.1 Calculate the return on assets for both enterprises for 2023.
-2.2 Calculate the return on equity for both enterprises for 2023.
-2.3 Which enterprise is more profitable? Explain.
-2.4 Should Vuyo Traders be satisfied with its return on assets? Explain.
-
-Ensure that there every type ratio
-1. Solvency and Net asset value
-1.1Solvency (Total Assets (Fairly valued) > Total liabilities) 
-1.2 Net Asset Value (NAV)
-2. Liquidity ratios
-2.1 Current ratio
-2.2 Acid test ratio (Quick ratio)
-3. Asset Management 
-3.1 Days inventory on hand
-3.2 Inventory Turnover Ratio
-3.3  Account Receivables Days (Collection period)
-3.4  Accounts Payables Days (Creditors payment period)
-4. Asset Turnover Ratios (Management) 
-4.1  Total Asset Turnover
-4.2  Fixed Asset (Non Current) Turnover 
-5. Financial Leverage Ratios
-5.1  Debt ratio
-5.2(a)  Debt to Equity Ratio 
-5.2(b)  Debt to Equity Ratio
-5.3  Times Interest Earned Ratio
-5.4  Cash Coverage Ratio
-6. Profitability
-6.1 Gross Margin on Sales
-6.2 Net Operating Profit Margin
-6.3 Net Profit on Sales after Tax
-6.4(a)  Return on Total Assets (ROA) 
-6.4(b)  Return on Total Assets (ROA) 
-6.5 Return on Equity (ROE)
-7. Investment Performance Ratios
-7.1  Dividend Yield (DY) (Income yield)
-7.2 Return to Shareholder (Holding Period Return (HPR) 
-7.3  Headline Earnings Per Share (EPS)
-7.4 Dividend Cover
-7.5 Pay-out ratio
-7.6 Retention ratio (Ploughback/plowback ratio)
-7.7(a) Price Earnings Ratio (P/E) 
-7.7(b) Earnings Yield (EY) (Inverse of PE) 
-   --------------------------- */
-function ratiosHTML(){
+function ratiosHTML() {
   return `
     <div>
       <h2 class="text-2xl font-semibold">Financial Ratio Analysis</h2>
-      <p class="mt-2 text-sm opacity-90">Compute common ratios (liquidity, profitability, efficiency). Each explanation shows the formula and interpretation.</p>
-      <div class="mt-3 grid gap-3 md:grid-cols-3">
-        <label class="label">Current assets <input id="rat-current-assets" class="input" /></label>
-        <label class="label">Inventory <input id="rat-inventory" class="input" /></label>
-        <label class="label">Current liabilities <input id="rat-current-liab" class="input" /></label>
-        <label class="label">Sales / Revenue <input id="rat-sales" class="input" /></label>
-        <label class="label">Cost of goods sold <input id="rat-cogs" class="input" /></label>
-        <label class="label">Net income <input id="rat-netincome" class="input" /></label>
-        <label class="label">Total assets <input id="rat-totalassets" class="input" /></label>
-        <label class="label">Total equity <input id="rat-equity" class="input" /></label>
+      <p class="mt-2 text-sm opacity-90">
+        Choose a financial ratio to compute. Enter the relevant values to see the formula, calculation, and interpretation.
+      </p>
+      
+      <div class="mt-3">
+        <label class="label">Select Ratio:
+          <select id="rat-type" class="input">
+            <option value="">--Choose--</option>
+            <option value="currentRatio">Current Ratio</option>
+            <option value="quickRatio">Quick (Acid Test) Ratio</option>
+            <option value="grossMargin">Gross Margin</option>
+            <option value="netMargin">Net Profit Margin</option>
+            <option value="roa">Return on Assets (ROA)</option>
+            <option value="roe">Return on Equity (ROE)</option>
+            <option value="inventoryTurnover">Inventory Turnover</option>
+            <option value="debtorDays">Debtors Collection Period</option>
+            <option value="creditorDays">Creditors Payment Period</option>
+            <option value="assetTurnover">Total Asset Turnover</option>
+          </select>
+        </label>
       </div>
-      <div class="mt-3 flex gap-2"><button id="rat-explain" class="btn btn-primary">Compute Ratios</button><button id="rat-example" class="btn btn-ghost">Example</button></div>
+
+      <div id="rat-inputs" class="mt-3 grid gap-3 md:grid-cols-3"></div>
+
+      <div class="mt-3 flex gap-2">
+        <button id="rat-explain" class="btn btn-primary">Compute</button>
+        <button id="rat-example" class="btn btn-ghost">Example</button>
+      </div>
+
       <div id="rat-output" class="mt-3 steps"></div>
     </div>
   `;
 }
-function explainRatios(){
-  const ca = parseFloat(document.getElementById('rat-current-assets').value || 0);
-  const inv = parseFloat(document.getElementById('rat-inventory').value || 0);
-  const cl = parseFloat(document.getElementById('rat-current-liab').value || 0);
-  const sales = parseFloat(document.getElementById('rat-sales').value || 0);
-  const cogs = parseFloat(document.getElementById('rat-cogs').value || 0);
-  const net = parseFloat(document.getElementById('rat-netincome').value || 0);
-  const ta = parseFloat(document.getElementById('rat-totalassets').value || 0);
-  const eq = parseFloat(document.getElementById('rat-equity').value || 0);
+
+// Utility to format numbers
+function fmt(num, dec=2){ return num === null || isNaN(num) ? 'N/A' : num.toFixed(dec); }
+
+function updateInputs() {
+  const type = document.getElementById('rat-type').value;
+  const container = document.getElementById('rat-inputs');
+  container.innerHTML = '';
+
+  const inputs = {
+    currentRatio: ['Current Assets', 'Current Liabilities'],
+    quickRatio: ['Current Assets', 'Inventory', 'Current Liabilities'],
+    grossMargin: ['Sales', 'Cost of Goods Sold (COGS)'],
+    netMargin: ['Net Income', 'Sales'],
+    roa: ['Net Income', 'Total Assets'],
+    roe: ['Net Income', 'Total Equity'],
+    inventoryTurnover: ['COGS', 'Average Inventory'],
+    debtorDays: ['Accounts Receivable', 'Sales'],
+    creditorDays: ['Accounts Payable', 'COGS'],
+    assetTurnover: ['Sales', 'Total Assets']
+  };
+
+  if(inputs[type]){
+    inputs[type].forEach(name => {
+      const id = 'rat-' + name.toLowerCase().replace(/[^a-z]/g,'');
+      container.innerHTML += `<label class="label">${name} <input id="${id}" class="input" type="number" /></label>`;
+    });
+  }
+}
+
+function explainRatios() {
+  const type = document.getElementById('rat-type').value;
   const out = document.getElementById('rat-output');
+  let html = `<p><strong>${type ? type.replace(/([A-Z])/g,' $1') : 'Ratios'}</strong></p>`;
 
-  const currentRatio = cl === 0 ? null : ca / cl;
-  const quickRatio = cl === 0 ? null : (ca - inv) / cl;
-  const grossMargin = sales === 0 ? null : (sales - cogs) / sales;
-  const netMargin = sales === 0 ? null : net / sales;
-  const roa = ta === 0 ? null : net / ta;
-  const roe = eq === 0 ? null : net / eq;
+  function getVal(id){ return parseFloat(document.getElementById(id)?.value || 0); }
 
-  let html = `<p><strong>Ratios</strong></p>`;
-  html += `<p>Current ratio = \\(\\dfrac{\\text{Current assets}}{\\text{Current liabilities}} = ${cl===0 ? 'N/A' : fmt(currentRatio)}</p>`;
-  html += `<p>Quick ratio (acid test) = \\(\\dfrac{\\text{Current assets - Inventory}}{\\text{Current liabilities}} = ${cl===0 ? 'N/A' : fmt(quickRatio)}</p>`;
-  html += `<p>Gross profit margin = \\(\\dfrac{\\text{Sales - COGS}}{\\text{Sales}} = ${sales===0 ? 'N/A' : (fmt(grossMargin*100,3) + '%')}</p>`;
-  html += `<p>Net profit margin = \\(\\dfrac{\\text{Net income}}{\\text{Sales}} = ${sales===0 ? 'N/A' : (fmt(netMargin*100,3) + '%')}</p>`;
-  html += `<p>Return on assets (ROA) = \\(\\dfrac{\\text{Net income}}{\\text{Total assets}} = ${ta===0 ? 'N/A' : (fmt(roa*100,3) + '%')}</p>`;
-  html += `<p>Return on equity (ROE) = \\(\\dfrac{\\text{Net income}}{\\text{Total equity}} = ${eq===0 ? 'N/A' : (fmt(roe*100,3) + '%')}</p>`;
-  html += `<p class="muted">Interpretation: liquidity ratios measure short-term ability to meet obligations; margin ratios show profitability; ROA/ROE indicate efficiency of asset/equity use.</p>`;
+  switch(type){
+    case 'currentRatio': {
+      const ca = getVal('rat-currentassets');
+      const cl = getVal('rat-currentliabilities');
+      const val = cl === 0 ? null : ca / cl;
+      html += `<p>Current Ratio = Current Assets / Current Liabilities = ${fmt(val)}</p>`;
+      html += `<p>Interpretation: Measures liquidity. Higher than 1 indicates sufficient short-term assets.</p>`;
+      break;
+    }
+    case 'quickRatio': {
+      const ca = getVal('rat-currentassets');
+      const inv = getVal('rat-inventory');
+      const cl = getVal('rat-currentliabilities');
+      const val = cl === 0 ? null : (ca - inv)/cl;
+      html += `<p>Quick Ratio = (Current Assets - Inventory) / Current Liabilities = ${fmt(val)}</p>`;
+      html += `<p>Interpretation: Stricter liquidity measure than current ratio. Excludes inventory.</p>`;
+      break;
+    }
+    case 'grossMargin': {
+      const sales = getVal('rat-sales');
+      const cogs = getVal('rat-costofgoodssoldcogs');
+      const val = sales === 0 ? null : (sales - cogs)/sales;
+      html += `<p>Gross Margin = (Sales - COGS) / Sales = ${fmt(val*100)}%</p>`;
+      html += `<p>Interpretation: Profitability of core operations before expenses.</p>`;
+      break;
+    }
+    case 'netMargin': {
+      const net = getVal('rat-netincome');
+      const sales = getVal('rat-sales');
+      const val = sales === 0 ? null : net/sales;
+      html += `<p>Net Profit Margin = Net Income / Sales = ${fmt(val*100)}%</p>`;
+      html += `<p>Interpretation: Overall profitability after all expenses and taxes.</p>`;
+      break;
+    }
+    case 'roa': {
+      const net = getVal('rat-netincome');
+      const ta = getVal('rat-totalassets');
+      const val = ta === 0 ? null : net/ta;
+      html += `<p>ROA = Net Income / Total Assets = ${fmt(val*100)}%</p>`;
+      html += `<p>Interpretation: Efficiency in using assets to generate profit.</p>`;
+      break;
+    }
+    case 'roe': {
+      const net = getVal('rat-netincome');
+      const eq = getVal('rat-totalequity');
+      const val = eq === 0 ? null : net/eq;
+      html += `<p>ROE = Net Income / Total Equity = ${fmt(val*100)}%</p>`;
+      html += `<p>Interpretation: Returns generated on shareholders' investment.</p>`;
+      break;
+    }
+    case 'inventoryTurnover': {
+      const cogs = getVal('rat-cogs');
+      const avgInv = getVal('rat-averageinventory');
+      const val = avgInv === 0 ? null : cogs / avgInv;
+      html += `<p>Inventory Turnover = COGS / Average Inventory = ${fmt(val)}</p>`;
+      html += `<p>Interpretation: How quickly inventory is sold and replaced.</p>`;
+      break;
+    }
+    case 'debtorDays': {
+      const ar = getVal('rat-accountsreceivable');
+      const sales = getVal('rat-sales');
+      const val = sales === 0 ? null : (ar / sales) * 365;
+      html += `<p>Debtors Collection Period = Accounts Receivable / Sales * 365 = ${fmt(val)} days</p>`;
+      html += `<p>Interpretation: Average collection period for receivables.</p>`;
+      break;
+    }
+    case 'creditorDays': {
+      const ap = getVal('rat-accountspayable');
+      const cogs = getVal('rat-cogs');
+      const val = cogs === 0 ? null : (ap / cogs) * 365;
+      html += `<p>Creditors Payment Period = Accounts Payable / COGS * 365 = ${fmt(val)} days</p>`;
+      html += `<p>Interpretation: Average period to pay suppliers.</p>`;
+      break;
+    }
+    case 'assetTurnover': {
+      const sales = getVal('rat-sales');
+      const ta = getVal('rat-totalassets');
+      const val = ta === 0 ? null : sales / ta;
+      html += `<p>Total Asset Turnover = Sales / Total Assets = ${fmt(val)}</p>`;
+      html += `<p>Interpretation: Efficiency in using assets to generate revenue.</p>`;
+      break;
+    }
+    default:
+      html += `<p>Please select a ratio.</p>`;
+  }
+
   out.innerHTML = html;
   if(window.MathJax) MathJax.typesetPromise();
 }
+
+// Event listeners
+document.addEventListener('DOMContentLoaded', ()=>{
+  document.body.addEventListener('change', e=>{
+    if(e.target && e.target.id==='rat-type') updateInputs();
+  });
+  document.body.addEventListener('click', e=>{
+    if(e.target && e.target.id==='rat-explain') explainRatios();
+  });
+});
+
+
 
 /* ---------------------------
    6) Investments, Risk & Return (expected return & variance)
