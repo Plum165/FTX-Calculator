@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en" data-theme="spiderman">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>FTX1005F/S — Accounting Calculator & Study Aid</title>
+
+  <!-- Tailwind for utilities (same pattern as provided) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- MathJax -->
+  <script>
+    window.MathJax = {
+      tex: { inlineMath: [['$','$'], ['\\(','\\)']] },
+      svg: { fontCache: 'global' }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+
+  <!-- math.js for evaluation -->
+  <script src="https://cdn.jsdelivr.net/npm/mathjs@11.8.0/lib/browser/math.js"></script>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="min-h-screen antialiased">
+  <header class="max-w-6xl mx-auto p-6">
+    <div class="flex items-center justify-between gap-4">
+      <div>
+        <h1 class="text-3xl md:text-4xl font-extrabold">FTX1005F/S — Accounting Calculator & Study Aid</h1>
+        <p class="mt-1 text-sm opacity-90">Worked examples, step-by-step explanations and exam-style practice for first-year accounting (UCT).</p>
+      </div>
+      <div class="flex items-center gap-3">
+        <div class="text-sm">Theme</div>
+        <select id="theme-dropdown" class="input text-black max-w-[220px]">
+          <option value="spiderman">Spiderman (default)</option>
+          <option value="bloodred">Blood</option>
+          <option value="sapphire-steel">Sapphire</option>
+          <option value="emerald-charcoal">Emerald</option>
+          <option value="monochrome-focus">Monochrome</option>
+        </select>
+        <a href="exam.html" class="btn btn-link" target="_blank">Practice / Exam ↗</a>
+        <button id="print-btn" class="btn btn-ghost" title="Print / Save PDF">Print / PDF</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto p-6 grid-large">
+    <aside class="glass p-6 rounded-xl" aria-label="modules">
+      <h2 class="text-xl font-semibold">Modules</h2>
+      <p class="mt-2 text-sm opacity-90">Pick a module to load worked examples, calculators and practice items.</p>
+
+      <nav class="mt-6 space-y-2" role="navigation">
+        <!-- modules list (matches prompt order) -->
+        <button class="module-select btn btn-primary w-full" data-module="intro">Introduction</button>
+        <button class="module-select btn btn-primary w-full" data-module="env">The Business Environment</button>
+        <button class="module-select btn btn-primary w-full" data-module="ooa_basic">Objective of Accounting (A = E + L)</button>
+        <button class="module-select btn btn-primary w-full" data-module="ooa_more">Objective of Accounting — deeper (OOA)</button>
+        <button class="module-select btn btn-primary w-full" data-module="sof_coc">Sources of Finance & Cost of Capital</button>
+        <button class="module-select btn btn-primary w-full" data-module="rft">Recording Financial Transactions</button>
+        <button class="module-select btn btn-primary w-full" data-module="aafs">Adjustments & Annual Financial Statements</button>
+        <button class="module-select btn btn-primary w-full" data-module="fra">Financial Ratio Analysis</button>
+        <button class="module-select btn btn-primary w-full" data-module="irr">Investments, Risk & Return</button>
+        <button class="module-select btn btn-primary w-full" data-module="wcm">Working Capital Management</button>
+        <button class="module-select btn btn-primary w-full" data-module="cvp">Costs & Cost-Volume-Profit (CVP)</button>
+        <button class="module-select btn btn-primary w-full" data-module="bud">Budgeting</button>
+        <button class="module-select btn btn-primary w-full" data-module="tvm">Time Value of Money (TVM)</button>
+        <button class="module-select btn btn-primary w-full" data-module="val">Valuations</button>
+        <button class="module-select btn btn-primary w-full" data-module="cb">Capital Budgeting (NPV / IRR)</button>
+      </nav>
+
+      <div class="solid-divider"></div>
+      <p class="muted">Tip: each module contains calculators, a worked example button, and a "Show steps" area with MathJax.</p>
+    </aside>
+
+    <section class="glass p-6 rounded-xl" id="module-root" aria-live="polite">
+      <!-- Content injected by script.js -->
+    </section>
+  </main>
+
+  <footer class="max-w-6xl mx-auto p-6 text-sm opacity-90">© <span id="year"></span> UCT FTX1005F/S — Accounting Calculator.</footer>
+
+<script src="script.js"></script>
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+  document.getElementById('print-btn').addEventListener('click', ()=> window.print());
+  document.getElementById('theme-dropdown').addEventListener('change', e => applyTheme(e.target.value));
+  // apply default from script.js
+</script>
+</body>
+</html>

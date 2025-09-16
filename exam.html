@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>FTX1005F/S — Practice & Exam</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    window.MathJax = { tex: { inlineMath:[['$','$'], ['\\(','\\)']] }, svg:{fontCache:'global'} };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjs@11.8.0/lib/browser/math.js"></script>
+
+  <link rel="stylesheet" href="style.css">
+  <style>.question-box{min-height:160px}</style>
+</head>
+<body>
+  <main class="max-w-4xl mx-auto p-6">
+    <h1 class="text-2xl font-bold">Practice / Exam Mode</h1>
+    <p class="muted">Random questions pulled from `questions.json`. Answers can be numeric or formula-based.</p>
+
+    <div class="mt-4">
+      <div class="flex gap-2">
+        <select id="filter-module" class="input text-black">
+          <option value="">All Modules</option>
+        </select>
+        <button id="random-q" class="btn btn-primary">Random Question</button>
+        <button id="start-quiz" class="btn btn-ghost">10-question quiz</button>
+      </div>
+    </div>
+
+    <div id="question-area" class="mt-6 topic-card p-4 rounded-xl question-box">
+      <p class="muted">Load a question to begin.</p>
+    </div>
+
+    <div class="mt-4 flex gap-2">
+      <input id="answer-input" class="input" placeholder="Type numeric answer or expression (e.g. 783.53 or PV(0.05,5,0,1000,0))"/>
+      <button id="check-answer" class="btn btn-primary">Check</button>
+      <button id="show-explain" class="btn btn-ghost">Show explanation</button>
+    </div>
+
+    <div id="feedback" class="mt-4 steps"></div>
+
+  </main>
+
+<script>
+  // quick fetch + quiz logic
+  async function loadQuestions(){
+    const res = await fetch('questions.json');
+    return res.json();
+  }
+
+  let QUESTIONS = [];
+  let current = null;
+
+  function populateFilter(){
+    const sel = document.getElementById('filter-module');
+    const modules = [...new Set(QUESTIONS.map(q=>q.module))];
+    modules.forEach(m => { const o = document.createElement('option'); o.value=m; o.textContent=m; sel.appendChild(o); });
+  }
+
+  function pickRandom(filtered){
+    if(!filtered || filtered.length===0) return null;
+    return filtered[Math.floor(Math.random()*filtered.length)];
+  }
+
+  function renderQuestion(q){
+    current = q;
+    const area = document.getElementById('question-area');
+    area.innerHTML = `<div>
+      <div class="text-sm muted">ID: ${q.ID} — Module: ${q.module} — Topic: ${q.topic}</div>
+      <h2 class="mt-2 font-semibold">${q.question}</h2>
+      ${q.type === 'mcq' && q.options.length ? `<ul class="mt-3 list-disc ml-6">${q.options.map(o=>`<li>${o}</li>`).join('')}</ul>` : ''}
+    </div>`;
+    if(window.MathJax) MathJax.typesetPromise();
+    document.getElementById('feedback').innerHTML = '';
+    document.getElementById('answer-input').value = '';
+  }
+
+  function normalizeAnswer(ans){
+    // string normalization for numeric comparison
+    if(typeof ans === 'number') return Number(ans.toFixed(6));
+    const n = Number(String(ans).replace(/[^0-9eE.\-+]/g,''));
+    return isNaN(n) ? null : Number(n.toFixed(6));
+  }
+
+  function evalAnswerExpression(expr){
+    // allow helper functions: PV, FV, PMT, NPV, IRR (basic)
+    try {
+      // create math.js scope functions
+      const scope = {};
+      scope.PV = function(r,n,pmt,fv,type=0){
+        // PV(r, n, pmt, fv, type)
+        r = Number(r); n = Number(n); pmt = Number(pmt || 0); fv = Number(fv || 0); type = Number(type || 0);
+        if(r === 0) return -(fv + pmt*n);
+        const pv = -( pmt*(1 + r*type)*( (1 - Math.pow(1+r, -n))/r ) + fv*Math.pow(1+r, -n) );
+        return pv;
+      };
+      scope.FV = function(r,n,pmt,pv,type=0){
+        r=Number(r); n=Number(n); pmt=Number(pmt||0); pv=Number(pv||0); type=Number(type||0);
+        if(r === 0) return -(pv + pmt*n);
+        const fv = -( pv*Math.pow(1+r,n) + pmt*(1 + r*type)*( (Math.pow(1+r,n)-1)/r ) );
+        return fv;
+      };
+      scope.NPV = function(r, ...cashflows){
+        r = Number(r);
+        let npv = 0;
+        for(let t=0;t<cashflows.length;t++){ npv += Number(cashflows[t]) / Math.pow(1+r, t+1); }
+        return npv;
+      };
+      // Simple IRR via Newton-Raphson (may not converge for all sequences)
+      scope.IRR = function(...cashflows){
+        const cf = cashflows.map(Number);
+        let guess = 0.1;
+        function f(r){ let s=0; for(let t=0;t<cf.length;t++) s += cf[t]/Math.pow(1+r, t); return s; }
+        function df(r){ let s=0; for(let t=0;t<cf.length;t++) s += -t*cf[t]/Math.pow(1+r, t+1); return s; }
+        for(let i=0;i<80;i++){
+          const val = f(guess), deriv = df(guess);
+          if(Math.abs(val) < 1e-9) return guess;
+          guess = guess - val/deriv;
+        }
+        return guess;
+      };
+      const node = math.parse(expr);
+      const code = node.compile();
+      return code.evaluate(scope);
+    } catch(e){
+      return NaN;
+    }
+  }
+
+  function checkAnswer(){
+    if(!current) return;
+    const raw = document.getElementById('answer-input').value.trim();
+    if(raw === '') { document.getElementById('feedback').innerHTML = '<p>Please enter an answer.</p>'; return; }
+    let correct=false, userVal=null, correctVal=null;
+    if(current.type === 'numeric' || current.type === 'formula'){
+      // Evaluate user expression
+      userVal = evalAnswerExpression(raw);
+      // Evaluate answer expression from JSON (the canonical answer)
+      try { correctVal = evalAnswerExpression(current.answer); } catch(e){ correctVal = current.answer; }
+      // numeric comparison
+      const uNorm = normalizeAnswer(userVal);
+      const cNorm = normalizeAnswer(correctVal);
+      if(uNorm === null || cNorm === null) {
+        // fallback string compare (trimmed)
+        correct = String(raw).trim() === String(current.answer).trim();
+      } else {
+        correct = Math.abs(uNorm - cNorm) <= 1e-3 * Math.max(1, Math.abs(cNorm));
+      }
+    } else if(current.type === 'mcq'){
+      correct = raw.toLowerCase() === String(current.answer).toLowerCase();
+    }
+    const fb = document.getElementById('feedback');
+    if(correct) fb.innerHTML = `<p class="text-green-400 font-semibold">Correct ✅</p>`;
+    else fb.innerHTML = `<p class="text-red-400 font-semibold">Incorrect — try again or view explanation.</p>
+      <p class="muted">Your evaluated answer: ${Number.isFinite(userVal) ? userVal : userVal}</p>
+    `;
+  }
+
+  document.getElementById('random-q').addEventListener('click', ()=>{
+    const mod = document.getElementById('filter-module').value;
+    const filtered = mod ? QUESTIONS.filter(q=>q.module===mod) : QUESTIONS;
+    const q = pickRandom(filtered);
+    if(q) renderQuestion(q);
+  });
+
+  document.getElementById('check-answer').addEventListener('click', checkAnswer);
+  document.getElementById('show-explain').addEventListener('click', ()=>{
+    if(!current) return;
+    document.getElementById('feedback').innerHTML = `<div class="steps p-3 bg-surface rounded">${current.explain}</div>`;
+    if(window.MathJax) MathJax.typesetPromise();
+  });
+
+  // init
+  loadQuestions().then(js => { QUESTIONS = js; populateFilter(); });
+
+</script>
+</body>
+</html>

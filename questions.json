@@ -1,0 +1,52 @@
+[
+  {
+    "ID": "Q1",
+    "module": "Time Value of Money (TVM)",
+    "topic": "TVM",
+    "type": "numeric",
+    "question": "Calculate the present value of R1000 to be received in 5 years at 5% per annum.",
+    "options": [],
+    "answer": "PV(0.05,5,0,1000,0)",
+    "explain": "To calculate PV, we discount the future value (R1000) using the formula PV = FV / (1+r)^n. Here, r = 5% = 0.05, n = 5, FV = 1000. PV = 1000 / (1.05)^5 = 783.526166... (≈ R783.53)."
+  },
+  {
+    "ID": "Q2",
+    "module": "Objective of Accounting (A = E + L)",
+    "topic": "Balance sheet basics",
+    "type": "numeric",
+    "question": "If Assets = R15000 and Liabilities = R6200, calculate Equity.",
+    "options": [],
+    "answer": "15000-6200",
+    "explain": "Equity = Assets − Liabilities = 15000 − 6200 = R8800."
+  },
+  {
+    "ID": "Q3",
+    "module": "Financial Ratio Analysis (FRA)",
+    "topic": "Current Ratio",
+    "type": "numeric",
+    "question": "Compute the current ratio where current assets = R120000 and current liabilities = R60000.",
+    "options": [],
+    "answer": "120000/60000",
+    "explain": "Current ratio = Current assets / Current liabilities = 120000 / 60000 = 2.00 (two times)."
+  },
+  {
+    "ID": "Q4",
+    "module": "Costs & CVP",
+    "topic": "Break-even point",
+    "type": "numeric",
+    "question": "Price per unit = R50, variable cost per unit = R30, fixed costs = R20000. Calculate break-even units.",
+    "options": [],
+    "answer": "20000/(50-30)",
+    "explain": "Contribution per unit = 50 − 30 = R20. Break-even units = Fixed costs / Contribution per unit = 20000 / 20 = 1000 units."
+  },
+  {
+    "ID": "Q5",
+    "module": "Capital Budgeting (CB)",
+    "topic": "NPV",
+    "type": "numeric",
+    "question": "Project cashflows: initial −R120000, year1 R40000, year2 R50000, year3 R60000. Discount rate 10%. Calculate NPV.",
+    "options": [],
+    "answer": "(-120000) + 40000/(1+0.10) + 50000/(1+0.10)^2 + 60000/(1+0.10)^3",
+    "explain": "Calculate present values of each future cashflow and add the initial investment. Compute each discounted term and sum. If NPV>0 project acceptable."
+  }
+]
