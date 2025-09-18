@@ -109,7 +109,7 @@ function renderTopic(topic){
 }
 
 /* ---------------------------
-   1) Accounting equation: A = E + L
+   1) Accounting Equation: A = E + L
    --------------------------- */
 function accEqHTML(){
   return `
@@ -117,9 +117,12 @@ function accEqHTML(){
       <h2 class="text-2xl font-semibold">Accounting Equation — Assets = Equity + Liabilities</h2>
       <p class="mt-2 text-sm opacity-90">Enter any two values; leave the value to compute blank. Amounts are in R (Rand).</p>
       <div class="mt-4 grid gap-4 md:grid-cols-3">
-        <div class="label">Assets (A) <span class="help">?</span></div><input id="acc-A" class="input" placeholder="leave blank to compute" />
-        <div class="label">Equity / Owner's capital (E) <span class="help">?</span></div><input id="acc-E" class="input" placeholder="leave blank to compute" />
-        <div class="label">Liabilities (L) <span class="help">?</span></div><input id="acc-L" class="input" placeholder="leave blank to compute" />
+        <div class="label">Assets (A) <span class="help">?</span></div>
+        <input id="acc-A" class="input" placeholder="leave blank to compute" />
+        <div class="label">Equity / Owner's capital (E) <span class="help">?</span></div>
+        <input id="acc-E" class="input" placeholder="leave blank to compute" />
+        <div class="label">Liabilities (L) <span class="help">?</span></div>
+        <input id="acc-L" class="input" placeholder="leave blank to compute" />
       </div>
       <div class="mt-4 flex gap-2">
         <button id="acc-explain" class="btn btn-primary">Explain</button>
@@ -129,63 +132,96 @@ function accEqHTML(){
     </div>
   `;
 }
+
+// Format numbers consistently
+function fmtAcc(n){
+  return Number(n).toLocaleString('en-ZA', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+}
+
+// Compute the missing value
 function explainAccEq(){
   const A = document.getElementById('acc-A').value.trim();
   const E = document.getElementById('acc-E').value.trim();
   const L = document.getElementById('acc-L').value.trim();
   const out = document.getElementById('acc-output');
-  // Count blanks
-  const blankCount = [A,E,L].filter(v=>v==='').length;
-  if(blankCount !== 1){ out.innerHTML = `<p>Please leave exactly one field blank (the one you want to compute).</p>`; return; }
+
+  const blankCount = [A,E,L].filter(v => v === '').length;
+  if(blankCount !== 1){
+    out.innerHTML = `<p>Please leave exactly one field blank (the one you want to compute).</p>`;
+    return;
+  }
+
   const toNum = v => Number(String(v).replace(/[, ]+/g,'')) || 0;
+
   if(A === ''){
-    // A = E + L
     const e = toNum(E), l = toNum(L);
     const a = e + l;
     out.innerHTML = `
-      <p><strong>Given</strong>: Equity (E) = R${fmt(e)}, Liabilities (L) = R${fmt(l)}</p>
-      <p>By definition: $A = E + L$ (Assets equal owner's equity plus liabilities)</p>
-      <p class="block">$A = ${fmt(e)} + ${fmt(l)} = ${fmt(a)}$</p>
-      <p><em>Answer:</em> Assets = R${fmt(a)}</p>
+      <p><strong>Given</strong>: Equity (E) = R${fmtAcc(e)}, Liabilities (L) = R${fmtAcc(l)}</p>
+      <p>By definition: $A = E + L$</p>
+      <p class="block">$A = ${fmtAcc(e)} + ${fmtAcc(l)} = ${fmtAcc(a)}$</p>
+      <p><em>Answer:</em> Assets = R${fmtAcc(a)}</p>
     `;
   } else if(E === ''){
     const a = toNum(A), l = toNum(L);
     const e = a - l;
     out.innerHTML = `
-      <p><strong>Given</strong>: Assets (A) = R${fmt(a)}, Liabilities (L) = R${fmt(l)}</p>
+      <p><strong>Given</strong>: Assets (A) = R${fmtAcc(a)}, Liabilities (L) = R${fmtAcc(l)}</p>
       <p>Rearrange: $E = A - L$</p>
-      <p class="block">$E = ${fmt(a)} - ${fmt(l)} = ${fmt(e)}$</p>
-      <p><em>Answer:</em> Equity = R${fmt(e)}</p>
+      <p class="block">$E = ${fmtAcc(a)} - ${fmtAcc(l)} = ${fmtAcc(e)}$</p>
+      <p><em>Answer:</em> Equity = R${fmtAcc(e)}</p>
     `;
   } else {
     const a = toNum(A), e = toNum(E);
     const l = a - e;
     out.innerHTML = `
-      <p><strong>Given</strong>: Assets (A) = R${fmt(a)}, Equity (E) = R${fmt(e)}</p>
+      <p><strong>Given</strong>: Assets (A) = R${fmtAcc(a)}, Equity (E) = R${fmtAcc(e)}</p>
       <p>Rearrange: $L = A - E$</p>
-      <p class="block">$L = ${fmt(a)} - ${fmt(e)} = ${fmt(l)}</p>
-      <p><em>Answer:</em> Liabilities = R${fmt(l)}</p>
+      <p class="block">$L = ${fmtAcc(a)} - ${fmtAcc(e)} = ${fmtAcc(l)}</p>
+      <p><em>Answer:</em> Liabilities = R${fmtAcc(l)}</p>
     `;
   }
+
   if(window.MathJax) MathJax.typesetPromise();
 }
 
+// Load example values
+function loadAccExample(){
+  document.getElementById('acc-A').value = '';
+  document.getElementById('acc-E').value = '3000';
+  document.getElementById('acc-L').value = '2000';
+  explainAccEq();
+}
+
+// Bind events after rendering the topic
+function bindAccEqEvents(){
+  const explainBtn = document.getElementById('acc-explain');
+  const exampleBtn = document.getElementById('acc-example');
+  if(explainBtn) explainBtn.addEventListener('click', explainAccEq);
+  if(exampleBtn) exampleBtn.addEventListener('click', loadAccExample);
+}
+
+// Integrate with your topic router
+function bindTopicEvents(topic){
+  if(topic === 'acc_eq'){
+    bindAccEqEvents();
+  }
+  // Add bindings for other topics here...
+}
+
+
+
+
+
+
 /* ---------------------------
-   2) Sources & Cost of Capital (Dividend Growth, CAPM, WACC)
-   /* ---------------------------
-   Sources of Finance & Cost of Capital
-   Upgraded: 
-   - Added direct P0 input option for Gordon Growth
-   - Expanded WACC explanation: kd step, weighted components, step-by-step
----------------------------- */
-/* ---------------------------
-   Sources of Finance & Cost of Capital (Upgraded)
+   Module 2: Sources & Cost of Capital
    --------------------------- */
 function sourcesCostHTML(){
   return `
     <div>
       <h2 class="text-2xl font-semibold">Sources of Finance & Cost of Capital</h2>
-      <p class="mt-2 text-sm opacity-90">Work with Dividend Growth (Gordon), CAPM, and WACC — all step by step with symbols used in class.</p>
+      <p class="mt-2 text-sm opacity-90">Work with Dividend Growth (Gordon), CAPM, and WACC — step by step with class symbols.</p>
 
       <div class="mt-4 grid gap-3 md:grid-cols-2">
         <!-- Dividend Growth -->
@@ -197,7 +233,10 @@ function sourcesCostHTML(){
             <label class="label">Growth rate g <input id="dgm-g" class="input" placeholder="e.g. 0.08" /></label>
             <label class="label">Required return r <input id="dgm-r" class="input" placeholder="e.g. 0.20" /></label>
             <label class="label">Price today P₀ (optional) <input id="dgm-p0" class="input" placeholder="Enter to compute r" /></label>
-            <div class="flex gap-2 mt-2"><button id="dgm-explain" class="btn btn-primary">Explain</button><button id="dgm-example" class="btn btn-ghost">Example</button></div>
+            <div class="flex gap-2 mt-2">
+              <button id="dgm-explain" class="btn btn-primary">Explain</button>
+              <button id="dgm-example" class="btn btn-ghost">Example</button>
+            </div>
             <div id="dgm-output" class="mt-2 steps"></div>
           </div>
         </div>
@@ -209,7 +248,10 @@ function sourcesCostHTML(){
             <label class="label">Risk-free rate R<sub>f</sub> <input id="capm-rf" class="input" placeholder="e.g. 0.06" /></label>
             <label class="label">Beta β <input id="capm-beta" class="input" placeholder="e.g. 1.1" /></label>
             <label class="label">Market return R<sub>m</sub> <input id="capm-rm" class="input" placeholder="e.g. 0.10" /></label>
-            <div class="flex gap-2 mt-2"><button id="capm-explain" class="btn btn-primary">Explain</button><button id="capm-example" class="btn btn-ghost">Example</button></div>
+            <div class="flex gap-2 mt-2">
+              <button id="capm-explain" class="btn btn-primary">Explain</button>
+              <button id="capm-example" class="btn btn-ghost">Example</button>
+            </div>
             <div id="capm-output" class="mt-2 steps"></div>
           </div>
         </div>
@@ -219,15 +261,18 @@ function sourcesCostHTML(){
           <h3 class="font-semibold">Weighted Average Cost of Capital (WACC)</h3>
           <p class="muted">Use Ke, Kp, Kd, and values of Equity (Vₑ), Preference shares (Vₚ), and Debt (Vd).</p>
           <div class="mt-2 grid gap-2 md:grid-cols-3">
-            <label class="label">Vₑ (Ordinary shares + Retained income) <input id="wacc-ve" class="input" placeholder="e.g. 2000000" /></label>
-            <label class="label">K<sub>e</sub> (Cost of equity) <input id="wacc-ke" class="input" placeholder="e.g. 0.20" /></label>
-            <label class="label">Vₚ (Preference shares) <input id="wacc-vp" class="input" placeholder="e.g. 500000" /></label>
-            <label class="label">K<sub>p</sub> (Cost of preference shares) <input id="wacc-kp" class="input" placeholder="e.g. 0.14" /></label>
-            <label class="label">Vd (Debt) <input id="wacc-vd" class="input" placeholder="e.g. 300000" /></label>
-            <label class="label">K<sub>d</sub> (Before tax) <input id="wacc-kd" class="input" placeholder="e.g. 0.15" /></label>
+            <label class="label">Vₑ <input id="wacc-ve" class="input" placeholder="e.g. 2000000" /></label>
+            <label class="label">K<sub>e</sub> <input id="wacc-ke" class="input" placeholder="e.g. 0.20" /></label>
+            <label class="label">Vₚ <input id="wacc-vp" class="input" placeholder="e.g. 500000" /></label>
+            <label class="label">K<sub>p</sub> <input id="wacc-kp" class="input" placeholder="e.g. 0.14" /></label>
+            <label class="label">Vd <input id="wacc-vd" class="input" placeholder="e.g. 300000" /></label>
+            <label class="label">K<sub>d</sub> <input id="wacc-kd" class="input" placeholder="e.g. 0.15" /></label>
             <label class="label">Tax rate t <input id="wacc-t" class="input" placeholder="e.g. 0.30" /></label>
           </div>
-          <div class="mt-2 flex gap-2"><button id="wacc-explain" class="btn btn-primary">Explain</button><button id="wacc-example" class="btn btn-ghost">Example</button></div>
+          <div class="mt-2 flex gap-2">
+            <button id="wacc-explain" class="btn btn-primary">Explain</button>
+            <button id="wacc-example" class="btn btn-ghost">Example</button>
+          </div>
           <div id="wacc-output" class="mt-2 steps"></div>
         </div>
       </div>
@@ -236,8 +281,13 @@ function sourcesCostHTML(){
 }
 
 /* ---------------------------
-   Explain Functions
-   --------------------------- */
+   Helpers
+---------------------------- */
+function fmt(x){ return Number.parseFloat(x).toFixed(4); }
+
+/* ---------------------------
+   DGM Explain
+---------------------------- */
 function explainDGM(){
   const d0 = parseFloat(document.getElementById('dgm-d0').value || NaN);
   const d1val = document.getElementById('dgm-d1').value.trim();
@@ -246,24 +296,21 @@ function explainDGM(){
   const p0val = document.getElementById('dgm-p0').value.trim();
   const out = document.getElementById('dgm-output');
 
-  // Need at least D1 & r-g OR P0 given
   if(isNaN(g)){ out.innerHTML='<p>Enter growth rate g.</p>'; return; }
 
   let d1, p0, reqR;
-  if(d1val !== '') d1 = parseFloat(d1val);
-  else if(!isNaN(d0)) d1 = d0 * (1 + g);
+  if(d1val!=='') d1=parseFloat(d1val);
+  else if(!isNaN(d0)) d1 = d0*(1+g);
 
-  if(p0val !== '' && !isNaN(d1)){ 
-    // Compute required return r
+  if(p0val!=='' && !isNaN(d1)){
     p0 = parseFloat(p0val);
     reqR = d1/p0 + g;
     out.innerHTML = `
       <p><strong>Given</strong>: D₁ = R${fmt(d1)}, P₀ = R${fmt(p0)}, g = ${fmt(g)}</p>
       <p>Formula: $r = \\dfrac{D₁}{P₀} + g$</p>
       <p class="block">$r = \\dfrac{${fmt(d1)}}{${fmt(p0)}} + ${fmt(g)} = ${fmt(reqR)}$</p>
-      <p><em>Interpretation:</em> Required return equals dividend yield plus growth.</p>
     `;
-  } else if(!isNaN(d1) && !isNaN(r) && r>g){ 
+  } else if(!isNaN(d1) && !isNaN(r) && r>g){
     p0 = d1/(r-g);
     out.innerHTML = `
       <p><strong>Given</strong>: D₁ = R${fmt(d1)}, r = ${fmt(r)}, g = ${fmt(g)}</p>
@@ -276,6 +323,9 @@ function explainDGM(){
   if(window.MathJax) MathJax.typesetPromise();
 }
 
+/* ---------------------------
+   CAPM Explain
+---------------------------- */
 function explainCAPM(){
   const rf = parseFloat(document.getElementById('capm-rf').value || NaN);
   const beta = parseFloat(document.getElementById('capm-beta').value || NaN);
@@ -287,11 +337,14 @@ function explainCAPM(){
   out.innerHTML = `
     <p><strong>Given</strong>: Rf=${fmt(rf)}, β=${fmt(beta)}, Rm=${fmt(rm)}</p>
     <p>Formula: $K_e = R_f + \\beta (R_m - R_f)$</p>
-    <p class="block">$K_e = ${fmt(rf)} + ${fmt(beta)} \\times (${fmt(rm)} - ${fmt(rf)}) = ${fmt(ke)}$</p>
+    <p class="block">$K_e = ${fmt(rf)} + ${fmt(beta)}\\times(${fmt(rm)}-${fmt(rf)}) = ${fmt(ke)}$</p>
   `;
   if(window.MathJax) MathJax.typesetPromise();
 }
 
+/* ---------------------------
+   WACC Explain
+---------------------------- */
 function explainWACC(){
   const Ve = parseFloat(document.getElementById('wacc-ve').value || 0);
   const Ke = parseFloat(document.getElementById('wacc-ke').value || NaN);
@@ -302,9 +355,9 @@ function explainWACC(){
   const t = parseFloat(document.getElementById('wacc-t').value || 0);
   const out = document.getElementById('wacc-output');
 
-  if(isNaN(Ke) || isNaN(Kp) || isNaN(Kd)){ out.innerHTML='<p>Enter Ke, Kp, Kd values.</p>'; return; }
+  if(isNaN(Ke) || isNaN(Kp) || isNaN(Kd)){ out.innerHTML='<p>Enter Ke, Kp, Kd.</p>'; return; }
   const V = Ve+Vp+Vd;
-  if(V===0){ out.innerHTML='<p>Provide non-zero values for Ve, Vp, or Vd.</p>'; return; }
+  if(V===0){ out.innerHTML='<p>Provide non-zero Ve, Vp, or Vd.</p>'; return; }
 
   const kdAfter = Kd*(1-t);
   const wacc = (Ke*Ve + Kp*Vp + kdAfter*Vd)/V;
@@ -317,6 +370,16 @@ function explainWACC(){
   `;
   if(window.MathJax) MathJax.typesetPromise();
 }
+
+/* ---------------------------
+   Attach Event Listeners
+---------------------------- */
+document.addEventListener("DOMContentLoaded",()=>{
+  document.getElementById('dgm-explain').onclick=explainDGM;
+  document.getElementById('capm-explain').onclick=explainCAPM;
+  document.getElementById('wacc-explain').onclick=explainWACC;
+});
+
 
 
 /* ---------------------------
