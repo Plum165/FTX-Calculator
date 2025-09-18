@@ -215,7 +215,7 @@ function bindTopicEvents(topic){
 
 
 /* ---------------------------
-   Module 2: Sources & Cost of Capital
+   Module 2: Sources & Cost of Capital (with Examples)
    --------------------------- */
 function sourcesCostHTML(){
   return `
@@ -371,14 +371,46 @@ function explainWACC(){
   if(window.MathJax) MathJax.typesetPromise();
 }
 
-/* ---------------------------
-   Attach Event Listeners
----------------------------- */
-document.addEventListener("DOMContentLoaded",()=>{
-  document.getElementById('dgm-explain').onclick=explainDGM;
-  document.getElementById('capm-explain').onclick=explainCAPM;
-  document.getElementById('wacc-explain').onclick=explainWACC;
+/* Example fillers for Module 2 */
+function fillDGMExample(){
+  document.getElementById('dgm-d0').value = 2;
+  document.getElementById('dgm-g').value = 0.05;
+  document.getElementById('dgm-r').value = 0.12;
+  document.getElementById('dgm-d1').value = '';
+  document.getElementById('dgm-p0').value = '';
+  explainDGM();
+}
+
+function fillCAPMExample(){
+  document.getElementById('capm-rf').value = 0.06;
+  document.getElementById('capm-beta').value = 1.2;
+  document.getElementById('capm-rm').value = 0.10;
+  explainCAPM();
+}
+
+function fillWACCExample(){
+  document.getElementById('wacc-ve').value = 2000000;
+  document.getElementById('wacc-ke').value = 0.15;
+  document.getElementById('wacc-vp').value = 500000;
+  document.getElementById('wacc-kp').value = 0.12;
+  document.getElementById('wacc-vd').value = 300000;
+  document.getElementById('wacc-kd').value = 0.10;
+  document.getElementById('wacc-t').value = 0.30;
+  explainWACC();
+}
+
+/* Event delegation for Module 2 */
+document.addEventListener("click", e=>{
+  if(e.target.id === "dgm-explain"){ e.preventDefault(); explainDGM(); }
+  if(e.target.id === "dgm-example"){ e.preventDefault(); fillDGMExample(); }
+
+  if(e.target.id === "capm-explain"){ e.preventDefault(); explainCAPM(); }
+  if(e.target.id === "capm-example"){ e.preventDefault(); fillCAPMExample(); }
+
+  if(e.target.id === "wacc-explain"){ e.preventDefault(); explainWACC(); }
+  if(e.target.id === "wacc-example"){ e.preventDefault(); fillWACCExample(); }
 });
+
 
 
 
@@ -401,11 +433,12 @@ function recordTxnHTML(){
         <input id="je-amt" class="input" placeholder="Amount" />
       </div>
 
-      <div class="mt-2 flex gap-2">
+      <div class="mt-2 flex gap-2 flex-wrap">
         <button id="je-add" class="btn btn-primary">Add Journal Entry</button>
         <button id="je-post" class="btn btn-ghost">Post to Ledger</button>
         <button id="je-trial" class="btn btn-link">Show Trial Balance</button>
-        <button id="je-clear" class="btn btn-danger">Clear All</button>
+        <button id="je-clear" class="btn btn-primary">Clear All</button>
+        <button id="je-example" class="btn btn-primary">Load Example</button>
       </div>
 
       <div id="je-output" class="mt-4 topic-card p-4 rounded-md steps"></div>
@@ -413,6 +446,7 @@ function recordTxnHTML(){
     </div>
   `;
 }
+
 
 /* Account options for dropdowns */
 function accountOptions(){
@@ -532,18 +566,62 @@ function clearAll(){
   journalEntries=[]; ledger={};
   document.getElementById('je-output').innerHTML='<p>All data cleared.</p>';
 }
+/* Example filler */
+function fillJournalExample() {
+  journalEntries = [
+    // Statement of Financial Position accounts
+    {date: 'June 1', debit: 'Motor vehicles', credit: 'Share Capital', amount: 60000},
+    {date: 'June 1', debit: 'Equipment', credit: 'Share Capital', amount: 70000},
+    {date: 'June 1', debit: 'Loan : Nedbank 15 % per annum', credit: 'Bank', amount: 150000},
+    {date: 'June 1', debit: 'Inventory', credit: 'Bank', amount: 25000},
+    {date: 'June 5', debit: 'Cost of sales expense', credit: 'Inventory', amount: 2100},
+    {date: 'June 1', debit: 'Bank', credit: 'Inventory', amount: 2940},
+    {date: 'June 12', debit: 'Stationery expense', credit: 'Bank', amount: 250},
+    {date: 'June 30', debit: 'Interest expense', credit: 'Bank', amount: 1875},
 
+    // Statement of Comprehensive Income accounts
+    {date: 'June 1', debit: 'Sales income', credit: 'Debtors', amount: 4200},
+    {date: 'June 1', debit: 'Cost of sales expense', credit: 'Inventory', amount: 2100},
+    {date: 'June 4', debit: 'Bank', credit: 'Stationery expense', amount: 250},
+    {date: 'June 30', debit: 'Interest expense', credit: 'Bank', amount: 1875},
+  ];
+
+  ledger = {};
+  const out = document.getElementById('je-output');
+  out.innerHTML = '<p>Example journal entries loaded.</p>';
+  renderJournalList();
+}
+
+/* Event delegation */
+document.addEventListener("click", e => {
+  // Add journal entry
+  if(e.target.id === "je-add") { e.preventDefault(); addJournalEntry(); }
+
+  // Post to ledger
+  if(e.target.id === "je-post") { e.preventDefault(); postToLedger(); }
+
+  // Show trial balance
+  if(e.target.id === "je-trial") { e.preventDefault(); showTrialBalance(); }
+
+  // Clear all
+  if(e.target.id === "je-clear") { e.preventDefault(); clearAll(); }
+
+  // Example
+  if(e.target.id === "je-example") { e.preventDefault(); fillJournalExample(); }
+});
 /* ---------------------------
-   4) Adjustments & FS — integrated with Ledger & Trial Balance
-   Accruals, Prepayments, Depreciation
+   Module 4: Adjustments & Financial Statements
+   Integrated Ledger & Trial Balance
+   With Calculation Steps & Manual Posting
    --------------------------- */
+
 function adjustmentsHTML(){
   return `
     <div>
       <h2 class="text-2xl font-semibold">Adjustments & Annual Financial Statements</h2>
       <p class="mt-2 text-sm opacity-90">
         Record year-end adjustments (accruals, prepayments, depreciation).
-        Adjustments will automatically post journal entries and update your Trial Balance.
+        Adjustments automatically post journal entries and update your Trial Balance.
       </p>
 
       <div class="mt-3 grid gap-3 md:grid-cols-2">
@@ -552,14 +630,15 @@ function adjustmentsHTML(){
           <h3 class="font-semibold">Accruals and Prepayments</h3>
           <label class="label mt-2">Accrued expense (unpaid, still owed)</label>
           <input id="adj-accrued" class="input" placeholder="R e.g. 500" />
-
           <label class="label mt-2">Prepaid expense (paid in advance)</label>
           <input id="adj-prepaid" class="input" placeholder="R e.g. 1000" />
 
           <div class="mt-2 flex gap-2">
             <button id="adj-explain" class="btn btn-primary">Post Adjustment</button>
             <button id="adj-example" class="btn btn-ghost">Show Example</button>
+            <button id="adj-post-trial" class="btn btn-secondary">Update Trial Balance</button>
           </div>
+
           <div id="adj-output" class="mt-2 steps"></div>
         </div>
 
@@ -576,13 +655,126 @@ function adjustmentsHTML(){
           <div class="mt-2 flex gap-2">
             <button id="dep-explain" class="btn btn-primary">Post Depreciation</button>
             <button id="dep-example" class="btn btn-ghost">Show Example</button>
+            <button id="dep-post-trial" class="btn btn-secondary">Update Trial Balance</button>
           </div>
+
           <div id="dep-output" class="mt-2 steps"></div>
         </div>
+      </div>
+
+      <!-- Trial Balance Display in Module 4 -->
+      <div class="mt-6 glass p-3 rounded-md">
+        <h3 class="font-semibold">Trial Balance (Updated)</h3>
+        <div id="trial-output">Post adjustments or depreciation to see updated trial balance here.</div>
       </div>
     </div>
   `;
 }
+
+/* ---------------------------
+   Post adjustments and update Trial Balance
+   --------------------------- */
+function postAdjustment(){
+  const accrued = parseFloat(document.getElementById('adj-accrued').value || 0);
+  const prepaid = parseFloat(document.getElementById('adj-prepaid').value || 0);
+
+  if(accrued === 0 && prepaid === 0){
+    document.getElementById('adj-output').innerHTML = '<p>Enter at least one adjustment.</p>';
+    return;
+  }
+
+  let explanation = '<h4>Adjustment Calculations</h4><ul>';
+
+  if(accrued > 0){
+    journalEntries.push({date: '31/12', debit: 'Salaries Expense', credit: 'Accrued Expenses', amount: accrued});
+    explanation += `<li>Accrued Expense: Debit Salaries Expense R${fmt(accrued)}, Credit Accrued Expenses R${fmt(accrued)}</li>`;
+  }
+  if(prepaid > 0){
+    journalEntries.push({date: '31/12', debit: 'Prepaid Expenses', credit: 'Bank', amount: prepaid});
+    explanation += `<li>Prepaid Expense: Debit Prepaid Expenses R${fmt(prepaid)}, Credit Bank R${fmt(prepaid)}</li>`;
+  }
+
+  explanation += '</ul>';
+
+  document.getElementById('adj-output').innerHTML = explanation;
+  updateTrialBalanceDisplay();
+}
+
+/* ---------------------------
+   Post Depreciation & Update Trial Balance
+   --------------------------- */
+function postDepreciation(){
+  const cost = parseFloat(document.getElementById('dep-cost').value || 0);
+  const res = parseFloat(document.getElementById('dep-res').value || 0);
+  const life = parseFloat(document.getElementById('dep-life').value || 1);
+
+  if(cost <= 0 || life <= 0){
+    document.getElementById('dep-output').innerHTML = '<p>Enter valid asset cost and useful life.</p>';
+    return;
+  }
+
+  const depreciation = (cost - res)/life;
+  journalEntries.push({date: '31/12', debit: 'Depreciation Expense', credit: 'Accumulated Depreciation', amount: depreciation});
+
+  document.getElementById('dep-output').innerHTML = `
+    <h4>Depreciation Calculation (Straight-line)</h4>
+    <p>Depreciation = (Cost - Residual Value) / Useful Life</p>
+    <p>Depreciation = (R${fmt(cost)} - R${fmt(res)}) / ${life} years</p>
+    <p>Depreciation = R${fmt(depreciation)}</p>
+    <p>Journal entry: Debit Depreciation Expense R${fmt(depreciation)}, Credit Accumulated Depreciation R${fmt(depreciation)}</p>
+  `;
+  updateTrialBalanceDisplay();
+}
+
+/* ---------------------------
+   Update Trial Balance Display in Module 4
+   --------------------------- */
+function updateTrialBalanceDisplay(){
+  postToLedger(); // Ensure ledger is updated
+  const out=document.getElementById('trial-output');
+  if(!ledger || Object.keys(ledger).length===0){ out.innerHTML='<p>No ledger postings yet.</p>'; return; }
+
+  let isRows="", sofpRows="", totalDeb=0,totalCred=0;
+  Object.keys(ledger).forEach(a=>{
+    const bal=ledger[a].debit - ledger[a].credit;
+    let dr=0,cr=0; if(bal>=0){dr=bal; totalDeb+=bal;} else {cr=-bal; totalCred+=-bal;}
+    const row=`<tr><td>${a}</td><td>R${fmt(dr)}</td><td>R${fmt(cr)}</td></tr>`;
+    if(isAccount(a)) isRows+=row; else sofpRows+=row;
+  });
+
+  let html=`<p><strong>Income Statement Accounts</strong></p><table class="table-auto w-full border"><thead><tr><th>Account</th><th>Debit</th><th>Credit</th></tr></thead><tbody>${isRows}</tbody></table>`;
+  html+=`<p><strong>SOFP Accounts</strong></p><table class="table-auto w-full border"><thead><tr><th>Account</th><th>Debit</th><th>Credit</th></tr></thead><tbody>${sofpRows}</tbody></table>`;
+  html+=`<p><strong>Totals</strong> — Debits: R${fmt(totalDeb)} | Credits: R${fmt(totalCred)}</p>`;
+  html+=`<p>${fmt(totalDeb)===fmt(totalCred)?'<strong>Trial balance is balanced.</strong>':'<strong>Trial balance does not balance.</strong>'}</p>`;
+  out.innerHTML=html;
+}
+
+/* ---------------------------
+   Example fill for Module 4
+   --------------------------- */
+function fillAdjustmentExample(){
+  document.getElementById('adj-accrued').value = 1800;
+  document.getElementById('adj-prepaid').value = 1000;
+  document.getElementById('dep-cost').value = 236000;
+  document.getElementById('dep-res').value = 0;
+  document.getElementById('dep-life').value = 5;
+
+  postAdjustment();
+  postDepreciation();
+}
+
+/* ---------------------------
+   Event delegation for Module 4 buttons
+   --------------------------- */
+document.addEventListener("click", e => {
+  if(e.target.id === "adj-explain"){ e.preventDefault(); postAdjustment(); }
+  if(e.target.id === "dep-explain"){ e.preventDefault(); postDepreciation(); }
+  if(e.target.id === "adj-example"){ e.preventDefault(); fillAdjustmentExample(); }
+  if(e.target.id === "dep-example"){ e.preventDefault(); fillAdjustmentExample(); }
+  if(e.target.id === "adj-post-trial"){ e.preventDefault(); updateTrialBalanceDisplay(); }
+  if(e.target.id === "dep-post-trial"){ e.preventDefault(); updateTrialBalanceDisplay(); }
+});
+
 
 /* ---------------------------
    5) Financial Ratios — Working module
