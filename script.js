@@ -727,7 +727,7 @@ function postDepreciation(){
 }
 
 /* ---------------------------
-   Update Trial Balance Display in Module 4
+   Update Trial Balance Display in Module 4(Still busy)
    --------------------------- */
 function updateTrialBalanceDisplay(){
   postToLedger(); // Ensure ledger is updated
