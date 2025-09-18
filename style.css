@@ -28,3 +28,9 @@ body{font-family:Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Rob
 table { border-collapse: collapse; width:100%; }
 th, td { border: 1px solid rgba(255,255,255,0.06); padding: .35rem .5rem; text-align: left; font-size: .95rem }
 .muted { opacity: .85; font-size: .95rem }
+/* Add this to your CSS */
+#cvp-chart {
+  max-height: 400px;   /* lock chart height */
+  height: 400px;       /* force height */
+  width: 100%;         /* responsive width */
+}

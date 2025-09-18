@@ -99,6 +99,7 @@ function renderTopic(topic){
     case 'tvm': html = tvmHTML(); break;
     case 'valuation': html = valuationHTML(); break;
     case 'capbud': html = capBudHTML(); break;
+    case "formulae": html = formulaeHTML(); break;
     default: html = `<div><p>Topic not found</p></div>`;
   }
   topicRoot.innerHTML = '';
@@ -521,10 +522,16 @@ function adjustmentsHTML(){
 }
 
 /* ---------------------------
-   5) Financial Ratios
-   Full interactive ratio calculator with grouped dropdown,
-   category descriptions, worked examples, formulas, and explanations.
+   5) Financial Ratios — Working module
+   Drop-in replacement for previous "ratios" code.
+   Full behaviour:
+   - ratiosHTML() returns module HTML (used by your router)
+   - Dynamically renders inputs when the select appears or changes
+   - Compute button calculates & explains
+   - Example button fills inputs & computes
+   - Robust parsing & formatting
    --------------------------- */
+
 function ratiosHTML() {
   return `
     <div>
@@ -578,7 +585,7 @@ function ratiosHTML() {
         </optgroup>
       </select>
 
-      <div id="category-description" class="mt-2 text-sm text-gray-600"></div>
+      <div id="category-description" class="mt-2 text-sm text-gray-600 muted"></div>
 
       <div id="ratio-inputs" class="mt-3 grid gap-2 md:grid-cols-3"></div>
 
@@ -592,302 +599,566 @@ function ratiosHTML() {
   `;
 }
 
-/* Ratio definitions with categories */
+/* Definitions for ratios (label, formula, inputs, example and short interpretation) */
 const ratioDefs = {
   categoryDescriptions: {
-    "solvency": "Measures the company's ability to meet long-term obligations.",
-    "nav": "Shows the value of shareholders’ equity per share.",
-    "current": "Assesses short-term liquidity and ability to meet current liabilities.",
-    "quick": "Measures immediate liquidity excluding inventory.",
-    "inv-days": "Indicates average number of days inventory is held before sale.",
-    "inv-turnover": "Shows how many times inventory is sold and replaced over a period.",
-    "ar-days": "Average days to collect receivables from customers.",
-    "ap-days": "Average days to pay suppliers.",
-    "total-asset-turn": "Efficiency of using assets to generate sales.",
-    "fixed-asset-turn": "Efficiency of using fixed assets to generate sales.",
-    "debt-ratio": "Proportion of assets financed by debt.",
-    "debt-equity": "Shows leverage in terms of debt vs equity.",
-    "times-interest": "Ability to cover interest payments from operating profit.",
-    "cash-coverage": "Ability to cover interest using cash generated from operations.",
-    "gross-margin": "Percentage of revenue remaining after COGS.",
-    "oper-margin": "Percentage of revenue remaining after operating expenses.",
-    "net-margin": "Percentage of revenue remaining as net profit.",
-    "roa": "Return generated from total assets.",
-    "roe": "Return generated from shareholders’ equity.",
-    "dy": "Income return on investment from dividends.",
-    "hpr": "Total return earned over the holding period.",
-    "eps": "Profit allocated per share.",
-    "div-cover": "How many times earnings cover dividends.",
-    "payout": "Percentage of earnings distributed as dividends.",
-    "retention": "Percentage of earnings retained for reinvestment.",
-    "pe": "Market valuation of earnings.",
-    "ey": "Inverse of P/E; shows earnings yield as a percentage."
+    solvency: "Measures the company's ability to meet long-term obligations (higher >1 is usually better).",
+    nav: "Shows the value of shareholders’ equity per share (book value per share).",
+    current: "Assesses short-term liquidity and ability to meet current liabilities.",
+    quick: "Measures immediate liquidity excluding inventory (conservative liquidity measure).",
+    "inv-days": "Average days inventory is held before sale — the shorter, the better (usually).",
+    "inv-turnover": "How many times inventory is sold and replaced during a period.",
+    "ar-days": "Average number of days to collect credit sales from customers.",
+    "ap-days": "Average number of days the business takes to pay suppliers.",
+    "total-asset-turn": "How efficiently assets generate sales (higher = more efficient).",
+    "fixed-asset-turn": "How efficiently fixed assets generate sales.",
+    "debt-ratio": "Proportion of assets financed by debt (lower = less leverage).",
+    "debt-equity": "Leverage in terms of debt vs equity (higher = more leveraged).",
+    "times-interest": "How many times operating profit covers interest expense (higher = safer).",
+    "cash-coverage": "EBIT + Depreciation relative to interest expense (cash ability to cover interest).",
+    "gross-margin": "Share of sales left after COGS (profitability at production level).",
+    "oper-margin": "Share of sales left after operating expenses (operational profitability).",
+    "net-margin": "Share of sales that becomes net profit (bottom-line profitability).",
+    roa: "Return on total assets (efficiency of using assets to generate net income).",
+    roe: "Return on shareholders' equity (profitability for owners).",
+    dy: "Dividend per share relative to market price (income yield).",
+    hpr: "Total return (price change + dividends) over the holding period.",
+    eps: "Net income per share — used in valuation metrics.",
+    "div-cover": "How many times earnings cover dividends (safety of dividend).",
+    payout: "Portion of net income paid out as dividends.",
+    retention: "Portion of net income retained for growth (1 - payout).",
+    pe: "Price investors are willing to pay per R1 of earnings.",
+    ey: "Inverse of P/E: earnings yield (EPS / Price)."
   },
+
   solvency: {
-    label:"Solvency Ratio",
-    formula:"Total Assets ÷ Total Liabilities",
-    inputs:["Total assets","Total liabilities"],
-    example:{vals:[200000,120000],calc:"200000/120000 = 1.67",explain:"For every R1 of liability, the business has R1.67 in assets."}
+    label: "Solvency Ratio",
+    formula: "Total assets ÷ Total liabilities",
+    inputs: ["Total assets", "Total liabilities"],
+    example: { vals: [200000, 120000], explain: "For every R1 of liability the business has R1.67 in assets (200k / 120k = 1.67)." }
   },
+
   nav: {
-    label:"Net Asset Value",
-    formula:"(Total Assets - Total Liabilities) ÷ Shares Outstanding",
-    inputs:["Total assets","Total liabilities","Number of shares"],
-    example:{vals:[500000,200000,10000],calc:"(500000-200000)/10000=30",explain:"Each share represents R30 in net assets."}
+    label: "Net Asset Value (per share)",
+    formula: "(Total assets - Total liabilities) ÷ Shares outstanding",
+    inputs: ["Total assets", "Total liabilities", "Shares outstanding"],
+    example: { vals: [500000, 200000, 10000], explain: "Book value per share = (500k - 200k) / 10k = R30 per share." }
   },
+
   current: {
-    label:"Current Ratio",
-    formula:"Current Assets ÷ Current Liabilities",
-    inputs:["Current assets","Current liabilities"],
-    example:{vals:[100000,50000],calc:"100000/50000=2.0",explain:"R2 of current assets per R1 of liability."}
+    label: "Current Ratio",
+    formula: "Current assets ÷ Current liabilities",
+    inputs: ["Current assets", "Current liabilities"],
+    example: { vals: [100000, 50000], explain: "Current ratio = 100k / 50k = 2.0 (R2 of current assets per R1 liability)." }
   },
+
   quick: {
-    label:"Quick Ratio (Acid Test)",
-    formula:"(Current Assets - Inventory) ÷ Current Liabilities",
-    inputs:["Current assets","Inventory","Current liabilities"],
-    example:{vals:[80000,20000,40000],calc:"(80000-20000)/40000=1.5",explain:"Quick assets cover short-term liabilities 1.5 times."}
+    label: "Quick Ratio (Acid Test)",
+    formula: "(Current assets - Inventory) ÷ Current liabilities",
+    inputs: ["Current assets", "Inventory", "Current liabilities"],
+    example: { vals: [80000, 20000, 40000], explain: "(80k - 20k) / 40k = 1.5 (quick assets cover short-term liabilities 1.5x)." }
   },
-  "inv-days": {
-    label:"Days Inventory on Hand",
-    formula:"365 ÷ Inventory Turnover",
-    inputs:["COGS","Average inventory"],
-    example:{vals:[60000,10000],calc:"Inv turnover=60000/10000=6; Days=365/6=61",explain:"Inventory is held ~61 days before sale."}
-  },
+
   "inv-turnover": {
-    label:"Inventory Turnover",
-    formula:"COGS ÷ Average Inventory",
-    inputs:["COGS","Average inventory"],
-    example:{vals:[60000,10000],calc:"60000/10000=6",explain:"Stock turns over 6 times a year."}
+    label: "Inventory Turnover",
+    formula: "COGS ÷ Average inventory",
+    inputs: ["COGS", "Average inventory"],
+    example: { vals: [60000, 10000], explain: "60000 / 10000 = 6 times per year." }
   },
+
+  "inv-days": {
+    label: "Days Inventory on Hand (DIO)",
+    formula: "365 ÷ Inventory turnover (or (Average inventory / COGS) × 365)",
+    inputs: ["COGS", "Average inventory"],
+    example: { vals: [60000, 10000], explain: "Turnover = 6; Days = 365 / 6 ≈ 61 days inventory on hand." }
+  },
+
   "ar-days": {
-    label:"Receivables Collection Period",
-    formula:"(Accounts Receivable ÷ Credit Sales) × 365",
-    inputs:["Accounts receivable","Credit sales"],
-    example:{vals:[20000,120000],calc:"20000/120000×365=61 days",explain:"On average, debtors pay in 61 days."}
+    label: "Receivables Collection Period (DSO)",
+    formula: "(Accounts receivable ÷ Credit sales) × 365",
+    inputs: ["Accounts receivable", "Credit sales (annual)"],
+    example: { vals: [20000, 120000], explain: "(20k / 120k) × 365 ≈ 61 days to collect receivables." }
   },
+
   "ap-days": {
-    label:"Payables Payment Period",
-    formula:"(Accounts Payable ÷ Purchases) × 365",
-    inputs:["Accounts payable","Purchases"],
-    example:{vals:[15000,90000],calc:"15000/90000×365=61 days",explain:"On average, creditors are paid after 61 days."}
+    label: "Payables Payment Period (DPO)",
+    formula: "(Accounts payable ÷ Purchases) × 365",
+    inputs: ["Accounts payable", "Purchases (annual)"],
+    example: { vals: [15000, 90000], explain: "(15k / 90k) × 365 ≈ 61 days to pay suppliers." }
   },
+
   "total-asset-turn": {
-    label:"Total Asset Turnover",
-    formula:"Sales ÷ Total Assets",
-    inputs:["Sales","Total assets"],
-    example:{vals:[200000,100000],calc:"200000/100000=2",explain:"Every R1 of assets generates R2 sales."}
+    label: "Total Asset Turnover",
+    formula: "Sales ÷ Total assets",
+    inputs: ["Sales (annual)", "Total assets"],
+    example: { vals: [200000, 100000], explain: "200k / 100k = 2 => each R1 of assets generates R2 sales." }
   },
+
   "fixed-asset-turn": {
-    label:"Fixed Asset Turnover",
-    formula:"Sales ÷ Net Fixed Assets",
-    inputs:["Sales","Net fixed assets"],
-    example:{vals:[200000,50000],calc:"200000/50000=4",explain:"Each R1 of fixed assets generates R4 in sales."}
+    label: "Fixed Asset Turnover",
+    formula: "Sales ÷ Net fixed assets",
+    inputs: ["Sales (annual)", "Net fixed assets"],
+    example: { vals: [200000, 50000], explain: "200k / 50k = 4 => each R1 of fixed assets generates R4 sales." }
   },
+
   "debt-ratio": {
-    label:"Debt Ratio",
-    formula:"Total Liabilities ÷ Total Assets",
-    inputs:["Total liabilities","Total assets"],
-    example:{vals:[40000,100000],calc:"40000/100000=0.4",explain:"40% of assets are financed by debt."}
+    label: "Debt Ratio",
+    formula: "Total liabilities ÷ Total assets",
+    inputs: ["Total liabilities", "Total assets"],
+    example: { vals: [40000, 100000], explain: "40k / 100k = 0.4 => 40% of assets financed by debt." }
   },
+
   "debt-equity": {
-    label:"Debt-to-Equity Ratio",
-    formula:"Total Liabilities ÷ Total Equity",
-    inputs:["Total liabilities","Total equity"],
-    example:{vals:[60000,90000],calc:"60000/90000=0.67",explain:"R0.67 debt per R1 equity."}
+    label: "Debt-to-Equity Ratio",
+    formula: "Total liabilities ÷ Total equity",
+    inputs: ["Total liabilities", "Total equity"],
+    example: { vals: [60000, 90000], explain: "60k / 90k ≈ 0.67 => R0.67 debt per R1 equity." }
   },
+
   "times-interest": {
-    label:"Times Interest Earned",
-    formula:"EBIT ÷ Interest Expense",
-    inputs:["EBIT","Interest expense"],
-    example:{vals:[50000,10000],calc:"50000/10000=5",explain:"Operating profit covers interest 5 times."}
+    label: "Times Interest Earned",
+    formula: "EBIT ÷ Interest expense",
+    inputs: ["EBIT (Operating profit)", "Interest expense"],
+    example: { vals: [50000, 10000], explain: "50k / 10k = 5 times coverage." }
   },
+
   "cash-coverage": {
-    label:"Cash Coverage Ratio",
-    formula:"(EBIT + Depreciation) ÷ Interest Expense",
-    inputs:["EBIT","Depreciation","Interest expense"],
-    example:{vals:[50000,5000,10000],calc:"(50000+5000)/10000=5.5",explain:"Cash covers interest 5.5 times."}
+    label: "Cash Coverage Ratio",
+    formula: "(EBIT + Depreciation) ÷ Interest expense",
+    inputs: ["EBIT", "Depreciation", "Interest expense"],
+    example: { vals: [50000, 5000, 10000], explain: "(50k + 5k) / 10k = 5.5 times coverage." }
   },
+
   "gross-margin": {
-    label:"Gross Profit Margin",
-    formula:"(Sales - COGS) ÷ Sales",
-    inputs:["Sales","COGS"],
-    example:{vals:[120000,60000],calc:"(120000-60000)/120000=0.5=50%",explain:"50% of sales remains after COGS."}
+    label: "Gross Profit Margin",
+    formula: "(Sales - COGS) ÷ Sales",
+    inputs: ["Sales", "COGS"],
+    example: { vals: [120000, 60000], explain: "60k / 120k = 50% gross margin." }
   },
+
   "oper-margin": {
-    label:"Operating Margin",
-    formula:"Operating Profit ÷ Sales",
-    inputs:["Operating profit","Sales"],
-    example:{vals:[40000,200000],calc:"40000/200000=0.2=20%",explain:"20% operating profit margin."}
+    label: "Operating Margin",
+    formula: "Operating profit ÷ Sales",
+    inputs: ["Operating profit", "Sales"],
+    example: { vals: [40000, 200000], explain: "40k / 200k = 20% operating margin." }
   },
+
   "net-margin": {
-    label:"Net Profit Margin",
-    formula:"Net Profit ÷ Sales",
-    inputs:["Net profit","Sales"],
-    example:{vals:[30000,200000],calc:"30000/200000=0.15=15%",explain:"15% of sales is retained as net profit."}
+    label: "Net Profit Margin",
+    formula: "Net profit ÷ Sales",
+    inputs: ["Net profit", "Sales"],
+    example: { vals: [30000, 200000], explain: "30k / 200k = 15% net margin." }
   },
+
   roa: {
-    label:"Return on Assets (ROA)",
-    formula:"Net Income ÷ Total Assets",
-    inputs:["Net income","Total assets"],
-    example:{vals:[20000,100000],calc:"20000/100000=0.2=20%",explain:"20% return on total assets."}
+    label: "Return on Assets (ROA)",
+    formula: "Net income ÷ Total assets",
+    inputs: ["Net income", "Total assets"],
+    example: { vals: [20000, 100000], explain: "20k / 100k = 20% ROA." }
   },
+
   roe: {
-    label:"Return on Equity (ROE)",
-    formula:"Net Income ÷ Equity",
-    inputs:["Net income","Equity"],
-    example:{vals:[20000,50000],calc:"20000/50000=0.4=40%",explain:"40% return on equity."}
+    label: "Return on Equity (ROE)",
+    formula: "Net income ÷ Equity",
+    inputs: ["Net income", "Equity"],
+    example: { vals: [20000, 50000], explain: "20k / 50k = 40% ROE." }
   },
+
   dy: {
-    label:"Dividend Yield",
-    formula:"Dividend per Share ÷ Share Price",
-    inputs:["Dividend per share","Share price"],
-    example:{vals:[2,40],calc:"2/40=0.05=5%",explain:"Shareholders earn 5% income yield."}
+    label: "Dividend Yield",
+    formula: "Dividend per share ÷ Share price",
+    inputs: ["Dividend per share", "Share price"],
+    example: { vals: [2, 40], explain: "2 / 40 = 5% dividend yield." }
   },
+
   hpr: {
-    label:"Holding Period Return",
-    formula:"(Ending Price - Beginning Price + Dividends) ÷ Beginning Price",
-    inputs:["Beginning price","Ending price","Dividends received"],
-    example:{vals:[50,60,2],calc:"(60-50+2)/50=0.24=24%",explain:"Return over the holding period = 24%."}
+    label: "Holding Period Return (HPR)",
+    formula: "(Ending price - Beginning price + Dividends) ÷ Beginning price",
+    inputs: ["Beginning price", "Ending price", "Dividends received"],
+    example: { vals: [50, 60, 2], explain: "(60 - 50 + 2) / 50 = 24% HPR." }
   },
+
   eps: {
-    label:"Earnings per Share (EPS)",
-    formula:"Net Income ÷ Shares Outstanding",
-    inputs:["Net income","Shares outstanding"],
-    example:{vals:[100000,50000],calc:"100000/50000=2",explain:"Each share earns R2 profit."}
+    label: "Earnings per Share (EPS)",
+    formula: "Net income ÷ Shares outstanding",
+    inputs: ["Net income", "Shares outstanding"],
+    example: { vals: [100000, 50000], explain: "100k / 50k = R2 EPS." }
   },
+
   "div-cover": {
-    label:"Dividend Cover",
-    formula:"Earnings per Share ÷ Dividend per Share",
-    inputs:["EPS","DPS"],
-    example:{vals:[4,2],calc:"4/2=2",explain:"Earnings cover dividends 2 times."}
+    label: "Dividend Cover",
+    formula: "EPS ÷ Dividend per share",
+    inputs: ["EPS", "Dividend per share"],
+    example: { vals: [4, 2], explain: "4 / 2 = 2 times cover." }
   },
+
   payout: {
-    label:"Payout Ratio",
-    formula:"Dividends ÷ Net Income",
-    inputs:["Dividends","Net income"],
-    example:{vals:[20000,50000],calc:"20000/50000=0.4=40%",explain:"40% of profits paid as dividends."}
+    label: "Payout Ratio",
+    formula: "Dividends ÷ Net income",
+    inputs: ["Dividends", "Net income"],
+    example: { vals: [20000, 50000], explain: "20k / 50k = 40% payout." }
   },
+
   retention: {
-    label:"Retention Ratio",
-    formula:"1 - Payout Ratio",
-    inputs:["Dividends","Net income"],
-    example:{vals:[20000,50000],calc:"1-(20000/50000)=0.6=60%",explain:"60% profits retained for reinvestment."}
+    label: "Retention Ratio",
+    formula: "1 - Payout ratio (or (Net income - Dividends) ÷ Net income)",
+    inputs: ["Dividends", "Net income"],
+    example: { vals: [20000, 50000], explain: "1 - (20k/50k) = 60% retention." }
   },
+
   pe: {
-    label:"Price/Earnings Ratio",
-    formula:"Share Price ÷ Earnings per Share",
-    inputs:["Share price","EPS"],
-    example:{vals:[30,5],calc:"30/5=6",explain:"Investors pay R6 per R1 of earnings."}
+    label: "Price/Earnings Ratio (P/E)",
+    formula: "Share price ÷ EPS",
+    inputs: ["Share price", "EPS"],
+    example: { vals: [30, 5], explain: "30 / 5 = 6 (P/E = 6)." }
   },
+
   ey: {
-    label:"Earnings Yield",
-    formula:"EPS ÷ Share Price",
-    inputs:["EPS","Share price"],
-    example:{vals:[5,30],calc:"5/30=0.167=16.7%",explain:"Inverse of P/E; earnings yield 16.7%."}
+    label: "Earnings Yield (EY)",
+    formula: "EPS ÷ Share price",
+    inputs: ["EPS", "Share price"],
+    example: { vals: [5, 30], explain: "5 / 30 = 16.7% earnings yield." }
   }
 };
 
-/* Utility function to format numbers */
-function fmt(n, dec = 2) { return parseFloat(n.toFixed(dec)); }
+/* -------------------------
+   Helpers (format & parse)
+   ------------------------- */
+function formatNumberSmart(x, dec = 2) {
+  if (x === null || x === undefined) return "N/A";
+  if (!isFinite(x)) return "NaN";
+  // if very nearly integer, show integer
+  if (Math.abs(Math.round(x) - x) < 1e-9) return (Math.round(x)).toString();
+  return Number(x).toFixed(dec);
+}
 
-/* Render input fields dynamically */
-document.addEventListener("change", e => {
-  if (e.target.id === "ratio-select") {
-    const sel = e.target.value;
-    const def = ratioDefs[sel];
-    const inputDiv = document.getElementById('ratio-inputs');
-    const catDiv = document.getElementById('category-description');
-    inputDiv.innerHTML = "";
-    catDiv.innerHTML = ratioDefs.categoryDescriptions[sel] || "";
+// parse numeric-like strings robustly
+function parseNumberSmart(str) {
+  if (typeof str === "number") return str;
+  if (!str) return NaN;
+  // remove currency 'R', commas, spaces
+  let s = String(str).trim().replace(/[, ]+/g, "");
+  // if percentage like '12%', convert to 0.12
+  if (s.endsWith("%")) {
+    const v = parseFloat(s.slice(0, -1));
+    return isNaN(v) ? NaN : v / 100;
+  }
+  // remove leading R or other currency symbols
+  s = s.replace(/^[^\d\.\-]+/, "");
+  const v = parseFloat(s);
+  return isNaN(v) ? NaN : v;
+}
 
-    if (def) {
-      def.inputs.forEach((lbl, i) => {
-        inputDiv.innerHTML += `<label class="label">${lbl}<input id="ratio-in-${i}" class="input"/></label>`;
-      });
+/* -------------------------
+   Render inputs for selected ratio
+   ------------------------- */
+function renderRatioInputsFor(selectEl) {
+  if (!selectEl) return;
+  const sel = selectEl.value;
+  const def = ratioDefs[sel];
+  const inputDiv = document.getElementById("ratio-inputs");
+  const catDiv = document.getElementById("category-description");
+  if (!inputDiv || !catDiv) return;
+  inputDiv.innerHTML = "";
+  catDiv.innerHTML = ratioDefs.categoryDescriptions[sel] || "";
+
+  if (!def) {
+    inputDiv.innerHTML = `<p>Select a ratio</p>`;
+    return;
+  }
+  // create labeled inputs
+  def.inputs.forEach((lbl, i) => {
+    // accessible input id unique by index
+    const id = `ratio-in-${i}`;
+    inputDiv.insertAdjacentHTML(
+      "beforeend",
+      `<label class="label">${lbl} <input id="${id}" class="input" placeholder="${lbl}" /></label>`
+    );
+  });
+
+  // style select text black explicitly (some browsers need this after insertion)
+  selectEl.style.color = "black";
+}
+
+/* -------------------------
+   Compute & show output
+   ------------------------- */
+function computeSelectedRatio() {
+  const selEl = document.getElementById("ratio-select");
+  const outputEl = document.getElementById("rat-output");
+  if (!selEl || !outputEl) return;
+  const sel = selEl.value;
+  const def = ratioDefs[sel];
+  if (!def) {
+    outputEl.innerHTML = `<p>Please select a ratio.</p>`;
+    return;
+  }
+
+  // collect input values
+  const rawVals = def.inputs.map((_, i) => {
+    const el = document.getElementById(`ratio-in-${i}`);
+    return el ? el.value.trim() : "";
+  });
+
+  // parse all values
+  const vals = rawVals.map(v => parseNumberSmart(v));
+
+  // check for missing (NaN) values
+  const missingIndex = vals.findIndex(v => isNaN(v));
+  if (missingIndex !== -1) {
+    outputEl.innerHTML = `<p>Please enter a valid number for <strong>${def.inputs[missingIndex]}</strong>.</p>`;
+    return;
+  }
+
+  // compute based on sel
+  let result = null;
+  let formulaStr = def.formula;
+  let stepStr = "";
+  try {
+    switch (sel) {
+      case "solvency":
+        result = vals[0] / vals[1];
+        stepStr = `${formatNumberSmart(vals[0])} ÷ ${formatNumberSmart(vals[1])} = ${formatNumberSmart(result, 4)}`;
+        break;
+
+      case "nav":
+        result = (vals[0] - vals[1]) / vals[2];
+        stepStr = `(${formatNumberSmart(vals[0])} - ${formatNumberSmart(vals[1])}) ÷ ${formatNumberSmart(vals[2])} = ${formatNumberSmart(result, 4)}`;
+        break;
+
+      case "current":
+        result = vals[0] / vals[1];
+        stepStr = `${formatNumberSmart(vals[0])} ÷ ${formatNumberSmart(vals[1])} = ${formatNumberSmart(result, 4)}`;
+        break;
+
+      case "quick":
+        result = (vals[0] - vals[1]) / vals[2];
+        stepStr = `(${formatNumberSmart(vals[0])} - ${formatNumberSmart(vals[1])}) ÷ ${formatNumberSmart(vals[2])} = ${formatNumberSmart(result, 4)}`;
+        break;
+
+      case "inv-turnover":
+        result = vals[0] / vals[1];
+        stepStr = `${formatNumberSmart(vals[0])} ÷ ${formatNumberSmart(vals[1])} = ${formatNumberSmart(result, 4)} times`;
+        break;
+
+      case "inv-days": {
+        const turnover = vals[0] / vals[1];
+        result = turnover === 0 ? null : 365 / turnover;
+        stepStr = `Inventory turnover = ${formatNumberSmart(turnover, 4)}; Days = 365 ÷ ${formatNumberSmart(turnover, 4)} = ${formatNumberSmart(result, 2)} days`;
+        break;
+      }
+
+      case "ar-days":
+        result = (vals[0] / vals[1]) * 365;
+        stepStr = `(${formatNumberSmart(vals[0])} ÷ ${formatNumberSmart(vals[1])}) × 365 = ${formatNumberSmart(result, 2)} days`;
+        break;
+
+      case "ap-days":
+        result = (vals[0] / vals[1]) * 365;
+        stepStr = `(${formatNumberSmart(vals[0])} ÷ ${formatNumberSmart(vals[1])}) × 365 = ${formatNumberSmart(result, 2)} days`;
+        break;
+
+      case "total-asset-turn":
+        result = vals[0] / vals[1];
+        stepStr = `${formatNumberSmart(vals[0])} ÷ ${formatNumberSmart(vals[1])} = ${formatNumberSmart(result, 4)}`;
+        break;
+
+      case "fixed-asset-turn":
+        result = vals[0] / vals[1];
+        stepStr = `${formatNumberSmart(vals[0])} ÷ ${formatNumberSmart(vals[1])} = ${formatNumberSmart(result, 4)}`;
+        break;
+
+      case "debt-ratio":
+        result = vals[0] / vals[1];
+        stepStr = `${formatNumberSmart(vals[0])} ÷ ${formatNumberSmart(vals[1])} = ${formatNumberSmart(result, 4)}`;
+        break;
+
+      case "debt-equity":
+        result = vals[0] / vals[1];
+        stepStr = `${formatNumberSmart(vals[0])} ÷ ${formatNumberSmart(vals[1])} = ${formatNumberSmart(result, 4)}`;
+        break;
+
+      case "times-interest":
+        result = vals[0] / vals[1];
+        stepStr = `${formatNumberSmart(vals[0])} ÷ ${formatNumberSmart(vals[1])} = ${formatNumberSmart(result, 4)} times`;
+        break;
+
+      case "cash-coverage":
+        result = (vals[0] + vals[1]) / vals[2];
+        stepStr = `(${formatNumberSmart(vals[0])} + ${formatNumberSmart(vals[1])}) ÷ ${formatNumberSmart(vals[2])} = ${formatNumberSmart(result, 4)} times`;
+        break;
+
+      case "gross-margin":
+        result = (vals[0] - vals[1]) / vals[0];
+        stepStr = `(${formatNumberSmart(vals[0])} - ${formatNumberSmart(vals[1])}) ÷ ${formatNumberSmart(vals[0])} = ${formatNumberSmart(result * 100, 2)}%`;
+        break;
+
+      case "oper-margin":
+        result = vals[0] / vals[1];
+        stepStr = `${formatNumberSmart(vals[0])} ÷ ${formatNumberSmart(vals[1])} = ${formatNumberSmart(result * 100, 2)}%`;
+        break;
+
+      case "net-margin":
+        result = vals[0] / vals[1];
+        stepStr = `${formatNumberSmart(vals[0])} ÷ ${formatNumberSmart(vals[1])} = ${formatNumberSmart(result * 100, 2)}%`;
+        break;
+
+      case "roa":
+        result = vals[0] / vals[1];
+        stepStr = `${formatNumberSmart(vals[0])} ÷ ${formatNumberSmart(vals[1])} = ${formatNumberSmart(result * 100, 2)}%`;
+        break;
+
+      case "roe":
+        result = vals[0] / vals[1];
+        stepStr = `${formatNumberSmart(vals[0])} ÷ ${formatNumberSmart(vals[1])} = ${formatNumberSmart(result * 100, 2)}%`;
+        break;
+
+      case "dy":
+        result = vals[0] / vals[1];
+        stepStr = `${formatNumberSmart(vals[0])} ÷ ${formatNumberSmart(vals[1])} = ${formatNumberSmart(result * 100, 2)}%`;
+        break;
+
+      case "hpr":
+        result = (vals[1] - vals[0] + vals[2]) / vals[0];
+        stepStr = `(${formatNumberSmart(vals[1])} - ${formatNumberSmart(vals[0])} + ${formatNumberSmart(vals[2])}) ÷ ${formatNumberSmart(vals[0])} = ${formatNumberSmart(result * 100, 2)}%`;
+        break;
+
+      case "eps":
+        result = vals[0] / vals[1];
+        stepStr = `${formatNumberSmart(vals[0])} ÷ ${formatNumberSmart(vals[1])} = ${formatNumberSmart(result, 4)}`;
+        break;
+
+      case "div-cover":
+        result = vals[0] / vals[1];
+        stepStr = `${formatNumberSmart(vals[0])} ÷ ${formatNumberSmart(vals[1])} = ${formatNumberSmart(result, 4)} times`;
+        break;
+
+      case "payout":
+        result = vals[0] / vals[1];
+        stepStr = `${formatNumberSmart(vals[0])} ÷ ${formatNumberSmart(vals[1])} = ${formatNumberSmart(result * 100, 2)}%`;
+        break;
+
+      case "retention":
+        result = 1 - (vals[0] / vals[1]);
+        stepStr = `1 - (${formatNumberSmart(vals[0])} ÷ ${formatNumberSmart(vals[1])}) = ${formatNumberSmart(result * 100, 2)}%`;
+        break;
+
+      case "pe":
+        result = vals[0] / vals[1];
+        stepStr = `${formatNumberSmart(vals[0])} ÷ ${formatNumberSmart(vals[1])} = ${formatNumberSmart(result, 4)}`;
+        break;
+
+      case "ey":
+        result = vals[0] / vals[1];
+        stepStr = `${formatNumberSmart(vals[0])} ÷ ${formatNumberSmart(vals[1])} = ${formatNumberSmart(result * 100, 2)}%`;
+        break;
+
+      default:
+        result = "Unsupported ratio";
+    }
+  } catch (err) {
+    outputEl.innerHTML = `<p>Error computing ratio: ${err.message || err}</p>`;
+    return;
+  }
+
+  // produce result display
+  const resultText = (typeof result === "number") ? formatNumberSmart(result, 4) : result;
+  const interpret = def.example && def.example.explain ? def.example.explain : (ratioDefs.categoryDescriptions[sel] || "");
+
+  outputEl.innerHTML = `
+    <p><strong>${def.label}</strong></p>
+    <p><em>Formula:</em> ${def.formula}</p>
+    <p><em>Calculation:</em> ${stepStr}</p>
+    <p><em>Result:</em> <strong>${resultText}</strong></p>
+    <p class="muted"><strong>Interpretation:</strong> ${interpret}</p>
+  `;
+}
+
+/* -------------------------
+   Example filler
+   ------------------------- */
+function fillExampleForSelected() {
+  const selEl = document.getElementById("ratio-select");
+  if (!selEl) return;
+  const def = ratioDefs[selEl.value];
+  if (!def) return;
+  def.example.vals.forEach((v, i) => {
+    const input = document.getElementById(`ratio-in-${i}`);
+    if (input) input.value = v;
+  });
+  // compute immediately after filling
+  computeSelectedRatio();
+}
+
+/* -------------------------
+   Event wiring (delegation + mutation observer)
+   - works whether the module is dynamically injected or present at load
+   ------------------------- */
+
+// Listen for clicks on Compute / Example (delegation)
+document.addEventListener("click", function (ev) {
+  const t = ev.target;
+  if (!t) return;
+  // Compute button
+  if (t.id === "rat-explain") {
+    ev.preventDefault();
+    computeSelectedRatio();
+    return;
+  }
+  // Example button
+  if (t.id === "rat-example") {
+    ev.preventDefault();
+    fillExampleForSelected();
+    return;
+  }
+});
+
+// Listen for change events on the ratio-select (delegation)
+document.addEventListener("change", function (ev) {
+  const t = ev.target;
+  if (!t) return;
+  if (t.id === "ratio-select") {
+    // when selection changes, render its input fields
+    renderRatioInputsFor(t);
+  }
+});
+
+// A MutationObserver to catch when the module HTML is injected into DOM
+// (your router calls renderTopic and injects the HTML — this detects that insertion)
+const ratioObserver = new MutationObserver(function (mutations) {
+  for (const m of mutations) {
+    // check added nodes for the select
+    const added = Array.from(m.addedNodes || []);
+    for (const node of added) {
+      if (!(node instanceof HTMLElement)) continue;
+      const sel = node.querySelector && node.querySelector("#ratio-select");
+      if (sel) {
+        // initial render inputs for default selection
+        renderRatioInputsFor(sel);
+        sel.style.color = "black";
+        // optionally focus first input
+        const firstInput = document.getElementById("ratio-in-0");
+        if (firstInput) firstInput.focus();
+      }
+      // also if the node itself is the container (topic-root) and contains select
+      if (node.id === "topic-root") {
+        const sel2 = node.querySelector && node.querySelector("#ratio-select");
+        if (sel2) renderRatioInputsFor(sel2);
+      }
     }
   }
 });
 
-/* Compute ratio */
-function explainRatios() {
-  const sel = document.getElementById('ratio-select').value;
-  const def = ratioDefs[sel];
-  if (!def) { document.getElementById('rat-output').innerHTML = "<p>Please select a ratio.</p>"; return; }
+// observe document body for subtree changes (lightweight)
+ratioObserver.observe(document.body, { childList: true, subtree: true });
 
-  const vals = def.inputs.map((lbl, i) => parseFloat(document.getElementById(`ratio-in-${i}`).value || 0));
-  let result = "N/A";
-  try {
-    switch (sel) {
-      case "solvency": result = vals[1] === 0 ? "N/A" : fmt(vals[0]/vals[1]); break;
-      case "nav": result = vals[2] === 0 ? "N/A" : fmt((vals[0]-vals[1])/vals[2]); break;
-      case "current": result = vals[1] === 0 ? "N/A" : fmt(vals[0]/vals[1]); break;
-      case "quick": result = vals[2] === 0 ? "N/A" : fmt((vals[0]-vals[1])/vals[2]); break;
-      case "inv-days": {
-        const turnover = vals[1] === 0 ? 0 : vals[0]/vals[1];
-        result = turnover === 0 ? "N/A" : fmt(365/turnover) + " days"; break;
-      }
-      case "inv-turnover": result = vals[1] === 0 ? "N/A" : fmt(vals[0]/vals[1]); break;
-      case "ar-days": result = vals[1] === 0 ? "N/A" : fmt((vals[0]/vals[1])*365) + " days"; break;
-      case "ap-days": result = vals[1] === 0 ? "N/A" : fmt((vals[0]/vals[1])*365) + " days"; break;
-      case "total-asset-turn": result = vals[1] === 0 ? "N/A" : fmt(vals[0]/vals[1]); break;
-      case "fixed-asset-turn": result = vals[1] === 0 ? "N/A" : fmt(vals[0]/vals[1]); break;
-      case "debt-ratio": result = vals[1] === 0 ? "N/A" : fmt(vals[0]/vals[1]); break;
-      case "debt-equity": result = vals[1] === 0 ? "N/A" : fmt(vals[0]/vals[1]); break;
-      case "times-interest": result = vals[1] === 0 ? "N/A" : fmt(vals[0]/vals[1]); break;
-      case "cash-coverage": result = vals[2] === 0 ? "N/A" : fmt((vals[0]+vals[1])/vals[2]); break;
-      case "gross-margin": result = vals[0] === 0 ? "N/A" : fmt((vals[0]-vals[1])/vals[0]*100,2)+"%"; break;
-      case "oper-margin": result = vals[1] === 0 ? "N/A" : fmt(vals[0]/vals[1]*100,2)+"%"; break;
-      case "net-margin": result = vals[1] === 0 ? "N/A" : fmt(vals[0]/vals[1]*100,2)+"%"; break;
-      case "roa": result = vals[1] === 0 ? "N/A" : fmt(vals[0]/vals[1]*100,2)+"%"; break;
-      case "roe": result = vals[1] === 0 ? "N/A" : fmt(vals[0]/vals[1]*100,2)+"%"; break;
-      case "dy": result = vals[1] === 0 ? "N/A" : fmt(vals[0]/vals[1]*100,2)+"%"; break;
-      case "hpr": result = vals[0] === 0 ? "N/A" : fmt((vals[1]-vals[0]+vals[2])/vals[0]*100,2)+"%"; break;
-      case "eps": result = vals[1] === 0 ? "N/A" : fmt(vals[0]/vals[1]); break;
-      case "div-cover": result = vals[1] === 0 ? "N/A" : fmt(vals[0]/vals[1]); break;
-      case "payout": result = vals[1] === 0 ? "N/A" : fmt(vals[0]/vals[1]*100,2)+"%"; break;
-      case "retention": result = vals[1] === 0 ? "N/A" : fmt((1-vals[0]/vals[1])*100,2)+"%"; break;
-      case "pe": result = vals[1] === 0 ? "N/A" : fmt(vals[0]/vals[1]); break;
-      case "ey": result = vals[1] === 0 ? "N/A" : fmt(vals[0]/vals[1]*100,2)+"%"; break;
-    }
-  } catch(e) { result="Error"; }
-
-  document.getElementById('rat-output').innerHTML = `
-    <p><strong>${def.label}</strong></p>
-    <p>Formula: ${def.formula}</p>
-    <p>Result: ${result}</p>
-    <p class="muted">Interpretation: ${def.example.explain}</p>
-  `;
+// If the select is already present at script-eval time, render inputs now
+const existingSelect = document.getElementById("ratio-select");
+if (existingSelect) {
+  renderRatioInputsFor(existingSelect);
+  existingSelect.style.color = "black";
 }
 
-/* Fill example values */
-function fillExample() {
-  const sel = document.getElementById('ratio-select').value;
-  const def = ratioDefs[sel];
-  if(!def) return;
-  def.example.vals.forEach((v,i)=>{
-    const input = document.getElementById(`ratio-in-${i}`);
-    if(input) input.value = v;
-  });
-  explainRatios();
-}
-
-/* Mount module to container */
-function mountRatioModule(container){
-  if(!container) return;
-  container.innerHTML = ratiosHTML();
-  // Trigger initial inputs rendering
-  const select = container.querySelector('#ratio-select');
-  select.dispatchEvent(new Event('change'));
-
-  container.querySelector('#rat-explain').addEventListener('click', explainRatios);
-  container.querySelector('#rat-example').addEventListener('click', fillExample);
-}
-
-/* Optional: auto-mount if div with id="ratio-module" exists */
-document.addEventListener("DOMContentLoaded", ()=>{
-  const container = document.getElementById("ratio-module");
-  if(container) mountRatioModule(container);
-});
 
 
 
@@ -1132,30 +1403,41 @@ document.addEventListener("click", e=>{
 
 
 /* ---------------------------
-   7) Working Capital Management (NWC & Cash Conversion Cycle)
+   7) Working Capital Management
    - Net Working Capital
-   - DIO, DSO, DPO
+   - Inventory Days on Hand
+   - Debtors Collection Period
+   - Creditors Payment Period
    - Cash Conversion Cycle
-   - Early payment discount interpretation
+   - Early Payment Discount
    --------------------------- */
+
 function workingCapHTML(){
   return `
     <div>
       <h2 class="text-2xl font-semibold">Working Capital Management</h2>
       <p class="mt-2 text-sm opacity-90">
-        Calculate net working capital and analyze the cash conversion cycle (CCC).
-        Inputs should be yearly averages where possible.
+        Select a topic to calculate and learn step-by-step with formulas and examples.
       </p>
 
-      <div class="mt-3 grid gap-2 md:grid-cols-3">
-        <label class="label">Current assets <input id="wc-ca" class="input" /></label>
-        <label class="label">Current liabilities <input id="wc-cl" class="input" /></label>
-        <label class="label">Average inventory <input id="wc-inv" class="input" /></label>
-        <label class="label">Cost of goods sold (annual) <input id="wc-cogs" class="input" /></label>
-        <label class="label">Average receivables <input id="wc-rec" class="input" /></label>
-        <label class="label">Credit sales (annual) <input id="wc-sales" class="input" /></label>
-        <label class="label">Average payables <input id="wc-pay" class="input" /></label>
-      </div>
+      <label class="block mt-3">Choose calculation:
+        <select id="wc-select" class="input">
+          <optgroup label="Liquidity Position">
+            <option value="nwc">Net Working Capital</option>
+          </optgroup>
+          <optgroup label="Cycle Components">
+            <option value="invdays">Inventory Days on Hand</option>
+            <option value="debtors">Debtors Collection Period</option>
+            <option value="creditors">Creditors Payment Period</option>
+            <option value="ccc">Cash Conversion Cycle</option>
+          </optgroup>
+          <optgroup label="Trade Credit">
+            <option value="discount">Early Payment Discount</option>
+          </optgroup>
+        </select>
+      </label>
+
+      <div id="wc-inputs" class="mt-3 grid gap-2 md:grid-cols-2"></div>
 
       <div class="mt-3 flex gap-2">
         <button id="wc-explain" class="btn btn-primary">Compute</button>
@@ -1167,71 +1449,143 @@ function workingCapHTML(){
   `;
 }
 
-function explainWorkingCap(){
-  const ca = parseFloat(document.getElementById('wc-ca').value || 0);
-  const cl = parseFloat(document.getElementById('wc-cl').value || 0);
-  const inv = parseFloat(document.getElementById('wc-inv').value || 0);
-  const cogs = parseFloat(document.getElementById('wc-cogs').value || 0);
-  const rec = parseFloat(document.getElementById('wc-rec').value || 0);
-  const sales = parseFloat(document.getElementById('wc-sales').value || 0);
-  const pay = parseFloat(document.getElementById('wc-pay').value || 0);
+// Define each formula, inputs, example, explanation
+const wcDefs = {
+  nwc: {
+    label: "Net Working Capital",
+    inputs: ["Current assets", "Current liabilities"],
+    formula: "Net Working Capital = Current Assets − Current Liabilities",
+    example: {
+      vals: [200000, 120000],
+      calc: "200,000 − 120,000 = 80,000",
+      explain: "A positive figure means the firm can cover its short-term obligations."
+    }
+  },
+  invdays: {
+    label: "Inventory Days on Hand",
+    inputs: ["Average inventory", "Cost of goods sold (annual)"],
+    formula: "Inventory Days = (Average Inventory × 365) ÷ Cost of Goods Sold",
+    example: {
+      vals: [120000, 600000],
+      calc: "(120,000 × 365) ÷ 600,000 = 73 days",
+      explain: "On average, inventory stays in stock for 73 days before being sold."
+    }
+  },
+  debtors: {
+    label: "Debtors Collection Period",
+    inputs: ["Accounts receivable", "Credit sales (annual)"],
+    formula: "Debtors Collection Period = (Accounts Receivable × 365) ÷ Credit Sales",
+    example: {
+      vals: [157808, 600000],
+      calc: "(157,808 × 365) ÷ 600,000 = 96 days",
+      explain: "On average, customers take 96 days to pay."
+    }
+  },
+  creditors: {
+    label: "Creditors Payment Period",
+    inputs: ["Accounts payable", "Total annual purchases (or COGS)"],
+    formula: "Creditors Payment Period = (Accounts Payable × 365) ÷ Purchases",
+    example: {
+      vals: [25000, 365000],
+      calc: "(25,000 × 365) ÷ 365,000 = 25 days",
+      explain: "On average, the firm pays suppliers in 25 days."
+    }
+  },
+  ccc: {
+    label: "Cash Conversion Cycle",
+    inputs: ["Inventory days", "Debtors collection days", "Creditors payment days"],
+    formula: "CCC = Inventory Days + Debtors Days − Creditors Days",
+    example: {
+      vals: [73, 96, 25],
+      calc: "73 + 96 − 25 = 144 days",
+      explain: "It takes 144 days from paying suppliers until receiving cash from sales."
+    }
+  },
+  discount: {
+    label: "Early Payment Discount",
+    inputs: ["Discount %", "Discount period (days)", "Final due (days)"],
+    formula: "Cost of not taking discount = (Discount ÷ (100 − Discount)) × (365 ÷ (Final Due − Discount Period))",
+    example: {
+      vals: [3, 10, 30],
+      calc: "(3 ÷ 97) × (365 ÷ 20) = 55.6%",
+      explain: "Forgoing the 3% discount costs the firm an annualised 55.6% — much higher than most borrowing costs."
+    }
+  }
+};
 
-  const out = document.getElementById('wc-output');
-  let html = "";
+// Render inputs dynamically
+document.addEventListener("change", e=>{
+  if(e.target.id==="wc-select"){
+    const sel = wcDefs[e.target.value];
+    if(sel){
+      document.getElementById("wc-inputs").innerHTML = sel.inputs.map((lbl,i)=>
+        `<label class="label">${lbl}<input id="wc-in${i}" class="input"/></label>`
+      ).join("");
+      document.getElementById("wc-output").innerHTML = "";
+    }
+  }
+});
 
-  // Net working capital
-  const nwc = ca - cl;
-  html += `<p><strong>Net working capital (NWC)</strong> = Current assets - Current liabilities = R${fmt(nwc)}</p>`;
+// Compute function
+function explainWC(){
+  const key = document.getElementById("wc-select").value;
+  const def = wcDefs[key];
+  if(!def) return;
+  const vals = def.inputs.map((_,i)=>parseFloat(document.getElementById(`wc-in${i}`).value||0));
+  let html = `<p><strong>${def.label}</strong></p>`;
+  html += `<p>Formula: ${def.formula}</p>`;
 
-  // Formulas:
-  // DIO = Inventory × 365 / COGS
-  const dio = cogs === 0 ? null : inv * 365 / cogs;
-  // DSO = Receivables × 365 / Credit sales
-  const dso = sales === 0 ? null : rec * 365 / sales;
-  // DPO = Payables × 365 / COGS
-  const dpo = cogs === 0 ? null : pay * 365 / cogs;
-
-  if(dio !== null) html += `<p><strong>Days Inventory Outstanding (DIO)</strong> = Inventory × 365 / COGS = ${fmt(dio)} days</p>`;
-  if(dso !== null) html += `<p><strong>Days Sales Outstanding (DSO)</strong> = Receivables × 365 / Credit sales = ${fmt(dso)} days</p>`;
-  if(dpo !== null) html += `<p><strong>Days Payables Outstanding (DPO)</strong> = Payables × 365 / COGS = ${fmt(dpo)} days</p>`;
-
-  if(dio !== null && dso !== null && dpo !== null){
-    const ccc = dio + dso - dpo;
-    html += `<p class="block"><strong>Cash Conversion Cycle (CCC)</strong> = DIO + DSO - DPO = ${fmt(ccc)} days</p>`;
-    html += `<p class="muted">Interpretation: Spar collected cash from debtors ${fmt(ccc)} days after they paid creditors. A shorter CCC means faster liquidity.</p>`;
+  // Apply calculations
+  if(key==="nwc"){
+    const res = vals[0]-vals[1];
+    html += `<p>Calculation: ${vals[0]} − ${vals[1]} = ${res}</p>`;
+  }
+  if(key==="invdays"){
+    const res = vals[1]===0?0:(vals[0]*365/vals[1]);
+    html += `<p>Calculation: (${vals[0]} × 365) ÷ ${vals[1]} = ${res.toFixed(2)} days</p>`;
+  }
+  if(key==="debtors"){
+    const res = vals[1]===0?0:(vals[0]*365/vals[1]);
+    html += `<p>Calculation: (${vals[0]} × 365) ÷ ${vals[1]} = ${res.toFixed(2)} days</p>`;
+  }
+  if(key==="creditors"){
+    const res = vals[1]===0?0:(vals[0]*365/vals[1]);
+    html += `<p>Calculation: (${vals[0]} × 365) ÷ ${vals[1]} = ${res.toFixed(2)} days</p>`;
+  }
+  if(key==="ccc"){
+    const res = vals[0]+vals[1]-vals[2];
+    html += `<p>Calculation: ${vals[0]} + ${vals[1]} − ${vals[2]} = ${res.toFixed(2)} days</p>`;
+  }
+  if(key==="discount"){
+    const disc = vals[0], dp=vals[1], fd=vals[2];
+    const cost = (disc/(100-disc))*(365/(fd-dp));
+    html += `<p>Calculation: (${disc} ÷ (100−${disc})) × (365 ÷ (${fd}−${dp})) = ${cost.toFixed(2)}%</p>`;
   }
 
-  out.innerHTML = html;
-  if(window.MathJax) MathJax.typesetPromise();
+  html += `<p><em>${def.example.explain}</em></p>`;
+  document.getElementById("wc-output").innerHTML = html;
 }
 
+// Example button
 document.addEventListener("click", e=>{
-  if(e.target.id === "wc-explain") explainWorkingCap();
+  if(e.target.id==="wc-explain") explainWC();
 
-  if(e.target.id === "wc-example"){
-    document.getElementById("wc-output").innerHTML = `
-      <p><strong>Example: Working Capital Cycle (2017)</strong></p>
-      <ul>
-        <li>DIO = (3,816.4 × 365) / 85,830.2 = 16.23 days</li>
-        <li>DSO = (10,814.3 × 365) / 57,277 = 68.91 days</li>
-        <li>DPO = (13,452.7 × 365) / 85,830.2 = 57.21 days</li>
-        <li>CCC = 16.23 + 68.91 - 57.21 = 27.93 days</li>
-      </ul>
-      <p><em>Interpretation:</em> Spar pays creditors 27.9 days before receiving cash from debtors.</p>
-    `;
+  if(e.target.id==="wc-example"){
+    const key = document.getElementById("wc-select").value;
+    const def = wcDefs[key];
+    if(def){
+      document.getElementById("wc-inputs").innerHTML = def.inputs.map((lbl,i)=>
+        `<label class="label">${lbl}<input id="wc-in${i}" class="input" value="${def.example.vals[i]}"/></label>`
+      ).join("");
+      explainWC();
+    }
   }
 });
 
 
 /* ---------------------------
    8) Cost-Volume-Profit (Break-even, MOS, Target Profit, Graph)
-   Includes:
-   - Contribution Margin Income Statement
-   - Break-even (units & revenue)
-   - Margin of Safety
-   - Target Profit units
-   - Graphical representation
-   - Example (Chenai Dodzo Boerewors rolls)
+   Fixed: buttons now work on dynamic injection, chart includes shaded profit/loss
    --------------------------- */
 function cvpHTML(){
   return `
@@ -1260,6 +1614,7 @@ function cvpHTML(){
   `;
 }
 
+/* Compute CVP analysis */
 function explainCVP(){
   const FC = parseFloat(document.getElementById('cvp-fc').value || 0);
   const P = parseFloat(document.getElementById('cvp-p').value || 0);
@@ -1299,17 +1654,18 @@ function explainCVP(){
   drawCVPChart(FC, P, VC, BE_units, Q);
 }
 
-// Graph function
+/* Graph function with shaded areas */
 function drawCVPChart(FC, P, VC, BE_units, Q){
   const ctx = document.getElementById('cvp-chart').getContext('2d');
   if(window.cvpChart) window.cvpChart.destroy();
 
-  const maxQ = Math.max(BE_units*1.5, Q*1.2 || BE_units*1.5);
+  const maxQ = Math.max(Q || 0, BE_units) * 1.2;
+  const step = Math.ceil(maxQ/30);
   const quantities = [];
   const salesLine = [];
   const costLine = [];
 
-  for(let q=0; q<=maxQ; q+=Math.ceil(maxQ/20)){
+  for(let q=0; q<=maxQ; q+=step){
     quantities.push(q);
     salesLine.push(q*P);
     costLine.push(FC + q*VC);
@@ -1324,18 +1680,39 @@ function drawCVPChart(FC, P, VC, BE_units, Q){
           label: 'Sales Revenue',
           data: salesLine,
           borderColor: 'green',
-          fill: false
+          fill: false,
+          tension: 0
         },
         {
           label: 'Total Cost',
           data: costLine,
           borderColor: 'red',
-          fill: false
+          fill: false,
+          tension: 0
+        },
+        // Shaded profit area (green)
+        {
+          label: 'Profit Area',
+          data: salesLine.map((s,i)=> s > costLine[i] ? s : costLine[i]),
+          borderColor: 'transparent',
+          backgroundColor: 'rgba(0,200,0,0.15)',
+          fill: '-1', // fill between this dataset and previous (Total Cost)
+          pointRadius: 0
+        },
+        // Shaded loss area (red)
+        {
+          label: 'Loss Area',
+          data: salesLine.map((s,i)=> s < costLine[i] ? s : costLine[i]),
+          borderColor: 'transparent',
+          backgroundColor: 'rgba(200,0,0,0.15)',
+          fill: 1, // fill between this dataset and Total Cost
+          pointRadius: 0
         }
       ]
     },
     options: {
       plugins: {
+        legend: { display: true },
         annotation: {
           annotations: {
             line1: {
@@ -1351,32 +1728,29 @@ function drawCVPChart(FC, P, VC, BE_units, Q){
       },
       scales: {
         x: { title: { display: true, text: 'Units Sold' }},
-        y: { title: { display: true, text: 'Rands (R)' }}
-      }
+        y: { title: { display: true, text: 'Rands (R)' }, beginAtZero: true }
+      },
+      maintainAspectRatio: false
     }
   });
 }
 
-// Example
+/* Example filler */
+function fillCVPExample(){
+  document.getElementById('cvp-fc').value = 312000;
+  document.getElementById('cvp-p').value = 20;
+  document.getElementById('cvp-vc').value = 14;
+  document.getElementById('cvp-q').value = 100000;
+  document.getElementById('cvp-tp').value = 250000;
+  explainCVP();
+}
+
+/* Event delegation */
 document.addEventListener("click", e=>{
-  if(e.target.id === "cvp-example"){
-    document.getElementById("cvp-output").innerHTML = `
-      <p><strong>Example: Chenai Dodzo (Pty) Ltd Boerewors rolls</strong></p>
-      <ul>
-        <li>VC = R2 + R8 + R4 = R14 per roll</li>
-        <li>FC = 104,000 + 40,000 + 96,000 + 72,000 = R312,000</li>
-        <li>CMU = 20 - 14 = R6</li>
-        <li>BE units = 312,000 ÷ 6 = 52,000 rolls</li>
-        <li>BE revenue = 52,000 × 20 = R1,040,000</li>
-        <li>MOS = 100,000 - 52,000 = 48,000 units</li>
-        <li>New VC (20% ↑) = 14 × 1.2 = 16.8</li>
-        <li>New FC (rental ↑) = 352,000</li>
-        <li>Target profit = 250,000 ⇒ (352,000+250,000)/3.2 = 188,125 rolls</li>
-      </ul>
-      <p><em>Interpretation:</em> Chenai must sell 52,000 rolls to break even, and 188,125 to reach the profit target under new costs.</p>
-    `;
-  }
+  if(e.target.id === "cvp-explain"){ e.preventDefault(); explainCVP(); }
+  if(e.target.id === "cvp-example"){ e.preventDefault(); fillCVPExample(); }
 });
+
 
 
 
@@ -1440,11 +1814,12 @@ function explainBudgeting(){
   const act = parseFloat(document.getElementById('bud-actual').value || 0);
   const out = document.getElementById('bud-output');
   const varAmt = act - bud;
-  const varPct = bud === 0 ? null : varAmt / bud;
+  const varPct = bud === 0 ? null : (varAmt / bud) * 100;
   const label = varAmt > 0 ? 'Unfavourable (U)' : (varAmt < 0 ? 'Favourable (F)' : 'No variance');
+
   out.innerHTML = `
     <p>Budgeted: R${fmt(bud)} | Actual: R${fmt(act)}</p>
-    <p>Variance (Actual - Budget) = R${fmt(varAmt)} ${varPct !== null ? `(${(varPct*100).toFixed(2)}%)` : ''}</p>
+    <p>Variance (Actual − Budget) = R${fmt(varAmt)} ${varPct !== null ? `(${varPct.toFixed(2)}%)` : ''}</p>
     <p><strong>Classification:</strong> ${label}</p>
     <p class="muted">Note: For costs → higher actual is Unfavourable; for revenue → higher actual is Favourable. Interpret carefully.</p>
   `;
@@ -1473,55 +1848,54 @@ function explainCashBudget(){
     <p>Opening balance: R${fmt(opening)}</p>
     <p><u>Inflows</u> = Cash sales (${fmt(cashsales)}) + Collections (${fmt(collections)}) + Other income (${fmt(other)}) = R${fmt(inflows)}</p>
     <p><u>Outflows</u> = Purchases (${fmt(cashpurch)}) + Creditors (${fmt(creditors)}) + Salaries (${fmt(salaries)}) + Opex (${fmt(opex)}) + Capex (${fmt(capex)}) + Loan (${fmt(loan)}) = R${fmt(outflows)}</p>
-    <p><strong>Closing balance</strong> = Opening + Inflows - Outflows = R${fmt(opening)} + R${fmt(inflows)} - R${fmt(outflows)} = R${fmt(closing)}</p>
+    <p><strong>Closing balance</strong> = Opening + Inflows − Outflows = R${fmt(opening)} + R${fmt(inflows)} − R${fmt(outflows)} = R${fmt(closing)}</p>
     <p class="muted">Interpretation: A negative closing balance = overdraft; positive = cash surplus.</p>
   `;
 }
 
 /* Example: FurnitureWorld Ltd */
-document.addEventListener("click", e=>{
-  if(e.target.id === "bud-example"){
-    document.getElementById("cb-output").innerHTML = `
-      <p><strong>Example: FurnitureWorld Ltd (September 2024)</strong></p>
-      <ul>
-        <li>Opening overdraft: R20,000</li>
-        <li>Cash sales: 20% of 500,000 = R100,000</li>
-        <li>Collections: 60% of Aug (400,000) + 35% of Jul (300,000) = 240,000 + 105,000 = R345,000</li>
-        <li>Other income: Rent = R40,000</li>
-        <li><u>Total inflows</u> = 100,000 + 345,000 + 40,000 = R485,000</li>
-        <li>Cash purchases: 40% of 160,000 = R64,000</li>
-        <li>Creditors (Aug purchases 140,000 × 60%) = R84,000</li>
-        <li>Salaries: 60,000 × 1.10 = R66,000</li>
-        <li>Opex (excl. depreciation) = 100,000 - 20,000 = R80,000</li>
-        <li>Van deposit (25% × 200,000) = R50,000</li>
-        <li>Loan instalment = R17,000</li>
-        <li><u>Total outflows</u> = 64,000 + 84,000 + 66,000 + 80,000 + 50,000 + 17,000 = R361,000</li>
-        <li><strong>Closing balance</strong> = -20,000 + 485,000 - 361,000 = R104,000</li>
-      </ul>
-      <p><em>Interpretation:</em> FurnitureWorld ends September 2024 with a cash surplus of R104,000.</p>
-    `;
-  }
-});
+function showBudgetExample(){
+  // Fill inputs with example values
+  document.getElementById("cb-opening").value = -20000;
+  document.getElementById("cb-cashsales").value = 100000;
+  document.getElementById("cb-collections").value = 345000;
+  document.getElementById("cb-other").value = 40000;
+  document.getElementById("cb-cashpurch").value = 64000;
+  document.getElementById("cb-creditors").value = 84000;
+  document.getElementById("cb-salaries").value = 66000;
+  document.getElementById("cb-opex").value = 80000;
+  document.getElementById("cb-capex").value = 50000;
+  document.getElementById("cb-loan").value = 17000;
 
-/* Event Handlers */
+  // Automatically compute
+  explainCashBudget();
+}
+
+/* Event Handlers (single listener) */
 document.addEventListener("click", e=>{
   if(e.target.id === "bud-explain") explainBudgeting();
   if(e.target.id === "cb-explain") explainCashBudget();
+  if(e.target.id === "bud-example") showBudgetExample();
 });
 
 
+
+
 /* ---------------------------
-   10) Time Value of Money (PV, FV, annuities)
+   10) Time Value of Money (PV, FV, Annuities)
    Features:
    - Compute PV (given FV/PMT) and FV (given PV/PMT)
    - Supports annuities (ordinary vs annuity due with type)
-   - Examples from exam-style problems
+   - Examples auto-fill inputs and compute
    --------------------------- */
 function tvmHTML(){
   return `
     <div>
       <h2 class="text-2xl font-semibold">Time Value of Money (TVM)</h2>
-      <p class="mt-2 text-sm opacity-90">Single-sum and annuity calculators. Enter knowns, leave the unknown blank. Rate is per period (decimal, e.g. 0.05 = 5%).</p>
+      <p class="mt-2 text-sm opacity-90">
+        Single-sum and annuity calculators. Enter knowns, leave the unknown blank. 
+        Rate is per period (decimal, e.g. 0.05 = 5%).
+      </p>
 
       <div class="mt-3 grid gap-2 md:grid-cols-3">
         <label class="label">Rate per period (r) <input id="tvm-r" class="input" placeholder="e.g. 0.05" /></label>
@@ -1554,10 +1928,15 @@ function explainTVMPV(){
   const out = document.getElementById('tvm-output');
   out.innerHTML = `
     <p><strong>Present Value (PV)</strong></p>
-    <p class="block">PV = \\(-\\dfrac{FV + PMT(1+r \\cdot type)\\dfrac{(1+r)^n - 1}{r}}{(1+r)^n}\\)</p>
-    <p>Substitute: PV = -[ ${fv} + ${pmt}(1+${r}·${type})((1+${r})^${n} - 1)/${r} ] / (1+${r})^${n}</p>
+    <p class="block">\\[
+      PV = - \\frac{FV + PMT(1 + r \\cdot type) \\cdot \\frac{(1+r)^n - 1}{r}}
+      {(1+r)^n}
+    \\]</p>
+    <p>Substitute: \\[
+      PV = - \\frac{${fv} + ${pmt}(1+${r}\\cdot${type}) \\cdot \\frac{(1+${r})^{${n}} - 1}{${r}}}
+      {(1+${r})^{${n}}}
+    \\]</p>
     <p><strong>Result:</strong> PV = R${fmt(pv)}</p>
-    <p class="muted">Interpretation: This is the value today (present) of the given future value and/or payments.</p>
   `;
   if(window.MathJax) MathJax.typesetPromise();
 }
@@ -1574,32 +1953,44 @@ function explainTVMFV(){
   const out = document.getElementById('tvm-output');
   out.innerHTML = `
     <p><strong>Future Value (FV)</strong></p>
-    <p class="block">FV = \\(-\\big( PV(1+r)^n + PMT(1+r \\cdot type)\\dfrac{(1+r)^n - 1}{r} \\big)\\)</p>
-    <p>Substitute: FV = -[ ${pv}(1+${r})^${n} + ${pmt}(1+${r}·${type})((1+${r})^${n}-1)/${r} ]</p>
+    <p class="block">\\[
+      FV = - \\Big( PV(1+r)^n + PMT(1 + r \\cdot type) \\cdot \\frac{(1+r)^n - 1}{r} \\Big)
+    \\]</p>
+    <p>Substitute: \\[
+      FV = - \\Big( ${pv}(1+${r})^{${n}} + ${pmt}(1+${r}\\cdot${type}) \\cdot \\frac{(1+${r})^{${n}} - 1}{${r}} \\Big)
+    \\]</p>
     <p><strong>Result:</strong> FV = R${fmt(fv)}</p>
-    <p class="muted">Interpretation: This is the value after n periods, including compounding of PV and PMTs.</p>
   `;
   if(window.MathJax) MathJax.typesetPromise();
 }
 
-/* --- Example button: exam-style problems --- */
-document.addEventListener("click", e=>{
-  if(e.target.id === "tvm-example"){
-    document.getElementById("tvm-output").innerHTML = `
-      <p><strong>Example 1:</strong> If you invest R1,000 today at 10% for 5 years, what is FV?</p>
-      <p>FV = 1000 × (1.1)^5 = R1610.51</p>
-      <p><strong>Example 2:</strong> You want R10,000 in 5 years, interest 8%. PV = ?</p>
-      <p>PV = 10000 / (1.08^5) = R6805.83</p>
-      <p><strong>Example 3:</strong> An annuity of R2,000 paid yearly for 10 years at 6% (ordinary annuity). FV = ?</p>
-      <p>FV = 2000 × [(1.06^10 - 1)/0.06] = R26,358.47</p>
-    `;
-  }
-});
+/* --- Example button: auto-fill + compute --- */
+function showTVMExample(){
+  const r = document.getElementById("tvm-r");
+  const n = document.getElementById("tvm-n");
+  const fv = document.getElementById("tvm-fv");
+  const pv = document.getElementById("tvm-pv");
+  const pmt = document.getElementById("tvm-pmt");
+  const type = document.getElementById("tvm-type");
+
+  // Example 1: FV of single sum
+  r.value = 0.10; n.value = 5; pv.value = 1000; fv.value = ""; pmt.value = 0; type.value = 0;
+  explainTVMFV();
+
+  // Append text explanation under the result
+  document.getElementById("tvm-output").innerHTML += `
+    <hr/>
+    <p><strong>Extra Examples:</strong></p>
+    <p>Example 2: Want R10,000 in 5 years, interest 8%. PV = 10000 / (1.08^5) = R6,805.83</p>
+    <p>Example 3: Annuity of R2,000 yearly for 10 years at 6%. FV = 2000 × [(1.06^10 - 1)/0.06] = R26,358.47</p>
+  `;
+}
 
 /* --- Event Handlers --- */
 document.addEventListener("click", e=>{
   if(e.target.id === "tvm-pv-btn") explainTVMPV();
   if(e.target.id === "tvm-fv-btn") explainTVMFV();
+  if(e.target.id === "tvm-example") showTVMExample();
 });
 
 /* --- Helper Financial Functions --- */
@@ -1615,6 +2006,7 @@ function FV(rate, nper, pmt, pv, type){
 }
 
 
+
 /* ---------------------------
    11) Valuation (DDM, Perpetuity, Bonds)
    --------------------------- */
@@ -1626,7 +2018,7 @@ function valuationHTML(){
 
       <div class="mt-3">
         <label class="label">Type
-          <select id="val-type" class="input">
+          <select id="val-type" class="input" style="color:black;">
             <option value="perpetuity">Perpetuity / Growing perpetuity</option>
             <option value="ddm">Dividend Discount Model (DDM)</option>
             <option value="bond">Bond (finite maturity)</option>
@@ -1670,11 +2062,13 @@ function explainValuation(){
     if(isNaN(C) || isNaN(r)){ out.innerHTML = '<p>Enter cash flow C and discount rate r.</p>'; return; }
     if(g === 0){
       const pv = C / r;
-      out.innerHTML = `<p>Perpetuity: PV = C / r = ${fmt(C)} / ${fmt(r)} = ${fmt(pv)}</p>`;
+      out.innerHTML = `<p>Perpetuity: \\( PV = \\frac{C}{r} \\)</p>
+                       <p>Substitute: \\( \\frac{${C}}{${r}} = ${fmt(pv)} \\)</p>`;
     } else {
       if(r <= g){ out.innerHTML = '<p>For a growing perpetuity r must be greater than g.</p>'; return; }
       const pv = C / (r - g);
-      out.innerHTML = `<p>Growing perpetuity: PV = C / (r - g) = ${fmt(C)} / (${fmt(r)} - ${fmt(g)}) = ${fmt(pv)}</p>`;
+      out.innerHTML = `<p>Growing perpetuity: \\( PV = \\frac{C}{r-g} \\)</p>
+                       <p>Substitute: \\( \\frac{${C}}{${r}-${g}} = ${fmt(pv)} \\)</p>`;
     }
   }
 
@@ -1685,7 +2079,8 @@ function explainValuation(){
     if(isNaN(D1) || isNaN(r)){ out.innerHTML = '<p>Enter dividend and discount rate.</p>'; return; }
     if(r <= g){ out.innerHTML = '<p>r must exceed g for DDM.</p>'; return; }
     const P0 = D1 / (r - g);
-    out.innerHTML = `<p>DDM (Gordon growth): P₀ = D₁ / (r - g) = ${fmt(D1)} / (${fmt(r)} - ${fmt(g)}) = ${fmt(P0)}</p>`;
+    out.innerHTML = `<p>DDM (Gordon growth): \\( P_0 = \\frac{D_1}{r-g} \\)</p>
+                     <p>Substitute: \\( \\frac{${D1}}{${r}-${g}} = ${fmt(P0)} \\)</p>`;
   }
 
   if(type === "bond"){
@@ -1711,7 +2106,7 @@ function explainValuation(){
 
     out.innerHTML = `
       <p>Bond valuation:</p>
-      <p>Price = C × [1 - (1+i)^(-N)]/i + F × (1+i)^(-N)</p>
+      <p>\\( Price = C \\times \\frac{1-(1+i)^{-N}}{i} + F \\times (1+i)^{-N} \\)</p>
       <p>Substitute: C=${fmt(C)}, i=${fmt(i)}, N=${N}, F=${fmt(F)}</p>
       <p><strong>Price = ${fmt(price)}</strong> → Bond trades at <strong>${status}</strong></p>
     `;
@@ -1727,6 +2122,36 @@ document.addEventListener("change", e=>{
   }
 });
 
+/* --- Buttons --- */
+document.addEventListener("click", e=>{
+  if(e.target.id === "val-explain") explainValuation();
+
+  if(e.target.id === "val-example"){
+    const type = document.getElementById('val-type').value;
+
+    if(type === "perpetuity"){
+      document.getElementById('val-c').value = 13;
+      document.getElementById('val-r').value = 0.08;
+      document.getElementById('val-g').value = 0.04;
+    }
+    if(type === "ddm"){
+      document.getElementById('val-c').value = 4.5;
+      document.getElementById('val-r').value = 0.12;
+      document.getElementById('val-g').value = 0.05;
+    }
+    if(type === "bond"){
+      document.getElementById('val-f').value = 1000;
+      document.getElementById('val-cr').value = 8;
+      document.getElementById('val-r').value = 0.07;
+      document.getElementById('val-n').value = 10;
+      document.getElementById('val-m').value = 2;
+    }
+
+    explainValuation();
+  }
+});
+
+
 /* ---------------------------
    12) Capital Budgeting — NPV, IRR, AAR, PBP, DPB
    --------------------------- */
@@ -1734,9 +2159,11 @@ function capBudHTML(){
   return `
     <div>
       <h2 class="text-2xl font-semibold">Capital Budgeting — NPV, IRR & Other Methods</h2>
-      <p class="mt-2 text-sm opacity-90">Enter cash flows for periods 0..n as comma-separated values (e.g. -500000,100000,150000,250000,400000).</p>
+      <p class="mt-2 text-sm opacity-90">
+        Enter cash flows for periods 0..n as comma-separated values (e.g. -930000,760000,122000,75000).
+      </p>
       <div class="mt-2 grid gap-2 md:grid-cols-2">
-        <label class="label">Discount rate (r) <input id="cb-r" class="input" placeholder="e.g. 0.12" /></label>
+        <label class="label">Discount rate (r) <input id="cb-r" class="input" placeholder="e.g. 0.20" /></label>
         <label class="label">Cash flows (CSV) <input id="cb-cfs" class="input" /></label>
       </div>
       <div class="mt-2 flex flex-wrap gap-2">
@@ -1745,6 +2172,7 @@ function capBudHTML(){
         <button id="cb-pbp" class="btn btn-ghost">Payback</button>
         <button id="cb-dpb" class="btn btn-ghost">Discounted Payback</button>
         <button id="cb-example" class="btn btn-ghost">Example</button>
+        <button id="cb-theory" class="btn btn-link">Theory Notes</button>
       </div>
       <div id="cb-output" class="mt-3 steps"></div>
     </div>
@@ -1762,8 +2190,8 @@ function explainCapBud(){
 
   out.innerHTML = `
     <p><strong>Cash flows:</strong> [${cfs.join(', ')}]</p>
-    <p>NPV at r=${fmt(r)} = ${fmt(npv)} → Accept project if NPV > 0.</p>
-    <p>IRR = ${irr === null ? 'Cannot compute (non-conventional cash flows)' : fmt(irr)}.</p>
+    <p>NPV at r=${(r*100).toFixed(2)}% = R${fmt(npv)} → Accept project if NPV > 0.</p>
+    <p>IRR = ${irr === null ? 'Cannot compute (non-conventional cash flows)' : (irr*100).toFixed(2)+'%'}.</p>
   `;
 }
 
@@ -1779,10 +2207,10 @@ function explainAAR(){
 
   out.innerHTML = `
     <p><strong>AAR</strong> = Average inflow ÷ Initial investment</p>
-    <p>Average inflow = (${inflows.join(" + ")}) / ${inflows.length} = ${fmt(avgReturn)}</p>
-    <p>Initial investment = ${fmt(C0)}</p>
+    <p>Average inflow = (${inflows.join(" + ")}) / ${inflows.length} = R${fmt(avgReturn)}</p>
+    <p>Initial investment = R${fmt(C0)}</p>
     <p>AAR = ${fmt(avgReturn)} / ${fmt(C0)} = ${(aar*100).toFixed(2)}%</p>
-    <p class="muted">Interpretation: Accept project if AAR > required return.</p>
+    <p class="muted">Accept if AAR > required return.</p>
   `;
 }
 
@@ -1792,13 +2220,12 @@ function explainPBP(){
   if(cfs.length < 2){ out.innerHTML = '<p>Need cash flows including initial investment.</p>'; return; }
 
   let cum = cfs[0];
-  let years = 0;
   for(let t=1; t<cfs.length; t++){
     if(cum + cfs[t] >= 0){
       const needed = -cum;
       const frac = needed / cfs[t];
-      years = t-1 + frac;
-      out.innerHTML = `<p><strong>Payback Period</strong> = ${years.toFixed(2)} years</p>`;
+      const years = (t-1 + frac).toFixed(2);
+      out.innerHTML = `<p><strong>Payback Period</strong> = ${years} years</p>`;
       return;
     }
     cum += cfs[t];
@@ -1813,14 +2240,13 @@ function explainDPB(){
   if(isNaN(r) || cfs.length < 2){ out.innerHTML = '<p>Need discount rate and cash flows.</p>'; return; }
 
   let cum = cfs[0];
-  let years = 0;
   for(let t=1; t<cfs.length; t++){
     const pv = cfs[t] / Math.pow(1+r,t);
     if(cum + pv >= 0){
       const needed = -cum;
       const frac = needed / pv;
-      years = t-1 + frac;
-      out.innerHTML = `<p><strong>Discounted Payback Period</strong> = ${years.toFixed(2)} years</p>`;
+      const years = (t-1 + frac).toFixed(2);
+      out.innerHTML = `<p><strong>Discounted Payback Period</strong> = ${years} years</p>`;
       return;
     }
     cum += pv;
@@ -1828,10 +2254,28 @@ function explainDPB(){
   out.innerHTML = '<p>Discounted investment not recovered within project life.</p>';
 }
 
-/* Utility: get parsed cash flows */
+/* Utility: parse CSV cash flows */
 function getCashFlows(){
   const cfsStr = document.getElementById('cb-cfs').value || '';
   return cfsStr.split(',').map(s=>parseFloat(s.trim())).filter(x=>!isNaN(x));
+}
+
+/* --- Financial functions --- */
+function NPV(rate, cashflows){
+  return cashflows.reduce((acc,cf,t)=>acc + cf/Math.pow(1+rate,t),0);
+}
+
+// IRR via Newton-Raphson
+function IRR(cashflows, guess=0.1){
+  let r = guess;
+  for(let i=0; i<100; i++){
+    let f = cashflows.reduce((acc,cf,t)=>acc + cf/Math.pow(1+r,t),0);
+    let fPrime = cashflows.reduce((acc,cf,t)=>acc - (t*cf)/Math.pow(1+r,t+1),0);
+    let newR = r - f/fPrime;
+    if(Math.abs(newR-r) < 1e-7) return newR;
+    r = newR;
+  }
+  return null;
 }
 
 /* --- Bindings --- */
@@ -1840,12 +2284,165 @@ document.addEventListener("click", e=>{
   if(e.target.id==="cb-aar") explainAAR();
   if(e.target.id==="cb-pbp") explainPBP();
   if(e.target.id==="cb-dpb") explainDPB();
+
   if(e.target.id==="cb-example"){
     document.getElementById('cb-r').value='0.20';
-    document.getElementById('cb-cfs').value='-500000,100000,150000,250000,400000';
+    document.getElementById('cb-cfs').value='-930000,760000,122000,75000';
     explainCapBud();
   }
+
+  if(e.target.id==="cb-theory"){
+    document.getElementById("cb-output").innerHTML = `
+      <h3>Theory Notes</h3>
+      <ul>
+        <li><strong>Disadvantage of AAR:</strong> Ignores time value of money.</li>
+        <li><strong>Disadvantage of PBP:</strong> Ignores cash flows after payback period, and TVM.</li>
+        <li><strong>Replacement project:</strong> Replace old assets; compare cash flows with vs without replacement.</li>
+        <li><strong>Expansion project:</strong> Expands capacity; evaluate new project’s incremental cash flows.</li>
+      </ul>
+    `;
+  }
 });
+
+/* ---------------------------
+   Formulae sheet
+   --------------------------- */
+
+/* ---------------------------
+   Formulae sheet (with MathJax rendering)
+   Paste this into your script.js near other topic modules.
+   --------------------------- */
+
+function formulaeHTML(){
+  return `
+    <div class="glass p-3 rounded-md">
+      <h2 class="text-2xl font-semibold">📘 Formulae Sheet</h2>
+      <p class="mt-2 text-sm opacity-90">Quick reference for Managerial Finance (FTX1005F). All formulas are rendered with MathJax.</p>
+
+      <div class="mt-4 space-y-6">
+
+        <section>
+          <h3 class="text-lg font-bold">Financial Ratio Analysis</h3>
+          <ul class="list-disc ml-6 mt-2">
+            <li><strong>Solvency Ratio</strong>: \\( \\text{Solvency} = \\dfrac{\\text{Total Assets}}{\\text{Total Liabilities}} \\)</li>
+            <li><strong>Net Asset Value (NAV)</strong>: \\( \\text{NAV per share} = \\dfrac{\\text{Total Assets} - \\text{Total Liabilities}}{\\text{Shares Outstanding}} \\)</li>
+            <li><strong>Current Ratio</strong>: \\( \\text{Current Ratio} = \\dfrac{\\text{Current Assets}}{\\text{Current Liabilities}} \\)</li>
+            <li><strong>Quick Ratio (Acid Test)</strong>: \\( \\text{Quick Ratio} = \\dfrac{\\text{Current Assets} - \\text{Inventory}}{\\text{Current Liabilities}} \\)</li>
+            <li><strong>Inventory Turnover</strong>: \\( \\text{InvTurn} = \\dfrac{\\text{COGS}}{\\text{Avg Inventory}} \\)</li>
+            <li><strong>Days Inventory on Hand (DIO)</strong>: \\( \\text{DIO} = \\dfrac{\\text{Avg Inventory} \\times 365}{\\text{COGS}} = \\dfrac{365}{\\text{InvTurn}} \\)</li>
+            <li><strong>Receivables Collection Period (DSO)</strong>: \\( \\text{DSO} = \\dfrac{\\text{Accounts Receivable} \\times 365}{\\text{Credit Sales}} \\)</li>
+            <li><strong>Payables Payment Period (DPO)</strong>: \\( \\text{DPO} = \\dfrac{\\text{Accounts Payable} \\times 365}{\\text{Purchases or COGS}} \\)</li>
+            <li><strong>Total Asset Turnover</strong>: \\( \\text{TAT} = \\dfrac{\\text{Sales}}{\\text{Total Assets}} \\)</li>
+            <li><strong>Fixed Asset Turnover</strong>: \\( \\text{FAT} = \\dfrac{\\text{Sales}}{\\text{Net Fixed Assets}} \\)</li>
+            <li><strong>Debt Ratio</strong>: \\( \\text{Debt Ratio} = \\dfrac{\\text{Total Liabilities}}{\\text{Total Assets}} \\)</li>
+            <li><strong>Debt-to-Equity</strong>: \\( \\text{D/E} = \\dfrac{\\text{Total Liabilities}}{\\text{Total Equity}} \\)</li>
+            <li><strong>Times Interest Earned</strong>: \\( \\text{TIE} = \\dfrac{\\text{EBIT}}{\\text{Interest Expense}} \\)</li>
+            <li><strong>Cash Coverage Ratio</strong>: \\( \\text{CashCov} = \\dfrac{\\text{EBIT} + \\text{Depreciation}}{\\text{Interest Expense}} \\)</li>
+            <li><strong>Gross Profit Margin</strong>: \\( \\text{Gross Margin} = \\dfrac{\\text{Sales} - \\text{COGS}}{\\text{Sales}} \\times 100\\% \\)</li>
+            <li><strong>Operating Margin</strong>: \\( \\text{Operating Margin} = \\dfrac{\\text{Operating Profit}}{\\text{Sales}} \\times 100\\% \\)</li>
+            <li><strong>Net Profit Margin</strong>: \\( \\text{Net Margin} = \\dfrac{\\text{Net Profit}}{\\text{Sales}} \\times 100\\% \\)</li>
+            <li><strong>Return on Assets (ROA)</strong>: \\( \\text{ROA} = \\dfrac{\\text{Net Income}}{\\text{Total Assets}} \\times 100\\% \\)</li>
+            <li><strong>Return on Equity (ROE)</strong>: \\( \\text{ROE} = \\dfrac{\\text{Net Income}}{\\text{Equity}} \\times 100\\% \\)</li>
+          </ul>
+        </section>
+
+        <section>
+          <h3 class="text-lg font-bold">Investment Performance</h3>
+          <ul class="list-disc ml-6 mt-2">
+            <li><strong>Dividend Yield</strong>: \\( \\text{DY} = \\dfrac{\\text{Dividend per share}}{\\text{Share price}} \\times 100\\% \\)</li>
+            <li><strong>Holding Period Return (HPR)</strong>: \\( \\text{HPR} = \\dfrac{\\text{Ending price} - \\text{Beginning price} + \\text{Dividends}}{\\text{Beginning price}} \\times 100\\% \\)</li>
+            <li><strong>Earnings per Share (EPS)</strong>: \\( \\text{EPS} = \\dfrac{\\text{Net Income}}{\\text{Shares outstanding}} \\)</li>
+            <li><strong>Dividend Cover</strong>: \\( \\text{Cover} = \\dfrac{\\text{EPS}}{\\text{DPS}} \\)</li>
+            <li><strong>Payout Ratio</strong>: \\( \\text{Payout} = \\dfrac{\\text{Dividends}}{\\text{Net Income}} \\times 100\\% \\)</li>
+            <li><strong>Retention Ratio</strong>: \\( \\text{Retention} = 1 - \\text{Payout} \\)</li>
+            <li><strong>Price/Earnings (P/E)</strong>: \\( \\text{P/E} = \\dfrac{\\text{Share price}}{\\text{EPS}} \\)</li>
+            <li><strong>Earnings Yield (EY)</strong>: \\( \\text{EY} = \\dfrac{\\text{EPS}}{\\text{Share price}} \\times 100\\% \\)</li>
+          </ul>
+        </section>
+
+        <section>
+          <h3 class="text-lg font-bold">Time Value of Money (TVM)</h3>
+          <ul class="list-disc ml-6 mt-2">
+            <li>Future Value (single sum): \\( FV = PV (1+i)^n \\)</li>
+            <li>Present Value (single sum): \\( PV = \\dfrac{FV}{(1+i)^n} \\)</li>
+            <li>FV of ordinary annuity: \\( FV_{ann} = PMT \\times \\dfrac{(1+i)^n - 1}{i} \\)</li>
+            <li>PV of ordinary annuity: \\( PV_{ann} = PMT \\times \\dfrac{1 - (1+i)^{-n}}{i} \\)</li>
+            <li>Annuity due: multiply ordinary annuity by \\( (1+i) \\)</li>
+          </ul>
+        </section>
+
+        <section>
+          <h3 class="text-lg font-bold">Valuation & Bonds</h3>
+          <ul class="list-disc ml-6 mt-2">
+            <li>Dividend Discount Model (Gordon): \\( P_0 = \\dfrac{D_1}{r - g} \\)</li>
+            <li>Perpetuity: \\( PV = \\dfrac{C}{r} \\)</li>
+            <li>Growing Perpetuity: \\( PV = \\dfrac{C}{r - g}, \\; r>g \\)</li>
+            <li>Bond price (periodic): \\( P = C \\times \\dfrac{1 - (1+i)^{-N}}{i} + F(1+i)^{-N} \\)</li>
+            <li>Where: \\(C\\) = coupon per period, \\(i\\) = market rate per period, \\(N\\) = #periods, \\(F\\)=face value</li>
+          </ul>
+        </section>
+
+        <section>
+          <h3 class="text-lg font-bold">Capital Budgeting</h3>
+          <ul class="list-disc ml-6 mt-2">
+            <li>Net Present Value (NPV): \\( NPV = \\sum_{t=0}^{N} \\dfrac{C_t}{(1+i)^t} \\) (include initial outflow)</li>
+            <li>Internal Rate of Return (IRR): discount rate such that \\( NPV = 0 \\)</li>
+            <li>Average Accounting Return (AAR): \\( AAR = \\dfrac{\\text{Average accounting profit}}{\\text{Initial investment}} \\)</li>
+            <li>Payback Period (PBP): time until cumulative cash flows = initial investment</li>
+            <li>Discounted Payback (DPB): time until cumulative discounted cash flows = initial investment</li>
+          </ul>
+        </section>
+
+      </div>
+
+      <div class="mt-4">
+        <button id="print-formulae" class="btn btn-ghost">Print / Save as PDF</button>
+      </div>
+    </div>
+  `;
+}
+
+/* mountFormulae: injects the formulae sheet into the page and triggers MathJax */
+function mountFormulae(){
+  // find your main content container - adapt ID if necessary
+  const content = document.getElementById('content') || document.getElementById('main') || document.getElementById('app') || document.body;
+  content.innerHTML = formulaeHTML();
+
+  // typeset math for the newly inserted element (target the content element)
+  if(window.MathJax && MathJax.typesetPromise){
+    MathJax.typesetPromise([content]).catch((err)=>{ console.warn('MathJax typeset error:', err); });
+  } else {
+    console.warn('MathJax not loaded - include the MathJax script in your HTML head.');
+  }
+
+  // Print button handler
+  const btn = document.getElementById('print-formulae');
+  if(btn) btn.addEventListener('click', ()=> window.print());
+}
+
+/* Attach to your existing nav buttons (safe - won't duplicate handlers) */
+function attachFormulaeButton(){
+  document.querySelectorAll('.topic-select[data-topic="formulae"]').forEach(btn=>{
+    // remove previous listener (if any) to avoid double-binding:
+    btn.replaceWith(btn.cloneNode(true));
+  });
+
+  // re-select after cloning
+  document.querySelectorAll('.topic-select[data-topic="formulae"]').forEach(btn=>{
+    btn.addEventListener('click', (e)=>{
+      e.preventDefault();
+      mountFormulae();
+      // if you have a side panel, you may also want to highlight the active button there
+    });
+  });
+}
+
+/* Call attachFormulaeButton once DOM is ready */
+document.addEventListener('DOMContentLoaded', ()=> {
+  attachFormulaeButton();
+});
+
+
 
 
 /* Default topic */
