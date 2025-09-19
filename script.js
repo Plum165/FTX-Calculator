@@ -27,7 +27,77 @@ const themes = {
   'neutral-peach': {bg:['#ffe0b2','#f48fb1','#f06292'],text:'#000000',btn1:'#f48fb1',btn2:'#f06292',ghost:'#3d2b2b'},
   'retro-pop': {bg:['#ff00ff','#00ffff','#ffff00'],text:'#000000',btn1:'#ff00ff',btn2:'#00ffff',ghost:'#1a1020'},
   'cyberpunk-glow': {bg:['#0f0b1d','#ff0080','#7928ca'],text:'#ffffff',btn1:'#ff0080',btn2:'#7928ca',ghost:'#0a0713'},
-  'plum-gold': {bg:['#4b006e','#b07bac','#ffd700'],text:'#ffffff',btn1:'#a855f7',btn2:'#f59e0b',ghost:'#1a0a26'}
+  'plum-gold': {bg:['#4b006e','#b07bac','#ffd700'],text:'#ffffff',btn1:'#a855f7',btn2:'#f59e0b',ghost:'#1a0a26'},
+  'pink-black': {
+    bg: ['#1a0b0f','#ff1e56','#0d0d0d'],
+    text: '#ffffff',
+    btn1: '#ff4d6d',
+    btn2: '#000000',
+    ghost: '#1a0d12'
+  },
+  'pink-overall': {
+    bg: ['#ffc1cc','#ff69b4','#ff1493'],
+    text: '#000000',
+    btn1: '#ff69b4',
+    btn2: '#ff1493',
+    ghost: '#fff0f5'
+  },
+  'pink-purple': {
+    bg: ['#ff77e9','#b832ff','#7a0bc0'],
+    text: '#ffffff',
+    btn1: '#e879f9',
+    btn2: '#9333ea',
+    ghost: '#2b0b2e'
+  },
+  'pink-yellow': {
+    bg: ['#ffe4e1','#ffb347','#ff69b4'],
+    text: '#000000',
+    btn1: '#ff69b4',
+    btn2: '#ffd93d',
+    ghost: '#402d00'
+  },
+  'pink-white': {
+    bg: ['#ffffff','#ffe4f3','#ffb6c1'],
+    text: '#000000',
+    btn1: '#ff85a1',
+    btn2: '#f472b6',
+    ghost: '#fdf2f8'
+  },
+  'rose-gold': {
+    bg: ['#fadadd','#e6c7c2','#f5b5a3'],
+    text: '#000000',
+    btn1: '#f59e9e',
+    btn2: '#f4a261',
+    ghost: '#5a3d31'
+  },
+  'neon-pink': {
+    bg: ['#ff007f','#ff4da6','#33001a'],
+    text: '#ffffff',
+    btn1: '#ff0080',
+    btn2: '#ff4da6',
+    ghost: '#140010'
+  },
+  'blush-cherry': {
+    bg: ['#ffdde1','#ee4c7c','#b30f53'],
+    text: '#ffffff',
+    btn1: '#ec4899',
+    btn2: '#be123c',
+    ghost: '#25010b'
+  },
+  'bubblegum': {
+    bg: ['#ffb6c1','#ff85a1','#ff4d88'],
+    text: '#000000',
+    btn1: '#ff85a1',
+    btn2: '#ff4d88',
+    ghost: '#3d1a2b'
+  },
+  'flamingo': {
+    bg: ['#ff6f91','#ff9671','#ffc75f'],
+    text: '#000000',
+    btn1: '#ff6f91',
+    btn2: '#ff9671',
+    ghost: '#40220f'
+  }
 };
 const dropdown = document.getElementById('theme-dropdown');
 const themeChip = document.getElementById('theme-chip');
