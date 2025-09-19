@@ -11,9 +11,23 @@
 const themes = {
   'spiderman': {bg:['#0b172a','#d62828','#e63946'],text:'#ffffff',btn1:'#0ea5e9',btn2:'#ef4444',ghost:'#0b1220'},
   'bloodred': {bg:['#2a0000','#660000','#b30000'],text:'#ffeaea',btn1:'#7f1d1d',btn2:'#b91c1c',ghost:'#1a1a1a'},
+  'red-blue': {bg:['#2b2d42','#ef233c','#3a86ff'],text:'#ffffff',btn1:'#ef233c',btn2:'#3a86ff',ghost:'#161a2b'},
+  'purple-black': {bg:['#0f0b1d','#3b0d54','#12002b'],text:'#ffffff',btn1:'#7c3aed',btn2:'#a21caf',ghost:'#0b0b12'},
   'sapphire-steel': {bg:['#13293d','#006494','#247ba0'],text:'#ffffff',btn1:'#00a6fb',btn2:'#0582ca',ghost:'#0d1b2a'},
   'emerald-charcoal': {bg:['#004d40','#1c313a','#2e7d32'],text:'#ffffff',btn1:'#10b981',btn2:'#065f46',ghost:'#0b1f1a'},
-  'monochrome-focus': {bg:['#111111','#333333','#555555'],text:'#ffffff',btn1:'#6b7280',btn2:'#9ca3af',ghost:'#141414'}
+  'digital-twilight': {bg:['#0f2027','#203a43','#2c5364'],text:'#ffffff',btn1:'#22d3ee',btn2:'#0ea5e9',ghost:'#0a151b'},
+  'coral-aqua': {bg:['#ff6f61','#6bc5d2','#004d61'],text:'#ffffff',btn1:'#ff8fa3',btn2:'#00bcd4',ghost:'#0f2a2f'},
+  'electric-citrus': {bg:['#ff9f1c','#ffbf69','#ff4040'],text:'#000000',btn1:'#ff7f50',btn2:'#ff4040',ghost:'#2b1a00'},
+  'artisan-clay': {bg:['#b3541e','#d9a066','#8c4a2f'],text:'#ffffff',btn1:'#b3541e',btn2:'#8c4a2f',ghost:'#2a140a'},
+  'forest-canopy': {bg:['#004b23','#006400','#228b22'],text:'#ffffff',btn1:'#16a34a',btn2:'#065f46',ghost:'#06220f'},
+  'ocean-depth': {bg:['#011f4b','#03396c','#005b96'],text:'#ffffff',btn1:'#3b82f6',btn2:'#0ea5e9',ghost:'#041024'},
+  'desert-sunset': {bg:['#ff7e5f','#feb47b','#ffcc70'],text:'#000000',btn1:'#f97316',btn2:'#fde68a',ghost:'#3a1d0b'},
+  'monochrome-focus': {bg:['#111111','#333333','#555555'],text:'#ffffff',btn1:'#6b7280',btn2:'#9ca3af',ghost:'#141414'},
+  'soft-nordic': {bg:['#a8dadc','#457b9d','#1d3557'],text:'#000000',btn1:'#1d3557',btn2:'#457b9d',ghost:'#0f2338'},
+  'neutral-peach': {bg:['#ffe0b2','#f48fb1','#f06292'],text:'#000000',btn1:'#f48fb1',btn2:'#f06292',ghost:'#3d2b2b'},
+  'retro-pop': {bg:['#ff00ff','#00ffff','#ffff00'],text:'#000000',btn1:'#ff00ff',btn2:'#00ffff',ghost:'#1a1020'},
+  'cyberpunk-glow': {bg:['#0f0b1d','#ff0080','#7928ca'],text:'#ffffff',btn1:'#ff0080',btn2:'#7928ca',ghost:'#0a0713'},
+  'plum-gold': {bg:['#4b006e','#b07bac','#ffd700'],text:'#ffffff',btn1:'#a855f7',btn2:'#f59e0b',ghost:'#1a0a26'}
 };
 const dropdown = document.getElementById('theme-dropdown');
 const themeChip = document.getElementById('theme-chip');
@@ -2608,4 +2622,4 @@ function loadFormulae(){
 
 
 /* Default topic */
-renderTopic('tvm');
+renderTopic('acc_eq');
