@@ -44,7 +44,7 @@ const themes = {
   },
   'pink-purple': {
     bg: ['#ff77e9','#b832ff','#7a0bc0'],
-    text: '#ffffff',
+    text: '#000000',
     btn1: '#e879f9',
     btn2: '#9333ea',
     ghost: '#2b0b2e'
