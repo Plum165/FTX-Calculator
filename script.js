@@ -610,9 +610,8 @@ document.addEventListener("click", e => {
   if(e.target.id === "je-example") { e.preventDefault(); fillJournalExample(); }
 });
 /* ---------------------------
-   Module 4: Adjustments & Financial Statements
-   Integrated Ledger & Trial Balance
-   With Calculation Steps & Manual Posting
+   4) Adjustments & Financial Statements
+   Integrated with Journal, Ledger, Trial Balance
    --------------------------- */
 
 function adjustmentsHTML(){
@@ -662,7 +661,7 @@ function adjustmentsHTML(){
         </div>
       </div>
 
-      <!-- Trial Balance Display in Module 4 -->
+      <!-- Trial Balance Display -->
       <div class="mt-6 glass p-3 rounded-md">
         <h3 class="font-semibold">Trial Balance (Updated)</h3>
         <div id="trial-output">Post adjustments or depreciation to see updated trial balance here.</div>
@@ -672,7 +671,7 @@ function adjustmentsHTML(){
 }
 
 /* ---------------------------
-   Post adjustments and update Trial Balance
+   Post adjustments
    --------------------------- */
 function postAdjustment(){
   const accrued = parseFloat(document.getElementById('adj-accrued').value || 0);
@@ -701,7 +700,7 @@ function postAdjustment(){
 }
 
 /* ---------------------------
-   Post Depreciation & Update Trial Balance
+   Post depreciation
    --------------------------- */
 function postDepreciation(){
   const cost = parseFloat(document.getElementById('dep-cost').value || 0);
@@ -719,18 +718,18 @@ function postDepreciation(){
   document.getElementById('dep-output').innerHTML = `
     <h4>Depreciation Calculation (Straight-line)</h4>
     <p>Depreciation = (Cost - Residual Value) / Useful Life</p>
-    <p>Depreciation = (R${fmt(cost)} - R${fmt(res)}) / ${life} years</p>
-    <p>Depreciation = R${fmt(depreciation)}</p>
+    <p>= (R${fmt(cost)} - R${fmt(res)}) / ${life} years</p>
+    <p>= R${fmt(depreciation)}</p>
     <p>Journal entry: Debit Depreciation Expense R${fmt(depreciation)}, Credit Accumulated Depreciation R${fmt(depreciation)}</p>
   `;
   updateTrialBalanceDisplay();
 }
 
 /* ---------------------------
-   Update Trial Balance Display in Module 4(Still busy)
+   Update Trial Balance Display (reuse Module 3 logic)
    --------------------------- */
 function updateTrialBalanceDisplay(){
-  postToLedger(); // Ensure ledger is updated
+  postToLedger(); // reuse from Module 3
   const out=document.getElementById('trial-output');
   if(!ledger || Object.keys(ledger).length===0){ out.innerHTML='<p>No ledger postings yet.</p>'; return; }
 
@@ -750,7 +749,7 @@ function updateTrialBalanceDisplay(){
 }
 
 /* ---------------------------
-   Example fill for Module 4
+   Example filler
    --------------------------- */
 function fillAdjustmentExample(){
   document.getElementById('adj-accrued').value = 1800;
@@ -764,7 +763,7 @@ function fillAdjustmentExample(){
 }
 
 /* ---------------------------
-   Event delegation for Module 4 buttons
+   Event delegation
    --------------------------- */
 document.addEventListener("click", e => {
   if(e.target.id === "adj-explain"){ e.preventDefault(); postAdjustment(); }
@@ -2564,138 +2563,46 @@ document.addEventListener("click", e=>{
    --------------------------- */
 
 /* ---------------------------
-   Formulae sheet (with MathJax rendering)
-   Paste this into your script.js near other topic modules.
+   Formulae Sheet (with MathJax)
    --------------------------- */
-
 function formulaeHTML(){
   return `
-    <div class="glass p-3 rounded-md">
+    <div>
       <h2 class="text-2xl font-semibold">📘 Formulae Sheet</h2>
-      <p class="mt-2 text-sm opacity-90">Quick reference for Managerial Finance (FTX1005F). All formulas are rendered with MathJax.</p>
+      <p class="mt-2 text-sm opacity-90">Quick reference for Managerial Finance (FTX1005F). Formulas are rendered with MathJax.</p>
 
       <div class="mt-4 space-y-6">
 
+        <!-- Financial Ratios -->
         <section>
           <h3 class="text-lg font-bold">Financial Ratio Analysis</h3>
           <ul class="list-disc ml-6 mt-2">
             <li><strong>Solvency Ratio</strong>: \\( \\text{Solvency} = \\dfrac{\\text{Total Assets}}{\\text{Total Liabilities}} \\)</li>
-            <li><strong>Net Asset Value (NAV)</strong>: \\( \\text{NAV per share} = \\dfrac{\\text{Total Assets} - \\text{Total Liabilities}}{\\text{Shares Outstanding}} \\)</li>
-            <li><strong>Current Ratio</strong>: \\( \\text{Current Ratio} = \\dfrac{\\text{Current Assets}}{\\text{Current Liabilities}} \\)</li>
-            <li><strong>Quick Ratio (Acid Test)</strong>: \\( \\text{Quick Ratio} = \\dfrac{\\text{Current Assets} - \\text{Inventory}}{\\text{Current Liabilities}} \\)</li>
-            <li><strong>Inventory Turnover</strong>: \\( \\text{InvTurn} = \\dfrac{\\text{COGS}}{\\text{Avg Inventory}} \\)</li>
-            <li><strong>Days Inventory on Hand (DIO)</strong>: \\( \\text{DIO} = \\dfrac{\\text{Avg Inventory} \\times 365}{\\text{COGS}} = \\dfrac{365}{\\text{InvTurn}} \\)</li>
-            <li><strong>Receivables Collection Period (DSO)</strong>: \\( \\text{DSO} = \\dfrac{\\text{Accounts Receivable} \\times 365}{\\text{Credit Sales}} \\)</li>
-            <li><strong>Payables Payment Period (DPO)</strong>: \\( \\text{DPO} = \\dfrac{\\text{Accounts Payable} \\times 365}{\\text{Purchases or COGS}} \\)</li>
-            <li><strong>Total Asset Turnover</strong>: \\( \\text{TAT} = \\dfrac{\\text{Sales}}{\\text{Total Assets}} \\)</li>
-            <li><strong>Fixed Asset Turnover</strong>: \\( \\text{FAT} = \\dfrac{\\text{Sales}}{\\text{Net Fixed Assets}} \\)</li>
-            <li><strong>Debt Ratio</strong>: \\( \\text{Debt Ratio} = \\dfrac{\\text{Total Liabilities}}{\\text{Total Assets}} \\)</li>
-            <li><strong>Debt-to-Equity</strong>: \\( \\text{D/E} = \\dfrac{\\text{Total Liabilities}}{\\text{Total Equity}} \\)</li>
-            <li><strong>Times Interest Earned</strong>: \\( \\text{TIE} = \\dfrac{\\text{EBIT}}{\\text{Interest Expense}} \\)</li>
-            <li><strong>Cash Coverage Ratio</strong>: \\( \\text{CashCov} = \\dfrac{\\text{EBIT} + \\text{Depreciation}}{\\text{Interest Expense}} \\)</li>
-            <li><strong>Gross Profit Margin</strong>: \\( \\text{Gross Margin} = \\dfrac{\\text{Sales} - \\text{COGS}}{\\text{Sales}} \\times 100\\% \\)</li>
-            <li><strong>Operating Margin</strong>: \\( \\text{Operating Margin} = \\dfrac{\\text{Operating Profit}}{\\text{Sales}} \\times 100\\% \\)</li>
-            <li><strong>Net Profit Margin</strong>: \\( \\text{Net Margin} = \\dfrac{\\text{Net Profit}}{\\text{Sales}} \\times 100\\% \\)</li>
-            <li><strong>Return on Assets (ROA)</strong>: \\( \\text{ROA} = \\dfrac{\\text{Net Income}}{\\text{Total Assets}} \\times 100\\% \\)</li>
-            <li><strong>Return on Equity (ROE)</strong>: \\( \\text{ROE} = \\dfrac{\\text{Net Income}}{\\text{Equity}} \\times 100\\% \\)</li>
+           <li><strong>Net Asset Value (NAV)</strong>: \\( \\text{NAV per share} = \\dfrac{\\text{Total Assets} - \\text{Total Liabilities}}{\\text{Shares Outstanding}} \\)</li> 
+           <li><strong>Current Ratio</strong>: \\( \\text{Current Ratio} = \\dfrac{\\text{Current Assets}}{\\text{Current Liabilities}} \\)</li> 
+           <li><strong>Quick Ratio (Acid Test)</strong>: \\( \\text{Quick Ratio} = \\dfrac{\\text{Current Assets} - \\text{Inventory}}{\\text{Current Liabilities}} \\)</li> <li><strong>Inventory Turnover</strong>: \\( \\text{InvTurn} = \\dfrac{\\text{COGS}}{\\text{Avg Inventory}} \\)</li> <li><strong>Days Inventory on Hand (DIO)</strong>: \\( \\text{DIO} = \\dfrac{\\text{Avg Inventory} \\times 365}{\\text{COGS}} = \\dfrac{365}{\\text{InvTurn}} \\)</li> <li><strong>Receivables Collection Period (DSO)</strong>: \\( \\text{DSO} = \\dfrac{\\text{Accounts Receivable} \\times 365}{\\text{Credit Sales}} \\)</li> <li><strong>Payables Payment Period (DPO)</strong>: \\( \\text{DPO} = \\dfrac{\\text{Accounts Payable} \\times 365}{\\text{Purchases or COGS}} \\)</li> <li><strong>Total Asset Turnover</strong>: \\( \\text{TAT} = \\dfrac{\\text{Sales}}{\\text{Total Assets}} \\)</li> <li><strong>Fixed Asset Turnover</strong>: \\( \\text{FAT} = \\dfrac{\\text{Sales}}{\\text{Net Fixed Assets}} \\)</li> <li><strong>Debt Ratio</strong>: \\( \\text{Debt Ratio} = \\dfrac{\\text{Total Liabilities}}{\\text{Total Assets}} \\)</li> <li><strong>Debt-to-Equity</strong>: \\( \\text{D/E} = \\dfrac{\\text{Total Liabilities}}{\\text{Total Equity}} \\)</li> <li><strong>Times Interest Earned</strong>: \\( \\text{TIE} = \\dfrac{\\text{EBIT}}{\\text{Interest Expense}} \\)</li> <li><strong>Cash Coverage Ratio</strong>: \\( \\text{CashCov} = \\dfrac{\\text{EBIT} + \\text{Depreciation}}{\\text{Interest Expense}} \\)</li> <li><strong>Gross Profit Margin</strong>: \\( \\text{Gross Margin} = \\dfrac{\\text{Sales} - \\text{COGS}}{\\text{Sales}} \\times 100\\% \\)</li> <li><strong>Operating Margin</strong>: \\( \\text{Operating Margin} = \\dfrac{\\text{Operating Profit}}{\\text{Sales}} \\times 100\\% \\)</li> <li><strong>Net Profit Margin</strong>: \\( \\text{Net Margin} = \\dfrac{\\text{Net Profit}}{\\text{Sales}} \\times 100\\% \\)</li> <li><strong>Return on Assets (ROA)</strong>: \\( \\text{ROA} = \\dfrac{\\text{Net Income}}{\\text{Total Assets}} \\times 100\\% \\)</li> <li><strong>Return on Equity (ROE)</strong>: \\( \\text{ROE} = \\dfrac{\\text{Net Income}}{\\text{Equity}} \\times 100\\% \\)</li> </ul> </section> <section> <h3 class="text-lg font-bold">Investment Performance</h3> <ul class="list-disc ml-6 mt-2"> <li><strong>Dividend Yield</strong>: \\( \\text{DY} = \\dfrac{\\text{Dividend per share}}{\\text{Share price}} \\times 100\\% \\)</li> <li><strong>Holding Period Return (HPR)</strong>: \\( \\text{HPR} = \\dfrac{\\text{Ending price} - \\text{Beginning price} + \\text{Dividends}}{\\text{Beginning price}} \\times 100\\% \\)</li> <li><strong>Earnings per Share (EPS)</strong>: \\( \\text{EPS} = \\dfrac{\\text{Net Income}}{\\text{Shares outstanding}} \\)</li> <li><strong>Dividend Cover</strong>: \\( \\text{Cover} = \\dfrac{\\text{EPS}}{\\text{DPS}} \\)</li> <li><strong>Payout Ratio</strong>: \\( \\text{Payout} = \\dfrac{\\text{Dividends}}{\\text{Net Income}} \\times 100\\% \\)</li> <li><strong>Retention Ratio</strong>: \\( \\text{Retention} = 1 - \\text{Payout} \\)</li> <li><strong>Price/Earnings (P/E)</strong>: \\( \\text{P/E} = \\dfrac{\\text{Share price}}{\\text{EPS}} \\)</li> <li><strong>Earnings Yield (EY)</strong>: \\( \\text{EY} = \\dfrac{\\text{EPS}}{\\text{Share price}} \\times 100\\% \\)</li> </ul> </section> <section> <h3 class="text-lg font-bold">Time Value of Money (TVM)</h3> <ul class="list-disc ml-6 mt-2"> <li>Future Value (single sum): \\( FV = PV (1+i)^n \\)</li> <li>Present Value (single sum): \\( PV = \\dfrac{FV}{(1+i)^n} \\)</li> <li>FV of ordinary annuity: \\( FV_{ann} = PMT \\times \\dfrac{(1+i)^n - 1}{i} \\)</li> <li>PV of ordinary annuity: \\( PV_{ann} = PMT \\times \\dfrac{1 - (1+i)^{-n}}{i} \\)</li> <li>Annuity due: multiply ordinary annuity by \\( (1+i) \\)</li> </ul> </section> <section> <h3 class="text-lg font-bold">Valuation & Bonds</h3> <ul class="list-disc ml-6 mt-2"> <li>Dividend Discount Model (Gordon): \\( P_0 = \\dfrac{D_1}{r - g} \\)</li> <li>Perpetuity: \\( PV = \\dfrac{C}{r} \\)</li> <li>Growing Perpetuity: \\( PV = \\dfrac{C}{r - g}, \\; r>g \\)</li> <li>Bond price (periodic): \\( P = C \\times \\dfrac{1 - (1+i)^{-N}}{i} + F(1+i)^{-N} \\)</li> <li>Where: \\(C\\) = coupon per period, \\(i\\) = market rate per period, \\(N\\) = #periods, \\(F\\)=face value</li> </ul> </section> <section> <h3 class="text-lg font-bold">Capital Budgeting</h3> <ul class="list-disc ml-6 mt-2"> <li>Net Present Value (NPV): \\( NPV = \\sum_{t=0}^{N} \\dfrac{C_t}{(1+i)^t} \\) (include initial outflow)</li> <li>Internal Rate of Return (IRR): discount rate such that \\( NPV = 0 \\)</li> <li>Average Accounting Return (AAR): \\( AAR = \\dfrac{\\text{Average accounting profit}}{\\text{Initial investment}} \\)</li> <li>Payback Period (PBP): time until cumulative cash flows = initial investment</li> <li>Discounted Payback (DPB): time until cumulative discounted cash flows = initial investment</li>
           </ul>
         </section>
 
-        <section>
-          <h3 class="text-lg font-bold">Investment Performance</h3>
-          <ul class="list-disc ml-6 mt-2">
-            <li><strong>Dividend Yield</strong>: \\( \\text{DY} = \\dfrac{\\text{Dividend per share}}{\\text{Share price}} \\times 100\\% \\)</li>
-            <li><strong>Holding Period Return (HPR)</strong>: \\( \\text{HPR} = \\dfrac{\\text{Ending price} - \\text{Beginning price} + \\text{Dividends}}{\\text{Beginning price}} \\times 100\\% \\)</li>
-            <li><strong>Earnings per Share (EPS)</strong>: \\( \\text{EPS} = \\dfrac{\\text{Net Income}}{\\text{Shares outstanding}} \\)</li>
-            <li><strong>Dividend Cover</strong>: \\( \\text{Cover} = \\dfrac{\\text{EPS}}{\\text{DPS}} \\)</li>
-            <li><strong>Payout Ratio</strong>: \\( \\text{Payout} = \\dfrac{\\text{Dividends}}{\\text{Net Income}} \\times 100\\% \\)</li>
-            <li><strong>Retention Ratio</strong>: \\( \\text{Retention} = 1 - \\text{Payout} \\)</li>
-            <li><strong>Price/Earnings (P/E)</strong>: \\( \\text{P/E} = \\dfrac{\\text{Share price}}{\\text{EPS}} \\)</li>
-            <li><strong>Earnings Yield (EY)</strong>: \\( \\text{EY} = \\dfrac{\\text{EPS}}{\\text{Share price}} \\times 100\\% \\)</li>
-          </ul>
-        </section>
-
-        <section>
-          <h3 class="text-lg font-bold">Time Value of Money (TVM)</h3>
-          <ul class="list-disc ml-6 mt-2">
-            <li>Future Value (single sum): \\( FV = PV (1+i)^n \\)</li>
-            <li>Present Value (single sum): \\( PV = \\dfrac{FV}{(1+i)^n} \\)</li>
-            <li>FV of ordinary annuity: \\( FV_{ann} = PMT \\times \\dfrac{(1+i)^n - 1}{i} \\)</li>
-            <li>PV of ordinary annuity: \\( PV_{ann} = PMT \\times \\dfrac{1 - (1+i)^{-n}}{i} \\)</li>
-            <li>Annuity due: multiply ordinary annuity by \\( (1+i) \\)</li>
-          </ul>
-        </section>
-
-        <section>
-          <h3 class="text-lg font-bold">Valuation & Bonds</h3>
-          <ul class="list-disc ml-6 mt-2">
-            <li>Dividend Discount Model (Gordon): \\( P_0 = \\dfrac{D_1}{r - g} \\)</li>
-            <li>Perpetuity: \\( PV = \\dfrac{C}{r} \\)</li>
-            <li>Growing Perpetuity: \\( PV = \\dfrac{C}{r - g}, \\; r>g \\)</li>
-            <li>Bond price (periodic): \\( P = C \\times \\dfrac{1 - (1+i)^{-N}}{i} + F(1+i)^{-N} \\)</li>
-            <li>Where: \\(C\\) = coupon per period, \\(i\\) = market rate per period, \\(N\\) = #periods, \\(F\\)=face value</li>
-          </ul>
-        </section>
-
-        <section>
-          <h3 class="text-lg font-bold">Capital Budgeting</h3>
-          <ul class="list-disc ml-6 mt-2">
-            <li>Net Present Value (NPV): \\( NPV = \\sum_{t=0}^{N} \\dfrac{C_t}{(1+i)^t} \\) (include initial outflow)</li>
-            <li>Internal Rate of Return (IRR): discount rate such that \\( NPV = 0 \\)</li>
-            <li>Average Accounting Return (AAR): \\( AAR = \\dfrac{\\text{Average accounting profit}}{\\text{Initial investment}} \\)</li>
-            <li>Payback Period (PBP): time until cumulative cash flows = initial investment</li>
-            <li>Discounted Payback (DPB): time until cumulative discounted cash flows = initial investment</li>
-          </ul>
-        </section>
-
-      </div>
-
-      <div class="mt-4">
-        <button id="print-formulae" class="btn btn-ghost">Print / Save as PDF</button>
+        <!-- Other sections (Investments, TVM, Valuation, Capital Budgeting) ... same as before -->
+        
       </div>
     </div>
   `;
 }
 
-/* mountFormulae: injects the formulae sheet into the page and triggers MathJax */
-function mountFormulae(){
-  // find your main content container - adapt ID if necessary
-  const content = document.getElementById('content') || document.getElementById('main') || document.getElementById('app') || document.body;
-  content.innerHTML = formulaeHTML();
+/* Loader for Formulae (same pattern as other modules) */
+function loadFormulae(){
+  const container = document.getElementById("topic-content"); // the same container all modules use
+  if(!container) return;
+  container.innerHTML = formulaeHTML();
 
-  // typeset math for the newly inserted element (target the content element)
+  // trigger MathJax rendering
   if(window.MathJax && MathJax.typesetPromise){
-    MathJax.typesetPromise([content]).catch((err)=>{ console.warn('MathJax typeset error:', err); });
-  } else {
-    console.warn('MathJax not loaded - include the MathJax script in your HTML head.');
+    MathJax.typesetPromise([container]);
   }
-
-  // Print button handler
-  const btn = document.getElementById('print-formulae');
-  if(btn) btn.addEventListener('click', ()=> window.print());
 }
 
-/* Attach to your existing nav buttons (safe - won't duplicate handlers) */
-function attachFormulaeButton(){
-  document.querySelectorAll('.topic-select[data-topic="formulae"]').forEach(btn=>{
-    // remove previous listener (if any) to avoid double-binding:
-    btn.replaceWith(btn.cloneNode(true));
-  });
-
-  // re-select after cloning
-  document.querySelectorAll('.topic-select[data-topic="formulae"]').forEach(btn=>{
-    btn.addEventListener('click', (e)=>{
-      e.preventDefault();
-      mountFormulae();
-      // if you have a side panel, you may also want to highlight the active button there
-    });
-  });
-}
-
-/* Call attachFormulaeButton once DOM is ready */
-document.addEventListener('DOMContentLoaded', ()=> {
-  attachFormulaeButton();
-});
 
 
 
