@@ -138,5 +138,209 @@
         "explain": "E[R] = Σ p_i r_i = 0.6*0.08 + 0.4*(-0.02) = 0.032 = 3.2%."
       }
     ]
+  },
+
+  
+  {
+    "module": "Recording Financial Transactions & Financial Ratios",
+    "questions": [
+      {
+        "ID": "Q1",
+        "topic": "Accounting Equation",
+        "type": "table",
+        "question": "Analyse the following transactions of Mbonisa Limited according to the Accounting equation. Show if the element increases (+), decreases (-) or no change (0).",
+        "options": [],
+        "answer": "Transaction 1: Assets +105000, Equity +105000, Liabilities 0\nTransaction 2: Assets +30000 (deposit), +270000 (equipment), Liabilities +270000, Equity 0\nTransaction 10: Assets +4000 (Accounts Receivable), Equity +2000 (Revenue), Assets -2000 (COGS)",
+        "explain": "Raise capital, purchase assets via deposit and loan, record sales with mark-up."
+      },
+      {
+        "ID": "Q2",
+        "topic": "General Ledger",
+        "type": "ledger",
+        "question": "Complete the Bank account for Millward Ltd for February 2022.",
+        "options": [],
+        "answer": "Bank account debits: opening balance ?, receipts from Trade Receivables ?, total ?; credits: payments ?, ending balance 80,000",
+        "explain": "Fill in missing transactions to balance the Bank ledger account."
+      },
+      {
+        "ID": "Q3",
+        "topic": "Financial Statements",
+        "type": "numeric",
+        "question": "Prepare Statement of Comprehensive Income and Statement of Financial Position for Maduba (Pty) Ltd after adjustments.",
+        "options": [],
+        "answer": "Income Statement: Adjusted sales, interest, depreciation, repairs, wages. Balance Sheet: Adjusted assets, liabilities, equity.",
+        "explain": "Take into account depreciation, accrued expenses, and interest earned but not received."
+      },
+      {
+        "ID": "Q4",
+        "topic": "Financial Ratio Analysis",
+        "type": "numeric",
+        "question": "Using Pick n Pay 2021 financials, calculate Return on Equity (ROE) and explain two ways to improve it.",
+        "options": [],
+        "answer": "ROE = Net profit / Equity = 967.1 / 3386.2 ≈ 28.55%. Improve by increasing net profit or reducing equity (leverage).",
+        "explain": "ROE measures return generated on shareholders’ funds. Improving profit margins or leveraging debt can increase ROE."
+      }
+    ]
+  },
+  {
+    "module": "Budgeting",
+    "questions": [
+      {
+        "ID": "Q5",
+        "topic": "Cash Budget",
+        "type": "numeric",
+        "question": "Prepare a cash budget for King Limited for September 2022, given sales, purchases, withdrawals, and other info.",
+        "options": [],
+        "answer": "Cash inflows: Cash sales + Credit collections + Fixed deposit maturity + Interest; Cash outflows: Purchases, withdrawals, salaries, operating expenses, furniture deposit.",
+        "explain": "Apply cash collection policies, cash payments, and planned transactions to calculate month-end balance."
+      },
+      {
+        "ID": "Q6",
+        "topic": "Budgeting Process",
+        "type": "short_answer",
+        "question": "Name two important stages of budgeting.",
+        "options": [],
+        "answer": "1. Budget preparation/estimation 2. Budget implementation and control",
+        "explain": "Budgets must first be planned and prepared, then monitored and adjusted."
+      }
+    ]
+  },
+  {
+    "module": "Investments & Risk",
+    "questions": [
+      {
+        "ID": "Q7",
+        "topic": "Expected Return & Variance",
+        "type": "numeric",
+        "question": "Given probabilities and returns for share Fanta, calculate expected return and variance.",
+        "options": [],
+        "answer": "Expected return = 0.3*0.25 + 0.5*0.20 + 0.2*0.15 = 0.20 (20%)\nVariance = Σ p_i*(R_i - E[R])^2 = 0.0035 (0.35%)",
+        "explain": "Weighted average of returns for expected return; sum of squared deviations weighted by probabilities for variance."
+      },
+      {
+        "ID": "Q8",
+        "topic": "Investment Selection",
+        "type": "mcq",
+        "question": "Given expected return and variance of shares, which share would you invest in? (No calculations)",
+        "options": [
+          "1. Shares B vs C: Choose lower variance for same return",
+          "2. Shares A vs D: Choose higher return for same variance",
+          "3. Shares A vs B: Choose higher return for acceptable risk"
+        ],
+        "answerIndex": 0,
+        "explain": "Investment decision is based on risk-return trade-off. Lower variance preferred for same expected return."
+      }
+    ]
+  },
+  {
+    "module": "Time Value of Money (TVM)",
+    "questions": [
+      {
+        "ID": "Q9",
+        "topic": "Future Value",
+        "type": "numeric",
+        "question": "Luke invests R5 000 for two years at annual compounding 15%. Calculate FV.",
+        "options": [],
+        "answer": "5000 * (1 + 0.15)^2 = 5000 * 1.3225 = R6,612.50",
+        "explain": "FV = PV*(1 + r)^n"
+      },
+      {
+        "ID": "Q10",
+        "topic": "Future Value Quarterly Compounding",
+        "type": "numeric",
+        "question": "Jessica invests R6 000 for two years at 10% compounded quarterly. Calculate FV.",
+        "options": [],
+        "answer": "6000 * (1 + 0.10/4)^(4*2) = 6000 * 1.215506 ≈ R7,293.04",
+        "explain": "FV with quarterly compounding: FV = PV*(1 + r/m)^(n*m)"
+      },
+      {
+        "ID": "Q11",
+        "topic": "Present Value",
+        "type": "numeric",
+        "question": "Zintle wants to find PV of R10 000 to be received in 5 years at 9% per annum.",
+        "options": [],
+        "answer": "10000 / (1 + 0.09)^5 ≈ 6499.09",
+        "explain": "PV = FV / (1 + r)^n"
+      },
+      {
+        "ID": "Q12",
+        "topic": "Future Value of Annuity",
+        "type": "numeric",
+        "question": "Thato deposits R6 000 at the end of each year for 3 years at 12% per annum. Calculate FV.",
+        "options": [],
+        "answer": "FV = 6000 * [(1 + 0.12)^3 - 1] / 0.12 ≈ 6000 * 3.4019 ≈ R20,411.40",
+        "explain": "FV of ordinary annuity formula: FVA = PMT * [(1 + i)^n - 1] / i"
+      },
+      {
+        "ID": "Q13",
+        "topic": "Present Value of Annuity",
+        "type": "numeric",
+        "question": "Investment pays R3 500 annually for 10 years at 12%. Find PV.",
+        "options": [],
+        "answer": "PV = 3500 * [1 - (1 + 0.12)^-10]/0.12 ≈ 3500 * 5.65 ≈ R19,775",
+        "explain": "Present value of ordinary annuity formula: PVA = PMT * [1 - (1 + i)^-n] / i"
+      },
+      {
+        "ID": "Q14",
+        "topic": "Loan Payment",
+        "type": "numeric",
+        "question": "Dr. Nkosi buys equipment costing R2 000 000 financed over 60 months at 14% per annum monthly. First payment after 6 months. Calculate monthly payment without deferral.",
+        "options": [],
+        "answer": "PMT = 2,000,000 * [0.14/12 * (1+0.14/12)^60] / [(1+0.14/12)^60 - 1] ≈ R46,447.50",
+        "explain": "Use standard annuity formula for loan payments: PMT = PV * [i*(1+i)^n]/[(1+i)^n-1]"
+      },
+      {
+        "ID": "Q15",
+        "topic": "Finance Concept",
+        "type": "short_answer",
+        "question": "Explain compound interest.",
+        "options": [],
+        "answer": "Interest calculated on both principal and accumulated interest.",
+        "explain": "Compound interest grows faster than simple interest because interest earns interest."
+      },
+      {
+        "ID": "Q16",
+        "topic": "Central Bank",
+        "type": "short_answer",
+        "question": "Mention the central bank of South Africa.",
+        "options": [],
+        "answer": "South African Reserve Bank (SARB)",
+        "explain": "SARB is responsible for monetary policy and issuing currency."
+      }
+    ]
+  },
+  {
+    "module": "Valuation",
+    "questions": [
+      {
+        "ID": "Q17",
+        "topic": "Intrinsic Value Decision",
+        "type": "short_answer",
+        "question": "Bakers Ltd share trading at R1,500. Intrinsic value R900. Should Likhona sell? Motivate.",
+        "options": [],
+        "answer": "Yes, because market price > intrinsic value. Share is overvalued.",
+        "explain": "Sell overvalued shares to avoid loss or lower returns."
+      },
+      {
+        "ID": "Q18",
+        "topic": "Gordon Growth",
+        "type": "numeric",
+        "question": "Goldfields Ltd expected dividend R2.58, growth 7%, required return 14%. Maximum price?",
+        "options": [],
+        "answer": "P0 = 2.58 / (0.14 - 0.07) ≈ R36.86",
+        "explain": "Use Gordon Growth Model: P0 = D1 / (r - g)"
+      },
+      {
+        "ID": "Q19",
+        "topic": "Dividend Valuation",
+        "type": "numeric",
+        "question": "Adcorp Ltd dividends 2021: R10.0, 2022: R10.8, 2023: R11.2. Required return 12%. Value today?",
+        "options": [],
+        "answer": "Discount future dividends: PV ≈ 10/1.12 + 10.8/1.12^2 + 11.2/1.12^3 ≈ R27.17",
+        "explain": "Sum present values of known dividends to get intrinsic value."
+      }
+    ]
   }
 ]
+
+
