@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>FTX1005F/S — Practice Exam</title>
 
+  <!-- Tailwind + Math libraries -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjs@11.8.0/lib/browser/math.js"></script>
   <script>
@@ -22,15 +23,15 @@
 </head>
 <body class="min-h-screen flex">
 
-  <!-- Sidebar: Topic list -->
+  <!-- Sidebar -->
   <aside class="w-64 bg-[#111a33] border-r border-gray-800 overflow-y-auto p-4">
     <h2 class="text-xl mb-3 font-bold">Topics</h2>
     <ul id="topic-list" class="space-y-2">
-      <!-- Dynamically loaded topics -->
+      <!-- Loaded dynamically -->
     </ul>
   </aside>
 
-  <!-- Main Content -->
+  <!-- Main -->
   <main class="flex-1 p-6 overflow-y-auto">
     <div class="max-w-3xl mx-auto">
       <h1 class="text-3xl mb-3 font-bold">FTX1005F/S — Practice Mode</h1>
@@ -62,26 +63,25 @@ let topics = [];
 let currentTopicIndex = 0;
 let currentQIndex = 0;
 let score = 0;
+let answered = 0;
 
-// Apply stored theme to exam.html
+// Theme Sync
 const savedTheme = localStorage.getItem("theme") || "bloodred";
 document.documentElement.setAttribute("data-theme", savedTheme);
 
-// Update when theme changes on main calculator
-document.getElementById("theme-dropdown").addEventListener("change", e => {
-  const theme = e.target.value;
-  document.documentElement.setAttribute("data-theme", theme);
-  localStorage.setItem("theme", theme);
-});
-
-
+// Load questions.json
 async function loadQuestions() {
-  const res = await fetch('questions.json');
-  topics = await res.json();
-  renderTopicList();
-  loadQuestion(0, 0);
+  try {
+    const res = await fetch('questions.json');
+    topics = await res.json();
+    renderTopicList();
+    loadQuestion(0, 0);
+  } catch (err) {
+    console.error("Error loading questions:", err);
+  }
 }
 
+// Render topic sidebar
 function renderTopicList() {
   const list = document.getElementById('topic-list');
   list.innerHTML = '';
@@ -94,13 +94,17 @@ function renderTopicList() {
   });
 }
 
+// Select a topic
 function selectTopic(i) {
   currentTopicIndex = i;
   currentQIndex = 0;
   score = 0;
+  answered = 0;
   loadQuestion(i, 0);
+  updateScore();
 }
 
+// Load question
 function loadQuestion(topicIdx, qIdx) {
   const q = topics[topicIdx].questions[qIdx];
   if (!q) return;
@@ -111,6 +115,7 @@ function loadQuestion(topicIdx, qIdx) {
   controls.innerHTML = '';
   document.getElementById('result').innerHTML = '';
 
+  // Render controls
   if (q.type === 'numeric') {
     controls.innerHTML = `<input id="ans-input" class="input" placeholder="Enter numeric answer" />`;
   } else if (q.type === 'mcq') {
@@ -122,19 +127,65 @@ function loadQuestion(topicIdx, qIdx) {
   if (window.MathJax) MathJax.typesetPromise();
 }
 
+// Next button
 document.getElementById('next-btn').addEventListener('click', () => {
   const topic = topics[currentTopicIndex];
   currentQIndex = (currentQIndex + 1) % topic.questions.length;
   loadQuestion(currentTopicIndex, currentQIndex);
 });
 
-// Reuse your existing checking logic later
+// Check button logic
 document.getElementById('check-btn').addEventListener('click', () => {
   const q = topics[currentTopicIndex].questions[currentQIndex];
   const resDiv = document.getElementById('result');
-  // just placeholder text for now
-  resDiv.innerHTML = `<p class="text-green-400 font-bold">Answer checked (logic not yet added)</p>`;
+  let correct = false;
+
+  if (q.type === 'numeric') {
+    const val = document.getElementById('ans-input').value.trim();
+    if (val === '') return resDiv.innerHTML = `<span class="text-yellow-400">Please enter an answer.</span>`;
+    try {
+      const inputVal = math.evaluate(val);
+      const correctVal = parseFloat(q.answer);
+      const tol = Math.abs(correctVal * 0.005); // ±0.5%
+      if (Math.abs(inputVal - correctVal) <= tol) {
+        correct = true;
+      }
+    } catch {
+      resDiv.innerHTML = `<span class="text-red-400">Invalid expression.</span>`;
+      return;
+    }
+  } else if (q.type === 'mcq') {
+    const chosen = document.querySelector('input[name="mcq"]:checked');
+    if (!chosen) return resDiv.innerHTML = `<span class="text-yellow-400">Select an option.</span>`;
+    correct = parseInt(chosen.value) === q.answer;
+  }
+
+  if (correct) {
+    score++;
+    resDiv.innerHTML = `<span class="text-green-400 font-bold">✅ Correct!</span>`;
+  } else {
+    resDiv.innerHTML = `<span class="text-red-400 font-bold">❌ Incorrect.</span>`;
+  }
+
+  answered++;
+  updateScore();
 });
+
+// Show answer
+document.getElementById('show-ans-btn').addEventListener('click', () => {
+  const q = topics[currentTopicIndex].questions[currentQIndex];
+  const resDiv = document.getElementById('result');
+  if (q.type === 'mcq') {
+    resDiv.innerHTML = `<span class="text-purple-400">Answer: ${q.options[q.answer]}</span>`;
+  } else {
+    resDiv.innerHTML = `<span class="text-purple-400">Answer: ${q.answer}</span>`;
+  }
+});
+
+// Update score display
+function updateScore() {
+  document.getElementById('score').innerHTML = `Score: ${score}/${answered}`;
+}
 
 loadQuestions();
 </script>
