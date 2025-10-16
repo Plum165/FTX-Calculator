@@ -1,107 +1,142 @@
 [
   {
-    "ID": "Q1",
     "module": "Time Value of Money (TVM)",
-    "topic": "Present Value",
-    "type": "numeric",
-    "question": "Calculate the present value of R1000 to be received in 5 years at 5% per annum.",
-    "options": [],
-    "answer": "1000 / (1 + 0.05) ^ 5",
-    "explain": "PV = FV / (1 + r)^n. Here FV = 1000, r = 0.05, n = 5. PV ≈ 783.53."
+    "questions": [
+      {
+        "ID": "Q1",
+        "topic": "Present Value",
+        "type": "numeric",
+        "question": "Calculate the present value of R1000 to be received in 5 years at 5% per annum.",
+        "options": [],
+        "answer": "1000 / (1 + 0.05) ^ 5",
+        "explain": "PV = FV / (1 + r)^n. Here FV = 1000, r = 0.05, n = 5. PV ≈ 783.53."
+      }
+    ]
   },
   {
-    "ID": "Q2",
     "module": "Valuation",
-    "topic": "Gordon Growth",
-    "type": "numeric",
-    "question": "A company will pay a dividend of R2.00 next year. If required return is 9% and growth is 4%, what is the value of the share using Gordon Growth model?",
-    "options": [],
-    "answer": "2.00 / (0.09 - 0.04)",
-    "explain": "Using P0 = D1 / (r - g). D1=2.00, r=0.09, g=0.04 → P0 = 2 / 0.05 = R40."
+    "questions": [
+      {
+        "ID": "Q2",
+        "topic": "Gordon Growth",
+        "type": "numeric",
+        "question": "A company will pay a dividend of R2.00 next year. If required return is 9% and growth is 4%, what is the value of the share using Gordon Growth model?",
+        "options": [],
+        "answer": "2.00 / (0.09 - 0.04)",
+        "explain": "Using P0 = D1 / (r - g). D1=2.00, r=0.09, g=0.04 → P0 = 2 / 0.05 = R40."
+      },
+      {
+        "ID": "Q9",
+        "topic": "Perpetuity",
+        "type": "numeric",
+        "question": "A perpetuity pays R500 per year forever. If discount rate is 5%, what is the present value?",
+        "options": [],
+        "answer": "500 / 0.05",
+        "explain": "PV = C / r = 500 / 0.05 = R10,000."
+      }
+    ]
   },
   {
-    "ID": "Q3",
     "module": "Sources of Finance & Cost of Capital",
-    "topic": "CAPM",
-    "type": "numeric",
-    "question": "Using CAPM, compute expected return for beta = 1.2, risk-free rate 6% and market return 12%.",
-    "options": [],
-    "answer": "0.06 + 1.2 * (0.12 - 0.06)",
-    "explain": "CAPM: E[R] = Rf + β (Rm - Rf) = 0.06 + 1.2*(0.06) = 0.132 (13.2%)."
+    "questions": [
+      {
+        "ID": "Q3",
+        "topic": "CAPM",
+        "type": "numeric",
+        "question": "Using CAPM, compute expected return for beta = 1.2, risk-free rate 6% and market return 12%.",
+        "options": [],
+        "answer": "0.06 + 1.2 * (0.12 - 0.06)",
+        "explain": "CAPM: E[R] = Rf + β (Rm - Rf) = 0.06 + 1.2*(0.06) = 0.132 (13.2%)."
+      }
+    ]
   },
   {
-    "ID": "Q4",
     "module": "Capital Budgeting",
-    "topic": "NPV",
-    "type": "numeric",
-    "question": "Project with cash flows: t0 = -100000, t1 = 30000, t2 = 40000, t3 = 50000. Compute NPV at 12%.",
-    "options": [],
-    "answer": "(-100000) + 30000 / (1 + 0.12) + 40000 / (1 + 0.12)^2 + 50000 / (1 + 0.12)^3",
-    "explain": "Discount each cash flow to present. NPV > 0 indicates project adds value."
+    "questions": [
+      {
+        "ID": "Q4",
+        "topic": "NPV",
+        "type": "numeric",
+        "question": "Project with cash flows: t0 = -100000, t1 = 30000, t2 = 40000, t3 = 50000. Compute NPV at 12%.",
+        "options": [],
+        "answer": "(-100000) + 30000 / (1 + 0.12) + 40000 / (1 + 0.12)^2 + 50000 / (1 + 0.12)^3",
+        "explain": "Discount each cash flow to present. NPV > 0 indicates project adds value."
+      }
+    ]
   },
   {
-    "ID": "Q5",
     "module": "Financial Ratio Analysis",
-    "topic": "Current Ratio",
-    "type": "numeric",
-    "question": "Calculate the current ratio if current assets are R150,000 and current liabilities are R60,000.",
-    "options": [],
-    "answer": "150000 / 60000",
-    "explain": "Current ratio = Current Assets / Current Liabilities = 150000/60000 = 2.5."
+    "questions": [
+      {
+        "ID": "Q5",
+        "topic": "Current Ratio",
+        "type": "numeric",
+        "question": "Calculate the current ratio if current assets are R150,000 and current liabilities are R60,000.",
+        "options": [],
+        "answer": "150000 / 60000",
+        "explain": "Current ratio = Current Assets / Current Liabilities = 150000/60000 = 2.5."
+      }
+    ]
   },
   {
-    "ID": "Q6",
     "module": "Cost-Volume-Profit",
-    "topic": "Break-even",
-    "type": "numeric",
-    "question": "Fixed costs R50,000, price per unit R50, variable cost per unit R30. Compute break-even in units.",
-    "options": [],
-    "answer": "50000 / (50 - 30)",
-    "explain": "Break-even units = FC / (P - VC) = 50000 / 20 = 2500 units."
+    "questions": [
+      {
+        "ID": "Q6",
+        "topic": "Break-even",
+        "type": "numeric",
+        "question": "Fixed costs R50,000, price per unit R50, variable cost per unit R30. Compute break-even in units.",
+        "options": [],
+        "answer": "50000 / (50 - 30)",
+        "explain": "Break-even units = FC / (P - VC) = 50000 / 20 = 2500 units."
+      }
+    ]
   },
   {
-    "ID": "Q7",
     "module": "Working Capital",
-    "topic": "Net Working Capital",
-    "type": "numeric",
-    "question": "Compute Net Working Capital if current assets are R120,000 and current liabilities R80,000.",
-    "options": [],
-    "answer": "120000 - 80000",
-    "explain": "NWC = Current assets - Current liabilities = 40000."
+    "questions": [
+      {
+        "ID": "Q7",
+        "topic": "Net Working Capital",
+        "type": "numeric",
+        "question": "Compute Net Working Capital if current assets are R120,000 and current liabilities R80,000.",
+        "options": [],
+        "answer": "120000 - 80000",
+        "explain": "NWC = Current assets - Current liabilities = 40000."
+      }
+    ]
   },
   {
-    "ID": "Q8",
     "module": "Recording Transactions",
-    "topic": "Journal Entry",
-    "type": "mcq",
-    "question": "A firm receives cash of R10,000 from a customer for services rendered. What is the correct journal entry?",
-    "options": [
-      "Debit Cash R10,000; Credit Service Revenue R10,000",
-      "Debit Service Revenue R10,000; Credit Cash R10,000",
-      "Debit Cash R10,000; Credit Accounts Receivable R10,000",
-      "Debit Accounts Receivable R10,000; Credit Service Revenue R10,000"
-    ],
-    "answerIndex": 0,
-    "explain": "Cash received increases the Cash account (debit) and recognizes revenue (credit)."
+    "questions": [
+      {
+        "ID": "Q8",
+        "topic": "Journal Entry",
+        "type": "mcq",
+        "question": "A firm receives cash of R10,000 from a customer for services rendered. What is the correct journal entry?",
+        "options": [
+          "Debit Cash R10,000; Credit Service Revenue R10,000",
+          "Debit Service Revenue R10,000; Credit Cash R10,000",
+          "Debit Cash R10,000; Credit Accounts Receivable R10,000",
+          "Debit Accounts Receivable R10,000; Credit Service Revenue R10,000"
+        ],
+        "answerIndex": 0,
+        "explain": "Cash received increases the Cash account (debit) and recognizes revenue (credit)."
+      }
+    ]
   },
   {
-    "ID": "Q9",
-    "module": "Valuation",
-    "topic": "Perpetuity",
-    "type": "numeric",
-    "question": "A perpetuity pays R500 per year forever. If discount rate is 5%, what is the present value?",
-    "options": [],
-    "answer": "500 / 0.05",
-    "explain": "PV = C / r = 500 / 0.05 = R10,000."
-  },
-  {
-    "ID": "Q10",
     "module": "Investments",
-    "topic": "Expected Return",
-    "type": "numeric",
-    "question": "An asset has two states: 0.6 probability of 8% return and 0.4 probability of -2% return. Compute expected return.",
-    "options": [],
-    "answer": "0.6 * 0.08 + 0.4 * (-0.02)",
-    "explain": "E[R] = Σ p_i r_i = 0.6*0.08 + 0.4*(-0.02) = 0.032 = 3.2%."
+    "questions": [
+      {
+        "ID": "Q10",
+        "topic": "Expected Return",
+        "type": "numeric",
+        "question": "An asset has two states: 0.6 probability of 8% return and 0.4 probability of -2% return. Compute expected return.",
+        "options": [],
+        "answer": "0.6 * 0.08 + 0.4 * (-0.02)",
+        "explain": "E[R] = Σ p_i r_i = 0.6*0.08 + 0.4*(-0.02) = 0.032 = 3.2%."
+      }
+    ]
   }
 ]

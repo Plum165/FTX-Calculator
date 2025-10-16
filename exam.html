@@ -63,6 +63,18 @@ let currentTopicIndex = 0;
 let currentQIndex = 0;
 let score = 0;
 
+// Apply stored theme to exam.html
+const savedTheme = localStorage.getItem("theme") || "bloodred";
+document.documentElement.setAttribute("data-theme", savedTheme);
+
+// Update when theme changes on main calculator
+document.getElementById("theme-dropdown").addEventListener("change", e => {
+  const theme = e.target.value;
+  document.documentElement.setAttribute("data-theme", theme);
+  localStorage.setItem("theme", theme);
+});
+
+
 async function loadQuestions() {
   const res = await fetch('questions.json');
   topics = await res.json();
