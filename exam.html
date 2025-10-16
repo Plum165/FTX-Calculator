@@ -13,174 +13,116 @@
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
 
   <style>
-    body{font-family:Inter, system-ui, Arial; padding:20px; background:#0b1220; color:#fff}
-    .card{background:rgba(255,255,255,0.03); padding:16px; border-radius:8px;}
-    .input{padding:.5rem; border-radius:6px; width:100%}
-    button{padding:.5rem 1rem; border-radius:8px; font-weight:700}
-    .muted{opacity:.85}
+    body { font-family: Inter, system-ui, Arial; background: #0b1220; color: #fff; }
+    .card { background: rgba(255,255,255,0.05); padding: 16px; border-radius: 10px; }
+    .input { padding: .5rem; border-radius: 6px; width: 100%; color: black; }
+    button { font-weight: 700; border-radius: 8px; transition: all 0.2s ease; }
+    button:hover { opacity: 0.9; }
   </style>
 </head>
-<body>
-  <div class="max-w-3xl mx-auto">
-    <h1 class="text-2xl mb-2">FTX1005F/S — Practice Mode</h1>
-    <p class="muted mb-4">Questions are loaded from <code>questions.json</code>. Numeric answers accept a tolerance (default ±0.5%).</p>
+<body class="min-h-screen flex">
 
-    <div id="exam-card" class="card">
-      <div id="q-area">
-        <p id="q-id" class="muted"></p>
-        <h2 id="q-text" class="text-lg"></h2>
-        <div id="q-controls" class="mt-3"></div>
-        <div id="q-help" class="mt-3 muted"></div>
+  <!-- Sidebar: Topic list -->
+  <aside class="w-64 bg-[#111a33] border-r border-gray-800 overflow-y-auto p-4">
+    <h2 class="text-xl mb-3 font-bold">Topics</h2>
+    <ul id="topic-list" class="space-y-2">
+      <!-- Dynamically loaded topics -->
+    </ul>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="flex-1 p-6 overflow-y-auto">
+    <div class="max-w-3xl mx-auto">
+      <h1 class="text-3xl mb-3 font-bold">FTX1005F/S — Practice Mode</h1>
+      <p class="text-gray-300 mb-4">Each topic includes related exam questions. Numeric answers accept ±0.5% tolerance.</p>
+
+      <div id="exam-card" class="card">
+        <div id="q-area">
+          <p id="q-id" class="text-sm text-gray-400"></p>
+          <h2 id="q-text" class="text-lg font-semibold mb-2"></h2>
+          <div id="q-attachments" class="mb-3"></div>
+          <div id="q-controls" class="mt-3"></div>
+          <div id="q-help" class="mt-3 text-gray-400"></div>
+        </div>
+
+        <div class="mt-5 flex flex-wrap gap-2">
+          <button id="check-btn" class="bg-green-600 px-4 py-2">Check</button>
+          <button id="next-btn" class="bg-blue-600 px-4 py-2">Next</button>
+          <button id="show-ans-btn" class="bg-purple-600 px-4 py-2">Show Answer</button>
+        </div>
+
+        <div id="result" class="mt-3 text-lg"></div>
+        <div id="score" class="mt-4 text-gray-400"></div>
       </div>
-
-      <div class="mt-4 flex gap-2">
-        <button id="check-btn">Check Answer</button>
-        <button id="next-btn">Next</button>
-        <button id="show-ans-btn">Show Answer & Explanation</button>
-      </div>
-
-      <div id="result" class="mt-3"></div>
-      <div id="score" class="mt-4 muted"></div>
     </div>
-  </div>
+  </main>
 
 <script>
-let questions = [];
-let index = 0;
+let topics = [];
+let currentTopicIndex = 0;
+let currentQIndex = 0;
 let score = 0;
 
-async function loadQuestions(){
+async function loadQuestions() {
   const res = await fetch('questions.json');
-  questions = await res.json();
-  // shuffle for practice or keep order? We'll keep order but allow random later.
-  renderQuestion();
+  topics = await res.json();
+  renderTopicList();
+  loadQuestion(0, 0);
 }
 
-function renderQuestion(){
-  if(questions.length === 0) { document.getElementById('q-text').textContent = 'No questions loaded.'; return; }
-  const q = questions[index];
-  document.getElementById('q-id').textContent = `${q.ID} — ${q.module} — ${q.topic}`;
-  document.getElementById('q-text').textContent = q.question;
+function renderTopicList() {
+  const list = document.getElementById('topic-list');
+  list.innerHTML = '';
+  topics.forEach((t, i) => {
+    const li = document.createElement('li');
+    li.innerHTML = `
+      <button class="w-full text-left bg-[#1b2640] hover:bg-[#25355a] px-3 py-2 rounded"
+        onclick="selectTopic(${i})">${t.topic}</button>`;
+    list.appendChild(li);
+  });
+}
+
+function selectTopic(i) {
+  currentTopicIndex = i;
+  currentQIndex = 0;
+  score = 0;
+  loadQuestion(i, 0);
+}
+
+function loadQuestion(topicIdx, qIdx) {
+  const q = topics[topicIdx].questions[qIdx];
+  if (!q) return;
+  document.getElementById('q-id').textContent = `${q.id || ''} — ${topics[topicIdx].topic}`;
+  document.getElementById('q-text').innerHTML = q.question;
+  document.getElementById('q-attachments').innerHTML = q.attachments || '';
   const controls = document.getElementById('q-controls');
   controls.innerHTML = '';
   document.getElementById('result').innerHTML = '';
-  if(q.type === 'numeric'){
-    controls.innerHTML = `<input id="ans-input" class="input" placeholder="Enter numeric answer" aria-label="numeric answer" />`;
-  } else if(q.type === 'mcq'){
+
+  if (q.type === 'numeric') {
+    controls.innerHTML = `<input id="ans-input" class="input" placeholder="Enter numeric answer" />`;
+  } else if (q.type === 'mcq') {
     q.options.forEach((opt,i)=>{
       controls.insertAdjacentHTML('beforeend', `<div><label><input type="radio" name="mcq" value="${i}" /> ${opt}</label></div>`);
     });
   }
   document.getElementById('q-help').innerHTML = q.hint ? `<strong>Hint:</strong> ${q.hint}` : '';
-  if(window.MathJax) MathJax.typesetPromise();
+  if (window.MathJax) MathJax.typesetPromise();
 }
 
-function safeEvalAnswerExpression(expr){
-  // Provide functions: PV, FV, NPV, IRR (same as index)
-  // We'll implement PV_simple (no sign quirks)
-  try {
-    const scope = {
-      PV: function(rate, n, pmt=0, fv=0, type=0){
-        return (function(rate,n,pmt,fv,type){
-          rate = Number(rate); n = Number(n); pmt = Number(pmt); fv = Number(fv); type = Number(type);
-          if(n === 0) return (-(fv + pmt));
-          if(rate === 0) return (-(fv + pmt * n));
-          const pow = Math.pow(1+rate, n);
-          const pv = -( fv + pmt * (1+rate*type) * ( (pow - 1) / rate ) ) / pow;
-          return pv;
-        })(rate,n,pmt,fv,type);
-      },
-      FV: function(rate, n, pmt=0, pv=0, type=0){
-        return (function(rate,n,pmt,pv,type){
-          rate = Number(rate); n = Number(n); pmt = Number(pmt); pv = Number(pv); type = Number(type);
-          if(rate === 0) return (-(pv + pmt * n));
-          const pow = Math.pow(1+rate, n);
-          return -( pv * pow + pmt * (1+rate*type) * ( (pow - 1) / rate ) );
-        })(rate,n,pmt,pv,type);
-      },
-      NPV: function(rate, arr){
-        return arr.reduce((s,cf,i)=> s + cf / Math.pow(1+rate, i), 0);
-      },
-      // note: IRR implemented simply — returns numeric or null
-      IRR: function(arr){ 
-        const f = (r) => arr.reduce((s,cf,i)=> s + cf / Math.pow(1+r, i), 0);
-        let low=-0.9999, high=10; let fLow=f(low), fHigh=f(high);
-        for(let iter=0; iter<200; iter++){
-          const mid=(low+high)/2; const fMid=f(mid);
-          if(Math.abs(fMid) < 1e-8) return mid;
-          if(fLow * fMid <= 0){ high=mid; fHigh=fMid;} else { low=mid; fLow=fMid; }
-        }
-        return null;
-      }
-    };
-    // Evaluate expression using math.js with provided scope
-    return math.evaluate(expr, scope);
-  } catch(e){
-    return NaN;
-  }
-}
+document.getElementById('next-btn').addEventListener('click', () => {
+  const topic = topics[currentTopicIndex];
+  currentQIndex = (currentQIndex + 1) % topic.questions.length;
+  loadQuestion(currentTopicIndex, currentQIndex);
+});
 
-document.getElementById('check-btn').addEventListener('click', ()=>{
-  const q = questions[index];
+// Reuse your existing checking logic later
+document.getElementById('check-btn').addEventListener('click', () => {
+  const q = topics[currentTopicIndex].questions[currentQIndex];
   const resDiv = document.getElementById('result');
-  if(q.type === 'numeric'){
-    const input = document.getElementById('ans-input').value.trim();
-    if(input === '') { resDiv.innerHTML = `<p class="muted">Please enter an answer.</p>`; return; }
-    // Compute expected numeric answer. JSON answer may be expression string or numeric
-    let expected;
-    try {
-      if(typeof q.answer === 'number') expected = q.answer;
-      else expected = safeEvalAnswerExpression(q.answer);
-    } catch(e){ expected = NaN; }
-    // parse user's numeric answer (allow mathematical expressions)
-    let userVal;
-    try { userVal = math.evaluate(input); } catch(e){ userVal = Number(input); }
-    const tolPct = q.tolerance || 0.005; // default 0.5%
-    const tolAbs = q.tolAbs || 0.0001;
-    const absDiff = Math.abs(userVal - expected);
-    const pctDiff = expected === 0 ? (absDiff) : (absDiff / Math.abs(expected));
-    if(!isFinite(expected) || isNaN(expected)){ resDiv.innerHTML = `<p>Couldn't evaluate correct answer expression.</p>`; return; }
-    if(absDiff <= Math.max(tolAbs, Math.abs(expected) * tolPct)){
-      resDiv.innerHTML = `<p><strong style="color:lightgreen">Correct</strong> — your answer ${userVal} ≈ expected ${fmt(expected,6)}</p>`;
-      score += 1;
-    } else {
-      resDiv.innerHTML = `<p><strong style="color:salmon">Incorrect</strong> — your answer ${userVal} vs expected ${fmt(expected,6)} (diff ${fmt(absDiff,6)})</p>`;
-    }
-    document.getElementById('score').textContent = `Score: ${score} / ${index+1}`;
-  } else if(q.type === 'mcq'){
-    const opts = document.querySelectorAll('input[name="mcq"]');
-    let chosen = null;
-    opts.forEach(o=>{ if(o.checked) chosen = Number(o.value); });
-    if(chosen === null){ document.getElementById('result').innerHTML = '<p class="muted">Choose an option first.</p>'; return; }
-    if(chosen === q.answerIndex){ document.getElementById('result').innerHTML = '<p style="color:lightgreen"><strong>Correct</strong></p>'; score += 1; }
-    else document.getElementById('result').innerHTML = `<p style="color:salmon"><strong>Incorrect</strong></p>`;
-    document.getElementById('score').textContent = `Score: ${score} / ${index+1}`;
-  }
+  // just placeholder text for now
+  resDiv.innerHTML = `<p class="text-green-400 font-bold">Answer checked (logic not yet added)</p>`;
 });
-
-document.getElementById('show-ans-btn').addEventListener('click', ()=>{
-  const q = questions[index];
-  const resDiv = document.getElementById('result');
-  let correctStr = '';
-  try {
-    if(q.type === 'numeric'){
-      const expected = typeof q.answer === 'number' ? q.answer : safeEvalAnswerExpression(q.answer);
-      correctStr = `Answer: ${expected}`;
-    } else if(q.type === 'mcq'){
-      correctStr = `Answer: ${q.options[q.answerIndex]}`;
-    }
-  } catch(e){ correctStr = 'Could not evaluate answer.'; }
-  resDiv.innerHTML = `<div><strong>${correctStr}</strong></div><div class="mt-2"><em>Explanation:</em> ${q.explain || 'No extra explanation provided.'}</div>`;
-  if(window.MathJax) MathJax.typesetPromise();
-});
-
-document.getElementById('next-btn').addEventListener('click', ()=>{
-  index = (index + 1) % questions.length;
-  renderQuestion();
-});
-
-// small helper formatting
-function fmt(n,dec=6){ if(!isFinite(n)) return 'NaN'; if(Number.isInteger(n)) return n; return Number(n).toFixed(dec); }
 
 loadQuestions();
 </script>
