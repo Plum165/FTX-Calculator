@@ -5,16 +5,16 @@
     "type": "long",
     "question": "Explain the accounting equation and demonstrate how it remains in balance when a business purchases equipment worth R50,000 using a bank loan.",
     "answer": "Assets = Liabilities + Equity. Purchasing equipment increases assets by R50,000 and increases liabilities (bank loan) by R50,000, keeping the equation balanced.",
-    "explanation": "Any transaction that affects both sides equally preserves balance; in this case, the asset (equipment) and liability (loan) both increase by the same amount."
+    "explanation": "The fundamental accounting equation is <strong>Assets = Liabilities + Equity</strong>. It represents the relationship between what a company owns (assets), what it owes (liabilities), and the owner's stake (equity). Every transaction must keep this equation in balance. In this scenario: <ul><li><strong>Assets (Equipment)</strong> increase by R50,000.</li><li><strong>Liabilities (Bank Loan)</strong> increase by R50,000.</li><li>Equity is unaffected.</li></ul> The equation becomes: (Original Assets + R50,000) = (Original Liabilities + R50,000) + Equity. Thus, the equation remains perfectly balanced."
   },
   {
     "id": 2,
     "topic": "Cost of Capital (WACC)",
     "type": "mcq",
     "question": "A company issues preference shares at R100 each with a dividend of R12. Calculate the cost of preference share capital if flotation costs are R5 per share.",
-    "choices": ["A) 12.0%", "B) 12.6%", "C) 12.9%", "D) 13.3%"],
-    "answer": "D) 13.3%",
-    "explanation": "Kp = D / (P0 - F) = 12 / (100 - 5) = 12 / 95 = 12.63%. Rounded to 13.3%."
+    "choices": ["A) 12.0%", "B) 12.63%", "C) 12.9%", "D) 13.3%"],
+    "answer": "B) 12.63%",
+    "explanation": "The cost of preference shares (Kp) is calculated by dividing the annual dividend (D) by the net proceeds from the sale of each share. The net proceeds are the issue price (P0) minus any flotation costs (F). <br><strong>Formula:</strong> Kp = D / (P0 - F) <br><strong>Calculation:</strong> Kp = 12 / (100 - 5) = 12 / 95 = 0.1263 or <strong>12.63%</strong>."
   },
   {
     "id": 3,
@@ -22,15 +22,15 @@
     "type": "long",
     "question": "List three advantages of preparing a cash budget.",
     "answer": "1) Helps identify future cash surpluses or deficits. 2) Facilitates planning for short-term financing. 3) Aids control by comparing actual vs budgeted performance.",
-    "explanation": "Cash budgets are vital planning tools for liquidity management and short-term decision-making."
+    "explanation": "A cash budget is a critical financial tool for managing liquidity. Its key advantages include: <ul><li><strong>Identifies Potential Cash Shortfalls:</strong> It provides an early warning of potential cash deficits, allowing management to arrange for financing before a crisis occurs.</li><li><strong>Highlights Surplus Cash:</strong> It identifies periods of excess cash, enabling planning for short-term investments to earn a return.</li><li><strong>Improves Control and Monitoring:</strong> It sets a benchmark against which actual cash flows can be compared, helping to control spending and identify deviations from the plan.</li></ul>"
   },
   {
     "id": 4,
     "topic": "Capital Budgeting",
     "type": "numeric",
     "question": "Project X costs R100,000 and yields cash inflows of R40,000, R50,000, R30,000 over three years. The cost of capital is 10%. Compute the NPV.",
-    "answer": "24225",
-    "explanation": "NPV = (40,000/1.1) + (50,000/1.1²) + (30,000/1.1³) − 100,000 = 36,364 + 41,322 + 22,539 − 100,000 = R24,225 (positive). Since NPV > 0, accept the project."
+    "answer": "R24,225",
+    "explanation": "Net Present Value (NPV) is the difference between the present value of cash inflows and the present value of cash outflows over a period of time. <br><strong>Formula:</strong> NPV = &Sigma; [CFt / (1+r)^t] - C0 <br>Where CFt = Cash flow in year t, r = discount rate, t = time period, C0 = initial investment. <br><strong>Year 1:</strong> 40,000 / (1.10)^1 = R36,364 <br><strong>Year 2:</strong> 50,000 / (1.10)^2 = R41,322 <br><strong>Year 3:</strong> 30,000 / (1.10)^3 = R22,539 <br><strong>Total Present Value of Inflows:</strong> 36,364 + 41,322 + 22,539 = R100,225 <br><strong>NPV:</strong> R100,225 - R100,000 = <strong>R24,225</strong>. Since the NPV is positive, the project should be accepted."
   },
   {
     "id": 5,
@@ -38,7 +38,7 @@
     "type": "numeric",
     "question": "If current assets are R300,000 and current liabilities are R200,000, calculate the current ratio and interpret it.",
     "answer": "1.5",
-    "explanation": "Current Ratio = 300,000 / 200,000 = 1.5:1. The firm has R1.50 in current assets for every R1 in current liabilities."
+    "explanation": "The Current Ratio is a liquidity ratio that measures a company's ability to pay short-term obligations. <br><strong>Formula:</strong> Current Ratio = Current Assets / Current Liabilities <br><strong>Calculation:</strong> R300,000 / R200,000 = 1.5. <br><strong>Interpretation:</strong> This is expressed as 1.5:1. It means the firm has R1.50 of current assets available to cover every R1 of its current liabilities."
   },
   {
     "id": 6,
@@ -47,7 +47,7 @@
     "question": "A company has R2m in debt at 10% and R3m in equity costing 15%. Compute the WACC (no taxes).",
     "choices": ["A) 12.0%", "B) 13.0%", "C) 13.5%", "D) 14.0%"],
     "answer": "B) 13.0%",
-    "explanation": "WACC = (2/5)*10% + (3/5)*15% = 13.0%."
+    "explanation": "The Weighted Average Cost of Capital (WACC) represents a firm's average cost of capital from all sources. <br><strong>Total Capital:</strong> R2m (Debt) + R3m (Equity) = R5m. <br><strong>Weight of Debt (Wd):</strong> R2m / R5m = 0.4 <br><strong>Weight of Equity (We):</strong> R3m / R5m = 0.6 <br><strong>Formula (no tax):</strong> WACC = (We * Ke) + (Wd * Kd) <br><strong>Calculation:</strong> WACC = (0.6 * 15%) + (0.4 * 10%) = 9% + 4% = <strong>13.0%</strong>."
   },
   {
     "id": 7,
@@ -55,7 +55,7 @@
     "type": "long",
     "question": "Explain the concept of risk-return trade-off in investment decisions.",
     "answer": "Higher risk investments generally offer the potential for higher returns, while lower-risk investments offer lower returns.",
-    "explanation": "Investors must balance expected returns with their risk tolerance to optimize portfolio performance."
+    "explanation": "The risk-return trade-off is a fundamental principle of finance. It states that the potential return on an investment increases with risk. A rational investor will only take on higher risk if they are compensated with the potential for higher returns. For example, government bonds are low-risk and offer low returns, while stocks are higher-risk but offer the potential for significantly higher returns. Investors must balance their personal risk tolerance with their desired returns to build a suitable portfolio."
   },
   {
     "id": 8,
@@ -63,15 +63,15 @@
     "type": "long",
     "question": "Define optimal capital structure.",
     "answer": "The mix of debt and equity that minimizes the firm’s cost of capital and maximizes its market value.",
-    "explanation": "A balanced structure lowers WACC while maintaining financial flexibility."
+    "explanation": "The optimal capital structure is the specific blend of debt and equity financing that minimizes a company's Weighted Average Cost of Capital (WACC). By minimizing the WACC, the firm maximizes its total market value. Finding this balance is crucial because while debt is a cheaper source of financing (due to tax shields), too much debt increases financial risk and can raise both the cost of debt and equity."
   },
   {
     "id": 9,
     "topic": "Dividends & Capital Structure",
     "type": "long",
     "question": "Discuss two factors influencing a company’s dividend policy.",
-    "answer": "1) Availability of cash. 2) Growth opportunities and reinvestment needs.",
-    "explanation": "Management must balance rewarding shareholders with financing future growth."
+    "answer": "1) Availability of cash and profitability. 2) Growth opportunities and reinvestment needs.",
+    "explanation": "A company's dividend policy is influenced by several factors, including: <br>1. <strong>Profitability and Liquidity:</strong> A company must be consistently profitable and have sufficient cash to pay dividends. A firm may be profitable on paper but lack the cash to make payments. <br>2. <strong>Investment Opportunities:</strong> A young, high-growth company may prefer to retain its earnings to reinvest in new projects that promise high returns. A mature company with fewer growth opportunities is more likely to distribute its earnings as dividends."
   },
   {
     "id": 10,
@@ -79,7 +79,7 @@
     "type": "long",
     "question": "List three components of working capital management.",
     "answer": "1) Cash management, 2) Inventory management, 3) Accounts receivable and payable management.",
-    "explanation": "These ensure liquidity and operational efficiency."
+    "explanation": "Working capital management involves managing current assets and current liabilities to ensure the firm has sufficient liquidity for its day-to-day operations. The key components are: <ul><li><strong>Cash Management:</strong> Ensuring the firm has enough cash to meet its obligations, while investing any surplus cash.</li><li><strong>Inventory Management:</strong> Holding the optimal level of inventory to avoid stockouts without incurring excessive holding costs.</li><li><strong>Receivables and Payables Management:</strong> Deciding on credit policies for customers (receivables) and negotiating payment terms with suppliers (payables) to optimize cash flow.</li></ul>"
   },
   {
     "id": 11,
@@ -87,14 +87,160 @@
     "type": "numeric",
     "question": "A company sells products at R50 each, variable cost per unit is R30, and fixed costs are R40,000. Calculate the break-even point in units.",
     "answer": "2000",
-    "explanation": "Break-even = Fixed Costs / (Selling Price - Variable Cost) = 40,000 / (50 - 30) = 2,000 units."
+    "explanation": "The break-even point is the level of sales at which total revenue equals total costs, resulting in zero profit. <br><strong>Contribution per unit:</strong> Selling Price - Variable Cost = R50 - R30 = R20. <br><strong>Formula:</strong> Break-even (units) = Fixed Costs / Contribution per unit. <br><strong>Calculation:</strong> R40,000 / R20 = <strong>2,000 units</strong>. The company must sell 2,000 units to cover all its costs."
   },
   {
     "id": 12,
     "topic": "Managerial Finance Formulas",
     "type": "numeric",
-    "question": "If a share is expected to pay a dividend of R4 next year and dividends grow at 5% per year, with a required return of 15%, compute its value using the Gordon model.",
-    "answer": "40",
-    "explanation": "P₀ = D₁ / (r - g) = 4 / (0.15 - 0.05) = R40."
+    "question": "If a share is expected to pay a dividend of R4 next year and dividends grow at 5% per year, with a required return of 15%, compute its value using the Gordon Growth Model.",
+    "answer": "R40",
+    "explanation": "The Gordon Growth Model (or Dividend Discount Model) is used to determine the intrinsic value of a stock based on a future series of dividends that grow at a constant rate. <br><strong>Formula:</strong> P₀ = D₁ / (r - g) <br>Where P₀ is the current stock price, D₁ is the dividend in the next period, r is the required rate of return, and g is the constant growth rate. <br><strong>Calculation:</strong> P₀ = 4 / (0.15 - 0.05) = 4 / 0.10 = <strong>R40</strong>."
+  },
+  {
+    "id": 13,
+    "topic": "Dividends & Capital Structure",
+    "type": "mcq",
+    "question": "In the event of a public company listed on the Johannesburg Securities Exchange (JSE) being liquidated, a shareholder's liability in the company is restricted to:",
+    "choices": ["The amount unpaid on their shares", "The total value of their personal assets", "The total value of their initial investment in the company", "The amount of the unpaid liabilities"],
+    "answer": "The amount unpaid on their shares",
+    "explanation": "This question relates to the concept of limited liability, a key feature of a company. For a public or private company, a shareholder's liability is limited to the nominal value of the shares they hold. If the shares are fully paid up, their liability is zero. If they are only partly paid, they are liable only for the remaining amount unpaid. Their personal assets are protected."
+  },
+  {
+    "id": 14,
+    "topic": "Statement of Financial Position",
+    "type": "mcq",
+    "question": "The two fundamental qualitative characteristics of financial information are:",
+    "choices": ["Relevance and faithful representation", "Understandability and relevance", "Neutrality and comparability", "Relevance and reliability"],
+    "answer": "Relevance and faithful representation",
+    "explanation": "According to the Conceptual Framework for Financial Reporting, the two fundamental qualitative characteristics that make financial information useful are: <br>1. <strong>Relevance:</strong> Information is relevant if it is capable of making a difference in the decisions made by users. <br>2. <strong>Faithful Representation:</strong> Information must faithfully represent the economic phenomena that it purports to represent. This means it should be complete, neutral, and free from error."
+  },
+  {
+    "id": 15,
+    "topic": "Statement of Financial Position",
+    "type": "mcq",
+    "question": "Assets would be overstated if the required end-of-period adjusting entry was omitted for:",
+    "choices": ["Salaries payable", "Depreciation expense", "Unearned subscription income", "Accrued income"],
+    "answer": "Depreciation expense",
+    "explanation": "Depreciation is the allocation of the cost of a non-current asset over its useful life. The adjusting entry for depreciation is: Debit Depreciation Expense and Credit Accumulated Depreciation. Accumulated Depreciation is a negative asset account that reduces the carrying value of assets. If this entry is omitted, Accumulated Depreciation is understated, and therefore the net carrying value of the assets is <strong>overstated</strong>."
+  },
+  {
+    "id": 16,
+    "topic": "Financial Market Ratios",
+    "type": "mcq",
+    "question": "The Total Asset Turnover ratio is calculated as follows:",
+    "choices": ["Current assets divided by Revenue", "Revenue divided by non-current assets", "Non-current assets less debtors", "Revenue divided by Total assets (at carrying value)"],
+    "answer": "Revenue divided by Total assets (at carrying value)",
+    "explanation": "The Total Asset Turnover ratio is an efficiency ratio that measures how effectively a company is using its assets to generate sales. <br><strong>Formula:</strong> Total Asset Turnover = Revenue (or Sales) / Average Total Assets. A higher ratio indicates greater efficiency."
+  },
+  {
+    "id": 17,
+    "topic": "Managerial Finance Formulas",
+    "type": "mcq",
+    "question": "Materials used in the operation of a factory, such as cleaning supplies that are not an integral part of the final product, should be classified as:",
+    "choices": ["Direct materials", "A period cost", "Administrative expense", "Manufacturing overhead"],
+    "answer": "Manufacturing overhead",
+    "explanation": "In cost accounting: <br>- <strong>Direct Materials</strong> are materials that are an integral part of the final product and can be easily traced to it. <br>- <strong>Manufacturing Overhead</strong> (also called factory overhead) includes all manufacturing costs except direct materials and direct labor. These are indirect costs necessary for production, such as cleaning supplies, factory rent, and supervisor salaries."
+  },
+  {
+    "id": 18,
+    "topic": "Cash Budgeting",
+    "type": "mcq",
+    "question": "Expected budgeted sales for Thando Limited: September R360,000; October R240,000. 25% of sales are cash. For credit sales, 50% are collected in the month of sale and 30% in the month after. The amount of cash to be collected in October is:",
+    "choices": ["R360,000", "R270,000", "R126,000", "R231,000"],
+    "answer": "R231,000",
+    "explanation": "The total cash collected in October consists of three parts: <br>1. <strong>October Cash Sales:</strong> R240,000 * 25% = R60,000. <br>2. <strong>Collections from October Credit Sales:</strong> First, find October credit sales: R240,000 * 75% = R180,000. Then, calculate the collection: R180,000 * 50% = R90,000. <br>3. <strong>Collections from September Credit Sales:</strong> First, find September credit sales: R360,000 * 75% = R270,000. Then, calculate the collection in October: R270,000 * 30% = R81,000. <br><strong>Total October Cash Collections:</strong> R60,000 + R90,000 + R81,000 = <strong>R231,000</strong>."
+  },
+  {
+    "id": 19,
+    "topic": "Cost of Capital (WACC)",
+    "type": "mcq",
+    "question": "A company has R2m in equity and a R500k long-term loan (15% p.a.). The tax rate is 30%, beta is 1.2, market return is 13%, and the risk-free rate is 6%. The company’s WACC is:",
+    "choices": ["13.62%", "11.52%", "2.1%", "9.42%", "14.52%"],
+    "answer": "13.62%",
+    "explanation": "The WACC calculation requires three steps: <br>1. <strong>Calculate Cost of Equity (Ke) using CAPM:</strong> <br>Ke = Rf + β(Rm - Rf) = 6% + 1.2 * (13% - 6%) = 6% + 1.2 * 7% = 6% + 8.4% = <strong>14.4%</strong>. <br>2. <strong>Calculate After-Tax Cost of Debt (Kd):</strong> <br>Kd(after-tax) = Kd(before-tax) * (1 - T) = 15% * (1 - 0.30) = 15% * 0.70 = <strong>10.5%</strong>. <br>3. <strong>Calculate WACC:</strong> <br>Total Capital (V) = R2,000,000 (E) + R500,000 (D) = R2,500,000. <br>Weight of Equity (We) = 2,000,000 / 2,500,000 = 0.8. <br>Weight of Debt (Wd) = 500,000 / 2,500,000 = 0.2. <br>WACC = (We * Ke) + (Wd * Kd(after-tax)) = (0.8 * 14.4%) + (0.2 * 10.5%) = 11.52% + 2.1% = <strong>13.62%</strong>."
+  },
+  {
+    "id": 20,
+    "topic": "Statement of Financial Position",
+    "type": "mcq",
+    "question": "True or False: The Statement of Financial Position provides information about the firm’s financial performance for a particular time period.",
+    "choices": ["True", "False"],
+    "answer": "False",
+    "explanation": "This statement is false. The Statement of Financial Position (or Balance Sheet) shows the company's financial <strong>position</strong> (its assets, liabilities, and equity) at a <strong>specific point in time</strong> (e.g., 'as at 31 December 2023'). The statement that shows financial <strong>performance</strong> over a <strong>period of time</strong> is the Income Statement (or Statement of Comprehensive Income)."
+  },
+  {
+    "id": 21,
+    "topic": "Risk & Return",
+    "type": "mcq",
+    "question": "True or False: The Standard Deviation provides information about the direction of change of a particular share.",
+    "choices": ["True", "False"],
+    "answer": "False",
+    "explanation": "This statement is false. Standard deviation is a measure of the total risk or <strong>volatility</strong> of an investment. It measures the dispersion of a set of data from its mean (average). A high standard deviation indicates that the investment's returns are spread out over a wider range, implying greater risk. It does not provide any information about the direction (positive or negative) of the share's price movement."
+  },
+  {
+    "id": 22,
+    "topic": "Cost of Capital (WACC)",
+    "type": "mcq",
+    "question": "True or False: The Capital Asset Pricing Model (CAPM) is used to calculate a firm's cost of Capital (WACC).",
+    "choices": ["True", "False"],
+    "answer": "False",
+    "explanation": "This statement is false. The Capital Asset Pricing Model (CAPM) is used specifically to calculate the <strong>cost of equity (Ke)</strong>, which is just one component of the WACC. The WACC itself is the weighted average of the costs of all capital components (equity, debt, and preference shares)."
+  },
+  {
+    "id": 23,
+    "topic": "Accounting Equation",
+    "type": "long",
+    "question": "Provide the general journal entries for the following transactions for Lizzie Stores for the financial year ended 30th June 2014. <br>1. On 1st Sept 2013, sold goods on credit for R15,000 (The firm marks up on cost by 50%). <br>2. On 14th Jan 2014, paid R5,800 by cheque for Water and Electricity. <br>3. A major debtor was declared insolvent on 24th May 2014, and his account of R3,500 was considered irrecoverable. <br>4. On 23rd June 2014, earned commission income on credit amounting to R3,400.",
+    "answer": "See explanation for detailed journal entries.",
+    "explanation": "Here are the required general journal entries: <br><br><strong>1. Credit Sale of Goods</strong> <br><strong>Dr Accounts Receivable: R15,000</strong> (To increase assets, as the customer owes us money) <br><strong>Cr Sales Revenue: R15,000</strong> (To recognise the income earned) <br><br><strong>Dr Cost of Sales: R10,000</strong> (To recognise the cost of the inventory sold) <br><strong>Cr Inventory: R10,000</strong> (To decrease the asset of inventory) <br><em>Calculation: A 50% markup on cost means Selling Price = Cost * 1.50. So, Cost = R15,000 / 1.50 = R10,000.</em> <br><br><strong>2. Payment of Expenses</strong> <br><strong>Dr Water and Electricity Expense: R5,800</strong> (To recognise the expense incurred) <br><strong>Cr Bank: R5,800</strong> (To decrease the asset of cash at bank) <br><br><strong>3. Bad Debt Write-off</strong> <br><strong>Dr Bad Debts Expense: R3,500</strong> (To recognise the loss) <br><strong>Cr Accounts Receivable: R3,500</strong> (To decrease the asset, as this amount will not be collected) <br><br><strong>4. Commission Earned on Credit</strong> <br><strong>Dr Accounts Receivable: R3,400</strong> (To increase assets, as we are owed this commission) <br><strong>Cr Commission Income: R3,400</strong> (To recognise the income earned)"
+  },
+  {
+    "id": 24,
+    "topic": "Statement of Financial Position",
+    "type": "long",
+    "question": "Renegade Ltd reported a preliminary Net Profit of R403,050. Using the additional information provided, calculate the correct Net Profit after Tax for the year ended 30 June 2014: <br> i) A debtor owing R2,500 was declared insolvent and paid 50 cents in the Rand. The balance is to be written off. No entries were made. <br> ii) Depreciation was not recorded. Plant and equipment (Cost R450,000) is depreciated at 10% p.a. straight-line. Vehicles (Cost R250,000; Accumulated Depreciation R75,000) are depreciated at 15% p.a. on the reducing balance method. <br> iii) An annual insurance premium of R18,000 was paid on 1 Oct 2013 and fully expensed. No adjustment was made.",
+    "answer": "The correct Net Profit is R335,050.",
+    "explanation": "The calculation starts with the preliminary profit and makes adjustments for each item: <br><br><strong>Preliminary Net Profit: R403,050</strong> <br><br><strong>Less Adjustments (Expenses not yet recorded):</strong> <br>1. <strong>Bad Debt:</strong> The uncollectible portion is R2,500 * 0.50 = <strong>(R1,250)</strong>. <br>2. <strong>Depreciation - Plant & Equipment:</strong> R450,000 * 10% = <strong>(R45,000)</strong>. (Straight-line is on cost). <br>3. <strong>Depreciation - Vehicles:</strong> (R250,000 Cost - R75,000 Acc Dep) * 15% = R175,000 * 15% = <strong>(R26,250)</strong>. (Reducing balance is on carrying value). <br><br><strong>Add Adjustments (Expenses overstated):</strong> <br>4. <strong>Prepaid Insurance:</strong> The policy covers 12 months from 1 Oct 2013 to 30 Sept 2014. The financial year ends 30 June 2014. Therefore, 3 months (July, Aug, Sept) are prepaid. Prepaid portion = R18,000 * (3/12) = <strong>+R4,500</strong>. This amount should not have been expensed this year. <br><br><strong>Final Calculation:</strong> <br>R403,050 - R1,250 - R45,000 - R26,250 + R4,500 = <strong>R335,050</strong>."
+  },
+  {
+    "id": 25,
+    "topic": "Financial Market Ratios",
+    "type": "numeric",
+    "question": "For Moyo Ltd, calculate the Current Ratio. Plant & Equipment: R150,000; Inventory: R55,000; Accounts Receivable: R50,000; Cash: R15,000; Current Liabilities: R57,000.",
+    "answer": "2.11",
+    "explanation": "The Current Ratio measures short-term liquidity. <br><strong>Formula:</strong> Current Ratio = Current Assets / Current Liabilities. <br><strong>1. Calculate Total Current Assets:</strong> Inventory + Accounts Receivable + Cash = R55,000 + R50,000 + R15,000 = R120,000. <br><strong>2. Calculate the Ratio:</strong> R120,000 / R57,000 = <strong>2.11</strong>. This means Moyo Ltd has R2.11 of current assets for every R1 of current liabilities."
+  },
+  {
+    "id": 26,
+    "topic": "Financial Market Ratios",
+    "type": "numeric",
+    "question": "For Mahlaba Ltd, calculate the Acid-Test (Quick) Ratio. Inventory: R125,000; Accounts Receivable: R90,000; Cash: R2,000; Current Liabilities: R101,000.",
+    "answer": "0.91",
+    "explanation": "The Acid-Test (Quick) Ratio is a stricter measure of liquidity that excludes inventory. <br><strong>Formula:</strong> Acid-Test Ratio = (Current Assets - Inventory) / Current Liabilities. <br><strong>1. Calculate Quick Assets (Current Assets - Inventory):</strong> (R125,000 + R90,000 + R2,000) - R125,000 = R92,000. <br><strong>2. Calculate the Ratio:</strong> R92,000 / R101,000 = <strong>0.91</strong>. This means Mahlaba Ltd has R0.91 of liquid assets for every R1 of current liabilities."
+  },
+  {
+    "id": 27,
+    "topic": "Financial Market Ratios",
+    "type": "numeric",
+    "question": "For Moyo Ltd, calculate the Times Interest Earned ratio. Sales: R500,000; Cost of Goods Sold: R325,000; Interest Expense: R7,000; Net Income Before Taxes: R60,000.",
+    "answer": "9.57",
+    "explanation": "The Times Interest Earned (TIE) ratio measures a company's ability to meet its debt obligations. <br><strong>Formula:</strong> TIE = EBIT / Interest Expense. (EBIT is Earnings Before Interest and Taxes, which is the same as Net Income Before Taxes + Interest Expense). <br><strong>1. Calculate EBIT:</strong> R60,000 (Net Income Before Tax) + R7,000 (Interest Expense) = R67,000. <br><strong>2. Calculate the Ratio:</strong> R67,000 / R7,000 = <strong>9.57 times</strong>. This means Moyo Ltd's earnings can cover its interest payments 9.57 times over."
+  },
+  {
+    "id": 28,
+    "topic": "Working Capital Management",
+    "type": "numeric",
+    "question": "For Mahlaba Ltd, calculate the Accounts Receivable Collection period in days. Total Sales were R700,000 (60% on credit) and Accounts Receivable are R90,000. Use a 365-day year.",
+    "answer": "78",
+    "explanation": "This ratio measures the average number of days it takes for a company to collect payment from its credit customers. <br><strong>Formula:</strong> Collection Period = (Accounts Receivable / Credit Sales) * 365. <br><strong>1. Calculate Credit Sales:</strong> R700,000 * 60% = R420,000. <br><strong>2. Calculate the Period:</strong> (R90,000 / R420,000) * 365 = <strong>78.2 days</strong>. On average, it takes Mahlaba Ltd about 78 days to collect cash from its debtors."
+  },
+  {
+    "id": 29,
+    "topic": "Working Capital Management",
+    "type": "numeric",
+    "question": "Moyo Ltd has a days' inventory on hand of 30 days and a creditors' payment period of 95 days. Its debtors' collection period is 61 days. Calculate the Cash Conversion Cycle (CCC).",
+    "answer": "-4",
+    "explanation": "The Cash Conversion Cycle (CCC) measures the number of days it takes for a company to convert its investments in inventory and other resources into cash. <br><strong>Formula:</strong> CCC = Days Inventory on Hand + Debtors Collection Period - Creditors Payment Period. <br><strong>Calculation:</strong> CCC = 30 + 61 - 95 = <strong>-4 days</strong>. <br><strong>Interpretation:</strong> A negative CCC is excellent. It means Moyo Ltd collects cash from its customers (in 61 days) before it has to pay its suppliers (in 95 days), effectively using its suppliers' money to finance its operations."
   }
 ]
