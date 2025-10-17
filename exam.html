@@ -3,191 +3,269 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>FTX1005F/S — Practice Exam</title>
+  <title>FTX Practice — Exam</title>
 
-  <!-- Tailwind + Math libraries -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjs@11.8.0/lib/browser/math.js"></script>
-  <script>
-    window.MathJax = { tex: { inlineMath: [['$','$']] }, svg: { fontCache: 'global' } };
+  <!-- MathJax for math rendering -->
+  <script id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
   </script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
 
   <style>
-    body { font-family: Inter, system-ui, Arial; background: #0b1220; color: #fff; }
-    .card { background: rgba(255,255,255,0.05); padding: 16px; border-radius: 10px; }
-    .input { padding: .5rem; border-radius: 6px; width: 100%; color: black; }
-    button { font-weight: 700; border-radius: 8px; transition: all 0.2s ease; }
-    button:hover { opacity: 0.9; }
+    /* Dark academic theme with subtle purple accents */
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+    :root{
+      --bg:#050714; --card:#071428; --muted:#9fb4c8; --accent:#6ea6ff; --accent-2:#8b5cf6;
+    }
+    html,body{height:100%;margin:0;font-family:Inter,system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;}
+    body{background: radial-gradient(circle at 10% 10%, #0b1530 0%, var(--bg) 60%); color:#e6eef8; -webkit-font-smoothing:antialiased;}
+    .wrap{max-width:1100px;margin:28px auto;padding:22px;border-radius:12px;background:linear-gradient(180deg, rgba(10,18,35,0.6), rgba(6,10,20,0.6));box-shadow:0 10px 40px rgba(2,6,23,.6);border:1px solid rgba(120,150,220,0.04);}
+    header{display:flex;gap:12px;align-items:center;margin-bottom:12px}
+    h1{font-size:1.35rem;margin:0;color:#f3f9ff}
+    .meta{color:var(--muted);font-size:0.95rem}
+    .controls{display:flex;gap:8px;align-items:center;margin:12px 0}
+    .card{background:linear-gradient(180deg, rgba(12,20,36,0.6), rgba(6,10,20,0.55)); padding:14px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);}
+    .topics{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:12px}
+    .topic{padding:10px 12px;border-radius:8px;background:linear-gradient(180deg,#0f213d,#07122a);border:1px solid rgba(80,110,160,0.08);cursor:pointer;text-align:center;color:#bfdaf6;transition:transform .12s ease,box-shadow .12s ease}
+    .topic:hover{transform:translateY(-4px);box-shadow:0 8px 24px rgba(36,84,150,0.12)}
+    .topic.active{background:linear-gradient(180deg,var(--accent-2),#1b365f);color:#fff;border-color:rgba(140,110,240,0.6);box-shadow:0 8px 28px rgba(139,92,246,0.12)}
+    .controls button{background:linear-gradient(180deg,#1f2f4f,#162033);border:1px solid rgba(130,160,210,0.12);color:#e6f3ff;padding:8px 12px;border-radius:8px;cursor:pointer}
+    .questionArea{margin-top:16px;display:flex;gap:16px;align-items:flex-start}
+    .left{flex:1}
+    .right{width:320px}
+    #qText{font-weight:600;color:#eaf6ff}
+    .choices{margin-top:10px;display:flex;flex-direction:column;gap:10px}
+    label.choice{display:flex;gap:10px;align-items:center;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02));padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.02)}
+    input[type="text"], textarea{width:100%;padding:8px;border-radius:6px;border:1px solid rgba(20,50,80,0.6);background:#061426;color:#dbeefb}
+    .explain{margin-top:12px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:12px;border-radius:8px;color:#d8f0ff;font-size:0.95rem}
+    .metaSmall{font-size:0.88rem;color:var(--muted)}
+    footer{margin-top:18px;color:var(--muted);font-size:0.9rem}
+    @media(max-width:880px){.topics{grid-template-columns:repeat(2,1fr)}.right{width:100%}.questionArea{flex-direction:column}}
   </style>
 </head>
-<body class="min-h-screen flex">
-
-  <!-- Sidebar -->
-  <aside class="w-64 bg-[#111a33] border-r border-gray-800 overflow-y-auto p-4">
-    <h2 class="text-xl mb-3 font-bold">Topics</h2>
-    <ul id="topic-list" class="space-y-2">
-      <!-- Loaded dynamically -->
-    </ul>
-  </aside>
-
-  <!-- Main -->
-  <main class="flex-1 p-6 overflow-y-auto">
-    <div class="max-w-3xl mx-auto">
-      <h1 class="text-3xl mb-3 font-bold">FTX1005F/S — Practice Mode</h1>
-      <p class="text-gray-300 mb-4">Each topic includes related exam questions. Numeric answers accept ±0.5% tolerance.</p>
-
-      <div id="exam-card" class="card">
-        <div id="q-area">
-          <p id="q-id" class="text-sm text-gray-400"></p>
-          <h2 id="q-text" class="text-lg font-semibold mb-2"></h2>
-          <div id="q-attachments" class="mb-3"></div>
-          <div id="q-controls" class="mt-3"></div>
-          <div id="q-help" class="mt-3 text-gray-400"></div>
-        </div>
-
-        <div class="mt-5 flex flex-wrap gap-2">
-          <button id="check-btn" class="bg-green-600 px-4 py-2">Check</button>
-          <button id="next-btn" class="bg-blue-600 px-4 py-2">Next</button>
-          <button id="show-ans-btn" class="bg-purple-600 px-4 py-2">Show Answer</button>
-        </div>
-
-        <div id="result" class="mt-3 text-lg"></div>
-        <div id="score" class="mt-4 text-gray-400"></div>
+<body>
+  <div class="wrap">
+    <header>
+      <div>
+        <h1>FTX Practice — Interactive Question Bank</h1>
+        <div class="meta">Pick a topic (12 topics). Questions are loaded from <code>data/questions.json</code>. Math uses MathJax.</div>
       </div>
+    </header>
+
+    <div class="card">
+      <div class="topics" id="topics"></div>
+
+      <div class="controls">
+        <button id="newQ">New Question</button>
+        <button id="showAnswer">Show Answer & Explanation</button>
+        <button id="toggleTheme">Toggle Light</button>
+        <div style="margin-left:auto" class="metaSmall">Question <span id="qIndex">0</span> / <span id="qTotal">0</span></div>
+      </div>
+
+      <div class="questionArea">
+        <div class="left card" id="questionCard" style="display:none;">
+          <div id="qText"></div>
+          <div id="choices" class="choices"></div>
+          <div style="margin-top:10px"><button id="checkBtn">Check Answer</button></div>
+          <div id="feedback" class="explain" style="display:none"></div>
+        </div>
+        <div class="right">
+          <div class="card">
+            <div style="font-weight:600">Question Info</div>
+            <div id="qMeta" class="metaSmall" style="margin-top:6px"></div>
+            <hr style="border:none;border-top:1px solid rgba(255,255,255,0.03);margin:10px 0">
+            <div style="font-weight:600">Notes</div>
+            <div class="metaSmall" style="margin-top:6px">You can include <code>&lt;table&gt;</code> or images in the question/explanation HTML. Math: use \\( ... \\) or $$ ... $$.</div>
+          </div>
+        </div>
+      </div>
+
+      <div id="noTopic" class="meta" style="margin-top:12px">Loading questions…</div>
     </div>
-  </main>
+
+    <footer>Built for FTX1005F practice — questions externalized. Add more to <code>data/questions.json</code>.</footer>
+  </div>
 
 <script>
-let topics = [];
-let currentTopicIndex = 0;
-let currentQIndex = 0;
-let score = 0;
-let answered = 0;
+/* ----- App: loads data/questions.json, supports HTML inside questions, MathJax typesetting ----- */
 
-// Theme Sync
-const savedTheme = localStorage.getItem("theme") || "bloodred";
-document.documentElement.setAttribute("data-theme", savedTheme);
+let questions = [];
+const topicsList = [
+  'Accounting Equation','Dividends & Capital Structure','Statement of Financial Position',
+  'Financial Market Ratios','Working Capital Management','Cash Budgeting',
+  'Time Value of Money','Capital Budgeting','Cost of Capital (WACC)',
+  'Risk & Return','Break-even & CVP','Managerial Finance Formulas'
+];
 
-// Load questions.json
-async function loadQuestions() {
-  try {
-    const res = await fetch('questions.json');
-    topics = await res.json();
-    renderTopicList();
-    loadQuestion(0, 0);
-  } catch (err) {
-    console.error("Error loading questions:", err);
-  }
-}
+const topicsEl = document.getElementById('topics');
+const newQBtn = document.getElementById('newQ');
+const qArea = document.getElementById('questionCard');
+const qText = document.getElementById('qText');
+const choicesEl = document.getElementById('choices');
+const qIndex = document.getElementById('qIndex');
+const qTotal = document.getElementById('qTotal');
+const noTopic = document.getElementById('noTopic');
+const showAnswerBtn = document.getElementById('showAnswer');
+const checkBtn = document.getElementById('checkBtn');
+const feedback = document.getElementById('feedback');
+const qMeta = document.getElementById('qMeta');
+const toggleTheme = document.getElementById('toggleTheme');
 
-// Render topic sidebar
-function renderTopicList() {
-  const list = document.getElementById('topic-list');
-  list.innerHTML = '';
-  topics.forEach((t, i) => {
-    const li = document.createElement('li');
-    li.innerHTML = `
-      <button class="w-full text-left bg-[#1b2640] hover:bg-[#25355a] px-3 py-2 rounded"
-        onclick="selectTopic(${i})">${t.topic}</button>`;
-    list.appendChild(li);
+let selectedTopic = null;
+let filtered = [];
+let currentIndex = -1;
+
+/* build topic buttons */
+topicsList.forEach(t => {
+  const b = document.createElement('div');
+  b.className = 'topic'; b.textContent = t;
+  b.onclick = () => selectTopic(t, b);
+  topicsEl.appendChild(b);
+});
+
+/* fetch questions.json */
+fetch('data/questions.json')
+  .then(r => {
+    if (!r.ok) throw new Error('Could not load questions.json (use local server)');
+    return r.json();
+  })
+  .then(data => {
+    questions = data;
+    noTopic.textContent = 'Select a topic to begin.';
+    // Optionally compute counts per topic
+    qTotal.textContent = '0';
+  })
+  .catch(err => {
+    noTopic.textContent = 'Error loading questions.json — run this from a local server (see README).';
+    console.error(err);
   });
+
+function selectTopic(t, btn){
+  document.querySelectorAll('.topic').forEach(x=>x.classList.remove('active'));
+  btn.classList.add('active');
+  selectedTopic = t;
+  filtered = questions.filter(q=>q.topic === t);
+  currentIndex = -1;
+  qTotal.textContent = filtered.length;
+  qIndex.textContent = '0';
+  if(filtered.length === 0){
+    noTopic.textContent = 'No questions for this topic yet. Edit data/questions.json to add some.';
+    noTopic.style.display = 'block';
+    qArea.style.display = 'none';
+  } else {
+    noTopic.style.display = 'none';
+    qArea.style.display = 'block';
+    nextQuestion();
+  }
 }
 
-// Select a topic
-function selectTopic(i) {
-  currentTopicIndex = i;
-  currentQIndex = 0;
-  score = 0;
-  answered = 0;
-  loadQuestion(i, 0);
-  updateScore();
+function nextQuestion(){
+  if(!selectedTopic || filtered.length===0) return;
+  currentIndex = Math.floor(Math.random()*filtered.length);
+  const q = filtered[currentIndex];
+  qIndex.textContent = (currentIndex+1);
+  renderQuestion(q);
 }
 
-// Load question
-function loadQuestion(topicIdx, qIdx) {
-  const q = topics[topicIdx].questions[qIdx];
-  if (!q) return;
-  document.getElementById('q-id').textContent = `${q.id || ''} — ${topics[topicIdx].topic}`;
-  document.getElementById('q-text').innerHTML = q.question;
-  document.getElementById('q-attachments').innerHTML = q.attachments || '';
-  const controls = document.getElementById('q-controls');
-  controls.innerHTML = '';
-  document.getElementById('result').innerHTML = '';
+function renderQuestion(q){
+  feedback.style.display = 'none';
+  qText.innerHTML = q.question || '';
+  qMeta.innerHTML = `<div><strong>ID:</strong> ${q.id || '-'} <br><strong>Type:</strong> ${q.type || '-'} </div>`;
+  choicesEl.innerHTML = '';
 
-  // Render controls
-  if (q.type === 'numeric') {
-    controls.innerHTML = `<input id="ans-input" class="input" placeholder="Enter numeric answer" />`;
-  } else if (q.type === 'mcq') {
-    q.options.forEach((opt,i)=>{
-      controls.insertAdjacentHTML('beforeend', `<div><label><input type="radio" name="mcq" value="${i}" /> ${opt}</label></div>`);
+  if(q.type === 'mcq'){
+    (q.choices || []).forEach((c, i) => {
+      const label = document.createElement('label');
+      label.className = 'choice';
+      label.innerHTML = `<input type="radio" name="ans" value="${escapeHtml(c)}"> <div>${c}</div>`;
+      choicesEl.appendChild(label);
     });
+  } else if(q.type === 'numeric'){
+    const inp = document.createElement('input'); inp.type='text'; inp.id='userAns'; inp.placeholder='Numeric answer (no commas)';
+    choicesEl.appendChild(inp);
+  } else { // long / essay
+    const ta = document.createElement('textarea'); ta.rows=8; ta.id='userAns'; ta.placeholder='Write your answer or workings here...';
+    choicesEl.appendChild(ta);
   }
-  document.getElementById('q-help').innerHTML = q.hint ? `<strong>Hint:</strong> ${q.hint}` : '';
-  if (window.MathJax) MathJax.typesetPromise();
+
+  // typeset math if MathJax present
+  typesetMath();
 }
 
-// Next button
-document.getElementById('next-btn').addEventListener('click', () => {
-  const topic = topics[currentTopicIndex];
-  currentQIndex = (currentQIndex + 1) % topic.questions.length;
-  loadQuestion(currentTopicIndex, currentQIndex);
-});
-
-// Check button logic
-document.getElementById('check-btn').addEventListener('click', () => {
-  const q = topics[currentTopicIndex].questions[currentQIndex];
-  const resDiv = document.getElementById('result');
-  let correct = false;
-
-  if (q.type === 'numeric') {
-    const val = document.getElementById('ans-input').value.trim();
-    if (val === '') return resDiv.innerHTML = `<span class="text-yellow-400">Please enter an answer.</span>`;
-    try {
-      const inputVal = math.evaluate(val);
-      const correctVal = parseFloat(q.answer);
-      const tol = Math.abs(correctVal * 0.005); // ±0.5%
-      if (Math.abs(inputVal - correctVal) <= tol) {
-        correct = true;
-      }
-    } catch {
-      resDiv.innerHTML = `<span class="text-red-400">Invalid expression.</span>`;
-      return;
-    }
-  } else if (q.type === 'mcq') {
-    const chosen = document.querySelector('input[name="mcq"]:checked');
-    if (!chosen) return resDiv.innerHTML = `<span class="text-yellow-400">Select an option.</span>`;
-    correct = parseInt(chosen.value) === q.answer;
-  }
-
-  if (correct) {
-    score++;
-    resDiv.innerHTML = `<span class="text-green-400 font-bold">✅ Correct!</span>`;
+/* Check answer — tolerant numeric comparison */
+checkBtn.onclick = ()=>{
+  if(currentIndex < 0) return;
+  const q = filtered[currentIndex];
+  let userAns = null;
+  if(q.type === 'mcq'){
+    const sel = document.querySelector('input[name="ans"]:checked');
+    if(!sel){ alert('Choose an option first'); return; }
+    userAns = sel.value;
   } else {
-    resDiv.innerHTML = `<span class="text-red-400 font-bold">❌ Incorrect.</span>`;
+    userAns = document.getElementById('userAns')?.value?.trim() || '';
+    if(userAns === ''){ alert('Enter your answer first'); return; }
   }
 
-  answered++;
-  updateScore();
-});
+  const correct = String(q.answer || '').trim();
+  let isCorrect = null;
+  if(q.type === 'numeric'){
+    // tolerant numeric compare
+    const a = parseFloat(userAns.replace(/[, ]+/g,'')), b = parseFloat(correct.replace(/[, ]+/g,''));
+    if(!isNaN(a) && !isNaN(b)) isCorrect = Math.abs(a-b) <= Math.max(1e-6, Math.abs(b)*0.005);
+    else isCorrect = (userAns === correct);
+  } else if(q.type === 'mcq'){
+    isCorrect = (userAns === correct);
+  }
 
-// Show answer
-document.getElementById('show-ans-btn').addEventListener('click', () => {
-  const q = topics[currentTopicIndex].questions[currentQIndex];
-  const resDiv = document.getElementById('result');
-  if (q.type === 'mcq') {
-    resDiv.innerHTML = `<span class="text-purple-400">Answer: ${q.options[q.answer]}</span>`;
+  feedback.style.display = 'block';
+  if(q.type === 'long'){
+    feedback.innerHTML = `<strong>Model answer / guidance:</strong><br/>${q.explanation || '<em>No model answer provided.</em>'}`;
   } else {
-    resDiv.innerHTML = `<span class="text-purple-400">Answer: ${q.answer}</span>`;
+    feedback.innerHTML = (isCorrect ? '<strong>Correct.</strong><br/>' : '<strong>Incorrect.</strong><br/>')
+      + (correct ? `Correct answer: <strong>${correct}</strong><br/>` : '')
+      + (q.explanation || '');
   }
-});
 
-// Update score display
-function updateScore() {
-  document.getElementById('score').innerHTML = `Score: ${score}/${answered}`;
+  typesetMath();
 }
 
-loadQuestions();
+/* Show full answer & explanation */
+showAnswerBtn.onclick = ()=>{
+  if(currentIndex < 0) return;
+  const q = filtered[currentIndex];
+  feedback.style.display = 'block';
+  feedback.innerHTML = `<strong>Answer & Explanation</strong><br/>${q.answer ? ('<strong>' + q.answer + '</strong><br/>') : ''}${q.explanation || ''}`;
+  typesetMath();
+}
+
+/* New question */
+newQBtn.onclick = ()=>{
+  if(!selectedTopic){ alert('Select a topic first.'); return; }
+  nextQuestion();
+}
+
+/* Light / dark toggle (simple) */
+toggleTheme.onclick = ()=>{
+  document.documentElement.classList.toggle('light-mode');
+  if(document.documentElement.classList.contains('light-mode')){
+    toggleTheme.textContent = 'Toggle Dark';
+    document.body.style.background = '#f6f8fb';
+    document.body.style.color = '#06202d';
+  } else {
+    toggleTheme.textContent = 'Toggle Light';
+    document.body.style.background = '';
+    document.body.style.color = '';
+  }
+}
+
+/* Utility: MathJax typeset */
+function typesetMath(){
+  if(window.MathJax && MathJax.typesetPromise){
+    MathJax.typesetPromise().catch((err)=>console.log('MathJax error',err));
+  }
+}
+
+/* Utility: simple escape for radio values */
+function escapeHtml(s){ return String(s).replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 </script>
 </body>
 </html>

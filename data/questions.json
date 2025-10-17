@@ -1,0 +1,77 @@
+[
+  {
+    "id": "2014-sup-Q1-1",
+    "topic": "Accounting Equation",
+    "type": "mcq",
+    "question": "<p>In the event of a public company listed on the JSE being liquidated a shareholder's liability in the company is restricted to:</p><ol><li>The amount unpaid on his shares</li><li>The total value of his personal assets</li><li>The total value of his initial investment in the company</li><li>The amount of the unpaid liabilities</li><li>None of the above</li></ol>",
+    "choices": [
+      "The amount unpaid on his shares",
+      "The total value of his personal assets",
+      "The total value of his initial investment in the company",
+      "The amount of the unpaid liabilities",
+      "None of the above"
+    ],
+    "answer": "The amount unpaid on his shares",
+    "explanation": "<p>For a public company, shareholder liability is limited to the amount unpaid on their shares — they are not personally liable for company debts beyond that.</p>"
+  },
+
+  {
+    "id": "divs-1",
+    "topic": "Dividends & Capital Structure",
+    "type": "mcq",
+    "question": "A company has the following capital structure: <br><strong>Issued</strong>: 12% preference shares (Class B) issued R50,000; Ordinary shares (Class A) issued R300,000 at par R3. If the company declared an ordinary dividend of R0.30 per share, the total dividends payable (preference + ordinary) will be:",
+    "choices": ["R6 000","R30 000","R24 000","R36 000","None of the above"],
+    "answer": "R36 000",
+    "explanation": "Preference dividend = 12% of R50,000 = R6,000. Ordinary shares: R300,000 at par R3 => 100,000 shares. Ordinary dividend = 100,000 × R0.30 = R30,000. Total = R36,000."
+  },
+
+  {
+    "id": "ccc-1",
+    "topic": "Working Capital Management",
+    "type": "numeric",
+    "question": "Brenner Industries has a 125-day Operating Cycle. If the average days inventory on hand is 50 days and the average creditors' payment period is 30 days, what is its Cash Conversion Cycle?",
+    "choices": [],
+    "answer": "95",
+    "explanation": "Cash Conversion Cycle = Operating cycle - Creditors payment period = 125 - 30 = 95 days."
+  },
+
+  {
+    "id": "bsheet-1",
+    "topic": "Statement of Financial Position",
+    "type": "long",
+    "question": "<h4>Kiki Ltd — extract</h4><p>Use the following snippet (partial) to practice: adjust vehicles cost, record final dividend of 40c per share and add unpaid utilities R6,000. Prepare a correct Statement of Financial Position.</p><table><thead><tr><th>Account</th><th>R</th></tr></thead><tbody><tr><td>Inventory</td><td>37,000</td></tr><tr><td>Accounts receivable</td><td>38,000</td></tr></tbody></table>",
+    "choices": [],
+    "answer": "",
+    "explanation": "<p>This is a long-form question — reclassify, adjust retained earnings for declared final dividend (40c × number of ordinary shares), and include utilities payable of R6,000.</p>"
+  },
+
+  {
+    "id": "tvm-1",
+    "topic": "Time Value of Money",
+    "type": "numeric",
+    "question": "If a current ticket costs <strong>R191,958</strong> and inflation is 6% p.a., what will it cost in 10 years? (Round to the nearest rand)",
+    "choices": [],
+    "answer": "343026",
+    "explanation": "Future price = 191,958 × (1.06)^10 ≈ R343,026. (Use formula \\(FV = PV(1+i)^n\\).)"
+  },
+
+  {
+    "id": "ratio-1",
+    "topic": "Financial Market Ratios",
+    "type": "long",
+    "question": "Timcke Ltd and Hendricks Ltd: calculate EPS, PE and dividend yield and recommend which is a better buy if economic conditions improve. (Use figures in the exam paper.)",
+    "choices": [],
+    "answer": "",
+    "explanation": "Suggested steps: compute NPAT (after tax), EPS = NPAT ÷ shares, PE = MPS ÷ EPS, Dividend yield = DPS ÷ MPS. Compare PE relative to industry and growth prospects."
+  },
+
+  {
+    "id": "example-table-math",
+    "topic": "Managerial Finance Formulas",
+    "type": "long",
+    "question": "<p>Example: show a small balance sheet table and compute \\(ROE = \\frac{Net\\ profit}{Shareholders'\\ equity}\\)</p><table><tr><th>Item</th><th>R</th></tr><tr><td>Net profit</td><td>120,000</td></tr><tr><td>Shareholders' equity</td><td>800,000</td></tr></table>",
+    "choices": [],
+    "answer": "",
+    "explanation": "ROE = 120,000 / 800,000 = 0.15 = 15% — MathJax: \\(ROE=\\frac{120000}{800000}=0.15.\\)"
+  }
+]
