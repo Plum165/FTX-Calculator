@@ -1,108 +1,100 @@
 [
   {
     "id": 1,
-    "topic": "acc_eq",
+    "topic": "Accounting Equation",
+    "type": "long",
     "question": "Explain the accounting equation and demonstrate how it remains in balance when a business purchases equipment worth R50,000 using a bank loan.",
-    "options": [],
     "answer": "Assets = Liabilities + Equity. Purchasing equipment increases assets by R50,000 and increases liabilities (bank loan) by R50,000, keeping the equation balanced.",
     "explanation": "Any transaction that affects both sides equally preserves balance; in this case, the asset (equipment) and liability (loan) both increase by the same amount."
   },
   {
     "id": 2,
-    "topic": "sources_capcost",
+    "topic": "Cost of Capital (WACC)",
+    "type": "mcq",
     "question": "A company issues preference shares at R100 each with a dividend of R12. Calculate the cost of preference share capital if flotation costs are R5 per share.",
-    "options": [
-      "A) 12.0%",
-      "B) 12.6%",
-      "C) 12.9%",
-      "D) 13.3%"
-    ],
+    "choices": ["A) 12.0%", "B) 12.6%", "C) 12.9%", "D) 13.3%"],
     "answer": "D) 13.3%",
     "explanation": "Kp = D / (P0 - F) = 12 / (100 - 5) = 12 / 95 = 12.63%. Rounded to 13.3%."
   },
   {
     "id": 3,
-    "topic": "cost_budget",
+    "topic": "Cash Budgeting",
+    "type": "long",
     "question": "List three advantages of preparing a cash budget.",
-    "options": [],
     "answer": "1) Helps identify future cash surpluses or deficits. 2) Facilitates planning for short-term financing. 3) Aids control by comparing actual vs budgeted performance.",
     "explanation": "Cash budgets are vital planning tools for liquidity management and short-term decision-making."
   },
   {
     "id": 4,
-    "topic": "invest_appraisal",
+    "topic": "Capital Budgeting",
+    "type": "numeric",
     "question": "Project X costs R100,000 and yields cash inflows of R40,000, R50,000, R30,000 over three years. The cost of capital is 10%. Compute the NPV.",
-    "options": [],
-    "answer": "NPV = (40,000/1.1) + (50,000/1.1²) + (30,000/1.1³) − 100,000 = 36,364 + 41,322 + 22,539 − 100,000 = R24225 (positive).",
-    "explanation": "Since NPV > 0, the project should be accepted."
+    "answer": "24225",
+    "explanation": "NPV = (40,000/1.1) + (50,000/1.1²) + (30,000/1.1³) − 100,000 = 36,364 + 41,322 + 22,539 − 100,000 = R24,225 (positive). Since NPV > 0, accept the project."
   },
   {
     "id": 5,
-    "topic": "ratios_analysis",
+    "topic": "Financial Market Ratios",
+    "type": "numeric",
     "question": "If current assets are R300,000 and current liabilities are R200,000, calculate the current ratio and interpret it.",
-    "options": [],
-    "answer": "Current Ratio = 300,000 / 200,000 = 1.5:1. The firm has R1.50 in current assets for every R1 in current liabilities.",
-    "explanation": "A ratio above 1 indicates short-term liquidity but too high may indicate inefficient use of assets."
+    "answer": "1.5",
+    "explanation": "Current Ratio = 300,000 / 200,000 = 1.5:1. The firm has R1.50 in current assets for every R1 in current liabilities."
   },
   {
     "id": 6,
-    "topic": "wacc",
+    "topic": "Cost of Capital (WACC)",
+    "type": "mcq",
     "question": "A company has R2m in debt at 10% and R3m in equity costing 15%. Compute the WACC (no taxes).",
-    "options": [
-      "A) 12.0%",
-      "B) 13.0%",
-      "C) 13.5%",
-      "D) 14.0%"
-    ],
+    "choices": ["A) 12.0%", "B) 13.0%", "C) 13.5%", "D) 14.0%"],
     "answer": "B) 13.0%",
     "explanation": "WACC = (2/5)*10% + (3/5)*15% = 13.0%."
   },
   {
     "id": 7,
-    "topic": "risk_return",
+    "topic": "Risk & Return",
+    "type": "long",
     "question": "Explain the concept of risk-return trade-off in investment decisions.",
-    "options": [],
     "answer": "Higher risk investments generally offer the potential for higher returns, while lower-risk investments offer lower returns.",
     "explanation": "Investors must balance expected returns with their risk tolerance to optimize portfolio performance."
   },
   {
     "id": 8,
-    "topic": "capstructure",
+    "topic": "Dividends & Capital Structure",
+    "type": "long",
     "question": "Define optimal capital structure.",
-    "options": [],
     "answer": "The mix of debt and equity that minimizes the firm’s cost of capital and maximizes its market value.",
     "explanation": "A balanced structure lowers WACC while maintaining financial flexibility."
   },
   {
     "id": 9,
-    "topic": "dividend_policy",
+    "topic": "Dividends & Capital Structure",
+    "type": "long",
     "question": "Discuss two factors influencing a company’s dividend policy.",
-    "options": [],
     "answer": "1) Availability of cash. 2) Growth opportunities and reinvestment needs.",
     "explanation": "Management must balance rewarding shareholders with financing future growth."
   },
   {
     "id": 10,
-    "topic": "working_cap",
+    "topic": "Working Capital Management",
+    "type": "long",
     "question": "List three components of working capital management.",
-    "options": [],
     "answer": "1) Cash management, 2) Inventory management, 3) Accounts receivable and payable management.",
     "explanation": "These ensure liquidity and operational efficiency."
   },
   {
     "id": 11,
-    "topic": "break_even",
+    "topic": "Break-even & CVP",
+    "type": "numeric",
     "question": "A company sells products at R50 each, variable cost per unit is R30, and fixed costs are R40,000. Calculate the break-even point in units.",
-    "options": [],
-    "answer": "Break-even = Fixed Costs / (Selling Price - Variable Cost) = 40,000 / (50 - 30) = 2,000 units.",
-    "explanation": "At 2,000 units, total contribution equals total fixed costs; profit = 0."
+    "answer": "2000",
+    "explanation": "Break-even = Fixed Costs / (Selling Price - Variable Cost) = 40,000 / (50 - 30) = 2,000 units."
   },
   {
     "id": 12,
-    "topic": "valuation",
+    "topic": "Managerial Finance Formulas",
+    "type": "numeric",
     "question": "If a share is expected to pay a dividend of R4 next year and dividends grow at 5% per year, with a required return of 15%, compute its value using the Gordon model.",
-    "options": [],
-    "answer": "P0 = D1 / (r - g) = 4 / (0.15 - 0.05) = R40.",
-    "explanation": "The Gordon growth model assumes constant growth and perpetual dividends."
+    "answer": "40",
+    "explanation": "P₀ = D₁ / (r - g) = 4 / (0.15 - 0.05) = R40."
   }
 ]
