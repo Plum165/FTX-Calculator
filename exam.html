@@ -39,6 +39,38 @@
     .explain{margin-top:12px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:12px;border-radius:8px;color:#d8f0ff;font-size:0.95rem}
     .metaSmall{font-size:0.88rem;color:var(--muted)}
     footer{margin-top:18px;color:var(--muted);font-size:0.9rem}
+
+    /* --- ADDED FOR TABLES --- */
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12px 0;
+      font-size: 0.9rem;
+    }
+    .data-table th, .data-table td {
+      border: 1px solid rgba(120, 150, 220, 0.15);
+      padding: 8px 10px;
+      text-align: left;
+    }
+    .data-table th {
+      background-color: rgba(10, 22, 48, 0.7);
+      font-weight: 600;
+    }
+    .data-table td:first-child {
+      font-weight: 500;
+      color: var(--muted);
+    }
+    .data-table td:not(:first-child) {
+      text-align: right;
+    }
+    .data-table .header-row th {
+      text-align: right;
+    }
+    .data-table .header-row th:first-child {
+      text-align: left;
+    }
+    /* --- END OF ADDED STYLES --- */
+
     @media(max-width:880px){.topics{grid-template-columns:repeat(2,1fr)}.right{width:100%}.questionArea{flex-direction:column}}
   </style>
 </head>
