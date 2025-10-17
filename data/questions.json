@@ -1,77 +1,108 @@
 [
   {
-    "id": "2014-sup-Q1-1",
-    "topic": "Accounting Equation",
-    "type": "mcq",
-    "question": "<p>In the event of a public company listed on the JSE being liquidated a shareholder's liability in the company is restricted to:</p><ol><li>The amount unpaid on his shares</li><li>The total value of his personal assets</li><li>The total value of his initial investment in the company</li><li>The amount of the unpaid liabilities</li><li>None of the above</li></ol>",
-    "choices": [
-      "The amount unpaid on his shares",
-      "The total value of his personal assets",
-      "The total value of his initial investment in the company",
-      "The amount of the unpaid liabilities",
-      "None of the above"
+    "id": 1,
+    "topic": "acc_eq",
+    "question": "Explain the accounting equation and demonstrate how it remains in balance when a business purchases equipment worth R50,000 using a bank loan.",
+    "options": [],
+    "answer": "Assets = Liabilities + Equity. Purchasing equipment increases assets by R50,000 and increases liabilities (bank loan) by R50,000, keeping the equation balanced.",
+    "explanation": "Any transaction that affects both sides equally preserves balance; in this case, the asset (equipment) and liability (loan) both increase by the same amount."
+  },
+  {
+    "id": 2,
+    "topic": "sources_capcost",
+    "question": "A company issues preference shares at R100 each with a dividend of R12. Calculate the cost of preference share capital if flotation costs are R5 per share.",
+    "options": [
+      "A) 12.0%",
+      "B) 12.6%",
+      "C) 12.9%",
+      "D) 13.3%"
     ],
-    "answer": "The amount unpaid on his shares",
-    "explanation": "<p>For a public company, shareholder liability is limited to the amount unpaid on their shares — they are not personally liable for company debts beyond that.</p>"
+    "answer": "D) 13.3%",
+    "explanation": "Kp = D / (P0 - F) = 12 / (100 - 5) = 12 / 95 = 12.63%. Rounded to 13.3%."
   },
-
   {
-    "id": "divs-1",
-    "topic": "Dividends & Capital Structure",
-    "type": "mcq",
-    "question": "A company has the following capital structure: <br><strong>Issued</strong>: 12% preference shares (Class B) issued R50,000; Ordinary shares (Class A) issued R300,000 at par R3. If the company declared an ordinary dividend of R0.30 per share, the total dividends payable (preference + ordinary) will be:",
-    "choices": ["R6 000","R30 000","R24 000","R36 000","None of the above"],
-    "answer": "R36 000",
-    "explanation": "Preference dividend = 12% of R50,000 = R6,000. Ordinary shares: R300,000 at par R3 => 100,000 shares. Ordinary dividend = 100,000 × R0.30 = R30,000. Total = R36,000."
+    "id": 3,
+    "topic": "cost_budget",
+    "question": "List three advantages of preparing a cash budget.",
+    "options": [],
+    "answer": "1) Helps identify future cash surpluses or deficits. 2) Facilitates planning for short-term financing. 3) Aids control by comparing actual vs budgeted performance.",
+    "explanation": "Cash budgets are vital planning tools for liquidity management and short-term decision-making."
   },
-
   {
-    "id": "ccc-1",
-    "topic": "Working Capital Management",
-    "type": "numeric",
-    "question": "Brenner Industries has a 125-day Operating Cycle. If the average days inventory on hand is 50 days and the average creditors' payment period is 30 days, what is its Cash Conversion Cycle?",
-    "choices": [],
-    "answer": "95",
-    "explanation": "Cash Conversion Cycle = Operating cycle - Creditors payment period = 125 - 30 = 95 days."
+    "id": 4,
+    "topic": "invest_appraisal",
+    "question": "Project X costs R100,000 and yields cash inflows of R40,000, R50,000, R30,000 over three years. The cost of capital is 10%. Compute the NPV.",
+    "options": [],
+    "answer": "NPV = (40,000/1.1) + (50,000/1.1²) + (30,000/1.1³) − 100,000 = 36,364 + 41,322 + 22,539 − 100,000 = R24225 (positive).",
+    "explanation": "Since NPV > 0, the project should be accepted."
   },
-
   {
-    "id": "bsheet-1",
-    "topic": "Statement of Financial Position",
-    "type": "long",
-    "question": "<h4>Kiki Ltd — extract</h4><p>Use the following snippet (partial) to practice: adjust vehicles cost, record final dividend of 40c per share and add unpaid utilities R6,000. Prepare a correct Statement of Financial Position.</p><table><thead><tr><th>Account</th><th>R</th></tr></thead><tbody><tr><td>Inventory</td><td>37,000</td></tr><tr><td>Accounts receivable</td><td>38,000</td></tr></tbody></table>",
-    "choices": [],
-    "answer": "",
-    "explanation": "<p>This is a long-form question — reclassify, adjust retained earnings for declared final dividend (40c × number of ordinary shares), and include utilities payable of R6,000.</p>"
+    "id": 5,
+    "topic": "ratios_analysis",
+    "question": "If current assets are R300,000 and current liabilities are R200,000, calculate the current ratio and interpret it.",
+    "options": [],
+    "answer": "Current Ratio = 300,000 / 200,000 = 1.5:1. The firm has R1.50 in current assets for every R1 in current liabilities.",
+    "explanation": "A ratio above 1 indicates short-term liquidity but too high may indicate inefficient use of assets."
   },
-
   {
-    "id": "tvm-1",
-    "topic": "Time Value of Money",
-    "type": "numeric",
-    "question": "If a current ticket costs <strong>R191,958</strong> and inflation is 6% p.a., what will it cost in 10 years? (Round to the nearest rand)",
-    "choices": [],
-    "answer": "343026",
-    "explanation": "Future price = 191,958 × (1.06)^10 ≈ R343,026. (Use formula \\(FV = PV(1+i)^n\\).)"
+    "id": 6,
+    "topic": "wacc",
+    "question": "A company has R2m in debt at 10% and R3m in equity costing 15%. Compute the WACC (no taxes).",
+    "options": [
+      "A) 12.0%",
+      "B) 13.0%",
+      "C) 13.5%",
+      "D) 14.0%"
+    ],
+    "answer": "B) 13.0%",
+    "explanation": "WACC = (2/5)*10% + (3/5)*15% = 13.0%."
   },
-
   {
-    "id": "ratio-1",
-    "topic": "Financial Market Ratios",
-    "type": "long",
-    "question": "Timcke Ltd and Hendricks Ltd: calculate EPS, PE and dividend yield and recommend which is a better buy if economic conditions improve. (Use figures in the exam paper.)",
-    "choices": [],
-    "answer": "",
-    "explanation": "Suggested steps: compute NPAT (after tax), EPS = NPAT ÷ shares, PE = MPS ÷ EPS, Dividend yield = DPS ÷ MPS. Compare PE relative to industry and growth prospects."
+    "id": 7,
+    "topic": "risk_return",
+    "question": "Explain the concept of risk-return trade-off in investment decisions.",
+    "options": [],
+    "answer": "Higher risk investments generally offer the potential for higher returns, while lower-risk investments offer lower returns.",
+    "explanation": "Investors must balance expected returns with their risk tolerance to optimize portfolio performance."
   },
-
   {
-    "id": "example-table-math",
-    "topic": "Managerial Finance Formulas",
-    "type": "long",
-    "question": "<p>Example: show a small balance sheet table and compute \\(ROE = \\frac{Net\\ profit}{Shareholders'\\ equity}\\)</p><table><tr><th>Item</th><th>R</th></tr><tr><td>Net profit</td><td>120,000</td></tr><tr><td>Shareholders' equity</td><td>800,000</td></tr></table>",
-    "choices": [],
-    "answer": "",
-    "explanation": "ROE = 120,000 / 800,000 = 0.15 = 15% — MathJax: \\(ROE=\\frac{120000}{800000}=0.15.\\)"
+    "id": 8,
+    "topic": "capstructure",
+    "question": "Define optimal capital structure.",
+    "options": [],
+    "answer": "The mix of debt and equity that minimizes the firm’s cost of capital and maximizes its market value.",
+    "explanation": "A balanced structure lowers WACC while maintaining financial flexibility."
+  },
+  {
+    "id": 9,
+    "topic": "dividend_policy",
+    "question": "Discuss two factors influencing a company’s dividend policy.",
+    "options": [],
+    "answer": "1) Availability of cash. 2) Growth opportunities and reinvestment needs.",
+    "explanation": "Management must balance rewarding shareholders with financing future growth."
+  },
+  {
+    "id": 10,
+    "topic": "working_cap",
+    "question": "List three components of working capital management.",
+    "options": [],
+    "answer": "1) Cash management, 2) Inventory management, 3) Accounts receivable and payable management.",
+    "explanation": "These ensure liquidity and operational efficiency."
+  },
+  {
+    "id": 11,
+    "topic": "break_even",
+    "question": "A company sells products at R50 each, variable cost per unit is R30, and fixed costs are R40,000. Calculate the break-even point in units.",
+    "options": [],
+    "answer": "Break-even = Fixed Costs / (Selling Price - Variable Cost) = 40,000 / (50 - 30) = 2,000 units.",
+    "explanation": "At 2,000 units, total contribution equals total fixed costs; profit = 0."
+  },
+  {
+    "id": 12,
+    "topic": "valuation",
+    "question": "If a share is expected to pay a dividend of R4 next year and dividends grow at 5% per year, with a required return of 15%, compute its value using the Gordon model.",
+    "options": [],
+    "answer": "P0 = D1 / (r - g) = 4 / (0.15 - 0.05) = R40.",
+    "explanation": "The Gordon growth model assumes constant growth and perpetual dividends."
   }
 ]
