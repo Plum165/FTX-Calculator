@@ -18,7 +18,7 @@
     }
     html,body{height:100%;margin:0;font-family:Inter,system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;}
     body{background: radial-gradient(circle at 10% 10%, #0b1530 0%, var(--bg) 60%); color:#e6eef8; -webkit-font-smoothing:antialiased;}
-    .wrap{max-width:1100px;margin:28px auto;padding:22px;border-radius:12px;background:linear-gradient(180deg, rgba(10,18,35,0.6), rgba(6,10,20,0.6));box-shadow:0 10px 40px rgba(2,6,23,.6);border:1px solid rgba(120,150,220,0.04);}
+    .wrap{max-width:800px;margin:28px auto;padding:22px;border-radius:12px;background:linear-gradient(180deg, rgba(10,18,35,0.6), rgba(6,10,20,0.6));box-shadow:0 10px 40px rgba(2,6,23,.6);border:1px solid rgba(120,150,220,0.04);}
     header{display:flex;gap:12px;align-items:center;margin-bottom:12px}
     h1{font-size:1.35rem;margin:0;color:#f3f9ff}
     .meta{color:var(--muted);font-size:0.95rem}
@@ -29,9 +29,7 @@
     .topic:hover{transform:translateY(-4px);box-shadow:0 8px 24px rgba(36,84,150,0.12)}
     .topic.active{background:linear-gradient(180deg,var(--accent-2),#1b365f);color:#fff;border-color:rgba(140,110,240,0.6);box-shadow:0 8px 28px rgba(139,92,246,0.12)}
     .controls button{background:linear-gradient(180deg,#1f2f4f,#162033);border:1px solid rgba(130,160,210,0.12);color:#e6f3ff;padding:8px 12px;border-radius:8px;cursor:pointer}
-    .questionArea{margin-top:16px;display:flex;gap:16px;align-items:flex-start}
-    .left{flex:1}
-    .right{width:320px}
+    .questionArea{margin-top:16px;}
     #qText{font-weight:600;color:#eaf6ff}
     .choices{margin-top:10px;display:flex;flex-direction:column;gap:10px}
     label.choice{display:flex;gap:10px;align-items:center;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02));padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.02)}
@@ -71,7 +69,7 @@
     }
     /* --- END OF ADDED STYLES --- */
 
-    @media(max-width:880px){.topics{grid-template-columns:repeat(2,1fr)}.right{width:100%}.questionArea{flex-direction:column}}
+    @media(max-width:880px){.topics{grid-template-columns:repeat(2,1fr)}}
   </style>
 </head>
 <body>
@@ -79,7 +77,7 @@
     <header>
       <div>
         <h1>FTX Practice — Interactive Question Bank</h1>
-        <div class="meta">Pick a topic (12 topics). Questions are loaded from <code>data/questions.json</code>. Math uses MathJax.</div>
+        <div class="meta">Pick a topic. Questions are loaded from <code>data/questions.json</code>. Math uses MathJax.</div>
       </div>
     </header>
 
@@ -87,38 +85,30 @@
       <div class="topics" id="topics"></div>
 
       <div class="controls">
-        <button id="newQ">New Question</button>
+        <button id="prevQ">Previous Question</button>
+        <button id="nextQ">Next Question</button>
         <button id="showAnswer">Show Answer & Explanation</button>
         <button id="toggleTheme">Toggle Light</button>
         <div style="margin-left:auto" class="metaSmall">Question <span id="qIndex">0</span> / <span id="qTotal">0</span></div>
       </div>
 
       <div class="questionArea">
-        <div class="left card" id="questionCard" style="display:none;">
+        <div class="card" id="questionCard" style="display:none;">
           <div id="qText"></div>
           <div id="choices" class="choices"></div>
           <div style="margin-top:10px"><button id="checkBtn">Check Answer</button></div>
           <div id="feedback" class="explain" style="display:none"></div>
-        </div>
-        <div class="right">
-          <div class="card">
-            <div style="font-weight:600">Question Info</div>
-            <div id="qMeta" class="metaSmall" style="margin-top:6px"></div>
-            <hr style="border:none;border-top:1px solid rgba(255,255,255,0.03);margin:10px 0">
-            <div style="font-weight:600">Notes</div>
-            <div class="metaSmall" style="margin-top:6px">You can include <code>&lt;table&gt;</code> or images in the question/explanation HTML. Math: use \\( ... \\) or $$ ... $$.</div>
-          </div>
         </div>
       </div>
 
       <div id="noTopic" class="meta" style="margin-top:12px">Loading questions…</div>
     </div>
 
-    <footer>Built for FTX1005F practice — questions externalized. Add more to <code>data/questions.json</code>.</footer>
+    <footer>Built for FTX practice — questions externalized. Add more to <code>data/questions.json</code>.</footer>
   </div>
 
 <script>
-/* ----- App: loads data/questions.json, supports HTML inside questions, MathJax typesetting ----- */
+/* ----- App: loads data/questions.json, supports sequential navigation, HTML inside questions, MathJax typesetting ----- */
 
 let questions = [];
 const topicsList = [
@@ -129,7 +119,8 @@ const topicsList = [
 ];
 
 const topicsEl = document.getElementById('topics');
-const newQBtn = document.getElementById('newQ');
+const prevQBtn = document.getElementById('prevQ');
+const nextQBtn = document.getElementById('nextQ');
 const qArea = document.getElementById('questionCard');
 const qText = document.getElementById('qText');
 const choicesEl = document.getElementById('choices');
@@ -139,7 +130,6 @@ const noTopic = document.getElementById('noTopic');
 const showAnswerBtn = document.getElementById('showAnswer');
 const checkBtn = document.getElementById('checkBtn');
 const feedback = document.getElementById('feedback');
-const qMeta = document.getElementById('qMeta');
 const toggleTheme = document.getElementById('toggleTheme');
 
 let selectedTopic = null;
@@ -163,7 +153,6 @@ fetch('data/questions.json')
   .then(data => {
     questions = data;
     noTopic.textContent = 'Select a topic to begin.';
-    // Optionally compute counts per topic
     qTotal.textContent = '0';
   })
   .catch(err => {
@@ -176,32 +165,26 @@ function selectTopic(t, btn){
   btn.classList.add('active');
   selectedTopic = t;
   filtered = questions.filter(q=>q.topic === t);
-  currentIndex = -1;
+  currentIndex = 0; // Start at the first question
   qTotal.textContent = filtered.length;
-  qIndex.textContent = '0';
+  
   if(filtered.length === 0){
     noTopic.textContent = 'No questions for this topic yet. Edit data/questions.json to add some.';
     noTopic.style.display = 'block';
     qArea.style.display = 'none';
+    qIndex.textContent = '0';
   } else {
     noTopic.style.display = 'none';
     qArea.style.display = 'block';
-    nextQuestion();
+    renderQuestion(filtered[currentIndex]);
   }
 }
 
-function nextQuestion(){
-  if(!selectedTopic || filtered.length===0) return;
-  currentIndex = Math.floor(Math.random()*filtered.length);
-  const q = filtered[currentIndex];
-  qIndex.textContent = (currentIndex+1);
-  renderQuestion(q);
-}
-
 function renderQuestion(q){
+  if (!q) return;
   feedback.style.display = 'none';
+  qIndex.textContent = (currentIndex + 1);
   qText.innerHTML = q.question || '';
-  qMeta.innerHTML = `<div><strong>ID:</strong> ${q.id || '-'} <br><strong>Type:</strong> ${q.type || '-'} </div>`;
   choicesEl.innerHTML = '';
 
   if(q.type === 'mcq'){
@@ -221,6 +204,26 @@ function renderQuestion(q){
 
   // typeset math if MathJax present
   typesetMath();
+}
+
+/* Navigate to previous question */
+prevQBtn.onclick = ()=>{
+  if(!selectedTopic || filtered.length === 0) return;
+  currentIndex--;
+  if(currentIndex < 0){
+    currentIndex = filtered.length - 1; // Loop to the end
+  }
+  renderQuestion(filtered[currentIndex]);
+}
+
+/* Navigate to next question */
+nextQBtn.onclick = ()=>{
+  if(!selectedTopic || filtered.length === 0) return;
+  currentIndex++;
+  if(currentIndex >= filtered.length){
+    currentIndex = 0; // Loop to the beginning
+  }
+  renderQuestion(filtered[currentIndex]);
 }
 
 /* Check answer — tolerant numeric comparison */
@@ -267,12 +270,6 @@ showAnswerBtn.onclick = ()=>{
   feedback.style.display = 'block';
   feedback.innerHTML = `<strong>Answer & Explanation</strong><br/>${q.answer ? ('<strong>' + q.answer + '</strong><br/>') : ''}${q.explanation || ''}`;
   typesetMath();
-}
-
-/* New question */
-newQBtn.onclick = ()=>{
-  if(!selectedTopic){ alert('Select a topic first.'); return; }
-  nextQuestion();
 }
 
 /* Light / dark toggle (simple) */
