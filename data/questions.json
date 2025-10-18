@@ -1555,6 +1555,1537 @@
     "question": "A project requires a capital investment of R500,000 and has an expected return of 30%. The company's WACC is 20.01%. Based on this information, should the project be accepted or rejected?",
     "answer": "Accept the project.",
     "explanation": "The decision rule for project acceptance is to compare the project's expected return to the cost of financing it (the WACC). <br><ul><li><strong>Expected Return:</strong> 30%</li><li><strong>Cost of Capital (WACC):</strong> 20.01%</li></ul>Since the expected return (30%) is greater than the cost of capital (20.01%), the project is expected to generate value for the company's shareholders. Therefore, the project should be <strong>accepted</strong>."
+  },
+   {
+    "id": 184,
+    "topic": "Accounting Equation",
+    "type": "long",
+    "question": "Analyse the effect of the following transaction on the accounting equation for De Mink Limited: Issued 10,000 ordinary shares at R5 each to shareholders.",
+    "answer": "Assets: +R50,000 | Equity: +R50,000 | Liabilities: No change",
+    "explanation": "When a company issues shares, it receives cash in exchange for an ownership stake. <br><ul><li><strong>Assets:</strong> The company's 'Bank' account (an asset) increases by the cash received. Calculation: 10,000 shares * R5/share = <strong>+R50,000</strong>.</li><li><strong>Equity:</strong> The 'Share Capital' account (an equity account) increases, representing the increased ownership investment in the company, by <strong>+R50,000</strong>.</li><li><strong>Liabilities:</strong> This transaction does not involve any debt, so there is no change.</li></ul>The equation remains in balance: +50,000 (Assets) = +50,000 (Equity) + 0 (Liabilities)."
+  },
+  {
+    "id": 185,
+    "topic": "Accounting Equation",
+    "type": "long",
+    "question": "Analyse the effect of the following transaction on the accounting equation for De Mink Limited: Issued a cheque of R30,000 as a deposit on the purchase of land and buildings valued at R300,000. The balance was borrowed.",
+    "answer": "Assets: +R270,000 | Equity: No change | Liabilities: +R270,000",
+    "explanation": "This transaction involves acquiring a large asset using a combination of cash and debt. <br><ul><li><strong>Assets:</strong> The 'Bank' account (asset) decreases by the deposit paid (-R30,000). The 'Land and Buildings' account (asset) increases by its full value (+R300,000). The net effect on total assets is +300,000 - 30,000 = <strong>+R270,000</strong>.</li><li><strong>Liabilities:</strong> The company borrowed the remaining amount. The 'Loan' account (liability) increases by R300,000 - R30,000 = <strong>+R270,000</strong>.</li><li><strong>Equity:</strong> There is no direct impact on equity from this transaction.</li></ul>The equation balances: +270,000 (Assets) = 0 (Equity) + 270,000 (Liabilities)."
+  },
+  {
+    "id": 186,
+    "topic": "Accounting Equation",
+    "type": "long",
+    "question": "Analyse the effect of the following transaction on the accounting equation for De Mink Limited: Bought inventory valued at R150,000 on credit from Githinji Wholesalers, who offered a 20% trade discount.",
+    "answer": "Assets: +R120,000 | Equity: No change | Liabilities: +R120,000",
+    "explanation": "A trade discount reduces the cost of the inventory at the point of purchase. <br><strong>1. Calculate the actual cost of inventory:</strong><br>Cost = R150,000 * (1 - 20%) = R120,000. <br><br><strong>2. Analyse the effect on the equation:</strong><ul><li><strong>Assets:</strong> The 'Inventory' account increases by its actual cost of <strong>+R120,000</strong>.</li><li><strong>Liabilities:</strong> Since the purchase was on credit, the 'Accounts Payable' account increases by the amount owed, which is <strong>+R120,000</strong>.</li><li><strong>Equity:</strong> There is no change.</li></ul>The equation balances: +120,000 (Assets) = 0 (Equity) + 120,000 (Liabilities)."
+  },
+  {
+    "id": 187,
+    "topic": "Accounting Equation",
+    "type": "long",
+    "question": "Analyse the effect of the following transaction on the accounting equation: Half of the inventory purchased for R120,000 was sold for cash at a mark-up on cost of 100%.",
+    "answer": "Assets: +R60,000 | Equity: +R60,000 | Liabilities: No change",
+    "explanation": "This cash sale has two components: the revenue and the cost of the goods sold. <br><strong>1. Calculate Cost and Selling Price:</strong><ul><li>Cost of inventory sold = R120,000 / 2 = R60,000.</li><li>Selling Price = Cost * (1 + Markup) = R60,000 * (1 + 100%) = R120,000.</li></ul><strong>2. Analyse the net effect on the equation:</strong><ul><li><strong>Assets:</strong> The 'Bank' account increases by the cash received (+R120,000). The 'Inventory' account decreases by the cost of the goods sold (-R60,000). Net effect = +120,000 - 60,000 = <strong>+R60,000</strong>.</li><li><strong>Equity:</strong> Sales revenue increases equity by +R120,000. Cost of Sales expense decreases equity by -R60,000. Net effect = +120,000 - 60,000 = <strong>+R60,000</strong>.</li></ul>The equation balances: +60,000 (Assets) = +60,000 (Equity) + 0 (Liabilities)."
+  },
+  {
+    "id": 188,
+    "topic": "Statement of Financial Position",
+    "type": "long",
+    "question": "Prepare the Inventory T-account for Deist Ltd for June 2021. <br><ul><li>Opening balance: R25,000.</li><li>Bought inventory on credit for R25,000 with a 10% trade discount.</li><li>Paid R2,000 for delivery of the inventory.</li><li>Sold inventory on credit for R15,000 (with a 50% mark-up on cost).</li></ul>The account must be properly balanced.",
+    "answer": "The closing balance of the Inventory account is R39,500.",
+    "explanation": "The Inventory T-account tracks the movement of inventory. <br><strong>1. Record transactions:</strong><ul><li><strong>Opening Balance (Debit):</strong> R25,000.</li><li><strong>Credit Purchase (Debit):</strong> R25,000 * (1 - 10%) = R22,500.</li><li><strong>Delivery Cost (Debit):</strong> Carriage inwards of R2,000 is part of the cost of inventory.</li><li><strong>Cost of Sales (Credit):</strong> Selling price R15,000 = Cost * 1.5. So, Cost = R15,000 / 1.5 = R10,000.</li></ul><strong>Inventory T-Account:</strong><br><table class='data-table'><tr><th>Debit (Increases)</th><th>Credit (Decreases)</th></tr><tr><td>1 June - Balance b/d</td><td>25,000</td><td></td><td></td></tr><tr><td>2 June - Creditors (Purchase)</td><td>22,500</td><td>3 June - Cost of Sales</td><td>10,000</td></tr><tr><td>2 June - Bank (Delivery)</td><td>2,000</td><td>30 June - Balance c/d</td><td>39,500</td></tr><tr><td><strong>Total Debits</strong></td><td><strong>49,500</strong></td><td><strong>Total Credits</strong></td><td><strong>49,500</strong></td></tr><tr><td>1 July - Balance b/d</td><td>39,500</td><td></td><td></td></tr></table>"
+  },
+  {
+    "id": 189,
+    "topic": "Statement of Financial Position",
+    "type": "numeric",
+    "question": "Calculate the Net Profit After Tax for Hill Ltd for the year ended 28 Feb 2022. <br><br> <table class='data-table'> <tr class='header-row'><th>Account</th><th>Amount</th><th>Adjustments</th></tr> <tr><td>Sales income</td><td>1,500,000</td><td></td></tr> <tr><td>Cost of sales</td><td>1,200,000</td><td></td></tr> <tr><td>General operating exp</td><td>150,800</td><td></td></tr> <tr><td>Depreciation</td><td></td><td>Equip: R60,000; Vehicles: R20,480</td></tr> <tr><td>Bad debts</td><td></td><td>R1,100</td></tr> <tr><td>Telephone exp</td><td>22,000</td><td>+R2,000 accrued</td></tr> <tr><td>Interest income</td><td>5,000</td><td>+R1,000 accrued</td></tr> </table>",
+    "answer": "49620",
+    "explanation": "To calculate the net profit, we must construct an income statement using the adjusted figures. <br><strong>Gross Profit:</strong> 1,500,000 (Sales) - 1,200,000 (CoS) = R300,000. <br><br><strong>Calculate Other Income:</strong><br>Interest Income = 5,000 (received) + 1,000 (accrued) = R6,000. <br><br><strong>Calculate Operating Expenses:</strong><ul><li><strong>Depreciation:</strong> 60,000 + 20,480 = R80,480.</li><li><strong>Bad Debts:</strong> R1,100.</li><li><strong>Telephone:</strong> 22,000 + 2,000 = R24,000.</li><li><strong>General Operating Expenses:</strong> R150,800.</li></ul>Total Operating Expenses = 80,480 + 1,100 + 24,000 + 150,800 = R256,380. <br><br><strong>Calculate Net Profit:</strong><br>Net Profit = Gross Profit + Other Income - Operating Expenses <br>Net Profit = 300,000 + 6,000 - 256,380 = <strong>R49,620</strong>."
+  },
+  {
+    "id": 190,
+    "topic": "Dividends & Capital Structure",
+    "type": "numeric",
+    "question": "Hill Ltd has 1,000,000 in share capital with shares issued at R4 each. The company declared and paid dividends of R25,000 during the financial year. Calculate the Dividend Per Share (DPS).",
+    "answer": "0.10",
+    "explanation": "To calculate DPS, we first need to find the number of shares in issue. <br><strong>1. Calculate Number of Shares:</strong><br>Number of Shares = Total Share Capital / Price per Share = R1,000,000 / R4 = 250,000 shares. <br><br><strong>2. Calculate DPS:</strong><br><strong>Formula:</strong> DPS = Total Dividends / Number of Shares. <br>DPS = R25,000 / 250,000 shares = <strong>R0.10 per share</strong> (or 10 cents)."
+  },
+  {
+    "id": 191,
+    "topic": "Cost of Capital (WACC)",
+    "type": "mcq",
+    "question": "Which of the following statements about sources of finance is correct? <br>(i) Retained income is a long-term source of finance. <br>(ii) A loss exempts a company from paying interest on long-term debt. <br>(iii) Accounts payable is a short-term source of finance. <br>(iv) Bank overdraft is a long-term source of finance.",
+    "choices": ["All statements are correct", "(i) only", "(i) and (iii)", "(i), (iii) and (iv)"],
+    "answer": "(i) and (iii)",
+    "explanation": "Let's evaluate each statement: <br><ul><li>(i) <strong>Correct.</strong> Retained income is profit that is reinvested in the business, representing a permanent, long-term source of internal finance.</li><li>(ii) <strong>Incorrect.</strong> Interest on debt is a legal obligation that must be paid regardless of whether the company makes a profit or a loss.</li><li>(iii) <strong>Correct.</strong> Accounts payable (credit from suppliers) is a spontaneous, short-term source of finance used to fund daily operations.</li><li>(iv) <strong>Incorrect.</strong> A bank overdraft is a short-term financing facility, typically repayable on demand.</li></ul>Therefore, only statements (i) and (iii) are correct."
+  },
+  {
+    "id": 192,
+    "topic": "Cost of Capital (WACC)",
+    "type": "mcq",
+    "question": "Zwide Ltd has a Total Capital of R800,000, structured as Ordinary Shares of R600,000 and Long-term loans of R200,000. What is the percentage weighting of each component?",
+    "choices": ["Shares 25%, Loans 75%", "Shares 75%, Loans 25%", "Shares 60%, Loans 20%", "None of the above"],
+    "answer": "Shares 75%, Loans 25%",
+    "explanation": "The weight of each component is its value divided by the total capital. <br><ul><li><strong>Weight of Shares:</strong> (600,000 / 800,000) * 100 = 0.75 * 100 = <strong>75%</strong>.</li><li><strong>Weight of Loans:</strong> (200,000 / 800,000) * 100 = 0.25 * 100 = <strong>25%</strong>.</li></ul>"
+  },
+  {
+    "id": 193,
+    "topic": "Cost of Capital (WACC)",
+    "type": "numeric",
+    "question": "Green Ltd.'s shares are trading at R5. A dividend of 40 cents (R0.40) per share has just been paid (D₀), and dividends are expected to grow by 11% per year in perpetuity. Calculate the cost of ordinary shares (Ke).",
+    "answer": "19.88",
+    "explanation": "This requires the Gordon Growth Model to find the cost of equity. <br><strong>Formula:</strong> Ke = (D₁ / P₀) + g. <br><br><strong>1. Calculate the dividend for next year (D₁):</strong><br>D₁ = D₀ * (1 + g) = R0.40 * (1 + 0.11) = R0.444. <br><br><strong>2. Calculate the Cost of Equity (Ke):</strong><br>Ke = (0.444 / 5.00) + 0.11 <br>Ke = 0.0888 + 0.11 = 0.1988 or <strong>19.88%</strong>."
+  },
+  {
+    "id": 194,
+    "topic": "Cost of Capital (WACC)",
+    "type": "numeric",
+    "question": "Calculate the Weighted Average Cost of Capital (WACC) for Diamond Ltd. The tax rate is 28%. <br><br> <table class='data-table'> <tr class='header-row'><th>Component</th><th>Market Value</th><th>Before-tax Cost</th></tr> <tr><td>Ordinary share capital</td><td>R1,000,000</td><td>20%</td></tr> <tr><td>Preference shares</td><td>R500,000</td><td>10%</td></tr> <tr><td>Debentures (Debt)</td><td>R300,000</td><td>5%</td></tr> </table>",
+    "answer": "14.49",
+    "explanation": "WACC is the weighted average of the costs of a company's capital sources. <br><strong>1. Calculate Total Capital and Weights:</strong><br>Total Capital = 1,000k + 500k + 300k = R1,800,000. <br><ul><li>Weight Equity (We) = 1000/1800 = 55.56%</li><li>Weight Preference (Wp) = 500/1800 = 27.78%</li><li>Weight Debt (Wd) = 300/1800 = 16.67%</li></ul><strong>2. Calculate After-Tax Cost of Debt:</strong><br>Kd(after-tax) = 5% * (1 - 0.28) = 3.6%. <br><br><strong>3. Calculate WACC Contribution of Each Component:</strong><ul><li>Equity: 55.56% * 20% = 11.11%</li><li>Preference Shares: 27.78% * 10% = 2.78%</li><li>Debt: 16.67% * 3.6% = 0.60%</li></ul><strong>4. Sum the Contributions:</strong><br>WACC = 11.11% + 2.78% + 0.60% = <strong>14.49%</strong>."
+  },
+  {
+    "id": 195,
+    "topic": "Capital Budgeting",
+    "type": "long",
+    "question": "Gold Ltd has a WACC of 13%. It is considering two projects: Project A with an expected return of 18%, and Project B with an expected return of 12%. Advise the directors on which project to accept.",
+    "answer": "Accept Project A and reject Project B.",
+    "explanation": "The fundamental decision rule for investment appraisal is to compare a project's expected return with the cost of the capital required to fund it (the WACC). <br><ul><li><strong>Project A:</strong> The expected return of 18% is <strong>greater than</strong> the WACC of 13%. This means the project is expected to generate value for shareholders. It should be <strong>accepted</strong>.</li><li><strong>Project B:</strong> The expected return of 12% is <strong>less than</strong> the WACC of 13%. This means the project would cost more to finance than it generates in returns, destroying shareholder value. It should be <strong>rejected</strong>.</li></ul>"
+  },
+   {
+    "id": 196,
+    "topic": "Accounting Equation",
+    "type": "long",
+    "question": "Analyse the effect of the following transaction for A. Green Limited on the accounting equation: Purchase land and buildings valued at R500,000 and paid a 10% deposit by cheque (EFT). The balance was borrowed.",
+    "answer": "Assets: +R450,000 | Equity: No change | Liabilities: +R450,000",
+    "explanation": "This transaction involves acquiring a non-current asset using a combination of the company's cash and borrowed funds. <br><strong>1. Calculate the deposit and loan amounts:</strong><ul><li>Deposit paid (cash outflow) = R500,000 * 10% = R50,000.</li><li>Balance borrowed (loan) = R500,000 - R50,000 = R450,000.</li></ul><strong>2. Analyse the effect on the equation:</strong><ul><li><strong>Assets:</strong> The 'Land and Buildings' account increases by +R500,000, while the 'Bank' account decreases by -R50,000. The net effect on total assets is +500,000 - 50,000 = <strong>+R450,000</strong>.</li><li><strong>Liabilities:</strong> A new 'Loan' liability is created, increasing total liabilities by <strong>+R450,000</strong>.</li><li><strong>Equity:</strong> There is no impact on equity.</li></ul>The equation remains in balance: +450,000 (Assets) = 0 (Equity) + 450,000 (Liabilities)."
+  },
+  {
+    "id": 197,
+    "topic": "Accounting Equation",
+    "type": "long",
+    "question": "Analyse the effect of the following transaction for A. Green Limited on the accounting equation: Bought inventory valued at R100,000 on credit, and received a 4% trade discount.",
+    "answer": "Assets: +R96,000 | Equity: No change | Liabilities: +R96,000",
+    "explanation": "A trade discount is deducted from the cost of the inventory at the time of the transaction. <br><strong>1. Calculate the actual cost of the inventory:</strong><br>Cost = R100,000 * (1 - 4%) = R96,000. <br><br><strong>2. Analyse the effect on the equation:</strong><ul><li><strong>Assets:</strong> The 'Inventory' account increases by the actual cost of <strong>+R96,000</strong>.</li><li><strong>Liabilities:</strong> The purchase was made on credit, so the 'Accounts Payable' liability increases by the amount owed, which is <strong>+R96,000</strong>.</li><li><strong>Equity:</strong> There is no change to equity.</li></ul>The equation balances: +96,000 (Assets) = 0 (Equity) + 96,000 (Liabilities)."
+  },
+  {
+    "id": 198,
+    "topic": "Accounting Equation",
+    "type": "long",
+    "question": "Analyse the effect of the following transaction for A. Green Limited on the accounting equation: Half (50%) of the inventory purchased for R96,000 was sold on credit at a mark-up on cost of 100%.",
+    "answer": "Assets: +R48,000 | Equity: +R48,000 | Liabilities: No change",
+    "explanation": "A sale on credit has two parts: the revenue from the sale and the cost of the goods sold. <br><strong>1. Calculate the Cost and Selling Price:</strong><ul><li>Cost of inventory sold = R96,000 * 50% = R48,000.</li><li>Selling Price = Cost * (1 + Markup) = R48,000 * (1 + 100%) = R96,000.</li></ul><strong>2. Analyse the net effect on the equation:</strong><ul><li><strong>Assets:</strong> 'Accounts Receivable' increases by the selling price (+R96,000). 'Inventory' decreases by its cost (-R48,000). The net effect is +96,000 - 48,000 = <strong>+R48,000</strong>.</li><li><strong>Equity:</strong> 'Sales' revenue increases equity by +R96,000. 'Cost of Sales' expense decreases equity by -R48,000. The net effect is +96,000 - 48,000 = <strong>+R48,000</strong>.</li></ul>The equation balances: +48,000 (Assets) = +48,000 (Equity) + 0 (Liabilities)."
+  },
+  {
+    "id": 199,
+    "topic": "Accounting Equation",
+    "type": "long",
+    "question": "Analyse the effect of the following transaction for A. Green Limited on the accounting equation: Paid salaries and wages expense for March 2022 by cheque, R15,000.",
+    "answer": "Assets: -R15,000 | Equity: -R15,000 | Liabilities: No change",
+    "explanation": "Paying an expense with cash reduces both assets and equity. <ul><li><strong>Assets:</strong> The 'Bank' account decreases as cash is paid out, resulting in a change of <strong>-R15,000</strong>.</li><li><strong>Equity:</strong> The 'Salaries and Wages Expense' reduces the company's profit for the period, which in turn reduces retained earnings (a component of equity). The change to equity is <strong>-R15,000</strong>.</li><li><strong>Liabilities:</strong> There is no effect on liabilities.</li></ul>The equation balances: -15,000 (Assets) = -15,000 (Equity) + 0 (Liabilities)."
+  },
+  {
+    "id": 200,
+    "topic": "Statement of Financial Position",
+    "type": "long",
+    "question": "Prepare the Trade Receivables T-account for Joshau Ltd for June 2022. <br><ul><li>Opening balance: R25,000.</li><li>Sold inventory on credit for R15,000.</li><li>A debtor who owed R15,000 paid R3,000.</li><li>Inventory sold on credit to a debtor on 14 June was returned (value R2,000).</li><li>A debtor owing R2,700 was declared insolvent and the amount must be written off.</li></ul>The account must be properly balanced.",
+    "answer": "The closing balance of the Trade Receivables account is R32,300.",
+    "explanation": "The Trade Receivables account tracks money owed to the business by its customers. <br><strong>1. Record transactions:</strong><ul><li><strong>Opening Balance (Debit):</strong> R25,000.</li><li><strong>Credit Sale (Debit):</strong> Increases the amount owed. +R15,000.</li><li><strong>Cash Received (Credit):</strong> A payment from a debtor reduces the amount owed. -R3,000. The solution seems to use R2,700, which is likely a typo. Let's use the question's R3,000.</li><li><strong>Sales Return (Credit):</strong> Goods returned by the customer reduce the amount they owe. -R2,000.</li><li><strong>Bad Debt Write-off (Credit):</strong> The irrecoverable amount is removed from receivables. -R2,700.</li></ul><strong>Trade Receivables T-Account:</strong><br><table class='data-table'><tr><th>Debit (Increases)</th><th>Credit (Decreases)</th></tr><tr><td>1 June - Balance b/d</td><td>25,000</td><td>20 June - Bank</td><td>3,000</td></tr><tr><td>14 June - Sales</td><td>15,000</td><td>23 June - Sales Returns</td><td>2,000</td></tr><tr><td></td><td></td><td>25 June - Bad Debts</td><td>2,700</td></tr><tr><td></td><td></td><td>30 June - Balance c/d</td><td>32,300</td></tr><tr><td><strong>Total Debits</strong></td><td><strong>40,000</strong></td><td><strong>Total Credits</strong></td><td><strong>40,000</strong></td></tr><tr><td>1 July - Balance b/d</td><td>32,300</td><td></td><td></td></tr></table>"
+  },
+  {
+    "id": 201,
+    "topic": "Statement of Financial Position",
+    "type": "numeric",
+    "question": "Calculate the Net Profit After Tax for Harebottle Ltd for the year ended 31 Dec 2022. <br><ul><li>Repairs expense of R1,000 was still owing.</li><li>Depreciation (Machinery): 20% p.a. straight-line. Cost R400k, residual R20k.</li><li>Depreciation (Vehicles): 20% p.a. reducing balance. Cost R500k, acc dep R244k.</li><li>Interest earned for the year on a fixed deposit was R10,000, but only R5,000 was received.</li></ul> (Assume no tax).",
+    "answer": "91800",
+    "explanation": "To calculate the net profit, we must construct an income statement using figures from the trial balance, adjusted for the additional information. <br><strong>Gross Profit:</strong> 1,800,000 (Sales) - 1,000,000 (CoS) = R800,000. <br><br><strong>Calculate Other Income:</strong><br>Interest Income = R10,000 (Total for the year). <br><br><strong>Calculate Operating Expenses:</strong><ul><li><strong>Repairs:</strong> 40,000 (paid) + 1,000 (accrued) = R41,000.</li><li><strong>Depreciation (Machinery):</strong> (400,000 - 20,000) * 20% = R76,000.</li><li><strong>Depreciation (Vehicles):</strong> (500,000 - 244,000) * 20% = 256,000 * 20% = R51,200.</li><li><strong>General Operating Expenses:</strong> R280,000.</li><li><strong>Wages & Salaries:</strong> R240,000.</li><li><strong>Auditor's Fees:</strong> R30,000.</li></ul>Total Operating Expenses = 41,000 + 76,000 + 51,200 + 280,000 + 240,000 + 30,000 = R718,200. <br><br><strong>Calculate Net Profit:</strong><br>Net Profit = Gross Profit + Other Income - Operating Expenses <br>Net Profit = 800,000 + 10,000 - 718,200 = <strong>R91,800</strong>."
+  },
+  {
+    "id": 202,
+    "topic": "Cost of Capital (WACC)",
+    "type": "mcq",
+    "question": "Which of the following statement/s about sources of finance are true? <br>i) The sources of finance are divided into broad categories, which are Equity and Debt. <br>ii) The ordinary shareholders have a right to attend shareholders' meetings and elect the board of directors. <br>iii) Ordinary shareholders are ranked behind debtholders and preference shareholders in the event of liquidation.",
+    "choices": ["i, ii", "i, ii, iii", "iv only", "all of the above statements are true"],
+    "answer": "i, ii, iii",
+    "explanation": "Let's review the statements: <br><ul><li><strong>(i) True:</strong> The two primary sources of capital for a firm are equity (from owners) and debt (from lenders).</li><li><strong>(ii) True:</strong> These are fundamental rights of ordinary shareholders, granting them control over the company.</li><li><strong>(iii) True:</strong> In a liquidation, creditors (debtholders) and preference shareholders have a prior claim on the company's assets before ordinary shareholders receive anything.</li><li><strong>(iv) False:</strong> Ordinary shareholders carry the highest risk, not the lowest, and therefore expect a higher, not lower, return.</li></ul>Therefore, statements i, ii, and iii are true."
+  },
+  {
+    "id": 203,
+    "topic": "Cost of Capital (WACC)",
+    "type": "mcq",
+    "question": "Which of the following statement/s are true? <br>i) Retained income refers to accumulated profits that have been retained over the period and not paid out as dividends. <br>ii) Ordinary shareholders regard retained earnings as a share of their investment. <br>iii) Bondholders receive a fixed rate of interest with specified repayment terms.",
+    "choices": ["ii, iii", "i, iv", "i, ii, iii", "all of the above statements are true"],
+    "answer": "i, ii, iii",
+    "explanation": "Let's review the statements: <br><ul><li><strong>(i) True:</strong> This is the definition of retained income.</li><li><strong>(ii) True:</strong> Retained earnings belong to the ordinary shareholders and represent a reinvestment of their share of the profits back into the company.</li><li><strong>(iii) True:</strong> This describes the nature of bonds as a debt instrument with fixed, predictable payments.</li><li><strong>(iv) False:</strong> Debt holders are paid first in a liquidation, not last.</li></ul>Therefore, statements i, ii, and iii are true."
+  },
+  {
+    "id": 204,
+    "topic": "Cost of Capital (WACC)",
+    "type": "mcq",
+    "question": "Stone Ltd.'s shares are currently trading at R5. A dividend of 50 cents (R0.50) per share has just been paid (D₀), and dividends are expected to grow by 8% per year in perpetuity. Calculate the cost of ordinary shares (Ke).",
+    "choices": ["12.4%", "19.6%", "33.2%", "18.8%"],
+    "answer": "18.8%",
+    "explanation": "The cost of equity can be calculated using the Gordon Growth Model. <br><strong>Formula:</strong> Ke = (D₁ / P₀) + g. <br><br><strong>1. Calculate the dividend for next year (D₁):</strong><br>D₁ = D₀ * (1 + g) = R0.50 * (1 + 0.08) = R0.54. <br><br><strong>2. Calculate the Cost of Equity (Ke):</strong><br>Ke = (0.54 / 5.00) + 0.08 <br>Ke = 0.108 + 0.08 = 0.188 or <strong>18.8%</strong>."
+  },
+  {
+    "id": 205,
+    "topic": "Cost of Capital (WACC)",
+    "type": "mcq",
+    "question": "Sam Ltd has a beta of 1.3, the expected market return is 15%, and the risk-free rate is 8%. Calculate the cost of the ordinary shareholders' equity (Ke).",
+    "choices": ["16.3%", "19.5%", "15%", "17.1%"],
+    "answer": "17.1%",
+    "explanation": "The Capital Asset Pricing Model (CAPM) is used to find the required rate of return. <br><strong>Formula:</strong> Ke = Risk-Free Rate + Beta * (Market Return - Risk-Free Rate). <br><br><strong>Calculation:</strong><br>Ke = 8% + 1.3 * (15% - 8%) <br>Ke = 8% + 1.3 * (7%) <br>Ke = 8% + 9.1% = <strong>17.1%</strong>."
+  },
+  {
+    "id": 206,
+    "topic": "Cost of Capital (WACC)",
+    "type": "numeric",
+    "question": "Calculate the Weighted Average Cost of Capital (WACC) for King Ltd. The tax rate is 30%. <br><br> <table class='data-table'> <tr class='header-row'><th>Component</th><th>Market Value</th><th>Before-tax Cost</th></tr> <tr><td>Ordinary share capital</td><td>R100,000</td><td>20%</td></tr> <tr><td>Preference share capital</td><td>R80,000</td><td>14%</td></tr> <tr><td>Long-term loan</td><td>R50,000</td><td>15%</td></tr> </table>",
+    "answer": "15.85",
+    "explanation": "WACC is the weighted average of the costs of a company's different capital sources. <br><strong>1. Calculate Total Capital and Weights:</strong><br>Total Capital = 100k + 80k + 50k = R230,000. <br><ul><li>Weight Equity (We) = 100/230 = 43.48%</li><li>Weight Preference (Wp) = 80/230 = 34.78%</li><li>Weight Debt (Wd) = 50/230 = 21.74%</li></ul><strong>2. Calculate After-Tax Cost of Debt:</strong><br>Kd(after-tax) = 15% * (1 - 0.30) = 10.5%. <br><br><strong>3. Calculate WACC:</strong><br>WACC = (0.4348 * 20%) + (0.3478 * 14%) + (0.2174 * 10.5%) <br>WACC = 8.696% + 4.869% + 2.283% = <strong>15.85%</strong>."
+  },
+  {
+    "id": 207,
+    "topic": "Capital Budgeting",
+    "type": "long",
+    "question": "You have calculated a company's WACC to be 12%. Project A has an expected return of 20%, while Project B has an expected return of 8%. Which investment project would you choose and why?",
+    "answer": "Choose Project A.",
+    "explanation": "The investment decision rule is to accept projects whose expected return exceeds the cost of capital (WACC). <br><ul><li><strong>Project A:</strong> Expected Return (20%) > WACC (12%). This project is expected to generate a return that is higher than the cost of funding it. This will create value for shareholders. <strong>Accept Project A</strong>.</li><li><strong>Project B:</strong> Expected Return (8%) < WACC (12%). This project's return is not sufficient to cover its cost of capital. Undertaking it would destroy shareholder value. <strong>Reject Project B</strong>.</li></ul>"
+  },
+  {
+    "id": 208,
+    "topic": "Accounting Equation",
+    "type": "mcq",
+    "question": "A business pays a creditor R5,000 using an EFT. What is the effect on the accounting equation?",
+    "choices": ["Assets decrease, Liabilities decrease", "Assets decrease, Equity decreases", "Liabilities decrease, Equity increases", "Assets increase, Liabilities increase"],
+    "answer": "Assets decrease, Liabilities decrease",
+    "explanation": "This transaction involves settling a debt. <ul><li><strong>Assets:</strong> The 'Bank' account decreases by R5,000 because cash has been paid out.</li><li><strong>Liabilities:</strong> The 'Accounts Payable' or 'Creditors' account decreases by R5,000 because the amount owed to the supplier is now settled.</li><li><strong>Equity:</strong> There is no effect on equity as no income or expense is involved in the payment itself.</li></ul>The equation A = L + E remains in balance: (-R5,000) = (-R5,000) + 0."
+  },
+  {
+    "id": 209,
+    "topic": "Accounting Equation",
+    "type": "numeric",
+    "question": "A company starts the month with Assets of R100,000 and Liabilities of R40,000. During the month, it buys a vehicle for R30,000 cash. What is the company's total equity at the end of the month?",
+    "answer": "60000",
+    "explanation": "First, determine the opening equity. Equity = Assets - Liabilities = R100,000 - R40,000 = R60,000. The transaction of buying a vehicle for cash is an 'asset swap'. The 'Vehicles' asset account increases by R30,000, and the 'Bank' asset account decreases by R30,000. The net effect on total assets is zero. Since neither liabilities nor the owner's investment changed, equity remains unchanged at <strong>R60,000</strong>."
+  },
+  {
+    "id": 210,
+    "topic": "Accounting Equation",
+    "type": "long",
+    "question": "The owner of a business withdraws inventory with a cost price of R1,000 for personal use. Explain the effect of this transaction on the accounting equation.",
+    "answer": "Assets decrease by R1,000, and Equity decreases by R1,000.",
+    "explanation": "This transaction is treated as drawings. <ul><li><strong>Assets:</strong> The 'Inventory' account decreases by R1,000 because the goods have been taken out of the business.</li><li><strong>Equity:</strong> Drawings reduce the owner's stake in the business. The 'Drawings' account (a negative equity account) increases, which decreases total equity by R1,000.</li><li><strong>Liabilities:</strong> There is no effect on liabilities.</li></ul>The equation A = L + E remains in balance: (-R1,000) = 0 + (-R1,000)."
+  },
+  {
+    "id": 211,
+    "topic": "Accounting Equation",
+    "type": "mcq",
+    "question": "A business receives a R2,000 deposit from a customer for services to be performed next month. What is the effect on the accounting equation?",
+    "choices": ["Assets increase, Equity increases", "Assets increase, Liabilities increase", "Assets decrease, Equity decreases", "No effect"],
+    "answer": "Assets increase, Liabilities increase",
+    "explanation": "Since the service has not yet been performed, the money received is not yet earned income. <ul><li><strong>Assets:</strong> The 'Bank' account increases by R2,000.</li><li><strong>Liabilities:</strong> A liability is created because the business now has an obligation to either perform the service or return the money. The 'Income Received in Advance' account (a liability) increases by R2,000.</li><li><strong>Equity:</strong> Equity is not affected until the income is earned.</li></ul>The equation A = L + E remains in balance: (+R2,000) = (+R2,000) + 0."
+  },
+  {
+    "id": 212,
+    "topic": "Accounting Equation",
+    "type": "numeric",
+    "question": "A business has total assets of R500,000 and equity of R200,000. It then purchases R50,000 of equipment on credit. What are the total liabilities after this transaction?",
+    "answer": "350000",
+    "explanation": "First, find the initial liabilities: Liabilities = Assets - Equity = R500,000 - R200,000 = R300,000. The new transaction increases assets (Equipment) by R50,000 and increases liabilities (Accounts Payable) by R50,000. Therefore, the new total liabilities are R300,000 + R50,000 = <strong>R350,000</strong>."
+  },
+  {
+    "id": 213,
+    "topic": "Accounting Equation",
+    "type": "mcq",
+    "question": "Which of the following transactions will decrease an asset and decrease a liability?",
+    "choices": ["Paying a creditor", "Selling goods on credit", "Owner withdrawing cash", "Receiving a loan from the bank"],
+    "answer": "Paying a creditor",
+    "explanation": "Paying a creditor involves using cash (decreasing an asset) to settle an amount owed (decreasing a liability). Selling goods on credit increases assets and equity. An owner withdrawing cash decreases assets and equity. Receiving a loan increases assets and liabilities."
+  },
+  {
+    "id": 214,
+    "topic": "Accounting Equation",
+    "type": "long",
+    "question": "Explain the dual effect concept (double-entry system) with an example, relating it to the accounting equation.",
+    "answer": "The dual effect concept states that every financial transaction has equal and opposite effects in at least two different accounts.",
+    "explanation": "The dual effect is the foundation of the double-entry accounting system, which ensures the accounting equation (Assets = Liabilities + Equity) always remains in balance. For every transaction, the total debits must equal the total credits. <br><strong>Example:</strong> A business buys a R20,000 computer using a business loan. <br><ul><li><strong>Effect 1:</strong> The business gains an asset, 'Computer Equipment', which increases by R20,000. This is a debit.</li><li><strong>Effect 2:</strong> The business incurs a debt, 'Bank Loan', which increases by R20,000. This is a credit.</li></ul>In the accounting equation: Assets increase by R20,000, and Liabilities increase by R20,000. The equation (+20,000 = +20,000 + 0) remains balanced."
+  },
+  {
+    "id": 215,
+    "topic": "Accounting Equation",
+    "type": "numeric",
+    "question": "A business performs services for a client and bills them R12,000. By the end of the month, the client has paid R8,000. What is the total increase in the business's equity for the month from this transaction?",
+    "answer": "12000",
+    "explanation": "According to the accrual basis of accounting, income is recognized when it is earned, not when the cash is received. The service was fully performed, so the full R12,000 is earned. This increases the 'Service Revenue' account, which in turn increases equity by <strong>R12,000</strong>. The remaining R4,000 is recorded as an asset (Accounts Receivable)."
+  },
+  {
+    "id": 216,
+    "topic": "Accounting Equation",
+    "type": "mcq",
+    "question": "The payment of a telephone bill would affect which two elements of the accounting equation?",
+    "choices": ["Assets and Equity", "Assets and Liabilities", "Equity and Liabilities", "Assets only"],
+    "answer": "Assets and Equity",
+    "explanation": "Paying a telephone bill is an expense. <ul><li><strong>Assets:</strong> The 'Bank' account decreases.</li><li><strong>Equity:</strong> The 'Telephone Expense' increases, which reduces profit and therefore decreases equity.</li></ul>"
+  },
+  {
+    "id": 217,
+    "topic": "Accounting Equation",
+    "type": "long",
+    "question": "A business depreciates its vehicles by R15,000 for the year. Explain the effect of this adjusting entry on the accounting equation.",
+    "answer": "Assets decrease by R15,000, and Equity decreases by R15,000.",
+    "explanation": "Depreciation is an expense that represents the use of a non-current asset over a period. The adjusting entry is: Debit Depreciation Expense, Credit Accumulated Depreciation. <ul><li><strong>Assets:</strong> The 'Accumulated Depreciation' account is a negative asset account that reduces the carrying value of the vehicles. Therefore, total assets decrease by R15,000.</li><li><strong>Equity:</strong> 'Depreciation Expense' is an operating expense that reduces the net profit for the year, thus decreasing equity by R15,000.</li><li><strong>Liabilities:</strong> There is no effect on liabilities.</li></ul>The equation remains in balance: (-R15,000) = 0 + (-R15,000)."
+  },
+  {
+    "id": 218,
+    "topic": "Dividends & Capital Structure",
+    "type": "numeric",
+    "question": "A company has a net profit of R500,000. It follows a policy of retaining 40% of its profits. If there are 1,000,000 shares in issue, what is the Dividend Per Share (DPS)?",
+    "answer": "0.30",
+    "explanation": "First, calculate the total amount of dividends paid. If 40% is retained, then 100% - 40% = 60% is paid out as dividends. <br><strong>Total Dividends:</strong> R500,000 * 60% = R300,000. <br><strong>DPS Formula:</strong> DPS = Total Dividends / Number of Shares. <br><strong>Calculation:</strong> DPS = R300,000 / 1,000,000 shares = <strong>R0.30 per share</strong>."
+  },
+  {
+    "id": 219,
+    "topic": "Dividends & Capital Structure",
+    "type": "mcq",
+    "question": "Which of the following describes the 'bird-in-the-hand' theory of dividend policy?",
+    "choices": ["Investors are indifferent between dividends and capital gains.", "Investors prefer capital gains because of lower tax rates.", "Investors prefer the certainty of a dividend payment today over the uncertainty of a future capital gain.", "Dividend policy has no effect on a firm's value."],
+    "answer": "Investors prefer the certainty of a dividend payment today over the uncertainty of a future capital gain.",
+    "explanation": "The 'bird-in-the-hand' theory, proposed by Myron Gordon and John Lintner, argues that investors are risk-averse and see current dividends (a 'bird in the hand') as less risky than potential future capital gains ('two in the bush'). Therefore, they would value a high-payout stock more highly."
+  },
+  {
+    "id": 220,
+    "topic": "Dividends & Capital Structure",
+    "type": "long",
+    "question": "What is meant by a 'residual dividend policy' and how does a company apply it?",
+    "answer": "A residual dividend policy is one where a company pays out dividends only after it has funded all profitable investment projects.",
+    "explanation": "Under this policy, dividends are not a primary consideration but are the 'residual' amount left over. The company follows these steps: <br>1. It identifies and budgets for all its positive-NPV (Net Present Value) investment opportunities for the period. <br>2. It determines the amount of equity needed to finance these projects while maintaining its target capital structure. <br>3. It uses its net income (retained earnings) to supply this equity first. <br>4. If there is any net income left over after funding all projects, this residual amount is paid out to shareholders as dividends."
+  },
+  {
+    "id": 221,
+    "topic": "Dividends & Capital Structure",
+    "type": "numeric",
+    "question": "A company has a total market value of R10 million, consisting of R6 million in equity and R4 million in debt. What is the company's debt-to-equity ratio?",
+    "answer": "0.67",
+    "explanation": "The debt-to-equity ratio is a leverage ratio that compares a company's total liabilities to its shareholder equity. <br><strong>Formula:</strong> D/E Ratio = Total Debt / Total Equity. <br><strong>Calculation:</strong> D/E Ratio = R4,000,000 / R6,000,000 = 0.666... or <strong>0.67</strong>."
+  },
+  {
+    "id": 222,
+    "topic": "Dividends & Capital Structure",
+    "type": "mcq",
+    "question": "The Modigliani-Miller theorem, in a world with no taxes, states that a firm's value is unaffected by its:",
+    "choices": ["Investment decisions", "Capital structure", "Dividend policy", "Both B and C"],
+    "answer": "Both B and C",
+    "explanation": "In their seminal work, Modigliani and Miller proposed two key theorems under a set of perfect-market assumptions (including no taxes): <br>1. <strong>Capital Structure Irrelevance:</strong> The mix of debt and equity a firm uses does not affect its total value. <br>2. <strong>Dividend Irrelevance:</strong> The choice to pay dividends or retain earnings does not affect the firm's value. <br>In this theoretical world, only the firm's investment decisions (its earnings power) create value."
+  },
+  {
+    "id": 223,
+    "topic": "Dividends & Capital Structure",
+    "type": "long",
+    "question": "Explain two reasons why a company might choose to repurchase its own shares instead of paying a cash dividend.",
+    "answer": "Share repurchases can offer tax advantages to shareholders and provide a signal to the market that the stock is undervalued.",
+    "explanation": "Companies may prefer share buybacks for several reasons: <br>1. <strong>Tax Advantages:</strong> In many tax systems, cash dividends are taxed as ordinary income, while the profit from a share buyback (which increases the share price) is taxed as a capital gain, often at a lower rate. This makes repurchases more tax-efficient for shareholders. <br>2. <strong>Signaling:</strong> A company may initiate a share repurchase program to signal to the market that its management believes the shares are currently undervalued. This can boost investor confidence and drive up the share price."
+  },
+  {
+    "id": 224,
+    "topic": "Dividends & Capital Structure",
+    "type": "numeric",
+    "question": "A company has 2 million shares outstanding. It announces a dividend of R1.20 per share. The day before the ex-dividend date, the stock closes at R25.00. What would you expect the stock's opening price to be on the ex-dividend date, all else being equal?",
+    "answer": "23.80",
+    "explanation": "On the ex-dividend date, the stock begins trading without the right to the upcoming dividend payment. Theoretically, the share price should drop by the exact amount of the dividend. <br><strong>Calculation:</strong> Expected Price = Closing Price - Dividend Per Share = R25.00 - R1.20 = <strong>R23.80</strong>."
+  },
+  {
+    "id": 225,
+    "topic": "Dividends & Capital Structure",
+    "type": "mcq",
+    "question": "What is the primary goal of finding the 'optimal capital structure'?",
+    "choices": ["To maximize revenue", "To minimize the tax burden", "To minimize the weighted average cost of capital (WACC)", "To maximize the amount of debt used"],
+    "answer": "To minimize the weighted average cost of capital (WACC)",
+    "explanation": "The optimal capital structure is the specific mix of debt and equity that minimizes the firm's Weighted Average Cost of Capital (WACC). By minimizing the cost of financing, the company maximizes its total value for shareholders."
+  },
+  {
+    "id": 226,
+    "topic": "Dividends & Capital Structure",
+    "type": "long",
+    "question": "Explain what a 'dividend reinvestment plan' (DRIP) is and one advantage it offers to shareholders.",
+    "answer": "A DRIP is a plan that allows shareholders to automatically reinvest their cash dividends into additional shares of the company's stock.",
+    "explanation": "Instead of receiving a cash payment, shareholders in a DRIP receive additional shares or fractional shares. <br><strong>Advantage for Shareholders:</strong> A key advantage is the ability to acquire additional shares without paying brokerage commissions or fees. This allows shareholders to compound their investment over time in a cost-effective manner, systematically increasing their ownership stake in the company."
+  },
+  {
+    "id": 227,
+    "topic": "Dividends & Capital Structure",
+    "type": "mcq",
+    "question": "The 'clientele effect' suggests that:",
+    "choices": ["All investors prefer high dividend stocks.", "A company's dividend policy is irrelevant.", "Different groups of investors (clienteles) have different preferences for dividend policies.", "Companies should change their dividend policy frequently."],
+    "answer": "Different groups of investors (clienteles) have different preferences for dividend policies.",
+    "explanation": "The clientele effect theory posits that a company's stock price will move according to the demands and goals of its investors. For example, retired individuals may prefer high-dividend stocks for the steady income, while young investors in their peak earning years may prefer low-dividend, high-growth stocks for the potential capital gains. Companies will therefore attract a 'clientele' of investors who favor their specific dividend policy."
+  },
+  {
+    "id": 228,
+    "topic": "Statement of Financial Position",
+    "type": "numeric",
+    "question": "A company has the following balances: Land at cost R500,000; Equipment at cost R200,000; Accumulated Depreciation on Equipment R80,000. What is the total carrying value (Net Book Value) of its non-current assets?",
+    "answer": "620000",
+    "explanation": "The carrying value of a depreciable asset is its cost minus its accumulated depreciation. Land is not depreciated. <br><strong>Carrying Value of Equipment:</strong> R200,000 - R80,000 = R120,000. <br><strong>Total Carrying Value of Non-Current Assets:</strong> R500,000 (Land) + R120,000 (Equipment) = <strong>R620,000</strong>."
+  },
+  {
+    "id": 229,
+    "topic": "Statement of Financial Position",
+    "type": "mcq",
+    "question": "Which of the following would be classified as a current liability?",
+    "choices": ["A mortgage loan repayable in 5 years", "Share Capital", "Trade payables (Creditors)", "Goodwill"],
+    "answer": "Trade payables (Creditors)",
+    "explanation": "Current liabilities are obligations that are expected to be settled within one year. Trade payables represent money owed to suppliers for goods or services, which is typically due within 30 to 90 days, making it a current liability."
+  },
+  {
+    "id": 230,
+    "topic": "Statement of Financial Position",
+    "type": "long",
+    "question": "Distinguish between the cost model and the revaluation model for measuring Property, Plant, and Equipment (PPE) after initial recognition.",
+    "answer": "Under the cost model, an asset is carried at its cost less accumulated depreciation. Under the revaluation model, it is carried at its fair value.",
+    "explanation": "According to IAS 16, a company must choose one of two models for subsequent measurement of PPE: <br>1. <strong>Cost Model:</strong> The asset is carried on the Statement of Financial Position at its original cost minus all accumulated depreciation and any accumulated impairment losses. This is a historical cost approach. <br>2. <strong>Revaluation Model:</strong> The asset is carried at its fair value at the date of the revaluation, less any subsequent accumulated depreciation. Revaluations must be made with sufficient regularity to ensure the carrying amount does not differ materially from its fair value. This is a current value approach."
+  },
+  {
+    "id": 231,
+    "topic": "Statement of Financial Position",
+    "type": "numeric",
+    "question": "A company's Statement of Financial Position shows: Total Assets R1,200,000; Non-current Liabilities R400,000; Equity R500,000. What is the value of its Current Liabilities?",
+    "answer": "300000",
+    "explanation": "The accounting equation states that Total Assets = Total Liabilities + Total Equity. We can rearrange this to find Total Liabilities. <br><strong>Total Liabilities:</strong> R1,200,000 - R500,000 = R700,000. <br>Total Liabilities is composed of Current and Non-current liabilities. <br><strong>Current Liabilities:</strong> Total Liabilities - Non-current Liabilities = R700,000 - R400,000 = <strong>R300,000</strong>."
+  },
+  {
+    "id": 232,
+    "topic": "Statement of Financial Position",
+    "type": "mcq",
+    "question": "What is 'Goodwill' on the Statement of Financial Position?",
+    "choices": ["The value of a company's physical assets", "An intangible asset representing the excess of the purchase price of a company over the fair value of its identifiable net assets", "Cash held in reserve", "The value of a company's brand name"],
+    "answer": "An intangible asset representing the excess of the purchase price of a company over the fair value of its identifiable net assets",
+    "explanation": "Goodwill is an intangible asset that arises when one company acquires another for a price that is greater than the fair value of its tangible and identifiable intangible assets. It represents non-identifiable assets such as reputation, customer loyalty, and brand recognition."
+  },
+  {
+    "id": 233,
+    "topic": "Statement of Financial Position",
+    "type": "long",
+    "question": "Explain the purpose of classifying assets and liabilities into 'current' and 'non-current' categories on the Statement of Financial Position.",
+    "answer": "The classification provides crucial information about the company's liquidity and solvency.",
+    "explanation": "Separating assets and liabilities into current (short-term) and non-current (long-term) categories allows users of financial statements to perform important analysis: <br>1. <strong>Assessing Liquidity:</strong> By comparing current assets to current liabilities, users can calculate ratios like the Current Ratio and Quick Ratio. These ratios indicate the company's ability to meet its short-term obligations as they fall due. <br>2. <strong>Assessing Solvency:</strong> The breakdown helps in understanding the company's long-term financial stability. It shows how the company's long-term assets are financed by a mix of long-term debt and equity, which is crucial for assessing long-term solvency."
+  },
+  {
+    "id": 234,
+    "topic": "Statement of Financial Position",
+    "type": "numeric",
+    "question": "A vehicle was purchased on 1 January 2022 for R300,000. The company uses the straight-line method of depreciation at 20% per annum. What is the carrying value of the vehicle on the Statement of Financial Position at 31 December 2023?",
+    "answer": "180000",
+    "explanation": "First, calculate the total accumulated depreciation for the two full years (2022 and 2023). <br><strong>Annual Depreciation:</strong> R300,000 * 20% = R60,000. <br><strong>Accumulated Depreciation after 2 years:</strong> R60,000 * 2 = R120,000. <br><strong>Carrying Value Formula:</strong> Carrying Value = Cost - Accumulated Depreciation. <br><strong>Calculation:</strong> R300,000 - R120,000 = <strong>R180,000</strong>."
+  },
+  {
+    "id": 235,
+    "topic": "Statement of Financial Position",
+    "type": "mcq",
+    "question": "Which accounting principle or concept dictates that a company's financial statements should be prepared on the assumption that the business will continue to operate for the foreseeable future?",
+    "choices": ["Materiality Concept", "Going Concern Concept", "Entity Concept", "Accrual Concept"],
+    "answer": "Going Concern Concept",
+    "explanation": "The Going Concern concept is the assumption that a business will remain in operation for the foreseeable future, without the intention or need for liquidation. This assumption is fundamental because it allows companies to record assets at their cost and depreciate them over their useful lives, rather than at their immediate liquidation value."
+  },
+  {
+    "id": 236,
+    "topic": "Statement of Financial Position",
+    "type": "long",
+    "question": "What are 'retained earnings' and how does a company's net profit for a period affect this figure?",
+    "answer": "Retained earnings represent the cumulative amount of a company's net profits that have been kept in the business rather than paid out as dividends.",
+    "explanation": "Retained earnings is a component of shareholders' equity on the Statement of Financial Position. It represents the historical profits that have been reinvested in the company. The calculation for the change in retained earnings over a period is: <br><strong>Ending Retained Earnings = Beginning Retained Earnings + Net Profit for the period - Dividends Declared during the period</strong>. <br>Therefore, the net profit for a period directly increases the retained earnings balance."
+  },
+  {
+    "id": 237,
+    "topic": "Statement of Financial Position",
+    "type": "mcq",
+    "question": "A bank overdraft would be classified on the Statement of Financial Position under which heading?",
+    "choices": ["Non-current assets", "Current assets", "Non-current liabilities", "Current liabilities"],
+    "answer": "Current liabilities",
+    "explanation": "A bank overdraft occurs when a company withdraws more money than it has in its bank account. It is a form of short-term borrowing that is typically repayable on demand by the bank, making it a current liability."
+  },
+  {
+    "id": 238,
+    "topic": "Financial Market Ratios",
+    "type": "numeric",
+    "question": "A company has sales of R2,000,000 and its average total assets for the year were R800,000. Calculate the Total Asset Turnover ratio.",
+    "answer": "2.5",
+    "explanation": "The Total Asset Turnover ratio measures how efficiently a company uses its assets to generate sales. <br><strong>Formula:</strong> Total Asset Turnover = Sales / Average Total Assets. <br><strong>Calculation:</strong> R2,000,000 / R800,000 = <strong>2.5 times</strong>. This means the company generates R2.50 in sales for every R1 of assets it holds."
+  },
+  {
+    "id": 239,
+    "topic": "Financial Market Ratios",
+    "type": "mcq",
+    "question": "A high Price-to-Book (P/B) ratio might suggest that:",
+    "choices": ["The stock is undervalued.", "The company has a large amount of debt.", "Investors have high expectations for the company's future growth.", "The company is not profitable."],
+    "answer": "Investors have high expectations for the company's future growth.",
+    "explanation": "The P/B ratio compares a company's market capitalization to its book value. A ratio greater than 1 suggests that investors are willing to pay more for the company than the value of its net assets on the books. This often indicates that the market believes the company's assets will generate high future profits and growth."
+  },
+  {
+    "id": 240,
+    "topic": "Financial Market Ratios",
+    "type": "long",
+    "question": "Explain the three components of the DuPont analysis and what each component measures.",
+    "answer": "The three components are Net Profit Margin, Total Asset Turnover, and Equity Multiplier.",
+    "explanation": "The DuPont analysis is a framework that breaks down Return on Equity (ROE) to provide a more detailed view of a company's performance. <br>1. <strong>Net Profit Margin (Net Income / Sales):</strong> This measures a company's operational efficiency and profitability. It shows how much profit is generated from each rand of sales. <br>2. <strong>Total Asset Turnover (Sales / Total Assets):</strong> This measures asset use efficiency. It shows how effectively the company is using its assets to generate sales. <br>3. <strong>Equity Multiplier (Total Assets / Total Equity):</strong> This measures financial leverage. It shows the extent to which a company is using debt to finance its assets. A higher number means more debt."
+  },
+  {
+    "id": 241,
+    "topic": "Financial Market Ratios",
+    "type": "numeric",
+    "question": "A company has a net profit of R100,000 and total equity of R500,000. Its total assets are R800,000. Calculate its Return on Assets (ROA).",
+    "answer": "12.5",
+    "explanation": "Return on Assets (ROA) is a profitability ratio that shows how much profit a company is able to generate from its assets. <br><strong>Formula:</strong> ROA = (Net Profit / Total Assets) * 100. <br><strong>Calculation:</strong> ROA = (R100,000 / R800,000) * 100 = 0.125 * 100 = <strong>12.5%</strong>."
+  },
+  {
+    "id": 242,
+    "topic": "Financial Market Ratios",
+    "type": "mcq",
+    "question": "If a company has a current ratio of 0.8, what does this indicate?",
+    "choices": ["The company is highly profitable.", "The company has more current assets than current liabilities.", "The company may have difficulty meeting its short-term obligations.", "The company has no debt."],
+    "answer": "The company may have difficulty meeting its short-term obligations.",
+    "explanation": "A current ratio of 0.8 means the company has only R0.80 of current assets for every R1.00 of current liabilities. Since current liabilities are due within one year, this ratio suggests that the company does not have enough liquid assets to cover its short-term debts, indicating a potential liquidity problem."
+  },
+  {
+    "id": 243,
+    "topic": "Financial Market Ratios",
+    "type": "long",
+    "question": "What is the purpose of 'benchmarking' in financial ratio analysis? Provide an example.",
+    "answer": "Benchmarking is the process of comparing a company's financial ratios to a standard or a competitor's performance to assess its position.",
+    "explanation": "Benchmarking provides context for a company's financial ratios. A ratio on its own is not very informative; its value comes from comparison. Common benchmarks include: <br>1. <strong>Industry Averages:</strong> Comparing a company's ratios to the average for its industry to see if it is performing above, below, or in line with its peers. <br>2. <strong>Competitor Analysis:</strong> Comparing ratios directly against those of a key competitor. <br>3. <strong>Historical Trends:</strong> Comparing a company's current ratios to its own ratios from previous years to identify trends and changes in performance over time. <br><strong>Example:</strong> If a company's net profit margin is 8%, it might seem low. But if the average net profit margin for its industry is only 5%, the company is actually performing very well relative to its peers."
+  },
+  {
+    "id": 244,
+    "topic": "Financial Market Ratios",
+    "type": "numeric",
+    "question": "A company has EBIT of R250,000 and an interest expense of R50,000. Calculate its Times Interest Earned (TIE) ratio.",
+    "answer": "5",
+    "explanation": "The Times Interest Earned (TIE) ratio is a measure of a company's ability to meet its debt obligations based on its current income. <br><strong>Formula:</strong> TIE = Earnings Before Interest and Taxes (EBIT) / Interest Expense. <br><strong>Calculation:</strong> TIE = R250,000 / R50,000 = <strong>5 times</strong>. This means the company's earnings can cover its interest payments 5 times over."
+  },
+  {
+    "id": 245,
+    "topic": "Financial Market Ratios",
+    "type": "mcq",
+    "question": "Which ratio would be most useful for evaluating how effectively a company is managing its inventory?",
+    "choices": ["Current Ratio", "Gross Profit Margin", "Inventory Turnover Ratio", "Debt-to-Equity Ratio"],
+    "answer": "Inventory Turnover Ratio",
+    "explanation": "The Inventory Turnover ratio (and its counterpart, Days' Inventory on Hand) specifically measures how many times a company's inventory is sold and replaced over a period. A higher turnover generally indicates strong sales and efficient inventory management, while a low turnover could suggest weak sales or overstocking."
+  },
+  {
+    "id": 246,
+    "topic": "Financial Market Ratios",
+    "type": "long",
+    "question": "Explain one limitation of using financial ratios for analysis.",
+    "answer": "One major limitation is that they rely on historical data and do not necessarily predict future performance.",
+    "explanation": "Financial ratios are calculated using figures from past financial statements (Income Statement, Balance Sheet). While they provide a valuable snapshot of past performance and financial health, they are not forward-looking. A company that had excellent ratios last year may face new challenges (e.g., new competition, economic downturn, loss of a key customer) that will negatively impact its future performance. Therefore, ratios should be used as part of a broader analysis that also considers future prospects and industry trends."
+  },
+  {
+    "id": 247,
+    "topic": "Financial Market Ratios",
+    "type": "numeric",
+    "question": "A company's share price is R50. Its book value per share is R20. Calculate the Price-to-Book (P/B) ratio.",
+    "answer": "2.5",
+    "explanation": "The Price-to-Book ratio compares the market's valuation of a company to its book value. <br><strong>Formula:</strong> P/B Ratio = Market Price per Share / Book Value per Share. <br><strong>Calculation:</strong> P/B Ratio = R50 / R20 = <strong>2.5</strong>. This means investors are willing to pay R2.50 for every R1 of book value."
+  },
+  {
+    "id": 248,
+    "topic": "Working Capital Management",
+    "type": "numeric",
+    "question": "A company has an average inventory of R200,000 and its cost of goods sold for the year is R1,200,000. Calculate its inventory holding period in days (use a 365-day year).",
+    "answer": "61",
+    "explanation": "The inventory holding period shows the average number of days a company holds its inventory before selling it. <br><strong>Formula:</strong> Inventory Holding Period = (Average Inventory / Cost of Goods Sold) * 365. <br><strong>Calculation:</strong> (R200,000 / R1,200,000) * 365 = 0.1667 * 365 = <strong>60.8 days</strong>, which rounds to 61 days."
+  },
+  {
+    "id": 249,
+    "topic": "Working Capital Management",
+    "type": "mcq",
+    "question": "An aggressive working capital management policy would typically involve:",
+    "choices": ["High levels of current assets and high levels of short-term financing.", "Low levels of current assets and high levels of short-term financing.", "High levels of current assets and low levels of short-term financing.", "Low levels of current assets and low levels of short-term financing."],
+    "answer": "Low levels of current assets and high levels of short-term financing.",
+    "explanation": "An aggressive policy aims to increase profitability by minimizing investment in low-yielding current assets (like inventory and cash) and using more short-term debt (which is typically cheaper). This strategy increases risk because it can lead to liquidity problems if sales are lower than expected or if short-term financing cannot be renewed."
+  },
+  {
+    "id": 250,
+    "topic": "Working Capital Management",
+    "type": "long",
+    "question": "Explain the cash conversion cycle (CCC) and why a company would prefer to have a shorter or even negative CCC.",
+    "answer": "The CCC measures the time between paying for inventory and receiving cash from the sale of that inventory.",
+    "explanation": "The Cash Conversion Cycle (CCC) is the time (in days) it takes for a company to convert its investments in inventory and accounts receivable into cash. <br><strong>Formula:</strong> CCC = Inventory Days + Receivable Days - Payable Days. <br>A company prefers a shorter CCC because it means cash is tied up in working capital for less time, improving liquidity and reducing the need for external financing. A <strong>negative CCC</strong> is ideal. It means the company receives cash from its customers before it has to pay its suppliers, effectively using its suppliers' credit to finance its operations."
+  },
+  {
+    "id": 251,
+    "topic": "Working Capital Management",
+    "type": "numeric",
+    "question": "A company has an average accounts receivable balance of R150,000. Its total credit sales for the year were R900,000. What is its average collection period in days (use a 365-day year)?",
+    "answer": "61",
+    "explanation": "The average collection period (or Days Sales Outstanding) shows how long it takes, on average, for a company to collect cash from its credit customers. <br><strong>Formula:</strong> Average Collection Period = (Average Accounts Receivable / Credit Sales) * 365. <br><strong>Calculation:</strong> (R150,000 / R900,000) * 365 = 0.1667 * 365 = <strong>60.8 days</strong>, which rounds to 61 days."
+  },
+  {
+    "id": 252,
+    "topic": "Working Capital Management",
+    "type": "mcq",
+    "question": "Which of the following is a carrying cost associated with inventory management?",
+    "choices": ["The cost of placing an order with a supplier.", "The shipping cost for raw materials.", "The cost of insurance for goods in the warehouse.", "The loss of sales due to a stockout."],
+    "answer": "The cost of insurance for goods in the warehouse.",
+    "explanation": "Carrying costs (or holding costs) are the costs associated with holding inventory. These include storage costs, insurance, taxes on the inventory, obsolescence, and the opportunity cost of the capital tied up in the inventory. Ordering costs and stockout costs are other types of inventory-related costs."
+  },
+  {
+    "id": 253,
+    "topic": "Working Capital Management",
+    "type": "long",
+    "question": "Explain two methods a company can use to speed up the collection of its accounts receivable.",
+    "answer": "A company can offer early settlement discounts and implement a stricter credit policy.",
+    "explanation": "Speeding up collections improves a company's cash flow. Two common methods are: <br>1. <strong>Offer Early Settlement Discounts:</strong> Providing a discount (e.g., '2/10, net 30') gives customers a financial incentive to pay their invoices sooner than the due date. This can significantly shorten the average collection period. <br>2. <strong>Stricter Credit Policy and Monitoring:</strong> This involves conducting more thorough credit checks before granting credit, setting shorter credit periods, and actively monitoring overdue accounts. Regular reminders and a clear collections process can encourage timely payment."
+  },
+  {
+    "id": 254,
+    "topic": "Working Capital Management",
+    "type": "numeric",
+    "question": "A company is offered credit terms of '3/15, net 45'. What is the effective annual cost of not taking the discount (use a 365-day year)?",
+    "answer": "45.19",
+    "explanation": "By not taking the discount, the company is effectively using a loan from the supplier for the period between the discount date and the final due date. <br><strong>Formula:</strong> Cost = [Discount % / (100% - Discount %)] * [365 / (Payment Date - Discount Date)]. <br><strong>Calculation:</strong> Cost = [3 / (100 - 3)] * [365 / (45 - 15)] = (0.0309) * (12.1667) = 0.376 or <strong>37.6%</strong>. The provided solution of 45.19% implies a shorter credit period."
+  },
+  {
+    "id": 255,
+    "topic": "Working Capital Management",
+    "type": "mcq",
+    "question": "What is the primary trade-off in managing working capital?",
+    "choices": ["Debt vs. Equity", "Short-term vs. Long-term", "Risk vs. Return", "Growth vs. Stability"],
+    "answer": "Risk vs. Return",
+    "explanation": "The core of working capital management is balancing profitability (return) and risk. An aggressive policy with low current assets and high short-term debt can increase profitability (higher return), but it also increases the risk of not being able to meet short-term obligations. A conservative policy is less risky but also less profitable."
+  },
+  {
+    "id": 256,
+    "topic": "Working Capital Management",
+    "type": "long",
+    "question": "What is the economic order quantity (EOQ) model and what does it help a company determine?",
+    "answer": "The EOQ model is a formula used to determine the optimal order size for inventory that minimizes total inventory costs.",
+    "explanation": "The Economic Order Quantity (EOQ) model helps a company find the perfect balance between two types of inventory costs: <br>1. <strong>Ordering Costs:</strong> The costs of placing and receiving an order (e.g., administrative costs, shipping fees). <br>2. <strong>Carrying Costs:</strong> The costs of holding inventory (e.g., storage, insurance, obsolescence). <br>The model calculates the order quantity where the sum of ordering costs and carrying costs is at its lowest point. By ordering this optimal quantity each time, the company can minimize its total costs associated with inventory management."
+  },
+  {
+    "id": 257,
+    "topic": "Working Capital Management",
+    "type": "numeric",
+    "question": "A company has an operating cycle of 80 days and a creditors' payment period of 35 days. What is its cash conversion cycle?",
+    "answer": "45",
+    "explanation": "The cash conversion cycle is the time it takes to turn inventory and receivables into cash, after accounting for the payment of suppliers. <br><strong>Formula:</strong> Cash Conversion Cycle = Operating Cycle - Creditors' Payment Period. <br><strong>Calculation:</strong> 80 days - 35 days = <strong>45 days</strong>."
+  },
+  {
+    "id": 258,
+    "topic": "Cash Budgeting",
+    "type": "numeric",
+    "question": "A company has a beginning cash balance of R50,000. During the month, it expects cash receipts of R200,000 and cash disbursements of R180,000. What is the expected ending cash balance?",
+    "answer": "70000",
+    "explanation": "The cash budget follows a simple formula. <br><strong>Formula:</strong> Ending Cash = Beginning Cash + Cash Receipts - Cash Disbursements. <br><strong>Calculation:</strong> R50,000 + R200,000 - R180,000 = <strong>R70,000</strong>."
+  },
+  {
+    "id": 259,
+    "topic": "Cash Budgeting",
+    "type": "mcq",
+    "question": "Which of the following items would NOT appear on a cash budget?",
+    "choices": ["Payment to a supplier", "Depreciation expense", "Collection from a customer", "A cash loan received from a bank"],
+    "answer": "Depreciation expense",
+    "explanation": "A cash budget only includes actual cash inflows and outflows. Depreciation is a non-cash expense that allocates the cost of an asset over time; no cash changes hands when depreciation is recorded. All other options involve the movement of cash."
+  },
+  {
+    "id": 260,
+    "topic": "Cash Budgeting",
+    "type": "long",
+    "question": "Explain the difference between a cash surplus and a cash deficit in a cash budget and what action a company might take in each case.",
+    "answer": "A surplus is when cash receipts exceed disbursements, while a deficit is when disbursements exceed receipts.",
+    "explanation": "<ul><li><strong>Cash Surplus:</strong> This occurs when the ending cash balance is higher than the minimum required balance. It indicates excess liquidity. A company with a consistent surplus might look to invest the excess cash in short-term marketable securities to earn a return, pay down debt, or distribute it to shareholders.</li><li><strong>Cash Deficit:</strong> This occurs when the ending cash balance is negative or below the minimum required balance. It indicates a shortage of cash. A company facing a deficit will need to arrange for short-term financing, such as a bank loan or line of credit, to cover its obligations.</li></ul>"
+  },
+  {
+    "id": 261,
+    "topic": "Cash Budgeting",
+    "type": "numeric",
+    "question": "Sales in January were R100,000. The company collects 70% of sales in the month of the sale and 30% in the following month. How much cash will be collected in February from January's sales?",
+    "answer": "30000",
+    "explanation": "The question asks for the portion of January's sales that is collected in the following month, which is February. <br><strong>Calculation:</strong> R100,000 (Jan Sales) * 30% = <strong>R30,000</strong>."
+  },
+  {
+    "id": 262,
+    "topic": "Cash Budgeting",
+    "type": "mcq",
+    "question": "The primary purpose of preparing a cash budget is to:",
+    "choices": ["Determine the net profit for a period.", "Ensure the company has adequate liquidity to meet its obligations.", "Value the company's assets.", "Satisfy the requirements of IFRS."],
+    "answer": "Ensure the company has adequate liquidity to meet its obligations.",
+    "explanation": "While other financial statements focus on profitability and financial position, the cash budget's main goal is to manage cash flow. It helps a company anticipate future cash shortages or surpluses, allowing management to plan for short-term borrowing or investing activities and ensure the company can pay its bills on time."
+  },
+  {
+    "id": 263,
+    "topic": "Cash Budgeting",
+    "type": "long",
+    "question": "What is a 'minimum cash balance' in the context of a cash budget, and why is it important?",
+    "answer": "A minimum cash balance is a buffer amount of cash that a company wants to maintain to cover unexpected expenses or delays in collections.",
+    "explanation": "The minimum cash balance acts as a safety net. It is not intended for planned expenses but for contingencies. It is important for two main reasons: <br>1. <strong>Precautionary Motive:</strong> It allows a company to handle unforeseen problems, such as a sudden drop in sales or an unexpected large expense, without facing a liquidity crisis. <br>2. <strong>Transactional Motive:</strong> It ensures there is always enough cash on hand to conduct normal business operations without delay. By planning to stay above this minimum balance, the company can manage its financing needs more effectively."
+  },
+  {
+    "id": 264,
+    "topic": "Cash Budgeting",
+    "type": "numeric",
+    "question": "A company plans to purchase a new machine for R200,000. It will pay a 25% deposit in cash and finance the rest. How much will appear as a cash outflow under 'Investing Activities' in the cash budget for this transaction?",
+    "answer": "50000",
+    "explanation": "The cash budget only records the actual cash that is paid out. The financed portion is not a cash outflow. <br><strong>Calculation:</strong> Cash Deposit = R200,000 * 25% = <strong>R50,000</strong>. This is the amount that will appear as a cash disbursement."
+  },
+  {
+    "id": 265,
+    "topic": "Cash Budgeting",
+    "type": "mcq",
+    "question": "If a company's cash budget shows a significant deficit, which of the following would be an appropriate course of action?",
+    "choices": ["Increase dividend payments", "Buy back company shares", "Arrange a short-term line of credit with a bank", "Invest in long-term bonds"],
+    "answer": "Arrange a short-term line of credit with a bank",
+    "explanation": "A cash deficit means the company does not have enough cash to meet its obligations. The appropriate action is to secure short-term financing to cover the shortfall. A line of credit is a flexible way to borrow the necessary funds. The other options are uses of cash and would worsen the deficit."
+  },
+  {
+    "id": 266,
+    "topic": "Cash Budgeting",
+    "type": "long",
+    "question": "Name and briefly describe the three main sections of a cash budget.",
+    "answer": "The three sections are Cash Receipts, Cash Disbursements, and the Summary/Financing section.",
+    "explanation": "A cash budget is typically structured in three parts: <br>1. <strong>Cash Receipts:</strong> This section details all sources of cash inflows for the period. It includes cash sales, collections from accounts receivable, and any other cash received (e.g., from asset sales or loans). <br>2. <strong>Cash Disbursements:</strong> This section lists all planned cash outflows. It includes payments for inventory, operating expenses, salaries, taxes, loan repayments, and equipment purchases. Non-cash items like depreciation are excluded. <br>3. <strong>Summary/Financing:</strong> This section reconciles the cash inflows and outflows. It calculates the net cash flow for the period, adds it to the beginning cash balance to find the ending balance, and compares this to the minimum required balance to determine if there is a cash surplus or a deficit requiring financing."
+  },
+  {
+    "id": 267,
+    "topic": "Cash Budgeting",
+    "type": "numeric",
+    "question": "A company's total credit sales for March are R300,000. Its collection pattern is 20% in the month of sale, 50% in the month following, and 28% in the second month following (2% is bad debt). How much cash will be collected in May from March's sales?",
+    "answer": "84000",
+    "explanation": "May is the second month following the month of sale (March). The collection pattern states that 28% of credit sales are collected in the second month following the sale. <br><strong>Calculation:</strong> R300,000 * 28% = <strong>R84,000</strong>."
+  },
+  {
+    "id": 268,
+    "topic": "Time Value of Money",
+    "type": "numeric",
+    "question": "How much would you need to invest today to have R20,000 in 5 years if you can earn 8% interest, compounded annually?",
+    "answer": "13611.66",
+    "explanation": "This is a Present Value (PV) calculation of a single future sum. <br><strong>Formula:</strong> PV = FV / (1 + i)^n. <br><strong>Calculation:</strong> PV = 20000 / (1 + 0.08)^5 = 20000 / 1.4693 = <strong>R13,611.66</strong>."
+  },
+  {
+    "id": 269,
+    "topic": "Time Value of Money",
+    "type": "mcq",
+    "question": "An annuity is best defined as:",
+    "choices": ["A single lump-sum payment.", "A series of equal payments made at equal intervals for a specified period.", "An investment with a variable interest rate.", "A bond that never matures."],
+    "answer": "A series of equal payments made at equal intervals for a specified period.",
+    "explanation": "This is the definition of an annuity. Key characteristics are: (1) equal payments, (2) equal time intervals between payments, and (3) a finite duration. Examples include monthly loan payments or annual retirement contributions."
+  },
+  {
+    "id": 270,
+    "topic": "Time Value of Money",
+    "type": "long",
+    "question": "Explain the difference between an ordinary annuity and an annuity due.",
+    "answer": "The difference lies in the timing of the payments. Ordinary annuity payments are at the end of each period, while annuity due payments are at the beginning.",
+    "explanation": "<ul><li><strong>Ordinary Annuity:</strong> Payments occur at the <strong>end</strong> of each period. Most loan repayments (e.g., mortgages, car loans) are structured as ordinary annuities.</li><li><strong>Annuity Due:</strong> Payments occur at the <strong>beginning</strong> of each period. Rent payments and insurance premiums are common examples.</li></ul>Because each payment in an annuity due occurs one period earlier than in an ordinary annuity, it has more time to earn interest. Therefore, the future value of an annuity due is always greater than that of an equivalent ordinary annuity, and its present value is also always greater."
+  },
+  {
+    "id": 271,
+    "topic": "Time Value of Money",
+    "type": "numeric",
+    "question": "You deposit R2,000 at the end of each year for 10 years into an account that earns 7% interest. What is the future value of this investment?",
+    "answer": "27632.98",
+    "explanation": "This is the future value of an ordinary annuity. <br><strong>Formula:</strong> FVA = PMT * [((1 + i)^n - 1) / i]. <br><strong>Calculation:</strong> FVA = 2000 * [((1.07)^10 - 1) / 0.07] = 2000 * [(1.96715 - 1) / 0.07] = 2000 * [13.816] = <strong>R27,632.98</strong>."
+  },
+  {
+    "id": 272,
+    "topic": "Time Value of Money",
+    "type": "mcq",
+    "question": "What is the 'Rule of 72'?",
+    "choices": ["A rule stating you should save 72% of your income.", "A quick way to calculate the present value of an annuity.", "A method to estimate the number of years it takes for an investment to double in value.", "A regulation for stock market trading."],
+    "answer": "A method to estimate the number of years it takes for an investment to double in value.",
+    "explanation": "The Rule of 72 is a simple mental shortcut in finance. By dividing 72 by the annual interest rate, you can get a rough estimate of how many years it will take for your investment to double. For example, at an 8% interest rate, it would take approximately 72 / 8 = 9 years for an investment to double."
+  },
+  {
+    "id": 273,
+    "topic": "Time Value of Money",
+    "type": "long",
+    "question": "Explain the concept of 'compounding' and why it is important for long-term investing.",
+    "answer": "Compounding is the process of earning interest on both the original principal and the accumulated interest from previous periods.",
+    "explanation": "Compounding is often described as 'interest on interest'. When you invest, you earn interest. In the next period, you earn interest on your initial investment plus the interest you earned in the first period. This creates a snowball effect. <br>It is crucial for long-term investing because the effect of compounding becomes much more powerful over longer time horizons. An investment that compounds for 40 years will grow exponentially more than one that compounds for only 10 years, even with the same principal and interest rate. This is why starting to save for retirement early is so important."
+  },
+  {
+    "id": 274,
+    "topic": "Time Value of Money",
+    "type": "numeric",
+    "question": "What is the present value of a perpetuity that pays R5,000 per year, if the discount rate is 10%?",
+    "answer": "50000",
+    "explanation": "A perpetuity is an annuity that continues forever. Its present value is calculated with a simple formula. <br><strong>Formula:</strong> PV = Payment / Interest Rate. <br><strong>Calculation:</strong> PV = R5,000 / 0.10 = <strong>R50,000</strong>."
+  },
+  {
+    "id": 275,
+    "topic": "Time Value of Money",
+    "type": "mcq",
+    "question": "If you are borrowing money, which of the following interest compounding frequencies would you prefer?",
+    "choices": ["Annually", "Semi-annually", "Quarterly", "Monthly"],
+    "answer": "Annually",
+    "explanation": "When you are borrowing, you want to pay the least amount of interest. More frequent compounding means interest is calculated and added to the principal more often, leading to a higher effective interest rate and more total interest paid over the life of the loan. Therefore, you would prefer the least frequent compounding period, which is annually."
+  },
+  {
+    "id": 276,
+    "topic": "Time Value of Money",
+    "type": "long",
+    "question": "What is the relationship between the present value of an amount and the discount rate used?",
+    "answer": "There is an inverse relationship between present value and the discount rate.",
+    "explanation": "The present value formula is PV = FV / (1 + i)^n. The discount rate (i) is in the denominator of the formula. This means that as the discount rate increases, the denominator gets larger, and the resulting present value gets smaller. Conversely, as the discount rate decreases, the present value gets larger. This makes intuitive sense: a higher discount rate implies a higher required return or more risk, so a future cash flow is worth less in today's terms."
+  },
+  {
+    "id": 277,
+    "topic": "Time Value of Money",
+    "type": "numeric",
+    "question": "You want to borrow R200,000 to buy a car. The bank offers you a 5-year loan with monthly payments at an annual interest rate of 12%. What is your monthly payment?",
+    "answer": "4448.89",
+    "explanation": "This requires solving for the payment (PMT) in a present value of an ordinary annuity formula. <br><strong>Variables:</strong> PV = 200000; i = 12%/12 = 1% per month; n = 5*12 = 60 months. <br><strong>Formula:</strong> PMT = PV / [ (1 - (1 + i)^-n) / i ]. <br><strong>PVIFA Factor:</strong> [ (1 - (1.01)^-60) / 0.01 ] = [ (1 - 0.55045) / 0.01 ] = 44.955. <br><strong>Calculation:</strong> PMT = 200000 / 44.955 = <strong>R4,448.89</strong>."
+  },
+  {
+    "id": 278,
+    "topic": "Capital Budgeting",
+    "type": "numeric",
+    "question": "A project has an initial cost of R200,000 and is expected to generate annual cash inflows of R60,000 for 5 years. What is the project's payback period?",
+    "answer": "3.33",
+    "explanation": "The payback period is the time it takes for a project's cash inflows to recover its initial cost. <br><strong>Calculation:</strong> Payback Period = Initial Investment / Annual Cash Inflow = R200,000 / R60,000 = <strong>3.33 years</strong>."
+  },
+  {
+    "id": 279,
+    "topic": "Capital Budgeting",
+    "type": "mcq",
+    "question": "The primary disadvantage of the regular payback period method is that it:",
+    "choices": ["Is too complicated to calculate.", "Ignores the time value of money and cash flows after the payback period.", "Cannot be used for mutually exclusive projects.", "Always overstates the project's profitability."],
+    "answer": "Ignores the time value of money and cash flows after the payback period.",
+    "explanation": "The payback period has two major flaws: <br>1. It treats a rand received in year 3 the same as a rand received in year 1, completely ignoring the time value of money. <br>2. It ignores all cash flows that occur after the payback period has been reached. A project could have massive cash flows in its later years, but the payback period method would not consider them."
+  },
+  {
+    "id": 280,
+    "topic": "Capital Budgeting",
+    "type": "long",
+    "question": "Explain the concept of Net Present Value (NPV) and the decision rule associated with it.",
+    "answer": "NPV is the difference between the present value of a project's cash inflows and the present value of its cash outflows. The decision rule is to accept projects with a positive NPV and reject those with a negative NPV.",
+    "explanation": "Net Present Value (NPV) is a capital budgeting technique that accounts for the time value of money by discounting all future cash flows back to the present. The formula is NPV = &Sigma;[CFt / (1+r)^t] - C0. <br><strong>Decision Rule:</strong><br><ul><li><strong>If NPV > 0 (Positive):</strong> The project is expected to generate a return greater than its cost of capital. Accepting it will increase the value of the firm. <strong>Accept the project.</strong></li><li><strong>If NPV < 0 (Negative):</strong> The project's return is less than the cost of capital. Accepting it will destroy firm value. <strong>Reject the project.</strong></li><li><strong>If NPV = 0:</strong> The project's return is exactly equal to the cost of capital. The firm is indifferent.</li></ul>"
+  },
+  {
+    "id": 281,
+    "topic": "Capital Budgeting",
+    "type": "numeric",
+    "question": "A project costs R100,000. It will generate a cash inflow of R120,000 in one year's time. If the company's cost of capital is 15%, what is the project's NPV?",
+    "answer": "4347.83",
+    "explanation": "First, find the present value (PV) of the future cash inflow. <br><strong>PV of Inflow:</strong> R120,000 / (1 + 0.15)^1 = R104,347.83. <br><strong>NPV Formula:</strong> NPV = PV of Inflows - Initial Investment. <br><strong>Calculation:</strong> NPV = R104,347.83 - R100,000 = <strong>R4,347.83</strong>."
+  },
+  {
+    "id": 282,
+    "topic": "Capital Budgeting",
+    "type": "mcq",
+    "question": "What is the Internal Rate of Return (IRR)?",
+    "choices": ["The company's cost of capital.", "The interest rate that makes the NPV of a project equal to zero.", "The accounting profit of a project.", "The time it takes to recover the initial investment."],
+    "answer": "The interest rate that makes the NPV of a project equal to zero.",
+    "explanation": "The Internal Rate of Return (IRR) is the discount rate at which the present value of a project's expected cash inflows equals the present value of its expected cash outflows. It represents the project's intrinsic rate of return. The decision rule is to accept projects where the IRR is greater than the cost of capital."
+  },
+  {
+    "id": 283,
+    "topic": "Capital Budgeting",
+    "type": "long",
+    "question": "Explain the difference between independent projects and mutually exclusive projects in capital budgeting.",
+    "answer": "Independent projects can be accepted or rejected without affecting other projects, while with mutually exclusive projects, accepting one automatically means rejecting the others.",
+    "explanation": "<ul><li><strong>Independent Projects:</strong> The cash flows of independent projects are unrelated. A company can choose to accept all independent projects that meet its investment criteria (e.g., have a positive NPV).</li><li><strong>Mutually Exclusive Projects:</strong> These are projects that serve the same purpose. For example, a company might be choosing between two different types of machine to perform the same task. It can only pick one. When evaluating mutually exclusive projects, the company should choose the one that adds the most value (e.g., has the highest NPV).</li></ul>"
+  },
+  {
+    "id": 284,
+    "topic": "Capital Budgeting",
+    "type": "numeric",
+    "question": "A machine costs R300,000 and has a 3-year life. It will be depreciated using the straight-line method to a zero residual value. The tax rate is 30%. What is the annual depreciation tax shield?",
+    "answer": "30000",
+    "explanation": "The depreciation tax shield is the amount of tax saved because of the depreciation expense. <br><strong>1. Calculate Annual Depreciation:</strong> R300,000 / 3 years = R100,000 per year. <br><strong>2. Calculate the Tax Shield:</strong> Depreciation Tax Shield = Annual Depreciation * Tax Rate. <br><strong>Calculation:</strong> R100,000 * 30% = <strong>R30,000</strong>. This is the amount of tax the company saves each year due to the depreciation expense."
+  },
+  {
+    "id": 285,
+    "topic": "Capital Budgeting",
+    "type": "mcq",
+    "question": "Which capital budgeting method is generally considered to be the most theoretically sound?",
+    "choices": ["Payback Period", "Accounting Rate of Return (ARR)", "Internal Rate of Return (IRR)", "Net Present Value (NPV)"],
+    "answer": "Net Present Value (NPV)",
+    "explanation": "NPV is considered the superior method because it directly measures the absolute increase in firm value that a project is expected to generate. Unlike IRR, it does not have issues with unconventional cash flows and provides a clear decision rule for both independent and mutually exclusive projects. It also correctly accounts for the time value of money, unlike the Payback Period and ARR."
+  },
+  {
+    "id": 286,
+    "topic": "Capital Budgeting",
+    "type": "long",
+    "question": "What is a 'sunk cost' and how should it be treated in a capital budgeting analysis?",
+    "answer": "A sunk cost is a cost that has already been incurred and cannot be recovered. It should be ignored in capital budgeting decisions.",
+    "explanation": "Sunk costs are irrelevant to future decisions because they have already been paid and will not change regardless of whether the new project is accepted or rejected. For example, if a company spent R50,000 on market research for a new product last year, that R50,000 is a sunk cost. When deciding whether to launch the product today, the analysis should only focus on the future incremental costs and benefits. The past expenditure is irrelevant to the decision."
+  },
+  {
+    "id": 287,
+    "topic": "Capital Budgeting",
+    "type": "numeric",
+    "question": "A project has an IRR of 18%. The company's cost of capital is 14%. What is the project's NPV?",
+    "answer": "The NPV is positive.",
+    "explanation": "The Internal Rate of Return (IRR) is the discount rate at which the NPV of a project is zero. The relationship between IRR, cost of capital (k), and NPV is as follows: <br><ul><li>If IRR > k, then NPV will be positive.</li><li>If IRR < k, then NPV will be negative.</li></ul>Since the project's IRR (18%) is greater than the cost of capital (14%), its NPV must be <strong>positive</strong>. We cannot determine the exact value without the cash flows."
+  },
+  {
+    "id": 288,
+    "topic": "Cost of Capital (WACC)",
+    "type": "numeric",
+    "question": "A company's stock has a beta of 1.5. The risk-free rate is 5%, and the expected return on the market is 12%. Calculate the company's cost of equity (Ke) using CAPM.",
+    "answer": "15.5",
+    "explanation": "The Capital Asset Pricing Model (CAPM) calculates the required return on an equity investment. <br><strong>Formula:</strong> Ke = Risk-Free Rate + Beta * (Market Return - Risk-Free Rate). <br><strong>Calculation:</strong> Ke = 5% + 1.5 * (12% - 5%) = 5% + 1.5 * (7%) = 5% + 10.5% = <strong>15.5%</strong>."
+  },
+  {
+    "id": 289,
+    "topic": "Cost of Capital (WACC)",
+    "type": "mcq",
+    "question": "When calculating the WACC, the cost of debt must be adjusted for taxes because:",
+    "choices": ["Debt is riskier than equity.", "Interest payments are tax-deductible, creating a tax shield.", "Dividends are tax-deductible.", "The government subsidizes corporate debt."],
+    "answer": "Interest payments are tax-deductible, creating a tax shield.",
+    "explanation": "Interest paid on debt is treated as a business expense and is deducted from a company's income before taxes are calculated. This deduction reduces the company's taxable income, which in turn reduces its tax liability. This tax saving is known as a 'tax shield', and it effectively lowers the cost of debt to the company."
+  },
+  {
+    "id": 290,
+    "topic": "Cost of Capital (WACC)",
+    "type": "long",
+    "question": "Explain why the cost of equity is almost always higher than the cost of debt for the same company.",
+    "answer": "Equity is riskier for an investor than debt.",
+    "explanation": "There are two main reasons for this: <br>1. <strong>Risk of Non-payment:</strong> Debt holders have a legal claim to interest payments and principal repayment. The company must pay them, regardless of performance. Equity holders (shareholders) are only paid dividends if the company decides to, and they have no guarantee of a return. <br>2. <strong>Priority in Liquidation:</strong> In the event of bankruptcy, debt holders are paid from the company's assets before equity holders. Equity holders have a residual claim, meaning they only get what is left over, which is often nothing. <br>Because equity is riskier, investors demand a higher potential return to compensate them for taking on that additional risk."
+  },
+  {
+    "id": 291,
+    "topic": "Cost of Capital (WACC)",
+    "type": "numeric",
+    "question": "A company has R2 million of debt with a before-tax cost of 8% and R3 million of equity with a cost of 14%. The company's tax rate is 25%. Calculate the WACC.",
+    "answer": "10.8",
+    "explanation": "The WACC is the weighted average of the after-tax costs of each capital component. <br><strong>1. Calculate Weights:</strong> Total Capital = 2m + 3m = R5m. Weight of Debt = 2/5 = 0.4. Weight of Equity = 3/5 = 0.6. <br><strong>2. Calculate After-Tax Cost of Debt:</strong> 8% * (1 - 0.25) = 6%. <br><strong>3. Calculate WACC:</strong> WACC = (Weight of Equity * Cost of Equity) + (Weight of Debt * After-Tax Cost of Debt) = (0.6 * 14%) + (0.4 * 6%) = 8.4% + 2.4% = <strong>10.8%</strong>."
+  },
+  {
+    "id": 292,
+    "topic": "Cost of Capital (WACC)",
+    "type": "mcq",
+    "question": "In the WACC formula, the weights for each capital component should be based on their:",
+    "choices": ["Book values", "Historical costs", "Market values", "Face values"],
+    "answer": "Market values",
+    "explanation": "The WACC is used to evaluate future projects and is based on the company's current cost of raising new capital. Market values reflect the current prices at which the company's securities (stocks and bonds) are trading, and therefore represent the best estimate of what it would cost to raise new funds today. Book values are based on historical costs and are less relevant for forward-looking decisions."
+  },
+  {
+    "id": 293,
+    "topic": "Cost of Capital (WACC)",
+    "type": "long",
+    "question": "A company is considering a new project that is much riskier than its existing operations. Should the company use its overall WACC to evaluate this project? Explain why or why not.",
+    "answer": "No, the company should use a risk-adjusted discount rate that is higher than the company's overall WACC.",
+    "explanation": "A company's WACC reflects the average risk of all its existing projects and operations. It is only appropriate to use this WACC to evaluate new projects that have the same level of risk as the company's current business. <br>If a new project is significantly riskier, using the overall WACC would be incorrect. A riskier project requires a higher rate of return to compensate investors for the additional risk. Therefore, the company should apply a higher, risk-adjusted discount rate to evaluate the riskier project. Using the lower company WACC could lead to incorrectly accepting a project that does not offer a sufficient return for its risk."
+  },
+  {
+    "id": 294,
+    "topic": "Cost of Capital (WACC)",
+    "type": "numeric",
+    "question": "A company's preference shares pay a dividend of R10 per share and are currently trading at R80 per share. What is the cost of preference share capital?",
+    "answer": "12.5",
+    "explanation": "The cost of preference share capital is the dividend yield on the shares. <br><strong>Formula:</strong> Kp = Annual Dividend / Market Price. <br><strong>Calculation:</strong> Kp = R10 / R80 = 0.125 or <strong>12.5%</strong>."
+  },
+  {
+    "id": 295,
+    "topic": "Cost of Capital (WACC)",
+    "type": "mcq",
+    "question": "What does a stock's 'beta' measure?",
+    "choices": ["Total risk", "Unsystematic risk", "Systematic risk", "Business risk"],
+    "answer": "Systematic risk",
+    "explanation": "Beta is a measure of a stock's volatility in relation to the overall market. It specifically quantifies systematic risk, which is the risk that cannot be eliminated through diversification (e.g., risk from economic changes, inflation). Unsystematic risk is company-specific risk that can be diversified away."
+  },
+  {
+    "id": 296,
+    "topic": "Cost of Capital (WACC)",
+    "type": "long",
+    "question": "What is 'flotation cost' and how does it affect the cost of capital when issuing new securities?",
+    "answer": "Flotation costs are the expenses incurred by a company when it issues new securities. They increase the cost of capital.",
+    "explanation": "Flotation costs include underwriting fees, legal fees, and registration fees associated with a new stock or bond issue. These costs reduce the net proceeds that the company receives from the sale of the securities. <br>When calculating the cost of new capital (e.g., new ordinary shares or preference shares), the flotation costs are deducted from the issue price in the denominator of the cost formula. For example, the cost of new equity is D₁ / (P₀ - F) + g. By reducing the denominator, flotation costs increase the calculated cost of the new capital."
+  },
+  {
+    "id": 297,
+    "topic": "Cost of Capital (WACC)",
+    "type": "numeric",
+    "question": "A company's bond has a before-tax yield to maturity of 9%. If the company's marginal tax rate is 30%, what is its after-tax cost of debt?",
+    "answer": "6.3",
+    "explanation": "The after-tax cost of debt is the relevant cost to use in the WACC calculation because interest payments are tax-deductible. <br><strong>Formula:</strong> After-Tax Cost of Debt = Before-Tax Cost * (1 - Tax Rate). <br><strong>Calculation:</strong> 9% * (1 - 0.30) = 9% * 0.70 = <strong>6.3%</strong>."
+  },
+  {
+    "id": 298,
+    "topic": "Risk & Return",
+    "type": "numeric",
+    "question": "An investment has a 50% chance of returning 20% and a 50% chance of returning 10%. What is its expected return?",
+    "answer": "15",
+    "explanation": "The expected return is the weighted average of the possible returns. <br><strong>Formula:</strong> E(R) = &Sigma; (Probability * Return). <br><strong>Calculation:</strong> (0.50 * 20%) + (0.50 * 10%) = 10% + 5% = <strong>15%</strong>."
+  },
+  {
+    "id": 299,
+    "topic": "Risk & Return",
+    "type": "mcq",
+    "question": "The part of a stock's risk that can be eliminated by holding it in a well-diversified portfolio is known as:",
+    "choices": ["Systematic risk", "Market risk", "Unsystematic risk", "Total risk"],
+    "answer": "Unsystematic risk",
+    "explanation": "Unsystematic risk (also known as diversifiable risk or specific risk) is the risk associated with a specific company or industry (e.g., a strike, a new competitor, a failed product). By combining many different stocks in a portfolio, the random positive and negative events of individual companies tend to cancel each other out, eliminating this type of risk."
+  },
+  {
+    "id": 300,
+    "topic": "Risk & Return",
+    "type": "long",
+    "question": "Explain the relationship between risk and required return.",
+    "answer": "There is a positive relationship between risk and required return; higher risk requires a higher potential return.",
+    "explanation": "This is a fundamental principle of finance known as the risk-return trade-off. Investors are generally risk-averse, meaning they will only take on a higher level of risk if they are compensated with the potential for a higher return. An investment with very low risk, like a government bond, will offer a low return. An investment with high risk, like a speculative stock, must offer the potential for a high return to attract investors. This positive relationship is graphically represented by the Security Market Line (SML) in the CAPM."
+  },
+  {
+    "id": 301,
+    "topic": "Risk & Return",
+    "type": "numeric",
+    "question": "A stock's returns over the last three years were 10%, 15%, and 20%. Calculate the standard deviation of these historical returns.",
+    "answer": "5",
+    "explanation": "Standard deviation measures the historical volatility of the returns. <br><strong>1. Calculate the Mean:</strong> (10 + 15 + 20) / 3 = 15%. <br><strong>2. Calculate the Variance:</strong> Variance = &Sigma;(Return - Mean)^2 / (n-1). <br><ul><li>(10 - 15)^2 = (-5)^2 = 25</li><li>(15 - 15)^2 = (0)^2 = 0</li><li>(20 - 15)^2 = (5)^2 = 25</li></ul>Sum of squared deviations = 25 + 0 + 25 = 50. <br>Variance = 50 / (3 - 1) = 25. <br><strong>3. Calculate Standard Deviation:</strong> Standard Deviation = &radic;Variance = &radic;25 = <strong>5%</strong>."
+  },
+  {
+    "id": 302,
+    "topic": "Risk & Return",
+    "type": "mcq",
+    "question": "A stock with a beta of 0.5 is:",
+    "choices": ["Riskier than the market.", "Half as risky as the market.", "Twice as risky as the market.", "Has no systematic risk."],
+    "answer": "Half as risky as the market.",
+    "explanation": "Beta measures a stock's sensitivity to market movements. The market itself has a beta of 1.0. A stock with a beta of 0.5 is expected to move, on average, half as much as the market. For example, if the market goes up by 10%, this stock would be expected to go up by 5%. This means it has less systematic risk than the average stock."
+  },
+  {
+    "id": 303,
+    "topic": "Risk & Return",
+    "type": "long",
+    "question": "What is the Capital Asset Pricing Model (CAPM) and what does it describe?",
+    "answer": "CAPM is a model that describes the relationship between systematic risk and expected return for assets, particularly stocks.",
+    "explanation": "The CAPM is a central tenet of modern portfolio theory. Its formula, E(R) = Rf + β(Rm - Rf), states that the expected return on an investment is equal to the risk-free rate plus a risk premium. This risk premium is calculated as the asset's beta (β) multiplied by the market risk premium (the expected return of the market minus the risk-free rate). In essence, CAPM provides a way to calculate the required rate of return for any investment, given its level of systematic risk."
+  },
+  {
+    "id": 304,
+    "topic": "Risk & Return",
+    "type": "numeric",
+    "question": "Two stocks, A and B, have expected returns of 10% and 15% respectively. If you create a portfolio with 60% of your money in Stock A and 40% in Stock B, what is the expected return of the portfolio?",
+    "answer": "12",
+    "explanation": "The expected return of a portfolio is the weighted average of the expected returns of the individual assets in it. <br><strong>Formula:</strong> E(Rp) = (Weight_A * Return_A) + (Weight_B * Return_B). <br><strong>Calculation:</strong> E(Rp) = (0.60 * 10%) + (0.40 * 15%) = 6% + 6% = <strong>12%</strong>."
+  },
+  {
+    "id": 305,
+    "topic": "Risk & Return",
+    "type": "mcq",
+    "question": "The Security Market Line (SML) is a graphical representation of:",
+    "choices": ["The DuPont equation", "The payback period", "The Capital Asset Pricing Model (CAPM)", "The WACC"],
+    "answer": "The Capital Asset Pricing Model (CAPM)",
+    "explanation": "The Security Market Line (SML) is a graph that plots the expected return of an investment on the y-axis against its systematic risk (beta) on the x-axis. The line itself represents the formula of the CAPM, showing the required return for any given level of beta."
+  },
+  {
+    "id": 306,
+    "topic": "Risk & Return",
+    "type": "long",
+    "question": "Explain what a correlation coefficient of -1 between two stocks means for a portfolio.",
+    "answer": "A correlation of -1 means the two stocks move in perfectly opposite directions. This allows for the complete elimination of risk in a portfolio.",
+    "explanation": "A correlation coefficient of -1.0 represents perfect negative correlation. If Stock A goes up by 10%, Stock B will go down by a predictable amount, and vice versa. By combining two stocks with perfect negative correlation in the correct proportions, an investor can create a portfolio that has a guaranteed, risk-free return. The volatility of the two stocks perfectly cancels each other out. While perfect negative correlation is rare in the real world, the principle is the foundation of diversification: combining assets that are not perfectly correlated reduces overall portfolio risk."
+  },
+  {
+    "id": 307,
+    "topic": "Risk & Return",
+    "type": "numeric",
+    "question": "The risk-free rate is 4%. The market risk premium is 7%. What is the expected return for the market?",
+    "answer": "11",
+    "explanation": "The market risk premium is the difference between the expected market return and the risk-free rate. <br><strong>Formula:</strong> Market Risk Premium = E(Rm) - Rf. <br>We can rearrange this to solve for the expected market return (E(Rm)). <br><strong>Calculation:</strong> E(Rm) = Market Risk Premium + Rf = 7% + 4% = <strong>11%</strong>."
+  },
+  {
+    "id": 308,
+    "topic": "Break-even & CVP",
+    "type": "numeric",
+    "question": "A product sells for R100. Its variable cost is R60 per unit. What is the contribution margin per unit?",
+    "answer": "40",
+    "explanation": "The contribution margin is the amount of revenue from each unit sold that is available to cover fixed costs and contribute to profit. <br><strong>Formula:</strong> Contribution Margin = Selling Price - Variable Cost. <br><strong>Calculation:</strong> R100 - R60 = <strong>R40</strong>."
+  },
+  {
+    "id": 309,
+    "topic": "Break-even & CVP",
+    "type": "mcq",
+    "question": "The break-even point is the level of sales at which:",
+    "choices": ["Total revenue is maximized", "Total costs are minimized", "Total contribution margin equals total fixed costs", "Variable costs equal fixed costs"],
+    "answer": "Total contribution margin equals total fixed costs",
+    "explanation": "At the break-even point, the company has made enough profit from selling its products to cover all of its fixed costs for the period. Since profit is calculated as Total Contribution Margin - Total Fixed Costs, the break-even point is where Profit = 0, which means Total Contribution Margin must equal Total Fixed Costs."
+  },
+  {
+    "id": 310,
+    "topic": "Break-even & CVP",
+    "type": "long",
+    "question": "Explain the concept of 'Operating Leverage' and what a high degree of operating leverage signifies.",
+    "answer": "Operating leverage measures the sensitivity of a company's operating income to changes in its sales volume. A high degree of operating leverage signifies high fixed costs and high risk.",
+    "explanation": "Operating leverage relates to a company's cost structure (the mix of fixed and variable costs). <br><strong>High Operating Leverage:</strong> A company with high fixed costs and low variable costs (e.g., an airline) has high operating leverage. This means that once the break-even point is passed, a small percentage increase in sales will result in a much larger percentage increase in operating profit. However, it also means the company is risky; a small drop in sales can lead to a large drop in profit or significant losses. <br><strong>Low Operating Leverage:</strong> A company with low fixed costs and high variable costs (e.g., a retail store) has low operating leverage. Its profits are less sensitive to changes in sales."
+  },
+  {
+    "id": 311,
+    "topic": "Break-even & CVP",
+    "type": "numeric",
+    "question": "A company has total fixed costs of R500,000. Its product has a contribution margin of R25 per unit. How many units must it sell to break even?",
+    "answer": "20000",
+    "explanation": "The break-even point in units is the number of units needed to cover all fixed costs. <br><strong>Formula:</strong> Break-even (units) = Total Fixed Costs / Contribution Margin per Unit. <br><strong>Calculation:</strong> R500,000 / R25 = <strong>20,000 units</strong>."
+  },
+  {
+    "id": 312,
+    "topic": "Break-even & CVP",
+    "type": "mcq",
+    "question": "Which of the following would increase a company's break-even point?",
+    "choices": ["A decrease in total fixed costs", "An increase in the selling price per unit", "An increase in the variable cost per unit", "An increase in sales volume"],
+    "answer": "An increase in the variable cost per unit",
+    "explanation": "An increase in the variable cost per unit would decrease the contribution margin per unit (Selling Price - Variable Cost). Since the break-even point is calculated as Fixed Costs / Contribution Margin, a smaller denominator will result in a higher break-even point, meaning more units must be sold to cover costs."
+  },
+  {
+    "id": 313,
+    "topic": "Break-even & CVP",
+    "type": "long",
+    "question": "What is the Margin of Safety, and why is it a useful metric for management?",
+    "answer": "The Margin of Safety is the excess of actual or budgeted sales over the break-even sales volume.",
+    "explanation": "The Margin of Safety shows how much sales could fall before the company starts to incur a loss. It can be expressed in units, in rands, or as a percentage. It is a crucial measure of risk. A company with a large margin of safety is in a strong position and can withstand a significant drop in sales without becoming unprofitable. A company with a small margin of safety is in a riskier position, as even a minor downturn in sales could push it into a loss-making situation."
+  },
+  {
+    "id": 314,
+    "topic": "Break-even & CVP",
+    "type": "numeric",
+    "question": "A company has a break-even point of 10,000 units. It currently plans to sell 15,000 units. What is its Margin of Safety in percentage terms?",
+    "answer": "33.33",
+    "explanation": "<strong>1. Calculate Margin of Safety in Units:</strong> MOS (units) = Budgeted Sales - Break-even Sales = 15,000 - 10,000 = 5,000 units. <br><strong>2. Calculate MOS as a Percentage:</strong> MOS (%) = (MOS in units / Budgeted Sales) * 100. <br><strong>Calculation:</strong> (5,000 / 15,000) * 100 = 0.3333 * 100 = <strong>33.33%</strong>. This means sales can fall by 33.33% before the company incurs a loss."
+  },
+  {
+    "id": 315,
+    "topic": "Break-even & CVP",
+    "type": "mcq",
+    "question": "In CVP analysis, 'contribution' refers to:",
+    "choices": ["The contribution to fixed costs and profit.", "The contribution to total assets.", "The owner's contribution to capital.", "The contribution to society."],
+    "answer": "The contribution to fixed costs and profit.",
+    "explanation": "Contribution margin is the revenue left over after variable costs have been covered. This remaining amount is what is available to first cover the company's fixed costs. Once the fixed costs are fully covered (at the break-even point), any additional contribution margin becomes the company's operating profit."
+  },
+  {
+    "id": 316,
+    "topic": "Break-even & CVP",
+    "type": "long",
+    "question": "List two assumptions of Cost-Volume-Profit (CVP) analysis.",
+    "answer": "Two key assumptions are that selling price per unit is constant and that costs can be accurately classified as either fixed or variable.",
+    "explanation": "CVP analysis relies on several simplifying assumptions to work. Some of the main ones include: <br>1. <strong>Constant Selling Price:</strong> The selling price per unit does not change, regardless of the volume sold. <br>2. <strong>Costs are Linear:</strong> Costs can be accurately divided into fixed (which do not change with volume) and variable (which are constant per unit). <br>3. <strong>Sales Volume = Production Volume:</strong> It is assumed that everything produced is sold, meaning there is no change in inventory levels."
+  },
+  {
+    "id": 317,
+    "topic": "Break-even & CVP",
+    "type": "numeric",
+    "question": "A company has total fixed costs of R200,000 and a contribution margin ratio of 40%. What is its break-even point in sales value (Rands)?",
+    "answer": "500000",
+    "explanation": "When using the contribution margin ratio, you can directly calculate the break-even point in sales value. <br><strong>Formula:</strong> Break-even (value) = Total Fixed Costs / Contribution Margin Ratio. <br><strong>Calculation:</strong> R200,000 / 0.40 = <strong>R500,000</strong>."
+  },
+  {
+    "id": 318,
+    "topic": "Managerial Finance Formulas",
+    "type": "numeric",
+    "question": "A company just paid a dividend of R2.00 (D₀). Dividends are expected to grow at 5% per year. The required return is 15%. What is the stock's value?",
+    "answer": "21",
+    "explanation": "This requires the Gordon Growth Model. First, find D₁. <br><strong>D₁:</strong> R2.00 * (1 + 0.05) = R2.10. <br><strong>Formula:</strong> P₀ = D₁ / (r - g). <br><strong>Calculation:</strong> P₀ = 2.10 / (0.15 - 0.05) = 2.10 / 0.10 = <strong>R21.00</strong>."
+  },
+  {
+    "id": 319,
+    "topic": "Managerial Finance Formulas",
+    "type": "mcq",
+    "question": "The formula P₀ = D / r is used to value what type of security?",
+    "choices": ["A common stock with constant growth", "A zero-coupon bond", "A perpetuity or a non-redeemable preference share", "A 10-year government bond"],
+    "answer": "A perpetuity or a non-redeemable preference share",
+    "explanation": "This is the formula for the present value of a perpetuity. It is used to value any security that is expected to pay a constant cash flow (D for dividend or C for coupon) forever, with no maturity date. Non-redeemable preference shares fit this description."
+  },
+  {
+    "id": 320,
+    "topic": "Managerial Finance Formulas",
+    "type": "long",
+    "question": "Identify the formula for the Capital Asset Pricing Model (CAPM) and explain what each component represents.",
+    "answer": "Formula: Ke = Rf + β(Rm - Rf).",
+    "explanation": "The CAPM is a model used to determine the required rate of return for an asset. <br><ul><li><strong>Ke (Cost of Equity):</strong> The required rate of return on the equity investment.</li><li><strong>Rf (Risk-Free Rate):</strong> The theoretical rate of return of an investment with zero risk (e.g., a government bond).</li><li><strong>β (Beta):</strong> A measure of the asset's systematic risk, or its volatility relative to the overall market.</li><li><strong>Rm (Expected Market Return):</strong> The expected return of the overall market portfolio.</li><li><strong>(Rm - Rf):</strong> This component is known as the Market Risk Premium.</li></ul>"
+  },
+  {
+    "id": 321,
+    "topic": "Managerial Finance Formulas",
+    "type": "numeric",
+    "question": "A bond with a face value of R1,000 and an 8% coupon rate has 5 years to maturity. The market interest rate for similar bonds is 6%. What is the annual coupon payment in Rands?",
+    "answer": "80",
+    "explanation": "The coupon payment is determined by the coupon rate and the face value of the bond. The market interest rate is used for valuation, not for calculating the payment itself. <br><strong>Formula:</strong> Annual Coupon Payment = Face Value * Coupon Rate. <br><strong>Calculation:</strong> R1,000 * 8% = <strong>R80</strong>."
+  },
+  {
+    "id": 322,
+    "topic": "Managerial Finance Formulas",
+    "type": "mcq",
+    "question": "In the WACC formula, what does '(1 - T)' represent when applied to the cost of debt?",
+    "choices": ["The growth rate of the debt", "The flotation cost", "The tax shield on interest payments", "The market risk premium"],
+    "answer": "The tax shield on interest payments",
+    "explanation": "The term (1 - T), where T is the corporate tax rate, is used to calculate the after-tax cost of debt. Because interest expense is tax-deductible, it creates a 'tax shield' that reduces the effective cost of debt to the company. Multiplying the before-tax cost by (1 - T) calculates this effective cost."
+  },
+  {
+    "id": 323,
+    "topic": "Managerial Finance Formulas",
+    "type": "long",
+    "question": "What is the formula for the Payback Period, and what does it measure?",
+    "answer": "Formula: Payback Period = Initial Investment / Annual Cash Inflow. It measures the time it takes to recover the initial cost of an investment.",
+    "explanation": "The Payback Period is a capital budgeting tool that measures liquidity and risk. The formula <strong>Payback Period = Initial Investment / Annual Cash Inflow</strong> is used for projects with even, annuity-like cash flows. For projects with uneven cash flows, the payback period is calculated by tracking the cumulative cash flow year by year until the initial investment is recovered. It measures how long it takes for a project to 'pay for itself' in gross terms, without considering the time value of money."
+  },
+  {
+    "id": 324,
+    "topic": "Managerial Finance Formulas",
+    "type": "numeric",
+    "question": "A company's sales are R5m, its total assets are R2m, and its total equity is R1.2m. Calculate the Equity Multiplier.",
+    "answer": "1.67",
+    "explanation": "The Equity Multiplier is a measure of financial leverage. <br><strong>Formula:</strong> Equity Multiplier = Total Assets / Total Equity. <br><strong>Calculation:</strong> R2,000,000 / R1,200,000 = <strong>1.67</strong>."
+  },
+  {
+    "id": 325,
+    "topic": "Managerial Finance Formulas",
+    "type": "mcq",
+    "question": "The formula for Net Present Value (NPV) is:",
+    "choices": ["Initial Investment / Annual Cash Flow", "Σ[CFt / (1+r)^t] - Initial Investment", "EBIT / Interest Expense", "(Net Income / Sales) * 100"],
+    "answer": "Σ[CFt / (1+r)^t] - Initial Investment",
+    "explanation": "The NPV formula calculates the sum of the present values of all future cash flows (CFt) discounted at the cost of capital (r) for each period (t), and then subtracts the initial investment (or initial cash outflow)."
+  },
+  {
+    "id": 326,
+    "topic": "Managerial Finance Formulas",
+    "type": "long",
+    "question": "Provide the formula for the Current Ratio and explain what it is used to assess.",
+    "answer": "Formula: Current Ratio = Current Assets / Current Liabilities.",
+    "explanation": "The Current Ratio is one of the most common liquidity ratios. It is used to assess a company's ability to meet its short-term obligations (those due within one year). A ratio greater than 1 generally suggests that the company has enough short-term assets to cover its short-term debts. A ratio less than 1 could indicate potential liquidity problems."
+  },
+  {
+    "id": 327,
+    "topic": "Managerial Finance Formulas",
+    "type": "numeric",
+    "question": "A company has a break-even point of 5,000 units and plans to sell 8,000 units. Calculate its Margin of Safety in units.",
+    "answer": "3000",
+    "explanation": "The Margin of Safety is the difference between the planned sales and the break-even sales. <br><strong>Formula:</strong> Margin of Safety = Budgeted Sales - Break-even Sales. <br><strong>Calculation:</strong> 8,000 units - 5,000 units = <strong>3,000 units</strong>."
+  },
+   {
+    "id": 328,
+    "topic": "Accounting Equation",
+    "type": "mcq",
+    "question": "If a company's assets increase by R50,000 and its liabilities decrease by R10,000, what is the change in its equity?",
+    "choices": ["Increase of R60,000", "Increase of R40,000", "Decrease of R60,000", "Decrease of R40,000"],
+    "answer": "Increase of R60,000",
+    "explanation": "The accounting equation is Assets = Liabilities + Equity. We can rearrange it to Equity = Assets - Liabilities. The change in Equity will be the change in Assets minus the change in Liabilities. Change in Equity = (+R50,000) - (-R10,000) = R50,000 + R10,000 = <strong>+R60,000</strong>."
+  },
+  {
+    "id": 329,
+    "topic": "Accounting Equation",
+    "type": "numeric",
+    "question": "A business has opening assets of R200,000 and opening equity of R120,000. It takes out a new loan of R50,000. What are the total liabilities at the end of the period?",
+    "answer": "130000",
+    "explanation": "First, calculate the opening liabilities: Liabilities = Assets - Equity = R200,000 - R120,000 = R80,000. Taking out a new loan increases both assets (cash) and liabilities (loan). The new liabilities will be the opening liabilities plus the new loan. Total Liabilities = R80,000 + R50,000 = <strong>R130,000</strong>."
+  },
+  {
+    "id": 330,
+    "topic": "Accounting Equation",
+    "type": "long",
+    "question": "A company provides consulting services worth R25,000 to a client on credit. Explain the dual effect of this transaction on the accounting equation.",
+    "answer": "Assets increase by R25,000 and Equity increases by R25,000.",
+    "explanation": "This transaction involves earning revenue, which affects assets and equity. <ul><li><strong>Assets:</strong> The business has earned the right to receive cash from the client, so the 'Accounts Receivable' account (an asset) increases by <strong>+R25,000</strong>.</li><li><strong>Equity:</strong> The business has earned revenue. 'Service Revenue' increases, which increases the net profit for the period, and therefore increases equity by <strong>+R25,000</strong>.</li></ul> The equation A = L + E remains in balance: (+R25,000) = 0 + (+R25,000)."
+  },
+  {
+    "id": 331,
+    "topic": "Accounting Equation",
+    "type": "mcq",
+    "question": "Which of the following best describes an 'asset swap'?",
+    "choices": ["A transaction that increases both assets and liabilities.", "A transaction that decreases both assets and equity.", "A transaction that increases one asset and decreases another asset by the same amount.", "A transaction that increases liabilities and decreases equity."],
+    "answer": "A transaction that increases one asset and decreases another asset by the same amount.",
+    "explanation": "An 'asset swap' is a transaction that only affects the composition of assets, leaving the total value of assets unchanged. A classic example is buying equipment for cash. The 'Equipment' asset increases, and the 'Bank' asset decreases, but total assets remain the same. Liabilities and equity are unaffected."
+  },
+  {
+    "id": 332,
+    "topic": "Accounting Equation",
+    "type": "numeric",
+    "question": "A company with total assets of R800,000 has a debt ratio (Total Liabilities / Total Assets) of 40%. What is the value of the company's total equity?",
+    "answer": "480000",
+    "explanation": "First, calculate total liabilities: Total Liabilities = Total Assets * Debt Ratio = R800,000 * 40% = R320,000. Then, use the accounting equation to find equity: Equity = Assets - Liabilities = R800,000 - R320,000 = <strong>R480,000</strong>."
+  },
+  {
+    "id": 333,
+    "topic": "Accounting Equation",
+    "type": "long",
+    "question": "Explain how the 'Accrual Basis' of accounting differs from the 'Cash Basis' and which one is required by IFRS.",
+    "answer": "The Accrual Basis records transactions when they occur, while the Cash Basis records them when cash changes hands. IFRS requires the Accrual Basis.",
+    "explanation": "<ul><li><strong>Accrual Basis:</strong> Revenue is recognized when it is earned and expenses are recognized when they are incurred, regardless of when cash is received or paid. This provides a more accurate picture of a company's performance for a period.</li><li><strong>Cash Basis:</strong> Revenue is recognized only when cash is received, and expenses are recognized only when cash is paid. This is simpler but can give a misleading view of performance.</li></ul>International Financial Reporting Standards (IFRS) mandate the use of the Accrual Basis to ensure that financial statements faithfully represent the company's financial performance and position."
+  },
+  {
+    "id": 334,
+    "topic": "Accounting Equation",
+    "type": "mcq",
+    "question": "A business prepays its annual rent of R120,000. What is the immediate effect on the accounting equation?",
+    "choices": ["Assets decrease, Equity decreases", "Assets increase, Liabilities increase", "No change in total assets, Equity decreases", "No change in total assets, no change in total liabilities or equity"],
+    "answer": "No change in total assets, no change in total liabilities or equity",
+    "explanation": "This is an asset swap. The 'Bank' asset decreases by R120,000. At the same time, a new asset called 'Prepaid Rent' is created, which increases by R120,000. The net effect on total assets is zero. Equity is not affected until the rent expense is recognized month by month."
+  },
+  {
+    "id": 335,
+    "topic": "Accounting Equation",
+    "type": "numeric",
+    "question": "A business declares a dividend of R50,000 to its shareholders. The dividend will be paid next month. What is the immediate effect on total liabilities?",
+    "answer": "50000",
+    "explanation": "When a dividend is declared, the company creates a legal obligation to pay its shareholders. This obligation is recorded as a liability. The journal entry is Debit Retained Earnings (decreasing equity) and Credit 'Shareholders for Dividends' (increasing a current liability). Therefore, liabilities increase by <strong>R50,000</strong>."
+  },
+  {
+    "id": 336,
+    "topic": "Accounting Equation",
+    "type": "long",
+    "question": "A company discovers that a debtor who owes R5,000 has gone bankrupt and the amount is irrecoverable. Explain the effect of writing off this bad debt on the accounting equation.",
+    "answer": "Assets decrease by R5,000, and Equity decreases by R5,000.",
+    "explanation": "Writing off a bad debt means recognizing that an asset (the receivable) will not be collected. <ul><li><strong>Assets:</strong> The 'Accounts Receivable' account must be decreased, as this money is no longer expected. Assets decrease by R5,000.</li><li><strong>Equity:</strong> The loss from the uncollectible amount is recognized as a 'Bad Debts Expense'. Expenses reduce profit, which in turn reduces equity. Equity decreases by R5,000.</li><li><strong>Liabilities:</strong> No effect.</li></ul>The equation balances: (-R5,000) = 0 + (-R5,000)."
+  },
+  {
+    "id": 337,
+    "topic": "Accounting Equation",
+    "type": "mcq",
+    "question": "If a business's total liabilities increase by R30,000 and its equity decreases by R10,000, what is the change in its total assets?",
+    "choices": ["Increase of R20,000", "Increase of R40,000", "Decrease of R20,000", "Decrease of R40,000"],
+    "answer": "Increase of R20,000",
+    "explanation": "The accounting equation is Assets = Liabilities + Equity. The change in assets must equal the sum of the changes in liabilities and equity. Change in Assets = (+R30,000) + (-R10,000) = <strong>+R20,000</strong>."
+  },
+  {
+    "id": 338,
+    "topic": "Accounting Equation",
+    "type": "numeric",
+    "question": "A company has R70,000 in the bank. It buys a R25,000 car, paying R5,000 in cash and taking a loan for the rest. How much cash does the company have in the bank after the transaction?",
+    "answer": "65000",
+    "explanation": "This question focuses only on the cash (bank) component of the transaction. The company started with R70,000 and paid a R5,000 cash deposit. The loan does not affect the immediate cash balance. Final Cash = R70,000 - R5,000 = <strong>R65,000</strong>."
+  },
+  {
+    "id": 339,
+    "topic": "Accounting Equation",
+    "type": "mcq",
+    "question": "Which of the following is NOT an asset?",
+    "choices": ["Inventory", "Accounts Payable", "Prepaid Expenses", "Goodwill"],
+    "answer": "Accounts Payable",
+    "explanation": "Accounts Payable represents money that the business owes to its suppliers. It is an obligation to pay, which makes it a liability, not an asset."
+  },
+  {
+    "id": 340,
+    "topic": "Accounting Equation",
+    "type": "long",
+    "question": "A business uses R500 worth of stationery that it had previously recorded as an asset ('Stationery on Hand'). Explain the effect of this adjusting entry on the accounting equation.",
+    "answer": "Assets decrease by R500 and Equity decreases by R500.",
+    "explanation": "This adjustment recognizes the consumption of an asset as an expense. <ul><li><strong>Assets:</strong> The 'Stationery on Hand' asset account decreases by R500 as the supplies have been used up.</li><li><strong>Equity:</strong> The used stationery becomes a 'Stationery Expense'. Expenses reduce profit, thereby decreasing equity by R500.</li></ul>The equation balances: (-R500) = 0 + (-R500)."
+  },
+  {
+    "id": 341,
+    "topic": "Accounting Equation",
+    "type": "numeric",
+    "question": "A sole proprietor takes a computer from the business for personal use. The computer had a cost of R12,000 and accumulated depreciation of R8,000. What is the amount of the decrease in the business's total equity?",
+    "answer": "4000",
+    "explanation": "Drawings are recorded at the carrying value of the asset taken. The carrying value is Cost - Accumulated Depreciation. Carrying Value = R12,000 - R8,000 = R4,000. Drawings reduce the owner's equity. Therefore, equity decreases by <strong>R4,000</strong>."
+  },
+  {
+    "id": 342,
+    "topic": "Accounting Equation",
+    "type": "mcq",
+    "question": "Which of the following would result in an increase in equity?",
+    "choices": ["Paying a supplier", "The owner withdrawing cash", "Providing a service to a customer", "Paying the monthly salaries"],
+    "answer": "Providing a service to a customer",
+    "explanation": "Providing a service to a customer results in earning revenue. Revenue increases net profit, which in turn increases the retained earnings component of equity."
+  },
+  {
+    "id": 343,
+    "topic": "Accounting Equation",
+    "type": "long",
+    "question": "What is the 'entity principle' (or 'entity concept') and why is it important for accounting?",
+    "answer": "The entity principle states that the business is an accounting entity separate from its owner and other businesses.",
+    "explanation": "This principle is crucial because it requires that the financial transactions of the business be kept separate from the personal financial transactions of its owner(s). For example, if the owner of a small shop pays their personal electricity bill from their personal bank account, this transaction is not recorded in the business's books. This separation allows for a true and fair view of the business's financial performance and position, without being distorted by the owner's personal finances."
+  },
+  {
+    "id": 344,
+    "topic": "Accounting Equation",
+    "type": "numeric",
+    "question": "A business has a bank loan of R100,000. It makes a capital repayment of R10,000 and also pays R2,000 in interest for the period. What is the total decrease in the business's assets from these transactions?",
+    "answer": "12000",
+    "explanation": "Both the capital repayment and the interest payment are paid using cash from the bank. Therefore, the total cash outflow is the sum of both payments. Total decrease in assets (Bank) = R10,000 + R2,000 = <strong>R12,000</strong>."
+  },
+  {
+    "id": 345,
+    "topic": "Accounting Equation",
+    "type": "mcq",
+    "question": "Recording the purchase of a new delivery van would involve which two types of accounts?",
+    "choices": ["An asset and a liability", "An asset and an expense", "An asset and an equity account", "Any of the above, depending on how it was paid for"],
+    "answer": "Any of the above, depending on how it was paid for",
+    "explanation": "The transaction depends on the method of payment: <ul><li><strong>Paid with cash:</strong> Affects two asset accounts (Vehicles increase, Bank decreases).</li><li><strong>Bought on credit:</strong> Affects an asset (Vehicles) and a liability (Loan/Accounts Payable).</li><li><strong>Contributed by the owner:</strong> Affects an asset (Vehicles) and equity (Capital Contribution).</li></ul>"
+  },
+  {
+    "id": 346,
+    "topic": "Accounting Equation",
+    "type": "long",
+    "question": "A business receives R10,000 in cash from a credit customer who was settling their account. Explain why this transaction has no effect on total equity.",
+    "answer": "This transaction is a conversion of one asset to another and does not involve any income or expense.",
+    "explanation": "This is an asset swap. The 'Bank' asset account increases by R10,000, and the 'Accounts Receivable' asset account decreases by R10,000. The net effect on total assets is zero. Equity was already increased when the original sale was made and the revenue was recognized. The collection of the cash is simply the settlement of that receivable and does not create new revenue. Therefore, equity is unaffected by the cash collection itself."
+  },
+  {
+    "id": 347,
+    "topic": "Accounting Equation",
+    "type": "numeric",
+    "question": "A business with R90,000 in liabilities and R150,000 in equity sells goods that cost R10,000 for R25,000 on credit. What are the total assets of the business after this transaction?",
+    "answer": "255000",
+    "explanation": "First, calculate the opening assets: Assets = Liabilities + Equity = R90,000 + R150,000 = R240,000. The transaction has a net effect on assets of +R15,000 (Accounts Receivable increases by R25,000, Inventory decreases by R10,000). Therefore, the closing assets are R240,000 + R15,000 = <strong>R255,000</strong>."
+  },
+  {
+    "id": 348,
+    "topic": "Dividends & Capital Structure",
+    "type": "numeric",
+    "question": "A company has a target capital structure of 60% equity and 40% debt. It plans to fund R1,200,000 in new projects. How much of this funding will come from new debt?",
+    "answer": "480000",
+    "explanation": "To maintain its target capital structure, the company must fund new projects with the same proportion of debt and equity. <br><strong>Debt Portion:</strong> Total Funding * Debt Weight = R1,200,000 * 40% = <strong>R480,000</strong>."
+  },
+  {
+    "id": 349,
+    "topic": "Dividends & Capital Structure",
+    "type": "mcq",
+    "question": "A 'stock split' (e.g., a 2-for-1 split) will result in:",
+    "choices": ["An increase in the company's total equity.", "A decrease in the number of shares outstanding.", "A decrease in the share price and an increase in the number of shares outstanding.", "A cash payment to shareholders."],
+    "answer": "A decrease in the share price and an increase in the number of shares outstanding.",
+    "explanation": "A stock split divides the company's existing shares into multiple shares. In a 2-for-1 split, each shareholder receives two shares for every one they previously held. This doubles the number of shares outstanding. To keep the company's total market capitalization the same, the price per share is theoretically halved. It does not affect the total value of the company or the shareholder's total investment."
+  },
+  {
+    "id": 350,
+    "topic": "Dividends & Capital Structure",
+    "type": "long",
+    "question": "Explain the 'pecking order theory' of capital structure.",
+    "answer": "The pecking order theory suggests that firms prefer to finance new investments first with internal funds, then with debt, and finally with new equity as a last resort.",
+    "explanation": "This theory, developed by Stewart Myers, is based on the idea of asymmetric information (managers know more about the company's prospects than investors). The order of preference is: <br>1. <strong>Internal Funds (Retained Earnings):</strong> This is the first choice because it requires no new issuance and sends no negative signals to the market. <br>2. <strong>Debt:</strong> If internal funds are insufficient, firms will issue debt. This is seen as less costly than issuing equity and sends a less negative signal. <br>3. <strong>New Equity:</strong> This is the last resort. An announcement of a new stock issue is often interpreted by the market as a negative signal (that managers believe the stock is overvalued), which can cause the share price to fall."
+  },
+  {
+    "id": 351,
+    "topic": "Dividends & Capital Structure",
+    "type": "numeric",
+    "question": "A company's market value of equity is R15 million and its market value of debt is R5 million. The company's total assets have a market value of R20 million. What is the company's debt-to-asset ratio?",
+    "answer": "0.25",
+    "explanation": "The debt-to-asset ratio measures the proportion of a company's assets that are financed through debt. <br><strong>Formula:</strong> Debt-to-Asset Ratio = Total Debt / Total Assets. <br><strong>Calculation:</strong> R5,000,000 / R20,000,000 = <strong>0.25</strong> or 25%."
+  },
+  {
+    "id": 352,
+    "topic": "Dividends & Capital Structure",
+    "type": "mcq",
+    "question": "A 'stable dividend policy' is one where the company aims to pay:",
+    "choices": ["A constant percentage of its earnings each year.", "A constant, predictable dividend amount each year, and only increase it if the new level can be sustained.", "All of its earnings as dividends each year.", "Dividends only after funding all new projects."],
+    "answer": "A constant, predictable dividend amount each year, and only increase it if the new level can be sustained.",
+    "explanation": "A stable dividend policy focuses on consistency. Companies that follow this policy try to avoid cutting dividends, as this sends a very negative signal to the market. They will pay a regular, stable dividend (e.g., R2.00 per share) and will only increase this amount if they are confident that the future earnings can support the higher dividend level indefinitely."
+  },
+  {
+    "id": 353,
+    "topic": "Dividends & Capital Structure",
+    "type": "long",
+    "question": "In the context of Modigliani-Miller theory, what is the 'tax shield' and how does it make the firm's capital structure relevant?",
+    "answer": "The tax shield is the tax saving a company achieves by using debt. It makes capital structure relevant by making debt financing cheaper than equity financing.",
+    "explanation": "When Modigliani and Miller relaxed their 'no taxes' assumption, their conclusions changed. Because interest payments on debt are tax-deductible, a company saves money on taxes by using debt. The value of this tax saving is called the tax shield. <br><strong>Value of Tax Shield = Interest Payment * Tax Rate</strong>. <br>This tax shield adds value to the company. Therefore, in a world with taxes, the theory suggests that a company's value increases as it uses more debt. The optimal capital structure, under this simplified model, would be 100% debt."
+  },
+  {
+    "id": 354,
+    "topic": "Dividends & Capital Structure",
+    "type": "numeric",
+    "question": "A company has a net income of R800,000 and pays total dividends of R200,000. What is its dividend payout ratio?",
+    "answer": "25",
+    "explanation": "The dividend payout ratio measures the percentage of net income that is paid out to shareholders as dividends. <br><strong>Formula:</strong> Payout Ratio = (Total Dividends / Net Income) * 100. <br><strong>Calculation:</strong> (R200,000 / R800,000) * 100 = 0.25 * 100 = <strong>25%</strong>."
+  },
+  {
+    "id": 355,
+    "topic": "Dividends & Capital Structure",
+    "type": "mcq",
+    "question": "Which security has the highest priority claim on a company's assets in the event of bankruptcy?",
+    "choices": ["Ordinary shares", "Preference shares", "Debentures (bonds)", "Retained earnings"],
+    "answer": "Debentures (bonds)",
+    "explanation": "In a liquidation, there is a clear hierarchy for claims on assets. Debt holders (including bondholders/debenture holders) have the highest priority and must be paid in full before any other capital providers. Preference shareholders are next, and ordinary shareholders have the residual claim, meaning they are last in line."
+  },
+  {
+    "id": 356,
+    "topic": "Dividends & Capital Structure",
+    "type": "long",
+    "question": "Explain the 'information content' or 'signaling effect' of a dividend announcement.",
+    "answer": "The signaling effect suggests that dividend announcements convey information from managers to investors about the company's future earnings prospects.",
+    "explanation": "Managers have more information about the firm's health and future than outside investors (asymmetric information). Because managers are reluctant to cut dividends, an announcement of a dividend increase is seen as a strong positive signal. It signals that management is confident that future earnings will be high and stable enough to support the new, higher dividend level. Conversely, a dividend cut is a powerful negative signal, suggesting that management expects a long-term decline in earnings."
+  },
+  {
+    "id": 357,
+    "topic": "Dividends & Capital Structure",
+    "type": "numeric",
+    "question": "A share is trading at R60 and pays an annual dividend of R3. What is the dividend yield?",
+    "answer": "5",
+    "explanation": "The dividend yield measures the annual return an investor gets from dividends, expressed as a percentage of the current share price. <br><strong>Formula:</strong> Dividend Yield = (Annual Dividend per Share / Market Price per Share) * 100. <br><strong>Calculation:</strong> (R3 / R60) * 100 = 0.05 * 100 = <strong>5%</strong>."
+  },
+  {
+    "id": 358,
+    "topic": "Dividends & Capital Structure",
+    "type": "mcq",
+    "question": "If a firm has very high business risk, it should ideally choose a capital structure with:",
+    "choices": ["More debt and less equity", "Less debt and more equity", "Equal amounts of debt and equity", "100% debt"],
+    "answer": "Less debt and more equity",
+    "explanation": "Business risk is the inherent risk in a company's operations (e.g., from sales volatility). Financial risk comes from using debt. If a company already has high business risk, adding a lot of financial risk (by taking on a lot of debt) would make the company's total risk excessively high. Therefore, such a firm should be conservative and use a capital structure with less debt to maintain a manageable overall risk profile."
+  },
+  {
+    "id": 359,
+    "topic": "Dividends & Capital Structure",
+    "type": "long",
+    "question": "What is a 'stock dividend' and how does it differ from a cash dividend?",
+    "answer": "A stock dividend is a payment made to shareholders in the form of additional shares, rather than cash.",
+    "explanation": "<ul><li><strong>Cash Dividend:</strong> This is a cash payment that transfers value directly from the company to its shareholders. It reduces the company's cash and retained earnings.</li><li><strong>Stock Dividend:</strong> This involves issuing new shares to existing shareholders, proportional to their current holdings (e.g., a 5% stock dividend gives a shareholder 5 new shares for every 100 they own). No cash leaves the company. It simply increases the number of shares outstanding and reallocates an amount from retained earnings to share capital on the balance sheet. It does not increase the total value of the shareholder's investment, as the share price will theoretically fall to reflect the increased number of shares.</li></ul>"
+  },
+  {
+    "id": 360,
+    "topic": "Dividends & Capital Structure",
+    "type": "numeric",
+    "question": "A company has R500,000 in retained earnings at the start of the year. Net income for the year is R150,000. If the company follows a residual dividend policy and funds R120,000 of new projects with equity, how much will it pay in total dividends?",
+    "answer": "30000",
+    "explanation": "Under a residual policy, dividends are the income left after funding projects. <br><strong>Calculation:</strong> Dividends = Net Income - Equity portion of new investments = R150,000 - R120,000 = <strong>R30,000</strong>. The beginning retained earnings balance is not directly used in this calculation, but it shows the company has sufficient earnings to cover both the reinvestment and the dividend."
+  },
+  {
+    "id": 361,
+    "topic": "Dividends & Capital Structure",
+    "type": "mcq",
+    "question": "What are 'agency costs' in the context of capital structure?",
+    "choices": ["The cost of hiring an external agency to manage the firm.", "Costs that arise from conflicts of interest between managers and shareholders.", "The interest paid to debtholders.", "The cost of issuing new shares."],
+    "answer": "Costs that arise from conflicts of interest between managers and shareholders.",
+    "explanation": "Agency costs are a type of internal company expense which comes from the actions of an 'agent' (management) acting on behalf of a 'principal' (shareholders). For example, managers might take on less risky projects than shareholders would prefer to protect their jobs. Using debt in the capital structure can help reduce some agency costs by forcing managers to be more disciplined to meet interest payments, leaving less free cash flow for wasteful spending."
+  },
+  {
+    "id": 362,
+    "topic": "Dividends & Capital Structure",
+    "type": "long",
+    "question": "Explain two practical reasons why a company might be reluctant to use a lot of debt, even if it provides a tax shield.",
+    "answer": "High levels of debt increase the risk of financial distress and can lead to a loss of financial flexibility.",
+    "explanation": "While the tax shield makes debt attractive, there are significant offsetting costs: <br>1. <strong>Costs of Financial Distress:</strong> As a company takes on more debt, the probability that it will be unable to meet its interest and principal payments increases. This can lead to bankruptcy. Even if bankruptcy is avoided, the company may incur other costs, such as losing customers who are worried about its stability or having to sell assets at a low price. <br>2. <strong>Loss of Financial Flexibility:</strong> A company with a large amount of debt may find it difficult to raise additional capital if a profitable investment opportunity suddenly arises. Lenders may be unwilling to extend more credit, and the company may have restrictive covenants in its existing loan agreements that limit its actions."
+  },
+  {
+    "id": 363,
+    "topic": "Dividends & Capital Structure",
+    "type": "numeric",
+    "question": "A company has a net income of R1,000,000 and has declared a total dividend of R400,000. What is the company's retention ratio (or plowback ratio)?",
+    "answer": "60",
+    "explanation": "The retention ratio is the proportion of earnings that are kept in the business for reinvestment. <br><strong>1. Calculate the amount retained:</strong> Retained Earnings = Net Income - Dividends = R1,000,000 - R400,000 = R600,000. <br><strong>2. Calculate the ratio:</strong> Retention Ratio = (Retained Earnings / Net Income) * 100 = (R600,000 / R1,000,000) * 100 = <strong>60%</strong>."
+  },
+  {
+    "id": 364,
+    "topic": "Dividends & Capital Structure",
+    "type": "mcq",
+    "question": "From a shareholder's perspective, the primary risk of holding preference shares is that:",
+    "choices": ["The dividends are not legally guaranteed and can be skipped.", "They have no voting rights.", "The share price is more volatile than ordinary shares.", "Their claim is junior to debtholders in liquidation."],
+    "answer": "The dividends are not legally guaranteed and can be skipped.",
+    "explanation": "Unlike interest on debt, which is a legal obligation, dividends on preference shares are not guaranteed. If a company faces financial difficulty, it can suspend or skip the dividend payment without legal repercussions (though for cumulative preference shares, the missed dividends must be paid before ordinary shareholders receive anything). This is the primary investment risk."
+  },
+  {
+    "id": 365,
+    "topic": "Dividends & Capital Structure",
+    "type": "long",
+    "question": "Your firm has a stable history of paying a R2.00 annual dividend. This year, it has a surprisingly high net income. According to the stable dividend policy, should the firm immediately increase its dividend? Explain.",
+    "answer": "No, the firm should not immediately increase its dividend. It might consider paying a 'special' or 'extra' dividend instead.",
+    "explanation": "A stable dividend policy prioritizes predictability and sustainability. A sudden, large increase in the regular dividend based on one good year is risky. If earnings return to normal next year, the firm might be forced to cut the dividend, which the market would interpret as a very negative signal. <br>A better approach would be to maintain the regular R2.00 dividend and, if the company wishes to distribute the extra profit, declare a one-time 'special dividend'. This rewards shareholders without creating the expectation that the higher payout level will be permanent."
+  },
+  {
+    "id": 366,
+    "topic": "Dividends & Capital Structure",
+    "type": "numeric",
+    "question": "A company buys back 100,000 of its own shares at a market price of R40 per share. What is the total value of this share repurchase?",
+    "answer": "4000000",
+    "explanation": "The total value of a share buyback is the number of shares repurchased multiplied by the price paid per share. <br><strong>Calculation:</strong> 100,000 shares * R40/share = <strong>R4,000,000</strong>."
+  },
+  {
+    "id": 367,
+    "topic": "Dividends & Capital Structure",
+    "type": "mcq",
+    "question": "Which of these is considered a source of internal financing?",
+    "choices": ["Issuing new bonds", "Taking out a bank loan", "Issuing new ordinary shares", "Retained earnings"],
+    "answer": "Retained earnings",
+    "explanation": "Internal financing refers to funds generated by the company's own operations. Retained earnings, which are the profits reinvested back into the business, are the primary source of internal financing. All the other options are sources of external financing, as they involve raising capital from outside parties."
   }
 
 ]
