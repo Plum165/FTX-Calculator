@@ -38,6 +38,24 @@
     .metaSmall{font-size:0.88rem;color:var(--muted)}
     footer{margin-top:18px;color:var(--muted);font-size:0.9rem}
 
+    /* --- ADDED FOR RETURN BUTTON --- */
+    .return-btn {
+      background: linear-gradient(180deg, #1f2f4f, #162033);
+      border: 1px solid rgba(130, 160, 210, 0.12);
+      color: #e6f3ff;
+      padding: 8px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      text-decoration: none;
+      font-size: 0.9rem;
+      margin-left: auto;
+      transition: transform .12s ease, box-shadow .12s ease;
+    }
+    .return-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(36, 84, 150, 0.1);
+    }
+
     /* --- ADDED FOR TABLES --- */
     .data-table {
       width: 100%;
@@ -79,6 +97,7 @@
         <h1>FTX Practice — Interactive Question Bank</h1>
         <div class="meta">Pick a topic. Questions are loaded from <code>data/questions.json</code>. Math uses MathJax.</div>
       </div>
+      <a href="index.html" class="return-btn">Return to Calculator</a>
     </header>
 
     <div class="card">
